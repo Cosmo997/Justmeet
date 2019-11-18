@@ -9,8 +9,18 @@ class HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      
+    return new Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 10,
+          title: Image.asset('assets/logo.png'),
+          centerTitle: true,
+        ),
+        body: Container(
+          child: Center(
+            child: Text("Ciao")
+            ),
+        ),
       );
   }
 
