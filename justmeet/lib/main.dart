@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //Disabilita la scritta "debug" in alto a destra
+      themeMode: ThemeMode.dark,
       home: HomePage(),
     );
   }
