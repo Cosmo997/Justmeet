@@ -16,24 +16,23 @@ class HomePageState extends State<HomePage>{
           title: Image.asset('assets/logo.png', scale: 2.5),
           centerTitle: true,
         ),
-        drawer: Drawer(
-          child: Column(
+        drawer: Drawer(),
+        body: Container(
+        //  child: Center(
+        //    child: Text("Benvenuto", style: TextStyle(fontSize: 50))
+          child: Column(crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[            
               UserAccountsDrawerHeader(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.black54),
-                accountEmail: Text("Email"), 
-                accountName: Text("Nome"),
-               margin: EdgeInsets.only(top: 40, left: 10, right: 10) ,
+                accountEmail: Text("Evento: sgnipsi"), 
+                accountName: Text("Descrizione: sgnipsignepsdfjoeijedi"),
+               margin: EdgeInsets.only(top: 20, left: 10, right: 10) ,
               ),
             ],
           ),
-        ),
-        body: Container(
-          child: Center(
-            child: Text("Benvenuto", style: TextStyle(fontSize: 50))
+        
             ),
-        ),
-      );
+        );
   }
 
   
