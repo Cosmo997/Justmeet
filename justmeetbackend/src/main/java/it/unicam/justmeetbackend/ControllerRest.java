@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ControllerRest {
 
-    @GetMapping(value="/hello")
+    @GetMapping(value="/")
     public String getMethodName()
     {
         return "hello";
