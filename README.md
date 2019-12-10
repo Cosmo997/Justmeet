@@ -1,1 +1,1 @@
-# IDS-Justmeet
+# Justmeet
