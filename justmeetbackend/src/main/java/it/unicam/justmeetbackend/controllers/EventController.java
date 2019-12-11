@@ -36,8 +36,8 @@ public class EventController {
     }
 
     @RequestMapping(value="/eventi/{id}", method=RequestMethod.DELETE)
-    public String deleteMethod(@PathVariable String i) {
-            return eventService.deleteEvento(i);
+    public String deleteMethod(@PathVariable String id) {
+            return eventService.deleteEvento(id);
     }
 
 }
