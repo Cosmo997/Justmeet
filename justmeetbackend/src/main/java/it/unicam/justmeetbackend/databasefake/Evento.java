@@ -10,7 +10,7 @@ public class Evento
 
     public Evento(){};
         //Luogo luogoEvento;
-        //User creatore;
+        User creatore;
         //ArrayList<User> partecipanti;
         //ArrayList<Topic> topicEvento;
     public Evento(int id, String t, String d){
