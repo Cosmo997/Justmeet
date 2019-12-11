@@ -4,7 +4,7 @@ package it.unicam.justmeetbackend.databasefake;
 
 public class Evento
 {
-    private int id;
+    private String id;
     private String titolo;
     private String desc;
 
@@ -13,19 +13,19 @@ public class Evento
         User creatore;
         //ArrayList<User> partecipanti;
         //ArrayList<Topic> topicEvento;
-    public Evento(int id, String t, String d){
+    public Evento(String id, String t, String d){
         this.id = id;
         this.titolo = t;
         this.desc = d;
 
     } 
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

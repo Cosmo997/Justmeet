@@ -7,10 +7,10 @@ package it.unicam.justmeetbackend.databasefake;
         String username;
         String email;
         String password;
-        Preferiti preferiti;
+        //Preferiti preferiti;
         Luogo posizione;
         public User(){}
-        public User(String nome,String cognome, String username, )
+        //public User(String nome,String cognome, String username, )
 
 
     }
