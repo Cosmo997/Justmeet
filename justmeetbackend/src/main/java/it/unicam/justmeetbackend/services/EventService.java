@@ -12,8 +12,8 @@ import it.unicam.justmeetbackend.databasefake.Evento;
 public class EventService {
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(
-        new Evento(1, "Primo Evento", "Desc"),
-        new Evento(2, "Primo Evento", "Desc")
+        new Evento("1", "Primo Evento", "Descrizione 2"),
+        new Evento("2", "Secondo Evento", "Descrizione 2")
         ));
 
     /**
@@ -38,24 +38,26 @@ public class EventService {
      * @param id
      * @param e
      */
-	public void updateEvento(int id, Evento e) {
+	public void updateEvento(String id, Evento e) {
         for(int i = 0; i < listaEventi.size(); i++)
         {
             Evento ev = listaEventi.get(i);
-            if(ev.getId() == id)
+            if(ev.getId().equals(id))
             {
-                listaEventi.set(id, e);
+                listaEventi.set(i, e);
                 return;
             }   
         }
 	}
 
     /**
-     * Rimuove l'evento by ID
+     * Rimuove l'evento by Id
      * @param id
      */
-	public void deleteEvento(int id) {
-        listaEventi.removeIf(e -> e.getId() == id);
-	}
+    public String deleteEvento(String id) 
+    {     
+        listaEventi.removeIf(e -> e.getId().equals(id));
+        return "deleted";
+    }
     
 }
