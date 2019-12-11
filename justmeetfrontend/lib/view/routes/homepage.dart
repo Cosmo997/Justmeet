@@ -10,8 +10,7 @@ class HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
 
-    var appBarIniziale = 
-            AppBar(
+    var appBarIniziale = AppBar(
               backgroundColor: Colors.black54,
               elevation: 10,
               title: Image.asset('assets/logo.png', scale: 2.5),
@@ -20,7 +19,9 @@ class HomePageState extends State<HomePage>{
 
 
 
-        return new Scaffold(
+    return new Scaffold(
+
+      
         appBar: appBarIniziale,
         body: Container(
           child: Column(
@@ -55,6 +56,8 @@ class HomePageState extends State<HomePage>{
                     },
                     
                   ),
+        
+        
         );
   }
 
