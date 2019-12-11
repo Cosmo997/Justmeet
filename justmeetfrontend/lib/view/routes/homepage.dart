@@ -17,10 +17,7 @@ class HomePageState extends State<HomePage>{
               centerTitle: true,
             );
 
-
-
     return new Scaffold(
-
       
         appBar: appBarIniziale,
         body: Container(
