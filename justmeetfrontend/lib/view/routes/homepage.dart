@@ -17,11 +17,10 @@ class HomePageState extends State<HomePage>{
   {
     var url = "http://www.mocky.io/v2/5df10ee6310000487b8f0da4";
     var urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
-    http.Response response = await http.get(url);
+    var response = await http.get(Uri.encodeFull(urlSpring), headers: {"Accept" : "application/json"});
     print("Risposta ricevuta");
     print("Body: " +response.body);
-    String contenuto = response.body;
-    List collection = json.decode(contenuto);
+    List collection = json.decode(response.body);
     List<Evento> eventi = collection.map((json) => Evento.fromJson(json)).toList();
 
     setState(() {
