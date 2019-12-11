@@ -16,13 +16,46 @@ public class EventService {
         new Evento(2, "Primo Evento", "Desc")
         ));
 
+    /**
+     * Restituisce tutti gli eventi
+     * @return
+     */
     public List<Evento> getAllEvents(){
         return listaEventi;
     }
 
+    /**
+     * Aggiungere evento
+     * @param e
+     */
     public void addEvent(Evento e)
     {
         listaEventi.add(e);
     }
+
+    /**
+     * Aggiornare l'evento by Id
+     * @param id
+     * @param e
+     */
+	public void updateEvento(int id, Evento e) {
+        for(int i = 0; i < listaEventi.size(); i++)
+        {
+            Evento ev = listaEventi.get(i);
+            if(ev.getId() == id)
+            {
+                listaEventi.set(id, e);
+                return;
+            }   
+        }
+	}
+
+    /**
+     * Rimuove l'evento by ID
+     * @param id
+     */
+	public void deleteEvento(int id) {
+        listaEventi.removeIf(e -> e.getId() == id);
+	}
     
 }
