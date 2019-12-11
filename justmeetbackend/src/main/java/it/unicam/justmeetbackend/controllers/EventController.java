@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
-
 @RestController
 public class EventController {
 
@@ -25,7 +23,7 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/eventi")
-    public List<Evento> getAllEvent(){
+    public List<Evento> getAllEvent() {
         return eventService.getAllEvents();
     }
 
