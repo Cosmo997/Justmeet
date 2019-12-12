@@ -8,12 +8,13 @@ package it.unicam.justmeetbackend.databasefake;
         private String email;
         private String password;
         private Boolean isLogged;
+        private Preferiti preferiti;
         //Preferiti preferiti;
         //Luogo posizione;
 
         public User(){}
 
-        public User(String n, String c, String u, String e, String p, Boolean i)
+        public User(String n, String c, String u, String e, String p, Boolean i, Preferiti preferiti)
         {
             this.nome = n;
             this.cognome = c;
@@ -21,6 +22,7 @@ package it.unicam.justmeetbackend.databasefake;
             this.email = e;
             this.password = p;
             this.isLogged = i;
+            this.preferiti = preferiti;
         }
 
     public String getNome() {
@@ -69,6 +71,14 @@ package it.unicam.justmeetbackend.databasefake;
 
     public void setIsLogged(Boolean isLogged) {
         this.isLogged = isLogged;
+    }
+
+    public Preferiti getPreferiti() {
+        return preferiti;
+    }
+
+    public void setPreferiti(Preferiti preferiti) {
+        this.preferiti = preferiti;
     }
 
     }

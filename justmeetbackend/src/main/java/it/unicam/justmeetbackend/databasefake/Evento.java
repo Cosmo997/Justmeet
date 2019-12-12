@@ -1,9 +1,9 @@
 package it.unicam.justmeetbackend.databasefake;
 
+
 //import java.time.*;
 
-public class Evento
-{
+public class Evento {
     private String id;
     private String titolo;
     private String desc;
@@ -11,10 +11,9 @@ public class Evento
     private Topic topic;
     private User user;
     private Luogo luogo;
+    //private SimpleDateFormat dataInizio;
 
     public Evento(){};
-        //Luogo luogoEvento;
-        //User creatore;
         //ArrayList<User> partecipanti;
         //ArrayList<Topic> topicEvento;
     public Evento(String id, String t, String d, int partecipanti ,Topic topic, User user, Luogo luogo){
@@ -25,7 +24,6 @@ public class Evento
         this.topic = topic;
         this.user = user;
         this.luogo = luogo;
-
     } 
 
     public String getId()

@@ -8,22 +8,23 @@ import org.springframework.stereotype.Service;
 
 import it.unicam.justmeetbackend.databasefake.Evento;
 import it.unicam.justmeetbackend.databasefake.Luogo;
+import it.unicam.justmeetbackend.databasefake.Preferiti;
 import it.unicam.justmeetbackend.databasefake.Topic;
 import it.unicam.justmeetbackend.databasefake.User;
 
 @Service
 public class EventService {
 
-    private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(
-        new Evento("1", "primo", "Descrizione 1", 10, new Topic("partita"),
-        new User("Michele", "Benedetti", "username", "email", "psw", true),
-        new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30")),
+    Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, new Topic("partita"),
+    new User("Michele", "Benedetti", "username", "email", "psw", true, new Preferiti()),
+    new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30"));
 
-        new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("studio"),
-        new User("Daniele", "Moschini", "username", "email", "psw", false),
-        new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"))
-        ));
+    Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("studio"),
+    new User("Daniele", "Moschini", "username", "email", "psw", false, new Preferiti()),
+    new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"));
 
+    private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento1,evento2));
+    
     /**
      * Restituisce tutti gli eventi
      * @return
@@ -69,14 +70,42 @@ public class EventService {
     }
 
     /**
-     * Restituisce tutti gli elementi dato un certo nome
+     * Restituisce tutti gli eventi dato un certo nome
      * @param nome
      * @return
      */
 	public List<Evento> getEventsByName(String titolo) {
         List<Evento> l = new ArrayList<>();
         for (Evento evento : listaEventi) {
-            if(evento.getTitolo().equals(titolo))
+            if(evento.getTitolo().equalsIgnoreCase(titolo))
+            l.add(evento);
+        }
+        return l;
+	}
+
+    /**
+     * Restituisce tutti gli eventi in una regione
+     * @param regione
+     * @return
+     */
+	public List<Evento> getEventsByRegion(String regione) {
+        List<Evento> l = new ArrayList<>();
+        for (Evento evento : listaEventi) {
+            if(evento.getLuogo().getRegione().equalsIgnoreCase(regione))
+            l.add(evento);
+        }
+        return l;
+	}
+
+    /**
+     * Restituisce gli eventi di una determinata provincia
+     * @param provincia
+     * @return
+     */
+	public List<Evento> getEventsByProvincia(String provincia) {
+		List<Evento> l = new ArrayList<>();
+        for (Evento evento : listaEventi) {
+            if(evento.getLuogo().getProvincia().equalsIgnoreCase(provincia))
             l.add(evento);
         }
         return l;
