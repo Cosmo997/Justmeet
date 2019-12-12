@@ -7,13 +7,21 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import it.unicam.justmeetbackend.databasefake.Evento;
+import it.unicam.justmeetbackend.databasefake.Luogo;
+import it.unicam.justmeetbackend.databasefake.Topic;
+import it.unicam.justmeetbackend.databasefake.User;
 
 @Service
 public class EventService {
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(
-        new Evento("1", "Primo Evento", "Descrizione 2"),
-        new Evento("2", "Secondo Evento", "Descrizione 2")
+        new Evento("1", "primo", "Descrizione 1", 10, new Topic("partita"),
+        new User("Michele", "Benedetti", "username", "email", "psw", true),
+        new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30")),
+
+        new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("studio"),
+        new User("Daniele", "Moschini", "username", "email", "psw", false),
+        new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"))
         ));
 
     /**
@@ -59,5 +67,19 @@ public class EventService {
         listaEventi.removeIf(e -> e.getId().equals(id));
         return "deleted";
     }
+
+    /**
+     * Restituisce tutti gli elementi dato un certo nome
+     * @param nome
+     * @return
+     */
+	public List<Evento> getEventsByName(String titolo) {
+        List<Evento> l = new ArrayList<>();
+        for (Evento evento : listaEventi) {
+            if(evento.getTitolo().equals(titolo))
+            l.add(evento);
+        }
+        return l;
+	}
     
 }
