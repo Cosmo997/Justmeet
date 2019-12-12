@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/widget/appbariniziale.dart';
 //import 'dart:async';
 
 class HomePage extends StatefulWidget{
@@ -17,7 +16,6 @@ class HomePageState extends State<HomePage>{
   var eventList = [];
 
    loadEvent() async {
-    //var url = "http://www.mocky.io/v2/5df10ee6310000487b8f0da4";
     String urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
     http.Response response = await http.get(Uri.encodeFull(urlSpring), headers: {"Accept" : "application/json"});
     print("Risposta ricevuta");
@@ -41,9 +39,14 @@ class HomePageState extends State<HomePage>{
       Widget build(BuildContext context) {
     
         return Scaffold(
-                  
-                   DefaultAppbar,
-                    body: ListView.separated(
+                  appBar:AppBar
+                  (
+                   backgroundColor: Colors.black54,
+                   elevation: 10,
+                   title: Image.asset('assets/logo.png', scale: 2.5),
+                   centerTitle: true,
+                   ),
+                  body: ListView.separated(
                       itemCount: eventList.length,
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (BuildContext context, int index){
@@ -54,7 +57,7 @@ class HomePageState extends State<HomePage>{
                         );
                       },
                     ),
-                    bottomNavigationBar: CurvedNavigationBar(
+                  bottomNavigationBar: CurvedNavigationBar(
                                 color: Colors.black54,
                                 backgroundColor: Colors.white24,
                                 buttonBackgroundColor: Colors.black54,
