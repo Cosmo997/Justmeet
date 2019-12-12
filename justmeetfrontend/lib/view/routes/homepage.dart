@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
+
+import 'package:justmeet/classi/evento.dart';
+import 'package:justmeet/widget/appbariniziale.dart';
+//import 'dart:async';
 
 class HomePage extends StatefulWidget{
   @override
@@ -36,66 +39,45 @@ class HomePageState extends State<HomePage>{
       @override
       Widget build(BuildContext context) {
     
-        var appBarIniziale = AppBar(
-                  backgroundColor: Colors.black54,
-                  elevation: 10,
-                  title: Image.asset('assets/logo.png', scale: 2.5),
-                  centerTitle: true,
-                );
-    
-        return new Scaffold(
-          
-            appBar: appBarIniziale,
-            body: ListView.separated(
-              itemCount: eventList.length,
-              separatorBuilder: (context, index) => Divider(),
-              itemBuilder: (BuildContext context, int index){
-                Evento evento = eventList[index];
-                return UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black54,
-                  ),
-                  accountEmail: Text(evento.desc),
-                  accountName: Text(evento.titolo),
-                );
-              },
-            ),
-            bottomNavigationBar: CurvedNavigationBar(
-                        color: Colors.black54,
-                        backgroundColor: Colors.white24,
-                        buttonBackgroundColor: Colors.black54,
-                        items: <Widget>[
-                          Icon(Icons.favorite, size: 18,),
-                          Icon(Icons.home, size: 18,),
-                          Icon(Icons.message, size: 18,),
-                          Icon(Icons.add_circle_outline, size: 18),
-                        ],
-                        animationDuration: Duration(
-                          milliseconds: 300,
-                        ),
-                        
-                        index: 1,
-                        onTap: (index){
-                          print("Current Index: $index");
-                        },
-                        
-                      ),
-            
-            
-            );
+        return Scaffold(
+                  
+                   DefaultAppbar,
+                    body: ListView.separated(
+                      itemCount: eventList.length,
+                      separatorBuilder: (context, index) => Divider(),
+                      itemBuilder: (BuildContext context, int index){
+                        Evento evento = eventList[index];
+                        return ListTile(
+                          title: Text(evento.titolo),
+                          subtitle: Text(evento.desc),
+                        );
+                      },
+                    ),
+                    bottomNavigationBar: CurvedNavigationBar(
+                                color: Colors.black54,
+                                backgroundColor: Colors.white24,
+                                buttonBackgroundColor: Colors.black54,
+                                items: <Widget>[
+                                  Icon(Icons.favorite, size: 18,),
+                                  Icon(Icons.home, size: 18,),
+                                  Icon(Icons.message, size: 18,),
+                                  Icon(Icons.add_circle_outline, size: 18),
+                                ],
+                                animationDuration: Duration(
+                                  milliseconds: 300,
+                                ),
+                                
+                                index: 1,
+                                onTap: (index){
+                                  print("Current Index: $index");
+                                },
+                                
+                              ),
+                    
+                    
+                    );
+                
       }  
     }
     
-    class Evento {
-      final String id;
-      final String titolo;
-      final String desc;
-    
-      Evento(this.id, this.titolo, this.desc);
-    
-      Evento.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-      titolo = json['titolo'],
-      desc = json['desc'];
-}
+   
