@@ -14,7 +14,6 @@ class HomePageState extends State<HomePage>{
   var eventList = [];
 
    loadEvent() async {
-    //var url = "http://www.mocky.io/v2/5df10ee6310000487b8f0da4";
     String urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
     http.Response response = await http.get(Uri.encodeFull(urlSpring), headers: {"Accept" : "application/json"});
     print("Risposta ricevuta");
@@ -52,9 +51,13 @@ class HomePageState extends State<HomePage>{
               separatorBuilder: (context, index) => Divider(),
               itemBuilder: (BuildContext context, int index){
                 Evento evento = eventList[index];
-                return ListTile(
-                  title: Text(evento.titolo),
-                  subtitle: Text(evento.desc),
+                return UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black54,
+                  ),
+                  accountEmail: Text(evento.desc),
+                  accountName: Text(evento.titolo),
                 );
               },
             ),
