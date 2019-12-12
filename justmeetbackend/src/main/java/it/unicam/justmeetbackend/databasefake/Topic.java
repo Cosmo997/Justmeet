@@ -4,6 +4,8 @@ public class Topic {
 
     private String argomento;
 
+    public Topic(){};
+
     public Topic(String a){
         this.argomento = a;
     }
