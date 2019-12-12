@@ -10,19 +10,21 @@ public class Evento
     private int partecipanti;
     private Topic topic;
     private User user;
+    private Luogo luogo;
 
     public Evento(){};
         //Luogo luogoEvento;
         //User creatore;
         //ArrayList<User> partecipanti;
         //ArrayList<Topic> topicEvento;
-    public Evento(String id, String t, String d, int partecipanti ,Topic topic, User user){
+    public Evento(String id, String t, String d, int partecipanti ,Topic topic, User user, Luogo luogo){
         this.id = id;
         this.titolo = t;
         this.desc = d;
         this.partecipanti = partecipanti;
         this.topic = topic;
         this.user = user;
+        this.luogo = luogo;
 
     } 
 
@@ -73,6 +75,14 @@ public class Evento
 
     public void setPartecipanti(int partecipanti) {
         this.partecipanti = partecipanti;
+    }
+
+    public Luogo getLuogo() {
+        return luogo;
+    }
+
+    public void setLuogo(Luogo luogo) {
+        this.luogo = luogo;
     }
         
 }

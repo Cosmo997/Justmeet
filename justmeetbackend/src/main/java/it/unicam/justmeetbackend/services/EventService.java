@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import it.unicam.justmeetbackend.databasefake.Evento;
+import it.unicam.justmeetbackend.databasefake.Luogo;
 import it.unicam.justmeetbackend.databasefake.Topic;
 import it.unicam.justmeetbackend.databasefake.User;
 
@@ -15,9 +16,12 @@ public class EventService {
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(
         new Evento("1", "primo", "Descrizione 1", 10, new Topic("partita"),
-        new User("Michele", "Benedetti", "username", "email", "psw", true)),
+        new User("Michele", "Benedetti", "username", "email", "psw", true),
+        new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30")),
+
         new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("studio"),
-        new User("Daniele", "Moschini", "username", "email", "psw", false))
+        new User("Daniele", "Moschini", "username", "email", "psw", false),
+        new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"))
         ));
 
     /**
