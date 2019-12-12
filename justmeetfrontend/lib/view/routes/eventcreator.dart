@@ -1,8 +1,11 @@
+//import 'dart:html';
+import 'dart:ui';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/user.dart';
+//import 'package:justmeet/classi/user.dart';
 
 class EventCreator extends StatefulWidget 
   {
@@ -33,7 +36,8 @@ void newEventState()
    @override
     Widget build(BuildContext context)
     {
-     return Scaffold(
+
+     return Scaffold (
 
       appBar:AppBar(
                    backgroundColor: Colors.black54,
@@ -42,61 +46,105 @@ void newEventState()
                    centerTitle: true,
                    ),
 
-      body: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-        
+      body: Column(    
          children: <Widget>[
 
           Container(
-            
-            child: Text("Inserisci qui un nome significativo per l'evento:",
-              textAlign: TextAlign.left,
-            ),
-            ),
+            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: TextField(
+                  maxLength: 50,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8),
+                        )
 
-          Padding(
-              padding: EdgeInsets.all(16),
-              child: TextField(
-                maxLength: 50,
-                decoration: InputDecoration(
-                    focusColor: Colors.black54,
-                    fillColor: Colors.black54,
-                    hoverColor: Colors.black54,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)
-                      
+                      ),
+                      labelText: 'Nome Evento',
+                      icon: Icon(Icons.fiber_new),                    
+
+                  ),
+                ),
+              ),
+          ),
+  
+          Container(
+            child: Padding(
+                padding: EdgeInsets.all(16),
+                child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
+                  maxLines: 10,
+                  maxLength: 600,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8))
                       )
-                    ),
-                    labelText: 'Nome Evento',
-                    icon: Icon(Icons.fiber_new),                    
+                      ,
+                      labelText: 'Descrizione Evento',
+                      icon: Icon(Icons.description),                    
 
+                  ),
                 ),
               ),
-            ),
-
-          Container(child: Text("Descrizione Evento"),),
-          
-          Padding(
-              padding: EdgeInsets.all(16),
-              
-              child: TextField(
-                
-                maxLength: 600,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(80.0),
-                  
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8))
-                    ),
-                    labelText: 'Descrizione Evento',
-                    icon: Icon(Icons.fiber_new),                    
-
-                ),
-              ),
-            ),
+          ),
          
-         ]
-     ),
+          
+     
+           Container(
+           
+             
+                
+                TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8))
+                      ),
+                      
+                      labelText: 'Numero Max Partecipanti',
+                      icon: Icon(Icons.people),                    
+
+                  ),
+                ),
+         
+            
+          ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 IconButton(
+                   padding: EdgeInsets.all(10),
+                   icon: Icon(Icons.add_circle),
+                   onPressed: () {},
+                  iconSize: 32.0,
+                 ), 
+        
+         ]      
+      ),
+     
+
+
+
+
+
+
+
+
+
+
 
       bottomNavigationBar: CurvedNavigationBar(
                                 color: Colors.black54,
