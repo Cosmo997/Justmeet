@@ -1,33 +1,42 @@
  //import 'dart:convert';
 
+import 'luogo.dart';
+import 'topic.dart';
+
 class Evento {
-      final String id;
-      final String titolo;
-      final String desc;
-      final int partecipanti; 
-      final Topic topic;    
-      final Luogo luogo;
+  
+       String id;
+       String titolo;
+       String desc;
+       int partecipanti; 
+       Topic topic;    
+       Luogo luogo;
+       String idCreatore;
     
-    Evento();
+    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.topic, this.luogo, this.idCreatore);
 
   Map toMap() 
-{
+  {
     var map = new Map<String, dynamic>();
     map["id"] = this.id;
-    map["titolo"] = this.nome;
+    map["titolo"] = this.titolo;
     map["desc"] = this.desc;
-    map["maxP"] = this.maxPartecipanti;
+    map["partecipanti"] = this.partecipanti;
+    map["user"] = this.idCreatore;
+    map["topic"] = this.topic.id; this.topic.argomento; 
     return map;
   }
-Evento fromJson(Map<String, dynamic> json)
-        {
+
+Evento.fromJson(Map<String, dynamic> json)
+        :
           id = json['id'],
           titolo = json['titolo'],
           desc = json['desc'],
           partecipanti = json['partecipanti'],
-          topic = Topic.fromJson(json['topic']),
-          luogo = Luogo.fromJson(json['luogo']);
-        }
+          topic = Topic.fromJson2(json['topic']),
+          luogo = Luogo.fromJson(json['luogo']),
+          idCreatore = json['user'];
+          
   
 	String getId() {
 		return this.id;
@@ -38,11 +47,11 @@ Evento fromJson(Map<String, dynamic> json)
 	}
 
 	String getNome() {
-		return this.nome;
+		return this.titolo;
 	}
 
 	void setNome(String titolo) {
-		this.nome = titolo;
+		this.titolo = titolo;
 	}
 
 	String getDesc() {
@@ -54,11 +63,11 @@ Evento fromJson(Map<String, dynamic> json)
 	}
 
 	int getMaxPartecipanti() {
-		return this.maxPartecipanti;
+		return this.partecipanti;
 	}
 
 	void setMaxPartecipanti(int maxPartecipanti) {
-		this.maxPartecipanti = maxPartecipanti;
+		this.partecipanti = maxPartecipanti;
 	}
 
 }

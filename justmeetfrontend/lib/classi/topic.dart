@@ -1,11 +1,22 @@
+import 'dart:convert';
+import 'dart:js_util';
+
 class Topic{
 
-  final String argomento;
+   String argomento;
+   String id;
+  
+  Topic(this. id, this.argomento);
 
-  Topic({this.argomento});
+  Topic.fromJson2(Map<String, dynamic> json)
+  : 
+  id = json['id'],
+  argomento = json['argomento'];
 
+/*
   factory Topic.fromJson(Map<String, dynamic> json){
-    return Topic(argomento: json['argomento']);
+    return Topic(id: json['id'],argomento: json['argomento']);
   }
+  */
 
 }

@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/controllerjm.dart';
+
+import 'package:justmeet/classi/luogo.dart';
+import 'package:justmeet/classi/topic.dart';
 //import 'package:justmeet/classi/user.dart';
 
 class EventCreator extends StatefulWidget 
@@ -25,7 +28,7 @@ class EventCreator extends StatefulWidget
 @override
   void initState() {
     isCreationDisabled = false;
-    currentEvent = new Evento();
+    //currentEvent = Evento();
     super.initState();
   }
 
@@ -150,6 +153,10 @@ class EventCreator extends StatefulWidget
   // METODI ESTERNI  
          
       _creationPressed() {
+        Topic top;
+        top = new Topic("id", "argomento");
+        Luogo luogo = new Luogo();
+        currentEvent = new Evento("id1", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text), top ,luogo, "idCreatore");
         currentEvent.setNome(nameCtrl.text);
         currentEvent.setDesc(descCtrl.text);
         currentEvent.setMaxPartecipanti(int.parse(maxPCtrl.text));
