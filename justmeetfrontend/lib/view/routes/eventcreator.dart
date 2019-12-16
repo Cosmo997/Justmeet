@@ -15,10 +15,8 @@ class EventCreator extends StatefulWidget
   }
   
   class EventCreatorState extends State<EventCreator>{
-      Evento currentEvent = new Evento();
-      bool isCreationEnable;
-
-
+      Evento currentEvent;
+      bool isCreationDisabled;
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
@@ -26,11 +24,12 @@ class EventCreator extends StatefulWidget
       
 @override
   void initState() {
-    isCreationEnable = false;
+    isCreationDisabled = false;
+    currentEvent = new Evento();
     super.initState();
   }
 
-  @override
+@override
   void dispose() {
     nameCtrl.dispose();
     descCtrl.dispose();
@@ -64,10 +63,7 @@ class EventCreator extends StatefulWidget
                   maxLength: 50,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8),
-                        )
-
-                      ),
+                        borderRadius: BorderRadius.all(Radius.circular(8),)),
                       labelText: 'Nome Evento',
                       icon: Icon(Icons.fiber_new),                    
 
@@ -121,7 +117,7 @@ class EventCreator extends StatefulWidget
           RaisedButton(
                   padding: EdgeInsets.all(15),
                   child: Text("Crea Evento"),
-                  onPressed: (){if(isCreationEnable){_creationPressed();}else{}},
+                  onPressed: () async {if(isCreationDisabled){_creationPressed();}else{}},
                                    ),        
                          
                          
@@ -147,26 +143,23 @@ class EventCreator extends StatefulWidget
                                                     print("Current Index: $index");
                                                   },
                                                   
-                                                )
-                  
-                       );
-                      }
-                  
-      _creationPressed() {
-                      setState(() {
-                            currentEvent.setNome(nameCtrl.text);
-                            currentEvent.setDesc(descCtrl.text);
-                            currentEvent.setMaxPartecipanti(int.parse(maxPCtrl.text));
-                            ControllerJM.sendEvent(currentEvent);
-                                  }
-    );
-                    }
+                                                ) );}
 
-      
+
+
+  // METODI ESTERNI  
+         
+      _creationPressed() {
+        currentEvent.setNome(nameCtrl.text);
+        currentEvent.setDesc(descCtrl.text);
+        currentEvent.setMaxPartecipanti(int.parse(maxPCtrl.text));
+        setState(() {
+          ControllerJM.sendEvent(currentEvent);});}
+
       _onChanged() {
-        print(isCreationEnable);
+        print(isCreationDisabled);
           setState(() {
-            isCreationEnable = !(descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
+            isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
           });
 
       }

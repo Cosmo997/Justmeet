@@ -7,10 +7,15 @@ import 'classi/evento.dart';
 class ControllerJM 
 {
   static String urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
-
+ 
+  
   static sendEvent(Evento eventissimo)
   {
-    http.post(urlSpring, body: json.encode(eventissimo));
+     http.post(
+       urlSpring,
+       body: eventissimo.toMap()
+       
+       );
   }
 
 

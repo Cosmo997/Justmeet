@@ -40,7 +40,15 @@ class Evento {
 		this.maxPartecipanti = maxPartecipanti;
 	}
 
-
+Map toMap() 
+{
+    var map = new Map<String, dynamic>();
+    map["id"] = this.id;
+    map["titolo"] = this.nome;
+    map["desc"] = this.desc;
+    map["maxP"] = this.maxPartecipanti;
+    return map;
+  }
 
 
 
