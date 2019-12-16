@@ -8,22 +8,20 @@ public class Evento {
     private String titolo;
     private String desc;
     private int partecipanti;
-    private Topic topic;
+    private String idTopic;
     private String idCreator;
-    private Luogo luogo;
-    //private SimpleDateFormat dataInizio;
+    private String idLuogo;
 
     public Evento(){};
-        //ArrayList<User> partecipanti;
-        //ArrayList<Topic> topicEvento;
-    public Evento(String id, String t, String d, int partecipanti ,Topic topic, String creatore, Luogo luogo){
+    
+    public Evento(String id, String t, String d, int partecipanti ,String topic, String creatore, String luogo){
         this.id = id;
         this.titolo = t;
         this.desc = d;
         this.partecipanti = partecipanti;
-        this.topic = topic;
+        this.idTopic = topic;
         this.idCreator = creatore;
-        this.luogo = luogo;
+        this.idLuogo = luogo;
     } 
 
     public String getId()
@@ -51,14 +49,6 @@ public class Evento {
         this.desc = desc;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
     public String getUser() {
         return idCreator;
     }
@@ -75,12 +65,28 @@ public class Evento {
         this.partecipanti = partecipanti;
     }
 
-    public Luogo getLuogo() {
-        return luogo;
+    public String getIdTopic() {
+        return idTopic;
     }
 
-    public void setLuogo(Luogo luogo) {
-        this.luogo = luogo;
+    public void setIdTopic(String idTopic) {
+        this.idTopic = idTopic;
+    }
+
+    public String getIdCreator() {
+        return idCreator;
+    }
+
+    public void setIdCreator(String idCreator) {
+        this.idCreator = idCreator;
+    }
+
+    public String getIdLuogo() {
+        return idLuogo;
+    }
+
+    public void setIdLuogo(String idLuogo) {
+        this.idLuogo = idLuogo;
     }
         
 }

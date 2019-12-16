@@ -1,5 +1,6 @@
 package it.unicam.justmeetbackend.databasefake;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User
@@ -7,24 +8,24 @@ public class User
         private String id;
         private String nome;
         private String cognome;
-        private String username;
         private String email;
         private String password;
         private Boolean isLogged;
-        private List<String> preferiti;
+        private String idLuogo;
+        private ArrayList<String> preferiti;
 
         public User(){}
 
-        public User(String id, String n, String c, String u, String e, String p, Boolean i, List<String> preferiti)
+        public User(String id, String n, String c, String e, String p, String l, boolean b, ArrayList<String> idPreferit)
         {
             this.id = id;
             this.nome = n;
             this.cognome = c;
-            this.username = u;
             this.email = e;
             this.password = p;
-            this.isLogged = i;
-            this.preferiti = preferiti;
+            this.isLogged = b;
+            this.preferiti = idPreferit;
+            this.idLuogo = l;
         }
 
     public String getNome() {
@@ -41,14 +42,6 @@ public class User
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -79,7 +72,7 @@ public class User
         return preferiti;
     }
 
-    public void setPreferiti(List<String> preferiti) {
+    public void setPreferiti(ArrayList<String> preferiti) {
         this.preferiti = preferiti;
     }
 
@@ -89,6 +82,14 @@ public class User
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdLuogo() {
+        return idLuogo;
+    }
+
+    public void setIdLuogo(String idLuogo) {
+        this.idLuogo = idLuogo;
     }
 
     }

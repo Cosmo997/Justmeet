@@ -2,21 +2,19 @@ package it.unicam.justmeetbackend.databasefake;
 
 public class Luogo {
 
+    private String idLuogo;
     private String regione;
     private String provincia;
     private String comune;
-    private String indirizzo;
-    //private String coordinate;
-    private String via;
-
+    
     public Luogo(){}
 
-    public Luogo(String regione, String provincia, String comune, String indirizzo, String via) {
+    public Luogo(String idLuogo, String regione, String provincia, String comune) {
+        
+        this.idLuogo = idLuogo;
         this.regione = regione;
         this.provincia = provincia;
         this.comune = comune;
-        this.indirizzo = indirizzo;
-        this.via = via;
     }
 
     public String getRegione() {
@@ -43,20 +41,12 @@ public class Luogo {
         this.comune = comune;
     }
 
-    public String getIndirizzo() {
-        return indirizzo;
+    public String getIdLuogo() {
+        return idLuogo;
     }
 
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    public String getVia() {
-        return via;
-    }
-
-    public void setVia(String via) {
-        this.via = via;
+    public void setIdLuogo(String idLuogo) {
+        this.idLuogo = idLuogo;
     };
 
     

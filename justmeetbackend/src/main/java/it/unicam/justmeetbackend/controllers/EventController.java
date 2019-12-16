@@ -32,16 +32,6 @@ public class EventController {
     public List<Evento> getEventsByTitolo(@PathVariable String titolo) {
         return eventService.getEventsByName(titolo);
     }
-    
-    /**
-     * Restituisce gli eventi di una determinata regione
-     * @param regione
-     * @return
-     */
-    @RequestMapping(value="/eventi/regione/{regione}", method=RequestMethod.GET)
-    public List<Evento> getEventsByRegion(@PathVariable String regione) {
-        return eventService.getEventsByRegion(regione);
-    }
 
     /**
      * Restituisce gli eventi di una determinata provincia
@@ -53,7 +43,6 @@ public class EventController {
         return eventService.getEventsByProvincia(provincia);
     }
     
-
     /**
      * Creare Evento (POST)
      * @param e

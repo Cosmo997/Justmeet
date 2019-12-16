@@ -4,20 +4,20 @@ import java.util.List;
 
 public class Preferiti {
 
-    private List<Evento> eventiPreferiti;
+    private List<String> idEventiPreferiti;
     
-    public Preferiti(){};
+    Preferiti(){};
 
-    public Preferiti(List<Evento> eventi){
-        this.eventiPreferiti = eventi;
+    public Preferiti(List<String> eventi) {
+        this.idEventiPreferiti = eventi;
     }
 
-    public List<Evento> getEventiPreferiti() {
-        return eventiPreferiti;
+    public List<String> getEventiPreferiti() {
+        return idEventiPreferiti;
     }
 
-    public void setEventiPreferiti(List<Evento> eventiPreferiti) {
-        this.eventiPreferiti = eventiPreferiti;
+    public void setEventiPreferiti(final List<String> eventiPreferiti) {
+        this.idEventiPreferiti = eventiPreferiti;
     }
 
 }

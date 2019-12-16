@@ -8,16 +8,15 @@ import org.springframework.stereotype.Service;
 
 import it.unicam.justmeetbackend.databasefake.Evento;
 import it.unicam.justmeetbackend.databasefake.Luogo;
-import it.unicam.justmeetbackend.databasefake.Topic;
 
 @Service
 public class EventService {
 
-    Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, new Topic("id del topic","partita"),
-    "Ciao124",new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30"));
+    Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, "idTopic",
+    "Ciao124", "idLuogo2");
 
-    Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("id del topic","studio"),
-    "idCreatore",new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"));
+    Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 ,"idTopic",
+    "idCreatore", "idLuogo");
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento1,evento2));
     
@@ -80,31 +79,26 @@ public class EventService {
 	}
 
     /**
-     * Restituisce tutti gli eventi in una regione
-     * @param regione
-     * @return
-     */
-	public List<Evento> getEventsByRegion(String regione) {
-        List<Evento> l = new ArrayList<>();
-        for (Evento evento : listaEventi) {
-            if(evento.getLuogo().getRegione().equalsIgnoreCase(regione))
-            l.add(evento);
-        }
-        return l;
-	}
-
-    /**
      * Restituisce gli eventi di una determinata provincia
+     * 
      * @param provincia
      * @return
      */
-	public List<Evento> getEventsByProvincia(String provincia) {
-		List<Evento> l = new ArrayList<>();
-        for (Evento evento : listaEventi) {
-            if(evento.getLuogo().getProvincia().equalsIgnoreCase(provincia))
-            l.add(evento);
+    public ArrayList<Evento> getEventsByProvincia(String provincia) {
+        LuogoService ls = new LuogoService();
+        ArrayList<Luogo> listaLuoghi = ls.getLuogoByProvincia(provincia);
+        ArrayList<Evento> listaEventiappoggio = new ArrayList<>(Arrays.asList());
+        for (Luogo l : listaLuoghi)
+        {
+            for(Evento e : listaEventi)
+               {
+                  if (e.getIdLuogo().equals(l.getIdLuogo()))
+                  {
+                        listaEventiappoggio.add(e);
+                  }
+                 }
         }
-        return l;
-	}
+        return listaEventiappoggio;
+}
     
 }
