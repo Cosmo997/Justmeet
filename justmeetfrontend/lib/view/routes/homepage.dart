@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../classi/evento.dart';
 
-import 'package:justmeet/classi/evento.dart';
 //import 'dart:async';
 
 class HomePage extends StatefulWidget{
@@ -29,6 +30,7 @@ class HomePageState extends State<HomePage>{
 
   }  
 
+
   @override
   void initState() {
     loadEvent();
@@ -41,7 +43,7 @@ class HomePageState extends State<HomePage>{
         return Scaffold(
                   appBar:AppBar
                   (
-                   backgroundColor: Colors.black54,
+                   backgroundColor: Colors.black,
                    elevation: 10,
                    title: Image.asset('assets/logo.png', scale: 2.5),
                    centerTitle: true,
@@ -51,21 +53,67 @@ class HomePageState extends State<HomePage>{
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (BuildContext context, int index){
                         Evento evento = eventList[index];
-                        return ListTile(
-                          title: Text(evento.titolo),
-                          subtitle: Text(evento.desc),
+                        return  SingleChildScrollView(
+                          child: Container(
+                          padding: EdgeInsets.all(20),
+                          margin: EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: Text(evento.titolo),
+                                  subtitle: Text(evento.desc),
+                                  trailing: Icon(Icons.favorite_border), onTap: () => {}
+                                  //Se loggato, salva l'evento tra i preferiti.
+                                ),
+                              Card(
+                                elevation: 5,
+                                color: Colors.white,
+                                margin: EdgeInsets.all(40),
+                                child: Container(
+                                  child: Column(
+                                    children: <Widget>[
+                                       ListTile(
+                                title: Text("\n Nome: \nCognome: "),
+                                subtitle: Text("\nRegione: "+evento.luogo.regione+"\nProvincia: " +evento.luogo.provincia),
+                                trailing: Text("Numero partecipanti: " +evento.partecipanti.toString()+
+                                 "\n\nTopic:" +evento.topic.argomento),
+                              ),
+                                  ],),
+                                ),
+                              ),
+                              RaisedButton(
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0),
+                                side: BorderSide(color: Colors.black)
+                                ),
+
+                                child: Text("ISCRIVITI"),
+                                onPressed: ()=>{}
+                                //,
+                              ),
+                            ],
+                            ),
+                          ),
+                        ),
                         );
                       },
                     ),
                   bottomNavigationBar: CurvedNavigationBar(
-                                color: Colors.black54,
-                                backgroundColor: Colors.white24,
-                                buttonBackgroundColor: Colors.black54,
+                                color: Colors.black,
+                                backgroundColor: Colors.white,
+                                buttonBackgroundColor: Colors.black,
                                 items: <Widget>[
-                                  Icon(Icons.favorite, size: 18,),
-                                  Icon(Icons.home, size: 18,),
-                                  Icon(Icons.message, size: 18,),
-                                  Icon(Icons.add_circle_outline, size: 18),
+                                  Icon(Icons.favorite, size: 18, color: Colors.white,),
+                                  Icon(Icons.home, size: 18, color: Colors.white),
+                                  Icon(Icons.message, size: 18, color: Colors.white,),
+                                  Icon(Icons.add_circle_outline, size: 18, color: Colors.white,),
                                 ],
                                 animationDuration: Duration(
                                   milliseconds: 300,
@@ -75,10 +123,7 @@ class HomePageState extends State<HomePage>{
                                 onTap: (index){
                                   print("Current Index: $index");
                                 },
-                                
                               ),
-                    
-                    
                     );
                 
       }  

@@ -2,11 +2,13 @@ package it.unicam.justmeetbackend.databasefake;
 
 public class Topic {
 
+    private String id;
     private String argomento;
 
     public Topic(){};
 
-    public Topic(String a){
+    public Topic(String id, String a){
+        this.id = id;
         this.argomento = a;
     }
 
@@ -22,6 +24,14 @@ public class Topic {
      */
     public void setArgomento(String argomento) {
         this.argomento = argomento;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

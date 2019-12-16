@@ -10,6 +10,6 @@ public class ControllerRest {
     @GetMapping("/")
     public String getMethodName()
     {
-        return "hello";
+        return "apiRest di Benedetti Michele \n e \n Moschini Daniele";
     }
 }

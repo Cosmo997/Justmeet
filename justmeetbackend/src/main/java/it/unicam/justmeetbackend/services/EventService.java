@@ -8,20 +8,16 @@ import org.springframework.stereotype.Service;
 
 import it.unicam.justmeetbackend.databasefake.Evento;
 import it.unicam.justmeetbackend.databasefake.Luogo;
-import it.unicam.justmeetbackend.databasefake.Preferiti;
 import it.unicam.justmeetbackend.databasefake.Topic;
-import it.unicam.justmeetbackend.databasefake.User;
 
 @Service
 public class EventService {
 
-    Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, new Topic("partita"),
-    new User("Michele", "Benedetti", "username", "email", "psw", true, new Preferiti()),
-    new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30"));
+    Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, new Topic("id del topic","partita"),
+    "Ciao124",new Luogo("Marche", "Ancona", "Castello", "via dei paperini", "30"));
 
-    Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("studio"),
-    new User("Daniele", "Moschini", "username", "email", "psw", false, new Preferiti()),
-    new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"));
+    Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 , new Topic("id del topic","studio"),
+    "idCreatore",new Luogo("Molise", "Boh", "Che ne so", "via dei mongoli", "4B"));
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento1,evento2));
     

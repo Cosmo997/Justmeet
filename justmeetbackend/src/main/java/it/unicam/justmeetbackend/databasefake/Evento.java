@@ -9,20 +9,20 @@ public class Evento {
     private String desc;
     private int partecipanti;
     private Topic topic;
-    private User user;
+    private String idCreator;
     private Luogo luogo;
     //private SimpleDateFormat dataInizio;
 
     public Evento(){};
         //ArrayList<User> partecipanti;
         //ArrayList<Topic> topicEvento;
-    public Evento(String id, String t, String d, int partecipanti ,Topic topic, User user, Luogo luogo){
+    public Evento(String id, String t, String d, int partecipanti ,Topic topic, String creatore, Luogo luogo){
         this.id = id;
         this.titolo = t;
         this.desc = d;
         this.partecipanti = partecipanti;
         this.topic = topic;
-        this.user = user;
+        this.idCreator = creatore;
         this.luogo = luogo;
     } 
 
@@ -59,12 +59,12 @@ public class Evento {
         this.topic = topic;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return idCreator;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String user) {
+        this.idCreator = user;
     }
 
     public int getPartecipanti() {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
+
+import 'view/routes/homepage.dart';
 //import 'view/routes/homepage.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //Disabilita la scritta "debug" in alto a destra
       themeMode: ThemeMode.dark,
-      home: EventCreator(),
+      home: HomePage(),
     );
   }
 }

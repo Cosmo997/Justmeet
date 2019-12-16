@@ -88,13 +88,10 @@ void newEventState()
                 ),
               ),
           ),
-         
           
-     
+     /*
            Container(
-           
-             
-                
+              
                 TextField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -111,18 +108,7 @@ void newEventState()
             
           ),
 
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
                  IconButton(

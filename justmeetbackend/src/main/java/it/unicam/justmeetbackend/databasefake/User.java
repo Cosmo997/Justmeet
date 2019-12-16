@@ -1,21 +1,23 @@
 package it.unicam.justmeetbackend.databasefake;
 
-    public class User
+import java.util.List;
+
+public class User
     {
+        private String id;
         private String nome;
         private String cognome;
         private String username;
         private String email;
         private String password;
         private Boolean isLogged;
-        private Preferiti preferiti;
-        //Preferiti preferiti;
-        //Luogo posizione;
+        private List<String> preferiti;
 
         public User(){}
 
-        public User(String n, String c, String u, String e, String p, Boolean i, Preferiti preferiti)
+        public User(String id, String n, String c, String u, String e, String p, Boolean i, List<String> preferiti)
         {
+            this.id = id;
             this.nome = n;
             this.cognome = c;
             this.username = u;
@@ -73,12 +75,20 @@ package it.unicam.justmeetbackend.databasefake;
         this.isLogged = isLogged;
     }
 
-    public Preferiti getPreferiti() {
+    public List<String> getPreferiti() {
         return preferiti;
     }
 
-    public void setPreferiti(Preferiti preferiti) {
+    public void setPreferiti(List<String> preferiti) {
         this.preferiti = preferiti;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     }
