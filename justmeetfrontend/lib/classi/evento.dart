@@ -1,13 +1,34 @@
  //import 'dart:convert';
 
 class Evento {
-      String id;
-      String nome;
-      String desc;
-      int maxPartecipanti;
+      final String id;
+      final String titolo;
+      final String desc;
+      final int partecipanti; 
+      final Topic topic;    
+      final Luogo luogo;
+    
+    Evento();
 
-      Evento();
-
+  Map toMap() 
+{
+    var map = new Map<String, dynamic>();
+    map["id"] = this.id;
+    map["titolo"] = this.nome;
+    map["desc"] = this.desc;
+    map["maxP"] = this.maxPartecipanti;
+    return map;
+  }
+Evento fromJson(Map<String, dynamic> json)
+        {
+          id = json['id'],
+          titolo = json['titolo'],
+          desc = json['desc'],
+          partecipanti = json['partecipanti'],
+          topic = Topic.fromJson(json['topic']),
+          luogo = Luogo.fromJson(json['luogo']);
+        }
+  
 	String getId() {
 		return this.id;
 	}
@@ -40,24 +61,6 @@ class Evento {
 		this.maxPartecipanti = maxPartecipanti;
 	}
 
-Map toMap() 
-{
-    var map = new Map<String, dynamic>();
-    map["id"] = this.id;
-    map["titolo"] = this.nome;
-    map["desc"] = this.desc;
-    map["maxP"] = this.maxPartecipanti;
-    return map;
-  }
-
-
-
-      Evento.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-      nome = json['titolo'],
-      desc = json['desc'],
-      maxPartecipanti = json['maxP'];
-
-
-    
 }
+
+      
