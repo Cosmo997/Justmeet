@@ -1,16 +1,55 @@
  //import 'dart:convert';
 
 class Evento {
-      final String id;
-      final String titolo;
-      final String desc;
-    
-      Evento(this.id, this.titolo, this.desc);
+      String id;
+      String nome;
+      String desc;
+      int maxPartecipanti;
+
+      Evento();
+
+	String getId() {
+		return this.id;
+	}
+
+	void setId(String id) {
+		this.id = id;
+	}
+
+	String getNome() {
+		return this.nome;
+	}
+
+	void setNome(String titolo) {
+		this.nome = titolo;
+	}
+
+	String getDesc() {
+		return this.desc;
+	}
+
+	void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	int getMaxPartecipanti() {
+		return this.maxPartecipanti;
+	}
+
+	void setMaxPartecipanti(int maxPartecipanti) {
+		this.maxPartecipanti = maxPartecipanti;
+	}
+
+
+
+
 
       Evento.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-      titolo = json['titolo'],
-      desc = json['desc'];
+      nome = json['titolo'],
+      desc = json['desc'],
+      maxPartecipanti = json['maxP'];
+
 
     
 }

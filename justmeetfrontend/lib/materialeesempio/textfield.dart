@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 controller: pswController,
-                //onChanged: _formChanged,
+                onChanged: _formChanged,
                 obscureText: true,
 
               ),

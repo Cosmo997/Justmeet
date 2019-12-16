@@ -52,7 +52,7 @@ class HomePageState extends State<HomePage>{
                       itemBuilder: (BuildContext context, int index){
                         Evento evento = eventList[index];
                         return ListTile(
-                          title: Text(evento.titolo),
+                          title: Text(evento.nome),
                           subtitle: Text(evento.desc),
                         );
                       },
