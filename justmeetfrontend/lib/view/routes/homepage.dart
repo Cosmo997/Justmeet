@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../classi/evento.dart';
+import 'eventcreator.dart';
 
 //import 'dart:async';
 
@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget{
 
 class HomePageState extends State<HomePage>{
  
+  int currentIndex = 1;
+
   var eventList = [];
 
    loadEvent() async {
@@ -30,6 +32,17 @@ class HomePageState extends State<HomePage>{
 
   }  
 
+  Widget callPageBody(int index){
+    switch (index) 
+    {
+      case 0: return HomePage();
+      case 1: return EventCreator();
+        
+        break;
+      default: return HomePage();
+    }
+  }
+
 
   @override
   void initState() {
@@ -41,13 +54,6 @@ class HomePageState extends State<HomePage>{
       Widget build(BuildContext context) {
     
         return Scaffold(
-                  appBar:AppBar
-                  (
-                   backgroundColor: Colors.black,
-                   elevation: 10,
-                   title: Image.asset('assets/logo.png', scale: 2.5),
-                   centerTitle: true,
-                   ),
                   body: ListView.separated(
                       itemCount: eventList.length,
                       separatorBuilder: (context, index) => Divider(),
@@ -105,25 +111,6 @@ class HomePageState extends State<HomePage>{
                         );
                       },
                     ),
-                  bottomNavigationBar: CurvedNavigationBar(
-                                color: Colors.black,
-                                backgroundColor: Colors.white,
-                                buttonBackgroundColor: Colors.black,
-                                items: <Widget>[
-                                  Icon(Icons.favorite, size: 18, color: Colors.white,),
-                                  Icon(Icons.home, size: 18, color: Colors.white),
-                                  Icon(Icons.message, size: 18, color: Colors.white,),
-                                  Icon(Icons.add_circle_outline, size: 18, color: Colors.white,),
-                                ],
-                                animationDuration: Duration(
-                                  milliseconds: 300,
-                                ),
-                                
-                                index: 1,
-                                onTap: (index){
-                                  print("Current Index: $index");
-                                },
-                              ),
                     );
                 
       }  

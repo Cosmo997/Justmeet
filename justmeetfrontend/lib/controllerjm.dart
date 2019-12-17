@@ -15,7 +15,6 @@ class ControllerJM
      http.post(
        urlEventi,
        body: eventissimo.toMap()
-       
        );
   }
   static List<Luogo> getLuoghi()
