@@ -23,7 +23,8 @@ class Evento {
     map["desc"] = this.desc;
     map["partecipanti"] = this.partecipanti;
     map["user"] = this.idCreatore;
-    map["topic"] = this.topic.id; this.topic.argomento; 
+    map["topic"] = this.topic.id;
+    //TODO da finire 
     return map;
   }
 
