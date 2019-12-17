@@ -1,16 +1,18 @@
-//import 'dart:html';
 import 'dart:ui';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/controllerjm.dart';
-
 import 'package:justmeet/classi/luogo.dart';
 import 'package:justmeet/classi/topic.dart';
-//import 'package:justmeet/classi/user.dart';
 
+
+/**
+ * Responsabilità: Creare un Evento.
+ */
 class EventCreator extends StatefulWidget 
   {
   @override
@@ -18,32 +20,23 @@ class EventCreator extends StatefulWidget
   }
   
   class EventCreatorState extends State<EventCreator>{
+
+      DateTime _selectedDate = DateTime.now();	
+      TimeOfDay _selectedTime = TimeOfDay.now();
       Evento currentEvent;
       bool isCreationDisabled;
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
-
+      ArrayList<Luogo> luoghi = 
       
-@override
-  void initState() {
-    isCreationDisabled = false;
-    //currentEvent = Evento();
-    super.initState();
-  }
 
-@override
-  void dispose() {
-    nameCtrl.dispose();
-    descCtrl.dispose();
-    maxPCtrl.dispose();
-    super.dispose();
-  }  
+ 
 
    @override
     Widget build(BuildContext context)
     {
-      
+      final DateFormat df = DateFormat("dd/MM/yyyy");
      return Scaffold (
 
       appBar:AppBar(
@@ -55,15 +48,15 @@ class EventCreator extends StatefulWidget
 
       body: Column(    
          children: <Widget>[
-
+          
+           //Container Nome Evento
           Container(
-            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextField(
                   controller: nameCtrl,
                   onChanged: _onChanged(),
-                  maxLength: 50,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8),)),
@@ -74,16 +67,15 @@ class EventCreator extends StatefulWidget
                 ),
               ),
           ),
-  
+          
+          // Container Descrizione Evento
           Container(
             child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(10),
                 child: TextField(
                   controller: descCtrl,
                   onChanged: _onChanged(),
                   textCapitalization: TextCapitalization.sentences,
-                  maxLines: 10,
-                  maxLength: 600,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8))
@@ -96,9 +88,14 @@ class EventCreator extends StatefulWidget
                 ),
               ),
           ),          
-     
-          Container( 
-                padding: EdgeInsets.all(16),
+          
+          // Riga N max , Regione, Provincia, Città
+         Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                width: 105,
                 child: TextField(
                   controller: maxPCtrl,
                   onChanged:_onChanged(),
@@ -108,15 +105,70 @@ class EventCreator extends StatefulWidget
                         borderRadius: BorderRadius.all(Radius.circular(8))
                       ),
                       
-                      labelText: 'Numero Max Partecipanti',
-                      icon: Icon(Icons.people),                    
+                      labelText: 'Max',
+                      icon: Icon(Icons.people)                   
 
                   ),
                 ),
-         
-            
+              ),
+
+              //Regione Provincia Città
+            ],
+            ),
+
+          //Riga Data e Ora Inizio
+            Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Text("Data e Ora inizio:")
+                ),
+              
+              Text(df.format(_selectedDate)),
+              IconButton(
+                       icon: Icon(Icons.date_range),
+                       onPressed: () => getData(context),
+                     ),
+              Text(_selectedTime.format(context)),
+              IconButton(
+                       icon: Icon(Icons.date_range),
+                       onPressed: () => getTime(context),
+                     ),
+
+              
+            ],
+          ),  
+
+          //Riga Data e Ora Fine
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Text("Data e ora fine: ")
+                ),
+                Text(df.format(_selectedDate)),
+              IconButton(
+                       icon: Icon(Icons.date_range),
+                       onPressed: () => getData(context),
+                     ),
+              Text(_selectedTime.format(context)),
+              IconButton(
+                       icon: Icon(Icons.date_range),
+                       onPressed: () => getTime(context),
+                     ),
+              
+              
+
+              
+            ],
           ),
 
+
+
+         
+          //Bottone Crea Evento
           RaisedButton(
                   padding: EdgeInsets.all(15),
                   child: Text("Crea Evento"),
@@ -171,6 +223,39 @@ class EventCreator extends StatefulWidget
 
       }
   
+      void getData(context) async {
+          var fDate = await showDatePicker(
+          context: context,
+          initialDate: _selectedDate,
+          firstDate: DateTime(2018),
+          lastDate: DateTime(2030),
+   );
+     //aggiornare lo stato
+     if (fDate != null) setState(() => _selectedDate = fDate);
+
+  }
   
-  
+      void getTime(context) async {
+    var fTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime
+    );
+    if (fTime != null) setState(() => _selectedTime = fTime);
+  }
+
+      @override
+      void initState() {
+    isCreationDisabled = false;
+    //currentEvent = Evento();
+    super.initState();
+  }
+
+      @override
+      void dispose() {
+    nameCtrl.dispose();
+    descCtrl.dispose();
+    maxPCtrl.dispose();
+    super.dispose();
+  } 
+
   }
