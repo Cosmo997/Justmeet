@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'view/routes/areariservata.dart';
 import 'view/routes/homepage.dart';
 import 'view/routes/eventcreator.dart';
 
@@ -8,17 +9,17 @@ class App extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-  return AppState();
+    return AppState();
   }
 }
 
 class AppState extends State<App>{
 
-  int currentIndex = 1;
+  int currentIndex = 0;
   final pageOption = [
     HomePage(),
-    EventCreator()
+    EventCreator(),
+    AreaRiservata()
   ];
 
   @override
@@ -50,10 +51,10 @@ class AppState extends State<App>{
       backgroundColor: Colors.white,
       buttonBackgroundColor: Colors.black,  
       items: <Widget>[
-      // Icon(Icons.favorite, size: 18, color: Colors.white,),
-      Icon(Icons.home, size: 18, color: Colors.white),
-      //Icon(Icons.message, size: 18, color: Colors.white,),
-      Icon(Icons.add_circle_outline, size: 18, color: Colors.white,),
+      Icon(Icons.home, size: 18, color: Colors.white,),
+      Icon(Icons.add_circle, size: 18, color: Colors.white),
+      Icon(Icons.accessible_forward, size: 18, color: Colors.white,),
+      //Icon(Icons.favorite, size: 18, color: Colors.white,),
       ],
         animationDuration: Duration(
           milliseconds: 600,

@@ -3,9 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../classi/evento.dart';
-import 'eventcreator.dart';
+import '../../classi/luogo.dart';
+import '../../classi/topic.dart';
 
-//import 'dart:async';
+import 'dart:async';
 
 class HomePage extends StatefulWidget{
   @override
@@ -16,7 +17,12 @@ class HomePageState extends State<HomePage>{
  
   int currentIndex = 1;
 
-  var eventList = [];
+  var eventList = [
+    new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
+    new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
+    new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
+    new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
+  ];
 
    loadEvent() async {
     String urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
@@ -32,22 +38,10 @@ class HomePageState extends State<HomePage>{
 
   }  
 
-  Widget callPageBody(int index){
-    switch (index) 
-    {
-      case 0: return HomePage();
-      case 1: return EventCreator();
-        
-        break;
-      default: return HomePage();
-    }
-  }
-
-
   @override
   void initState() {
-    loadEvent();
-    super.initState();
+    //loadEvent();
+    //super.initState();
   }
      
       @override
@@ -64,7 +58,7 @@ class HomePageState extends State<HomePage>{
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(30),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(color: Colors.grey),
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
@@ -86,9 +80,8 @@ class HomePageState extends State<HomePage>{
                                     children: <Widget>[
                                        ListTile(
                                 title: Text("\n Nome: \nCognome: "),
-                                subtitle: Text("\nRegione: "+evento.luogo.regione+"\nProvincia: " +evento.luogo.provincia),
-                                trailing: Text("Numero partecipanti: " +evento.partecipanti.toString()+
-                                 "\n\nTopic:" +evento.topic.argomento),
+                                subtitle: Text("\nRegione: " "\nProvincia: "),
+                                trailing: Text("Numero partecipanti: " "\n\nTopic:"),
                               ),
                                   ],),
                                 ),
@@ -97,7 +90,7 @@ class HomePageState extends State<HomePage>{
                                 elevation: 2,
                                 shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(8.0),
-                                side: BorderSide(color: Colors.black)
+                                side: BorderSide(color: Colors.grey)
                                 ),
 
                                 child: Text("ISCRIVITI"),
