@@ -11,6 +11,9 @@ import it.unicam.justmeetbackend.databasefake.Evento;
 import it.unicam.justmeetbackend.services.EventService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 @RestController
 public class EventController {
@@ -31,16 +34,6 @@ public class EventController {
     @RequestMapping(value="/eventi/{titolo}", method=RequestMethod.GET)
     public List<Evento> getEventsByTitolo(@PathVariable String titolo) {
         return eventService.getEventsByName(titolo);
-    }
-
-    /**
-     * Restituisce gli eventi di una determinata provincia
-     * @param provincia
-     * @return
-     */
-    @RequestMapping(value="/eventi/provincia/{provincia}", method=RequestMethod.GET)
-    public List<Evento> getEventsByProvincia(@PathVariable String provincia) {
-        return eventService.getEventsByProvincia(provincia);
     }
     
     /**
@@ -71,7 +64,12 @@ public class EventController {
     public String deleteMethod(@PathVariable String id) {
             return eventService.deleteEvento(id);
     }
+
+    @GetMapping(value="/eventi/comune/{comune}")
+    public List<Evento> getMethodName(@PathVariable String comune) {
+        return eventService.getEventsByComune(comune);
+    }
     
-    
+
 
 }

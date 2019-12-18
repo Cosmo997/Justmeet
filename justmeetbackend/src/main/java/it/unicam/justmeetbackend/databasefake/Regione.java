@@ -4,7 +4,10 @@ package it.unicam.justmeetbackend.databasefake;
  * Regione
  */
 public class Regione {
+
     String nome;
+
+    public Regione(){};
 
     public Regione(String nome)
     {

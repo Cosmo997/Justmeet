@@ -2,51 +2,50 @@ package it.unicam.justmeetbackend.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.unicam.justmeetbackend.databasefake.Comune;
+import it.unicam.justmeetbackend.databasefake.Provincia;
 //import java.util.List;
-import it.unicam.justmeetbackend.databasefake.Luogo;
+import it.unicam.justmeetbackend.databasefake.Regione;
 
 
 @Service
 public class LuogoService {
 
-    Luogo luogo1 = new Luogo("idLuogo", "regione", "provincia", "comune");
-    Luogo luogo2 = new Luogo("idLuogo2", "regione2", "provincia2", "comune2");
-    Luogo luogo6 = new Luogo("idLuogsdfdfsdfo6", "regionfsd", "provincia2", "comune1");
-    Luogo luogox = new Luogo("idLuogosddsfsdf6", "regionedfsfs3", "provincia2", "comune1fdsdsf");
-    Luogo luogo3 = new Luogo("idLuogo3", "regione3", "provincia3", "comune3");
-    ArrayList<Luogo> luoghi = new ArrayList<>(Arrays.asList(luogo1,luogo2,luogo3,luogo6,luogox));
+    ArrayList<Regione> regioni = new ArrayList<>(Arrays.asList(new Regione("Marche")));
+    ArrayList<Provincia> provincie = new ArrayList<>(Arrays.asList(new Provincia("Ancona", "AN", "Marche")));
+    ArrayList<Comune> comuni = new ArrayList<>(Arrays.asList(new Comune("Camerino", "AN")));
 
 
+	public ArrayList<Regione> getAllRegioni() {
+		return regioni;
+	}
 
-    /**
-    * 
-    * @param provincia
-    * @return Tutti i luoghi che hanno come provincia l'input. 
-    */
-    public ArrayList<Luogo> getLuogoByProvincia(String provincia)
-    {
-    ArrayList<Luogo> app = new ArrayList<>();
-    for(Luogo l : luoghi)
-    {
-     if(l.getProvincia().equals(provincia))
-        {
-         app.add(l);
+    public List<Provincia> getProvinciaByRegione(String regione){
+
+        List<Provincia> app = new ArrayList<>();
+
+		for (Provincia provincia : provincie) {
+            if(provincia.getNomeRegione().equalsIgnoreCase(regione));
+                app.add(provincia);
         }
-    }
-    return app;
+        return app;
+	}
+
+	public List<Comune> getComuniByProvincia(String provincia) {
+       
+        List<Comune> app = new ArrayList<>();
+
+		for (Comune comune : comuni) {
+            if(comune.getProvincia().equals(provincia));
+                app.add(comune);
+        }
+        return app;
     }
 
-    /**
-     * 
-     * @return Tutti i luoghi presenti nel service.
-     */
-    public ArrayList<Luogo> getAllLuoghi()
-    {
-        return luoghi;
-    }
 
 
 

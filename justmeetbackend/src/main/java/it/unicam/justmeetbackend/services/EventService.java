@@ -6,15 +6,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.unicam.justmeetbackend.databasefake.Comune;
 import it.unicam.justmeetbackend.databasefake.Evento;
-import it.unicam.justmeetbackend.databasefake.Luogo;
 
 @Service
 public class EventService {
 
+    LuogoService luogoService;
 
-   // Evento evento2 = new Evento("id", "t", "d", 4, "topic", "creatore", "luogo");
-    Evento evento2 = new Evento();
+    Evento evento2 = new Evento("id", "t", "d", 3, "topic", "creatore", "Camerino", false);
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento2));
     
     /**
@@ -73,29 +73,21 @@ public class EventService {
             l.add(evento);
         }
         return l;
-	}
-
+    }
+    
     /**
-     * Restituisce gli eventi di una determinata provincia
-     * 
-     * @param provincia
+     * Restituisce gli eventi in un determinato comune
+     * @param comune
      * @return
      */
-    public ArrayList<Evento> getEventsByProvincia(String provincia) {
-        LuogoService ls = new LuogoService();
-        ArrayList<Luogo> listaLuoghi = ls.getLuogoByProvincia(provincia);
-        ArrayList<Evento> listaEventiappoggio = new ArrayList<>(Arrays.asList());
-        for (Luogo l : listaLuoghi)
-        {
-            for(Evento e : listaEventi)
-               {
-                  if (e.getIdLuogo().equals(l.getIdLuogo()))
-                  {
-                        listaEventiappoggio.add(e);
-                  }
-                 }
+
+    public List<Evento> getEventsByComune(String comune){
+        List<Evento> l = new ArrayList<>();
+        for (Evento evento : listaEventi) {
+            evento.getNomeComune().equalsIgnoreCase(comune);
+            l.add(evento);
         }
-        return listaEventiappoggio;
-}
-    
+        return l;
+    }
+
 }
