@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+//import 'package:justmeet/controllerjm.dart';
+
 import '../../classi/evento.dart';
 import '../../classi/luogo.dart';
 import '../../classi/topic.dart';
 
-import 'dart:async';
+
 
 class HomePage extends StatefulWidget{
   @override
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget{
 class HomePageState extends State<HomePage>{
  
   int currentIndex = 1;
-
+  //List<Evento> eventi = ControllerJM.loadEvent() as List<Evento>;
   var eventList = [
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
@@ -24,24 +25,12 @@ class HomePageState extends State<HomePage>{
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
   ];
 
-   loadEvent() async {
-    String urlSpring = "https://springboot-restapi.herokuapp.com/eventi";
-    http.Response response = await http.get(Uri.encodeFull(urlSpring), headers: {"Accept" : "application/json"});
-    print("Risposta ricevuta");
-    print("Body: " +response.body);
-    List collection = json.decode(response.body);
-    List<Evento> eventi = collection.map((json) => Evento.fromJson(json)).toList();
 
-    setState(() {
-      eventList = eventi;
-    });  
-
-  }  
+  
 
   @override
   void initState() {
-    //loadEvent();
-    //super.initState();
+    super.initState();
   }
      
       @override
