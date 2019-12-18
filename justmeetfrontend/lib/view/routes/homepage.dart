@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:justmeet/controllerjm.dart';
 
 //import 'package:justmeet/controllerjm.dart';
 
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget{
 class HomePageState extends State<HomePage>{
  
   int currentIndex = 1;
-  //List<Evento> eventi = ControllerJM.loadEvent() as List<Evento>;
+  Future<List<Evento>> eventi = ControllerJM.loadEvent();
   var eventList = [
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
@@ -41,7 +42,7 @@ class HomePageState extends State<HomePage>{
                       itemCount: eventList.length,
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (BuildContext context, int index){
-                        Evento evento = eventList[index];
+                        Evento evento = eventi;
                         return  SingleChildScrollView(
                           child: Container(
                           padding: EdgeInsets.all(20),
