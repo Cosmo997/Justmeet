@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/luogo.dart';
-import 'package:justmeet/classi/topic.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -34,9 +29,7 @@ class EventCreator extends StatefulWidget
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
       //ArrayList<Luogo> luoghi = 
-      
 
- 
 
    @override
     Widget build(BuildContext context)
@@ -47,7 +40,6 @@ class EventCreator extends StatefulWidget
      return Scaffold (
       body: SingleChildScrollView(
         child: Column(    
-          
           children: <Widget>[
           Container(
             padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -231,7 +223,6 @@ class EventCreator extends StatefulWidget
           setState(() {
             isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
           });
-
       }
   
       void getData(context) async {

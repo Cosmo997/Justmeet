@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:http/http.dart' as http;
 
 //import 'package:justmeet/controllerjm.dart';
 
@@ -24,7 +25,6 @@ class HomePageState extends State<HomePage>{
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
     new Evento("id", "titolo", "desc", 3, new Topic("id", "argomento"), new Luogo(), "idCreatore"),
   ];
-
 
   
 

@@ -4,6 +4,7 @@ package it.unicam.justmeetbackend.databasefake;
 //import java.time.*;
 
 public class Evento {
+    
     private String id;
     private String titolo;
     private String desc;
@@ -11,10 +12,12 @@ public class Evento {
     private String idTopic;
     private String idCreator;
     private String idLuogo;
+    private boolean isApproved;
 
     public Evento(){};
     
-    public Evento(String id, String t, String d, int partecipanti ,String topic, String creatore, String luogo){
+    public Evento(String id, String t, String d, int partecipanti ,String topic, String creatore, String luogo, boolean isApp){
+        
         this.id = id;
         this.titolo = t;
         this.desc = d;
@@ -22,10 +25,10 @@ public class Evento {
         this.idTopic = topic;
         this.idCreator = creatore;
         this.idLuogo = luogo;
-    } 
+        this.isApproved = isApp;
+    }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
@@ -47,14 +50,6 @@ public class Evento {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public String getUser() {
-        return idCreator;
-    }
-
-    public void setUser(String user) {
-        this.idCreator = user;
     }
 
     public int getPartecipanti() {
@@ -88,5 +83,13 @@ public class Evento {
     public void setIdLuogo(String idLuogo) {
         this.idLuogo = idLuogo;
     }
-        
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+     
 }
