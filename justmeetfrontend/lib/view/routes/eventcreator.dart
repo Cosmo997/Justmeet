@@ -13,6 +13,7 @@ import 'package:justmeet/classi/evento.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../../classi/topic.dart';
 
 
 /// Responsabilità: Creare un Evento.
@@ -33,8 +34,45 @@ class EventCreator extends StatefulWidget
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
-      //ArrayList<Luogo> luoghi = 
 
+        List<Topic> listTopic;
+        List<DropdownMenuItem<Topic>> dropdownItem;
+        Topic selectedTopic;
+
+        List<String> argomentiTopic;
+
+void riempiLista(List<Topic> lista){
+        for (Topic topic in lista) {
+          argomentiTopic.add(topic.argomento);
+  }
+  print(argomentiTopic);
+}
+        List<DropdownMenuItem<Topic>> creaListaTopic (List<Topic> topics){
+          List<DropdownMenuItem<Topic>> items = List();
+          for (Topic topic in topics) 
+          {
+            items.add(DropdownMenuItem(
+              value: topic,
+              child: Text(topic.argomento),
+              )
+              );  
+          }
+          print(items);
+          return items;
+        }
+
+      Future getTopic() async{
+        http.Response response = await http.get('https://springboot-restapi.herokuapp.com/topics');
+        List collection = json.decode(response.body);
+        //print(collection);
+        List<Topic> _listTopic = collection.map((json) => Topic.fromJson(json)).toList();
+
+        setState(() {
+          listTopic = _listTopic;
+          super.initState();
+        });
+
+      }
 
    @override
     Widget build(BuildContext context)
@@ -149,13 +187,8 @@ class EventCreator extends StatefulWidget
                        icon: Icon(Icons.date_range),
                        onPressed: () => getTime(context),
                      ),
-              
-              
-
-              
             ],
           ),
-         
           //Bottone Crea Evento
           RaisedButton(
                   padding: EdgeInsets.all(15),
@@ -165,14 +198,26 @@ class EventCreator extends StatefulWidget
           RaisedButton(
                   padding: EdgeInsets.all(15),
                   child: Text("Prova"),
-                  onPressed: _prova,)
+                  onPressed: _prova,
+                  ),
+          DropdownButton(
+            value: selectedTopic,
+            items: argomentiTopic.map((value) => DropdownMenuItem(
+              child: Text(value),
+              value: value,)).toList(),
+              onChanged: (selectedTopicT) {
+                setState(() {
+                   selectedTopic = selectedTopicT;
+                });
+              },
+            ),
+            RaisedButton(onPressed: () => creaListaTopic(listTopic),)
                                               ]     
                                         ),
-                                          
-                                          ),
+                                    ),
                             );
                   }
-                  
+
                   
                     // METODI ESTERNI  
                   
@@ -246,9 +291,12 @@ class EventCreator extends StatefulWidget
                     }
                   
                         @override
-                        void initState() {
+                      void initState() {
                       isCreationDisabled = false;
                       //currentEvent = Evento();
+                      getTopic();
+                      //dropdownItem = creaListaTopic(listTopic);
+                      //riempiLista(listTopic);
                       super.initState();
                     }
                   

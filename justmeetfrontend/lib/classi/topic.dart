@@ -8,7 +8,7 @@ class Topic{
   
   Topic(this. id, this.argomento);
 
-  Topic.fromJson2(Map<String, dynamic> json)
+  Topic.fromJson(Map<String, dynamic> json)
   : 
   id = json['id'],
   argomento = json['argomento'];
