@@ -5,15 +5,18 @@ import 'topic.dart';
 
 class Evento {
   
-       String id;
-       String titolo;
-       String desc;
-       int partecipanti; 
-       Topic topic;    
-       Luogo luogo;
-       String idCreatore;
-    
-    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.topic, this.luogo, this.idCreatore);
+      String id;
+      String titolo;
+      String desc;
+      int partecipanti; 
+      Topic topic;    
+      Luogo idComune;
+      String idCreatore;
+      DateTime inizioEvento;
+      DateTime fineEvento;
+
+
+    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.topic, this.idComune, this.idCreatore,this.inizioEvento, this.fineEvento);
 
   Map toMap() 
   {
@@ -22,9 +25,11 @@ class Evento {
     map["titolo"] = this.titolo;
     map["desc"] = this.desc;
     map["partecipanti"] = this.partecipanti;
-    map["user"] = this.idCreatore;
     map["topic"] = this.topic.id;
-    //TODO da finire 
+    map["idComune"] = this.idComune;
+    map["idCreatore"] = this.idCreatore;
+    map["inizioEvento"] = inizioEvento.toIso8601String();
+    map["fineEvento"] = fineEvento.toIso8601String();
     return map;
   }
 
@@ -35,7 +40,7 @@ Evento.fromJson(Map<String, dynamic> json)
           desc = json['desc'],
           partecipanti = json['partecipanti'],
           topic = Topic.fromJson2(json['topic']),
-          luogo = Luogo.fromJson(json['luogo']),
+          idComune = Luogo.fromJson(json['luogo']),
           idCreatore = json['user'];
           
   

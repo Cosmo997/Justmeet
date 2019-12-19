@@ -1,22 +1,21 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/luogo.dart';
-import 'package:justmeet/classi/topic.dart';
+//import 'package:justmeet/classi/luogo.dart';
+//import 'package:justmeet/classi/topic.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
 
 
-/**
- * Responsabilità: Creare un Evento.
- */
+/// Responsabilità: Creare un Evento.
 class EventCreator extends StatefulWidget 
   {
   @override
@@ -25,6 +24,7 @@ class EventCreator extends StatefulWidget
   
   class EventCreatorState extends State<EventCreator>{
 
+      final DateFormat df = DateFormat("dd/MM/yyyy");
       DateTime _selectedDate = DateTime.now();	
       TimeOfDay _selectedTime = TimeOfDay.now();
       Evento currentEvent;
@@ -33,7 +33,7 @@ class EventCreator extends StatefulWidget
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
-      //ArrayList<Luogo> luoghi = 
+      
       
 
  
@@ -41,14 +41,12 @@ class EventCreator extends StatefulWidget
    @override
     Widget build(BuildContext context)
     {
-      final DateFormat df = DateFormat("dd/MM/yyyy");
-  
-           //Container Nome Evento
      return Scaffold (
       body: SingleChildScrollView(
         child: Column(    
           
           children: <Widget>[
+          //Container Nome Evento
           Container(
             padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: Padding(
@@ -86,7 +84,7 @@ class EventCreator extends StatefulWidget
           ),          
           
           // Riga N max , Regione, Provincia, Città
-         Row(
+          Row(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Container(
@@ -160,113 +158,116 @@ class EventCreator extends StatefulWidget
               
             ],
           ),
-
-
-
          
           //Bottone Crea Evento
           RaisedButton(
-        //  ),
-         //       RaisedButton(
                   padding: EdgeInsets.all(15),
                   child: Text("Crea Evento"),
-                  onPressed: _makePostRequest,
-                            ),   
-                            SizedBox(height: 20,),     
-                           ]     
-                        ),
-                        
-                        ),
-          );
+                  onPressed: _makePostRequest,),
+          
+          RaisedButton(
+                  padding: EdgeInsets.all(15),
+                  child: Text("Prova"),
+                  onPressed: _prova,)
+                                              ]     
+                                        ),
+                                          
+                                          ),
+                            );
+                  }
+                  
+                  
+                    // METODI ESTERNI  
+                  
+                         void _makePostRequest() async {
+                    // set up POST request arguments
+                    String url = 'https://springboot-restapi.herokuapp.com/eventi';
+                    Map<String, String> headers = {"Content-type": "application/json"};
+                  
+                    String titolo = nameCtrl.text;
+                    String desc = descCtrl.text;
+                    int numPar = int.parse(maxPCtrl.text);
+                    
+                  
+                    String json = '{"id": "4", "titolo": "$titolo", "desc": "$desc", "partecipanti": $numPar ,"idTopic": "idTopicApp","idCreator": "idCreatoreApp","idLuogo": "idLuogoApp","user": "idCreatoreApp"}';
+                    // make POST request
+                    http.Response response = await http.post(url, headers: headers, body: json);
+                    // check the status code for the result
+                    int statusCode = response.statusCode;
+                  
+                    print("Status code:" +statusCode.toString());
+                    if(statusCode == 200)
+                    _showDialog(titolo, desc, numPar);
+                  
+                    }
+                  
+                        void _showDialog(String nome, String des, int part) {
+                        showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          // return object of type Dialog
+                          return AlertDialog(
+                            title: new Text("Evento: $nome creato correttamente"),
+                            content: new Text("Descrizione: $des \n Numero di partecipanti: $part"),
+                            actions: <Widget>[
+                              // usually buttons at the bottom of the dialog
+                              new FlatButton(
+                                child: new Text("Torna alla home"),
+                                onPressed: () {},
+                              ),
+                            ],
+                          );
+                        },
+                      );}
+                   
+                        _onChanged() {
+                          print(isCreationDisabled);
+                            setState(() {
+                              isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
+                            });
+                  
+                        }
+                    
+                        void getData(context) async {
+                            var fDate = await showDatePicker(
+                            context: context,
+                            initialDate: _selectedDate,
+                            firstDate: DateTime(2018),
+                            lastDate: DateTime(2030),
+                     );
+                       //aggiornare lo stato
+                       if (fDate != null) setState(() => _selectedDate = fDate);
+                  
+                    }
+                    
+                        void getTime(context) async {
+                      var fTime = await showTimePicker(
+                        context: context,
+                        initialTime: _selectedTime
+                      );
+                      if (fTime != null) setState(() => _selectedTime = fTime);
+                    }
+                  
+                        @override
+                        void initState() {
+                      isCreationDisabled = false;
+                      //currentEvent = Evento();
+                      super.initState();
+                    }
+                  
+                        @override
+                        void dispose() {
+                      nameCtrl.dispose();
+                      descCtrl.dispose();
+                      maxPCtrl.dispose();
+                      super.dispose();
+                    } 
+                  
+                    
+                    void _prova() {
+                      var prova1 = jsonEncode(_selectedDate.toIso8601String());
+                      var prova2 = jsonEncode(_selectedTime.toString());
+                      print(prova1);
+                      print(prova2);
+  }
 }
-
-
-  // METODI ESTERNI  
-
-    void _makePostRequest() async {
-  // set up POST request arguments
-  String url = 'https://springboot-restapi.herokuapp.com/eventi';
-  Map<String, String> headers = {"Content-type": "application/json"};
-
-  String titolo = nameCtrl.text;
-  String desc = descCtrl.text;
-  int numPar = int.parse(maxPCtrl.text);
-  
-
-  String json = '{"id": "4", "titolo": "$titolo", "desc": "$desc", "partecipanti": $numPar ,"idTopic": "idTopicApp","idCreator": "idCreatoreApp","idLuogo": "idLuogoApp","user": "idCreatoreApp"}';
-  // make POST request
-  http.Response response = await http.post(url, headers: headers, body: json);
-  // check the status code for the result
-  int statusCode = response.statusCode;
-
-  print("Status code:" +statusCode.toString());
-  if(statusCode == 200)
-  _showDialog(titolo, desc, numPar);
-
-  }
-
-  // user defined function
-  void _showDialog(String nome, String des, int part) {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Evento: $nome creato correttamente"),
-          content: new Text("Descrizione: $des \n Numero di partecipanti: $part"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Torna alla home"),
-              onPressed: () {},
-            ),
-          ],
-        );
-      },
-    );
-  }
-      _onChanged() {
-        print(isCreationDisabled);
-          setState(() {
-            isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
-          });
-
-      }
-  
-      void getData(context) async {
-          var fDate = await showDatePicker(
-          context: context,
-          initialDate: _selectedDate,
-          firstDate: DateTime(2018),
-          lastDate: DateTime(2030),
-   );
-     //aggiornare lo stato
-     if (fDate != null) setState(() => _selectedDate = fDate);
-
-  }
-  
-      void getTime(context) async {
-    var fTime = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime
-    );
-    if (fTime != null) setState(() => _selectedTime = fTime);
-  }
-
-      @override
-      void initState() {
-    isCreationDisabled = false;
-    //currentEvent = Evento();
-    super.initState();
-  }
-
-      @override
-      void dispose() {
-    nameCtrl.dispose();
-    descCtrl.dispose();
-    maxPCtrl.dispose();
-    super.dispose();
-  } 
-
-  }

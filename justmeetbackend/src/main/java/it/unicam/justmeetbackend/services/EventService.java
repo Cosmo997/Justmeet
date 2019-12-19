@@ -13,10 +13,10 @@ import it.unicam.justmeetbackend.databasefake.Luogo;
 public class EventService {
 
     Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, "idTopic",
-    "Ciao124", "idLuogo2");
+    "Ciao124", "idLuogo2","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916");
 
     Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 ,"idTopic",
-    "idCreatore", "idLuogo");
+    "idCreatore", "idLuogo","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916");
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento1,evento2));
     

@@ -1,7 +1,6 @@
 package it.unicam.justmeetbackend.databasefake;
 
-
-//import java.time.*;
+import org.joda.time.DateTime;
 
 public class Evento {
     private String id;
@@ -10,26 +9,31 @@ public class Evento {
     private int partecipanti;
     private String idTopic;
     private String idCreator;
-    private String idLuogo;
+    private String idComune;
+    private DateTime inizioEvento;
+    private DateTime fineEvento;
 
-    public Evento(){};
-    
-    public Evento(String id, String t, String d, int partecipanti ,String topic, String creatore, String luogo){
+    public Evento() {
+    };
+
+    public Evento(final String id, final String t, final String d, final int partecipanti, final String topic,
+            final String creatore, final String luogo, String inizioEvento, String fineEvento) {
         this.id = id;
         this.titolo = t;
         this.desc = d;
         this.partecipanti = partecipanti;
         this.idTopic = topic;
         this.idCreator = creatore;
-        this.idLuogo = luogo;
-    } 
+        this.idComune = luogo;
+        this.inizioEvento = new DateTime(inizioEvento);
+        this.fineEvento = new DateTime(fineEvento);
+    }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -37,7 +41,7 @@ public class Evento {
         return titolo;
     }
 
-    public void setTitolo(String titolo) {
+    public void setTitolo(final String titolo) {
         this.titolo = titolo;
     }
 
@@ -45,7 +49,7 @@ public class Evento {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(final String desc) {
         this.desc = desc;
     }
 
@@ -53,7 +57,7 @@ public class Evento {
         return idCreator;
     }
 
-    public void setUser(String user) {
+    public void setUser(final String user) {
         this.idCreator = user;
     }
 
@@ -61,7 +65,7 @@ public class Evento {
         return partecipanti;
     }
 
-    public void setPartecipanti(int partecipanti) {
+    public void setPartecipanti(final int partecipanti) {
         this.partecipanti = partecipanti;
     }
 
@@ -69,7 +73,7 @@ public class Evento {
         return idTopic;
     }
 
-    public void setIdTopic(String idTopic) {
+    public void setIdTopic(final String idTopic) {
         this.idTopic = idTopic;
     }
 
@@ -77,16 +81,44 @@ public class Evento {
         return idCreator;
     }
 
-    public void setIdCreator(String idCreator) {
+    public void setIdCreator(final String idCreator) {
         this.idCreator = idCreator;
     }
 
     public String getIdLuogo() {
-        return idLuogo;
+        return idComune;
     }
 
-    public void setIdLuogo(String idLuogo) {
-        this.idLuogo = idLuogo;
+    public void setIdLuogo(final String idLuogo) {
+        this.idComune = idLuogo;
+    }
+
+    /**
+     * @return the inizioEvento
+     */
+    public String getInizioEvento() {
+        return inizioEvento.toString();
+    }
+
+    /**
+     * @param inizioEvento the inizioEvento to set
+     */
+    public void setInizioEvento(String inizioEvento) {
+        this.inizioEvento = new DateTime(inizioEvento);
+    }
+
+    /**
+     * @return the fineEvento
+     */
+    public String getFineEvento() {
+        return fineEvento.toString();
+    }
+
+    /**
+     * @param fineEvento the fineEvento to set
+     */
+    public void setFineEvento(String fineEvento) {
+        this.fineEvento = new DateTime(fineEvento);
     }
         
 }

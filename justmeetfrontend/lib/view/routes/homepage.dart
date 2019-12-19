@@ -42,7 +42,7 @@ class HomePageState extends State<HomePage>{
                       itemCount: eventList.length,
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (BuildContext context, int index){
-                        Evento evento = eventi;
+                        Evento evento = eventList[index];
                         return  SingleChildScrollView(
                           child: Container(
                           padding: EdgeInsets.all(20),
