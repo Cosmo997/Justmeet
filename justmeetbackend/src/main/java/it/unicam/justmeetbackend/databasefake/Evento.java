@@ -33,60 +33,116 @@ public class Evento {
         this.isApproved = isApp;
     }
 
+    /**
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(final String id) {
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * @return the titolo
+     */
     public String getTitolo() {
         return titolo;
     }
 
-    public void setTitolo(final String titolo) {
+    /**
+     * @param titolo the titolo to set
+     */
+    public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
+    /**
+     * @return the desc
+     */
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(final String desc) {
+    /**
+     * @param desc the desc to set
+     */
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public String getUser() {
-        return idCreator;
-    }
-
-    public void setUser(final String user) {
-        this.idCreator = user;
-    }
-
+    /**
+     * @return the partecipanti
+     */
     public int getPartecipanti() {
         return partecipanti;
     }
 
-    public void setPartecipanti(final int partecipanti) {
+    /**
+     * @param partecipanti the partecipanti to set
+     */
+    public void setPartecipanti(int partecipanti) {
         this.partecipanti = partecipanti;
     }
 
+    /**
+     * @return the idTopic
+     */
     public String getIdTopic() {
         return idTopic;
     }
 
-    public void setIdTopic(final String idTopic) {
+    /**
+     * @param idTopic the idTopic to set
+     */
+    public void setIdTopic(String idTopic) {
         this.idTopic = idTopic;
     }
 
+    /**
+     * @return the idCreator
+     */
     public String getIdCreator() {
         return idCreator;
     }
 
-    public void setIdCreator(final String idCreator) {
+    /**
+     * @param idCreator the idCreator to set
+     */
+    public void setIdCreator(String idCreator) {
         this.idCreator = idCreator;
+    }
+
+    /**
+     * @return the nomeComune
+     */
+    public String getNomeComune() {
+        return nomeComune;
+    }
+
+    /**
+     * @param nomeComune the nomeComune to set
+     */
+    public void setNomeComune(String nomeComune) {
+        this.nomeComune = nomeComune;
+    }
+
+    /**
+     * @return the isApproved
+     */
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    /**
+     * @param isApproved the isApproved to set
+     */
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
     }
 
     /**
@@ -116,20 +172,5 @@ public class Evento {
     public void setFineEvento(String fineEvento) {
         this.fineEvento = new DateTime(fineEvento);
     }
-    public boolean isApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(boolean isApproved) {
-        this.isApproved = isApproved;
-    }
-
-    public String getNomeComune() {
-        return nomeComune;
-    }
-
-    public void setNomeComune(String nomeComune) {
-        this.nomeComune = nomeComune;
-    }
-     
+  
 }

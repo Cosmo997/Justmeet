@@ -12,7 +12,19 @@ class Evento {
       DateTime fineEvento;
       bool isApproved;
 
-    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.idTopic, this.nomeComune, this.idCreatore,this.inizioEvento, this.fineEvento, this.isApproved);
+      
+    Evento(String id, String titolo, String desc, int partecipanti, String idTopic, String nomeComune,String idCreatore, String inizioEvent ,String fineEvent, bool isApproved)
+    {
+      this.id = id;
+      this.titolo = titolo;
+      this.desc = desc;
+      this.partecipanti = partecipanti;
+      this.idTopic = idTopic;
+      this.nomeComune = nomeComune;
+      this.idCreatore = idCreatore;
+      this.inizioEvento = DateTime.parse(inizioEvent);
+      this.fineEvento = DateTime.parse(fineEvent);
+    }
 
   Map toMap() 
   {
@@ -39,7 +51,10 @@ Evento.fromJson(Map<String, dynamic> json)
           idTopic = json['idTopic'],
           nomeComune = json['nomeComune'],
           idCreatore = json['user'],
-          isApproved = json['isApproved'];
+          isApproved = json['isApproved'],
+          inizioEvento = json['inizioEvento'],
+          fineEvento = json['fineEvento'];
+          
           
   
 	String getId() {
