@@ -172,5 +172,5 @@ public class Evento {
     public void setFineEvento(String fineEvento) {
         this.fineEvento = new DateTime(fineEvento);
     }
-
+  
 }
