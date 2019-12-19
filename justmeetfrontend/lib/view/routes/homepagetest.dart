@@ -1,50 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:justmeet/controllerjm.dart';
-
-//import 'package:justmeet/controllerjm.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
 import '../../classi/evento.dart';
-import '../../classi/luogo.dart';
-import '../../classi/topic.dart';
+import '../../controllerjm.dart';
 
 
+class HomePageTest extends StatefulWidget {
+ 
+    @override
+    HomePageTestState createState() => HomePageTestState();
+  }
+    
+  class HomePageTestState extends State<HomePageTest>{
+    List<Evento> eventsFromSpring = [];
+    bool isLoading = true;
 
-class HomePage extends StatefulWidget{
-  @override
-    HomePageState createState() => HomePageState();
+  Future getEventBySpring() async {
+    http.Response response = await http.get("https://springboot-restapi.herokuapp.com/eventi");
+
+    await Future.delayed(Duration(milliseconds: 300));
+
+    List collection = json.decode(response.body);
+    List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromJson(json)).toList();
+
+    setState(() {
+      eventsFromSpring = _eventsFromSpring;
+      isLoading = false;
+    });
+
   }
 
-class HomePageState extends State<HomePage>{
- 
-  int currentIndex = 1;
-  //Future<List<Evento>> eventi = ControllerJM.loadEvent();
-  var eventList = [
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "2", "3", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
-    
-  ];
-
-  var herokuList = [];
-  
-
-  @override
-  void initState() {
+  void initState(){
+    getEventBySpring();
     super.initState();
   }
-     
-      @override
-      Widget build(BuildContext context) {
-    
-        return Scaffold(
-                  body: ListView.separated(
-                      itemCount: eventList.length,
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: isLoading ? Center(child: CircularProgressIndicator())
+      : ListView.separated(
+                      itemCount: eventsFromSpring.length,
                       separatorBuilder: (context, index) => Divider(),
                       itemBuilder: (BuildContext context, int index){
-                        //Evento evento = eventList;
-                      
+                        Evento evento = eventsFromSpring[index];
                         return  SingleChildScrollView(
                           child: Container(
                           padding: EdgeInsets.all(20),
@@ -58,8 +59,8 @@ class HomePageState extends State<HomePage>{
                             child: Column(
                               children: <Widget>[
                                 ListTile(
-                                  title: Text("evento."),
-                                  subtitle: Text("evento.desc"),
+                                  title: Text(evento.titolo),
+                                  subtitle: Text(evento.desc),
                                   trailing: Icon(Icons.favorite_border), onTap: () => {}
                                   //Se loggato, salva l'evento tra i preferiti.
                                 ),
@@ -73,7 +74,7 @@ class HomePageState extends State<HomePage>{
                                        ListTile(
                                 title: Text("\n Nome: \nCognome: "),
                                 subtitle: Text("\nRegione: " "\nProvincia: "),
-                                trailing: Text("Numero partecipanti: " "\n\nTopic:"),
+                                trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic:"),
                               ),
                                   ],),
                                 ),
@@ -95,10 +96,7 @@ class HomePageState extends State<HomePage>{
                         ),
                         );
                       },
-                    ),
-                    );
-                
-      }  
-    }
-    
-   
+      )
+    );
+  }
+}
