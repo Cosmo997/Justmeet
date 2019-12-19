@@ -12,7 +12,6 @@ public class Evento {
     private String idCreator;
     private String nomeComune;
     private boolean isApproved;
-    private String idComune;
     private DateTime inizioEvento;
     private DateTime fineEvento;
    
@@ -28,7 +27,6 @@ public class Evento {
         this.partecipanti = partecipanti;
         this.idTopic = topic;
         this.idCreator = creatore;
-        this.idComune = luogo;
         this.inizioEvento = new DateTime(inizioEvento);
         this.fineEvento = new DateTime(fineEvento);
         this.nomeComune = luogo;
@@ -91,14 +89,6 @@ public class Evento {
         this.idCreator = idCreator;
     }
 
-    public String getIdLuogo() {
-        return idComune;
-    }
-
-    public void setIdLuogo(final String idLuogo) {
-        this.idComune = idLuogo;
-    }
-
     /**
      * @return the inizioEvento
      */
@@ -125,6 +115,7 @@ public class Evento {
      */
     public void setFineEvento(String fineEvento) {
         this.fineEvento = new DateTime(fineEvento);
+    }
     public boolean isApproved() {
         return isApproved;
     }

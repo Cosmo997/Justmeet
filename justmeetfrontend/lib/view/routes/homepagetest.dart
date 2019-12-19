@@ -39,7 +39,8 @@ class HomePageTest extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isLoading ? Center(child: CircularProgressIndicator())
+      body: isLoading ? Center(
+        child: CircularProgressIndicator())
       : ListView.separated(
                       itemCount: eventsFromSpring.length,
                       separatorBuilder: (context, index) => Divider(),

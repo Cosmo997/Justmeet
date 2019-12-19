@@ -11,8 +11,6 @@ import it.unicam.justmeetbackend.databasefake.Evento;
 import it.unicam.justmeetbackend.services.EventService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController
