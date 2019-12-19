@@ -18,12 +18,12 @@ class HomePageTest extends StatefulWidget {
 
   Future getEventBySpring() async {
     http.Response response = await http.get("https://springboot-restapi.herokuapp.com/eventi");
-
+    print("get fatta");
     await Future.delayed(Duration(milliseconds: 300));
-
+    print("detacco");
     List collection = json.decode(response.body);
-    List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromJson(json)).toList();
     print(collection);
+    List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromJson(json)).toList();
     setState(() {
       eventsFromSpring = _eventsFromSpring;
       isLoading = false;

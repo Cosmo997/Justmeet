@@ -52,8 +52,8 @@ Evento.fromJson(Map<String, dynamic> json)
           nomeComune = json['nomeComune'],
           idCreatore = json['user'],
           isApproved = json['isApproved'],
-          inizioEvento = json['inizioEvento'],
-          fineEvento = json['fineEvento'];
+          inizioEvento = DateTime.parse(json['inizioEvento']),
+          fineEvento = DateTime.parse(json['fineEvento']);
           
           
   
