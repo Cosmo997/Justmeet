@@ -1,4 +1,7 @@
 
+import 'dart:convert';
+import 'dart:js_util';
+
 class Evento {
   
       String id;
@@ -24,9 +27,10 @@ class Evento {
       this.idCreatore = idCreatore;
       this.inizioEvento = DateTime.parse(inizioEvent);
       this.fineEvento = DateTime.parse(fineEvent);
+      this.isApproved = isApproved;
     }
 
-  Map toMap() 
+  Map<String, dynamic> toMap() 
   {
     var map = new Map<String, dynamic>();
     map["id"] = this.id;
@@ -39,6 +43,7 @@ class Evento {
     map["inizioEvento"] = this.inizioEvento.toIso8601String();
     map["fineEvento"] = this.fineEvento.toIso8601String();
     map["isApproved"] = this.isApproved;
+    
     return map;
   }
 
@@ -51,9 +56,9 @@ Evento.fromJson(Map<String, dynamic> json)
           idTopic = json['idTopic'],
           nomeComune = json['nomeComune'],
           idCreatore = json['user'],
-          isApproved = json['isApproved'],
           inizioEvento = DateTime.parse(json['inizioEvento']),
-          fineEvento = DateTime.parse(json['fineEvento']);
+          fineEvento = DateTime.parse(json['fineEvento']),
+          isApproved = json['isApproved'];
           
           
   
@@ -89,6 +94,21 @@ Evento.fromJson(Map<String, dynamic> json)
 		this.partecipanti = maxPartecipanti;
 	}
 
+@override
+  String toString() {
+    String infoEvento;
+    infoEvento = "ID: "+ id +"\n"+
+                  "Titolo: "+ titolo + "\n"+
+                  "Descrizione: "+ desc + "\n"+
+                  "Partecipanti: "+ partecipanti.toString() + "\n"+
+                  "Topic: "+ idTopic + "\n"+
+                  "Comune: "+ nomeComune + "\n"+
+                  "Creatore: "+ idCreatore + "\n"+
+                  "Inizio:"+ inizioEvento.toIso8601String() + "\n"+
+                  "Fine: "+ fineEvento.toIso8601String() + "\n"+
+                  "Approvato: " + isApproved.toString();
+    return infoEvento;
+  }
 }
 
       

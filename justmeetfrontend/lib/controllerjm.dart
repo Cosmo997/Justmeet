@@ -11,13 +11,15 @@ class ControllerJM
   static String urlEventi = "https://springboot-restapi.herokuapp.com/eventi";
   static String urlLuoghi = "https://springboot-restapi.herokuapp.com/luoghi";
 
-  static sendEvent(Evento eventissimo)
-  {
-     http.post(
-       urlEventi,
-       body: eventissimo.toMap()
-       );
-  }
+  static Future<bool> makePostRequest(Evento event) async 
+                    {
+                    Map<String, String> headers = {"Content-type": "application/json"};
+                    print(json.encode(event.toMap()));
+                    http.Response response = await http.post(urlEventi, headers: headers, body: json.encode(event.toMap()));
+                    if(response.statusCode == 200)
+                    return true;
+                    else return false;
+                    }
 
    
   
