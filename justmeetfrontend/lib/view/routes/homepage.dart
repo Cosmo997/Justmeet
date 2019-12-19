@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:justmeet/controllerjm.dart';
-
-//import 'package:justmeet/controllerjm.dart';
-
-import '../../classi/evento.dart';
-import '../../classi/luogo.dart';
-import '../../classi/topic.dart';
 
 
 
@@ -20,10 +13,6 @@ class HomePageState extends State<HomePage>{
   int currentIndex = 1;
   //Future<List<Evento>> eventi = ControllerJM.loadEvent();
   var eventList = [
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "2", "3", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
-    new Evento("id", "titolo", "desc", 3, "1", "2", "idCreatore", false),
     
   ];
 

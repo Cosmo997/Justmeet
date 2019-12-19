@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 
 
 import 'package:http/http.dart' as http;
-import 'package:justmeet/classi/luogo.dart';
 import 'package:justmeet/classi/evento.dart';
 
 /// Responsabilità: Comunicare con il BackEnd.
@@ -21,12 +19,8 @@ class ControllerJM
        );
   }
 
-   Future<List<Luogo>> getLuoghi() async {
-    http.Response rispLuoghi = await http.get(Uri.encodeFull(urlLuoghi), headers: {"Accept" : "application/json"});
-    List collection = json.decode(rispLuoghi.body);
-    List<Luogo> luoghi = collection.map((json) => Luogo.fromJson(json)).toList();
-    return luoghi;
-  }
+   
+  
 
    Future<List<Evento>> loadEvent()  async {
     http.Response response = await http.get(Uri.encodeFull(urlEventi), headers: {"Accept" : "application/json"});

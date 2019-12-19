@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 class Evento {
   
@@ -6,14 +5,14 @@ class Evento {
       String titolo;
       String desc;
       int partecipanti; 
-      Topic topic;    
-      Luogo idComune;
+      String idTopic;    
+      String nomeComune;
       String idCreatore;
       DateTime inizioEvento;
       DateTime fineEvento;
       bool isApproved;
 
-    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.topic, this.idComune, this.idCreatore,this.inizioEvento, this.fineEvento, this.isApproved);
+    Evento(this.id, this.titolo, this.desc, this.partecipanti, this.idTopic, this.nomeComune, this.idCreatore,this.inizioEvento, this.fineEvento, this.isApproved);
 
   Map toMap() 
   {
@@ -22,8 +21,8 @@ class Evento {
     map["titolo"] = this.titolo;
     map["desc"] = this.desc;
     map["partecipanti"] = this.partecipanti;
-    map["topic"] = this.topic.id;
-    map["idComune"] = this.idComune;
+    map["topic"] = this.idTopic;
+    map["idComune"] = this.nomeComune;
     map["idCreatore"] = this.idCreatore;
     map["inizioEvento"] = this.inizioEvento.toIso8601String();
     map["fineEvento"] = this.fineEvento.toIso8601String();
@@ -37,9 +36,9 @@ Evento.fromJson(Map<String, dynamic> json)
           titolo = json['titolo'],
           desc = json['desc'],
           partecipanti = json['partecipanti'],
-          topic = Topic.fromJson2(json['topic']),
-          idComune = Luogo.fromJson(json['luogo']),
-          idCreatore = json['user'];
+          idTopic = json['idTopic'],
+          nomeComune = json['nomeComune'],
+          idCreatore = json['user'],
           isApproved = json['isApproved'];
           
   

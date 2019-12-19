@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:async';
 
 import '../../classi/evento.dart';
-import '../../controllerjm.dart';
 
 
 class HomePageTest extends StatefulWidget {
@@ -72,8 +71,8 @@ class HomePageTest extends StatefulWidget {
                                   child: Column(
                                     children: <Widget>[
                                        ListTile(
-                                title: Text("\n Nome: \nCognome: "),
-                                subtitle: Text("\nRegione: " "\nProvincia: "),
+                                title: Text(evento.inizioEvento.toIso8601String()),
+                                subtitle: Text(evento.fineEvento.toIso8601String()),
                                 trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic:"),
                               ),
                                   ],),

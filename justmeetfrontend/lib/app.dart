@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'view/routes/areariservata.dart';
-import 'view/routes/homepage.dart';
 import 'view/routes/eventcreator.dart';
 import 'view/routes/homepagetest.dart';
 
