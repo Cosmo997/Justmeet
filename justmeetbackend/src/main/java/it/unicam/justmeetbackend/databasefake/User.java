@@ -11,12 +11,11 @@ public class User
         private String email;
         private String password;
         private Boolean isLogged;
-        private String idLuogo;
         private ArrayList<String> preferiti;
 
         public User(){}
 
-        public User(String id, String n, String c, String e, String p, String l, boolean b, ArrayList<String> idPreferit)
+        public User(String id, String n, String c, String e, String p, boolean b, ArrayList<String> idPreferit)
         {
             this.id = id;
             this.nome = n;
@@ -25,7 +24,6 @@ public class User
             this.password = p;
             this.isLogged = b;
             this.preferiti = idPreferit;
-            this.idLuogo = l;
         }
 
     public String getNome() {
@@ -82,14 +80,6 @@ public class User
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getIdLuogo() {
-        return idLuogo;
-    }
-
-    public void setIdLuogo(String idLuogo) {
-        this.idLuogo = idLuogo;
     }
 
     }

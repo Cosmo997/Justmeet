@@ -13,10 +13,10 @@ public class UserService{
 
     ArrayList<String> idPreferit = new ArrayList<>(Arrays.asList("id1", "id2"));
 
-    User utente1 = new User("1234","Michele", "Benedetti", "username", "email", "psw", true, idPreferit);
-    User utente2 = new User("12","Daniel", "Moschi", "username", "email", "psw", true, idPreferit);
-    User utente3 = new User("34","Pluto", "Pippo", "username", "email", "psw", true, idPreferit);
-    User utente4 = new User("1","1","1","1","1","1",true, idPreferit);
+    User utente1 = new User("1234","Michele", "Benedetti", "email", "psw", true, idPreferit);
+    User utente2 = new User("12","Daniel", "Moschi", "username", "email", true, idPreferit);
+    User utente3 = new User("34","Pluto", "Pippo", "username", "email", true, idPreferit);
+    User utente4 = new User("1","1","1","1","1",true, idPreferit);
 
     List<User> userList = new ArrayList<>(Arrays.asList(utente1,utente2,utente3));
 

@@ -6,17 +6,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.unicam.justmeetbackend.databasefake.Comune;
 import it.unicam.justmeetbackend.databasefake.Evento;
-import it.unicam.justmeetbackend.databasefake.Luogo;
 
 @Service
 public class EventService {
 
     Evento evento1 = new Evento("1", "primo", "Descrizione 1", 10, "idTopic",
-    "Ciao124", "idLuogo2","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916");
+    "Ciao124", "idLuogo2","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916", false);
 
     Evento evento2 = new Evento("2", "secondo", "Descrizione 2", 5 ,"idTopic",
-    "idCreatore", "idLuogo","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916");
+    "idCreatore", "idLuogo","2019-12-19T11:15:58.916","2019-12-19T11:15:58.916", false);
 
     private List<Evento> listaEventi = new ArrayList<>(Arrays.asList(evento1,evento2));
     
@@ -76,29 +76,21 @@ public class EventService {
             l.add(evento);
         }
         return l;
-	}
-
+    }
+    
     /**
-     * Restituisce gli eventi di una determinata provincia
-     * 
-     * @param provincia
+     * Restituisce gli eventi in un determinato comune
+     * @param comune
      * @return
      */
-    public ArrayList<Evento> getEventsByProvincia(String provincia) {
-        LuogoService ls = new LuogoService();
-        ArrayList<Luogo> listaLuoghi = ls.getLuogoByProvincia(provincia);
-        ArrayList<Evento> listaEventiappoggio = new ArrayList<>(Arrays.asList());
-        for (Luogo l : listaLuoghi)
-        {
-            for(Evento e : listaEventi)
-               {
-                  if (e.getIdLuogo().equals(l.getIdLuogo()))
-                  {
-                        listaEventiappoggio.add(e);
-                  }
-                 }
+
+    public List<Evento> getEventsByComune(String comune){
+        List<Evento> l = new ArrayList<>();
+        for (Evento evento : listaEventi) {
+            evento.getNomeComune().equalsIgnoreCase(comune);
+            l.add(evento);
         }
-        return listaEventiappoggio;
-}
-    
+        return l;
+    }
+
 }

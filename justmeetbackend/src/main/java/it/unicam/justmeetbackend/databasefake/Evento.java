@@ -3,21 +3,25 @@ package it.unicam.justmeetbackend.databasefake;
 import org.joda.time.DateTime;
 
 public class Evento {
+    
     private String id;
     private String titolo;
     private String desc;
     private int partecipanti;
     private String idTopic;
     private String idCreator;
+    private String nomeComune;
+    private boolean isApproved;
     private String idComune;
     private DateTime inizioEvento;
     private DateTime fineEvento;
+   
 
     public Evento() {
     };
 
     public Evento(final String id, final String t, final String d, final int partecipanti, final String topic,
-            final String creatore, final String luogo, String inizioEvento, String fineEvento) {
+            final String creatore, final String luogo, String inizioEvento, String fineEvento, boolean isApp) {
         this.id = id;
         this.titolo = t;
         this.desc = d;
@@ -27,6 +31,8 @@ public class Evento {
         this.idComune = luogo;
         this.inizioEvento = new DateTime(inizioEvento);
         this.fineEvento = new DateTime(fineEvento);
+        this.nomeComune = luogo;
+        this.isApproved = isApp;
     }
 
     public String getId() {
@@ -119,6 +125,20 @@ public class Evento {
      */
     public void setFineEvento(String fineEvento) {
         this.fineEvento = new DateTime(fineEvento);
+    public boolean isApproved() {
+        return isApproved;
     }
-        
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public String getNomeComune() {
+        return nomeComune;
+    }
+
+    public void setNomeComune(String nomeComune) {
+        this.nomeComune = nomeComune;
+    }
+     
 }

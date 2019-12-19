@@ -33,10 +33,8 @@ class EventCreator extends StatefulWidget
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
-      
-      
+      //ArrayList<Luogo> luoghi = 
 
- 
 
    @override
     Widget build(BuildContext context)
@@ -44,7 +42,6 @@ class EventCreator extends StatefulWidget
      return Scaffold (
       body: SingleChildScrollView(
         child: Column(    
-          
           children: <Widget>[
           //Container Nome Evento
           Container(
