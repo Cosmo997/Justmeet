@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import it.unicam.justmeetbackend.databasefake.Comune;
 import it.unicam.justmeetbackend.databasefake.Evento;
 
 @Service

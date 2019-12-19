@@ -23,7 +23,7 @@ class HomePageTest extends StatefulWidget {
 
     List collection = json.decode(response.body);
     List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromJson(json)).toList();
-
+    print(collection);
     setState(() {
       eventsFromSpring = _eventsFromSpring;
       isLoading = false;
@@ -71,8 +71,8 @@ class HomePageTest extends StatefulWidget {
                                   child: Column(
                                     children: <Widget>[
                                        ListTile(
-                                title: Text(evento.inizioEvento.toIso8601String()),
-                                subtitle: Text(evento.fineEvento.toIso8601String()),
+                                title: Text(evento.inizioEvento.toString()),
+                                subtitle: Text(evento.fineEvento.toString()),
                                 trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic:"),
                               ),
                                   ],),
