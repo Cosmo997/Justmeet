@@ -16,6 +16,9 @@ public class Comune {
     public Comune() {
     }
 
+
+
+    
     public String getNome() {
         return nome;
     }

@@ -20,7 +20,7 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/eventi")
-    public List<Evento> getAllEvent() {
+    public List<Evento> getAllEvents() {
         return eventService.getAllEvents();
     }
 
@@ -39,7 +39,7 @@ public class EventController {
      * @param e
      */
     @RequestMapping(method = RequestMethod.POST, value="/eventi")
-    public void postMethod(@RequestBody Evento e) {
+    public void postEvent(@RequestBody Evento e) {
         eventService.addEvent(e);
     }
 
@@ -49,22 +49,23 @@ public class EventController {
      * @param id
      */
     @RequestMapping(value="/eventi/{id}", method=RequestMethod.PUT)
-    public void updateMethod(@RequestBody Evento e, @PathVariable String id) {
+    public void updateEvent(@RequestBody Evento e, @PathVariable String id) {
         eventService.updateEvento(id, e);
     }
 
     /**
      * Cancellare evento byId
+     * TODO String inutile
      * @param id
      * @return
      */
     @RequestMapping(value="/eventi/{id}", method=RequestMethod.DELETE)
-    public String deleteMethod(@PathVariable String id) {
+    public String deleteEvent(@PathVariable String id) {
             return eventService.deleteEvento(id);
     }
 
     @GetMapping(value="/eventi/comune/{comune}")
-    public List<Evento> getMethodName(@PathVariable String comune) {
+    public List<Evento> getEventByComune(@PathVariable String comune) {
         return eventService.getEventsByComune(comune);
     }
     

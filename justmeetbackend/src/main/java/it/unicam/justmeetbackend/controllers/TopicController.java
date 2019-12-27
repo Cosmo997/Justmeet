@@ -22,7 +22,7 @@ public class TopicController {
     TopicService topicService;
 
     @RequestMapping(value="/topics", method=RequestMethod.GET)
-    public ArrayList<Topic> requestMethodName() {
+    public ArrayList<Topic> getTopics() {
         return topicService.getTopicList();
     }
 
