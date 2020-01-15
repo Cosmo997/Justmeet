@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:justmeet/classi/evento.dart';
+import 'package:justmeet/controllerjm.dart';
+
 
 
 
@@ -9,46 +11,50 @@ class HomePage extends StatefulWidget{
   }
 
 class HomePageState extends State<HomePage>{
- 
-  int currentIndex = 1;
-  //Future<List<Evento>> eventi = ControllerJM.loadEvent();
-  var eventList = [
-    
-  ];
-
-  var herokuList = [];
-  
 
   @override
-  void initState() {
-    super.initState();
-  }
-     
-      @override
-      Widget build(BuildContext context) {
-    
-        return Scaffold(
-                  body: ListView.separated(
-                      itemCount: eventList.length,
-                      separatorBuilder: (context, index) => Divider(),
-                      itemBuilder: (BuildContext context, int index){
-                        //Evento evento = eventList;
-                      
-                        return  SingleChildScrollView(
-                          child: Container(
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(30),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+  Widget build(BuildContext context) {
+  return Scaffold(
+    body: FutureBuilder(
+      future: ControllerJM.loadEvent(),
+      builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
+        if(snapshot.data == null)
+        {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child:CircularProgressIndicator(
+                    backgroundColor: Colors.white
+                )),
+              ],
+            ),
+          ],
+        );
+        }
+        else
+        {
+          return ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              Evento evento = snapshot.data[index];
+              return  SingleChildScrollView(
+                        child: Container(
+                        padding: EdgeInsets.all(20),
+                        margin: EdgeInsets.all(30),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Container(
                             child: Column(
                               children: <Widget>[
                                 ListTile(
-                                  title: Text("evento."),
-                                  subtitle: Text("evento.desc"),
+                                  title: Text(evento.titolo),
+                                  subtitle: Text(evento.desc),
                                   trailing: Icon(Icons.favorite_border), onTap: () => {}
                                   //Se loggato, salva l'evento tra i preferiti.
                                 ),
@@ -60,9 +66,9 @@ class HomePageState extends State<HomePage>{
                                   child: Column(
                                     children: <Widget>[
                                        ListTile(
-                                title: Text("\n Nome: \nCognome: "),
-                                subtitle: Text("\nRegione: " "\nProvincia: "),
-                                trailing: Text("Numero partecipanti: " "\n\nTopic:"),
+                                title: Text(evento.inizioEvento.toString()),
+                                subtitle: Text(evento.fineEvento.toString()),
+                                trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic:"),
                               ),
                                   ],),
                                 ),
@@ -84,10 +90,17 @@ class HomePageState extends State<HomePage>{
                         ),
                         );
                       },
-                    ),
-                    );
-                
-      }  
-    }
-    
-   
+            itemCount: snapshot.data.length,
+            separatorBuilder: (context, index) => Divider(),
+            );
+        }
+
+        },
+    )
+    );             
+      }
+
+
+@override
+void initState() {super.initState();}
+}

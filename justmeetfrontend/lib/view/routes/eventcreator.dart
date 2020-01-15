@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
-//import 'package:http/http.dart' as http;
-import 'package:justmeet/classi/topic.dart';
+import 'package:justmeet/classi/provincia.dart';
+import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/controllerjm.dart';
 
 /// Responsabilità: Creare un Evento.
@@ -29,9 +28,18 @@ class EventCreator extends StatefulWidget
       TextEditingController nameCtrl = TextEditingController();
       TextEditingController descCtrl = TextEditingController();
       TextEditingController maxPCtrl = TextEditingController();
+      
+      bool isRegioneScelta = false;
+      bool isProvinciaScelta = false;
 
-        //List<Topic> listTopic;
-        //List<DropdownMenuItem<Topic>> dropdownItem;
+      String dropDownValue;
+      Regione currentRegione;
+      Provincia currentProvincia;
+      List<DropdownMenuItem<String>> dropItemRegione;
+      List<DropdownMenuItem<String>> dropItemProvincia;
+      List<DropdownMenuItem<String>> dropItemComune;
+
+       //List<Topic> listTopic;
         //Topic selectedTopic;
         //List<String> argomentiTopic;
 
@@ -39,9 +47,13 @@ class EventCreator extends StatefulWidget
    @override
     Widget build(BuildContext context)
     {
-     return Scaffold (
-      body: SingleChildScrollView(
-        child: Column(    
+      
+      dropDownValue = "-";
+     
+       return Scaffold (
+         body: SingleChildScrollView(
+
+        child: Column( 
           children: <Widget>[
 
           //Container Nome Evento
@@ -51,7 +63,6 @@ class EventCreator extends StatefulWidget
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextField(
                   controller: nameCtrl,
-                  onChanged: _onChanged(),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8),)),
@@ -68,8 +79,8 @@ class EventCreator extends StatefulWidget
                 padding: EdgeInsets.all(10),
                 child: TextField(
                   controller: descCtrl,
-                  onChanged: _onChanged(),
                   textCapitalization: TextCapitalization.sentences,
+                  maxLines: 10,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8))
@@ -81,16 +92,17 @@ class EventCreator extends StatefulWidget
               ),
           ),          
           
-          // Riga N max , Regione, Provincia, Città
+          // Riga N max , Regione, Provincia, Comune
           Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              //Max persone
               Container(
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 width: 105,
                 child: TextField(
                   controller: maxPCtrl,
-                  onChanged:_onChanged(),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -103,8 +115,72 @@ class EventCreator extends StatefulWidget
                   ),
                 ),
               ),
+              
+              //Regione
+              Container(
+                child: FutureBuilder(
+                future: ControllerJM.loadRegioni(),
+                builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
+                  if(snapshot.data == null)
+                  {
+                    return CircularProgressIndicator();
+                  }
+                  else{
+                   return DropdownButton(
+                    items:snapshot.data.map( (Regione data) { 
+                                        return DropdownMenuItem<String>(
+                                          value: data.nome,
+                                          child: Text(data.nome),);}).toList(), 
+                    onChanged: (value) => setState(() {currentRegione.nome = value; isRegioneScelta = true;}),
+                     );
+                  }
+                 },)
+                 ),
 
-              //Regione Provincia Città
+              //Provincia
+              Container(
+                child: FutureBuilder(
+                future: ControllerJM.loadProvinciaByRegione(currentRegione.nome),
+                builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
+                  if(snapshot.data == null && !isRegioneScelta)
+                  {
+                    return Text("Loading...");
+                  }
+                  else{
+                   return DropdownButton(
+                    items:snapshot.data.map( (Provincia data) { 
+                                        return DropdownMenuItem<String>(
+                                          value: data.nome,
+                                          child: Text(data.nome),);}).toList(), 
+                    onChanged: (value) => setState(() {currentProvincia = snapshot.data[currentIndex];}),
+                     );
+                  }
+                 },)
+                 ),
+
+                // Comune
+              Container(
+                child: FutureBuilder(
+                future: ControllerJM.loadRegioni(),
+                builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
+                  if(snapshot.data == null)
+                  {
+                    return Text("Loading...");
+                  }
+                  else{
+                   return DropdownButton(
+                    items:snapshot.data.map( (Regione data) { 
+                                        return DropdownMenuItem<String>(
+                                          value: data.nome,
+                                          child: Text(data.nome),);}).toList(), 
+                    onChanged: (value) => setState(() {dropDownValue = value;}),
+                     );
+                  }
+                 },)
+                 )
+
+
+              
             ],
             ),
 
@@ -114,7 +190,7 @@ class EventCreator extends StatefulWidget
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Data e Ora inizio:")
+                child: Text("Inizio Evento:")
                 ),
               
               Text(df.format(_selectedDateStart)),
@@ -138,7 +214,7 @@ class EventCreator extends StatefulWidget
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Data e ora fine: ")
+                child: Text("Fine Evento:")
                 ),
                 Text(df.format(_selectedDateFinish)),
               IconButton(
@@ -152,42 +228,61 @@ class EventCreator extends StatefulWidget
                      ),
             ],
           ),
+
+
+
+                    //  itemCount: snapshot.data.length,
+                    //  itemBuilder: (BuildContext context, int index) {
+                    //    return DropdownButton(
+                    //      value: snapshot.data[index],
+                    //      items: listone.map(
+                    //        (Regione data) { 
+                    //       return DropdownMenuItem<String>(
+                    //       value: data.nome,
+                    //       child: Text(data.nome),);}).toList(), 
+                    //      onChanged: (value) async => setState(() {dropDownValue = value;}),
+                    //    );
+                    // },
+
+          //Prova DDM
+          // Container(
+          //   child: DropdownButton<String>(
+          //     value: dropDownValue,
+          //     items: listone.map(
+          //       (Regione data) { 
+          //                 return DropdownMenuItem<String>(
+          //                 value: data.nome,
+          //                 child: Text(data.nome),);}).toList(),
+          //       onChanged: (value) {
+          //       setState(() {
+          //         dropDownValue = value;
+          //       });},
+          //   ),
+          //   ),
+
           //Bottone Crea Evento
           RaisedButton(
                   padding: EdgeInsets.all(15),
                   child: Text("Crea Evento"),
                   onPressed: () => _creaEvento(),
                   ),
-          
-          RaisedButton(
-                  padding: EdgeInsets.all(15),
-                  child: Text("Prova"),
-                  onPressed: _prova,
-                  ),
-          
-  /*       DropdownButton(
-            value: selectedTopic,
-            items: argomentiTopic.map((value) => DropdownMenuItem(
-              child: Text(value),
-              value: value,)).toList(),
-              onChanged: (selectedTopicT) {
-                setState(() {
-                   selectedTopic = selectedTopicT;
-                });
-              },
-            ),
-    */
+
+
                                               ]     
                                         ),
                                     ),
                             );
                   }
 
-                  
+
+
+
+
+
+
       // METODI ESTERNI  
                   
-     void _creaEvento()
-     {
+     void _creaEvento(){
       bool none = false;
       currentEvent = new Evento("0", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text),"1", "nome provvisorio","id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
       print("Evento creato");
@@ -216,13 +311,6 @@ class EventCreator extends StatefulWidget
                         },
                       );
           }
-                   
-      _onChanged() {
-                            setState(() {
-                              isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
-                            });
-                  
-                        }
                     
       void getDataStart(context) async {
                             var fDate = await showDatePicker(
@@ -264,11 +352,7 @@ class EventCreator extends StatefulWidget
                   
       @override
       void initState() {
-                      isCreationDisabled = false;
-                      //currentEvent = Evento();
-                      //getTopic();
-                      //dropdownItem = creaListaTopic(listTopic);
-                      //riempiLista(listTopic);
+                      
                       super.initState();
                     }
                   
@@ -280,46 +364,4 @@ class EventCreator extends StatefulWidget
                       super.dispose();
                     } 
                   
-      void _prova() {
-                      var prova1 = jsonEncode(_selectedDateStart.toIso8601String());
-                      var prova2 = jsonEncode(_selectedTimeStart.toString());
-                      print(prova1);
-                      print(prova2);
-  }
-
-      List<DropdownMenuItem<Topic>> creaListaTopic (List<Topic> topics){
-          List<DropdownMenuItem<Topic>> items = List();
-          for (Topic topic in topics) 
-          {
-            items.add(DropdownMenuItem(
-              value: topic,
-              child: Text(topic.argomento),
-              )
-              );  
-          }
-          print(items);
-          return items;
-        }
-/*
-      Future getTopic() async{
-        http.Response response = await http.get('https://springboot-restapi.herokuapp.com/topics');
-        List collection = json.decode(response.body);
-        //print(collection);
-        List<Topic> _listTopic = collection.map((json) => Topic.fromJson(json)).toList();
-
-        setState(() {
-          listTopic = _listTopic;
-          super.initState();
-        });
-
-      }
-*/
-/*
-      void riempiLista(List<Topic> lista){
-        for (Topic topic in lista) {
-          argomentiTopic.add(topic.argomento);
-  }
-  print(argomentiTopic);
-}
-*/
 }

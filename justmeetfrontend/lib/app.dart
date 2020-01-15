@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'view/routes/areariservata.dart';
 import 'view/routes/eventcreator.dart';
-import 'view/routes/homepagetest.dart';
+import 'view/routes/homepage.dart';
 
 
 class App extends StatefulWidget{
@@ -17,7 +17,7 @@ class AppState extends State<App>{
 
   int currentIndex = 0;
   final pageOption = [
-    HomePageTest(),
+    HomePage(),
     EventCreator(),
     AreaRiservata()
   ];
@@ -51,12 +51,12 @@ class AppState extends State<App>{
       backgroundColor: Colors.white,
       buttonBackgroundColor: Colors.black,  
       items: <Widget>[
-      Icon(Icons.home, size: 20, color: Colors.white,),
-      Icon(Icons.add_circle, size: 20, color: Colors.white),
-      Icon(Icons.accessible_forward, size: 20, color: Colors.white,),
+        Icon(Icons.home, size: 30, color: Colors.white,),
+        Icon(Icons.add_circle, size: 30, color: Colors.white),
+        Icon(Icons.accessible_forward, size: 30, color: Colors.white,),
       //Icon(Icons.favorite, size: 18, color: Colors.white,),
       ],
-        animationDuration: Duration(
+      animationDuration: Duration(
           milliseconds: 600,
             ),
               index: currentIndex,
