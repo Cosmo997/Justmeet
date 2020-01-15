@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
 import 'package:justmeet/classi/regione.dart';
@@ -18,11 +19,14 @@ class EventCreator extends StatefulWidget
   class EventCreatorState extends State<EventCreator>{
 
       final DateFormat df = DateFormat("dd/MM/yyyy");
+      // Evento da creare
+      Evento currentEvent;
+      // Elementi Evento
       DateTime _selectedDateStart = DateTime.now();	
       TimeOfDay _selectedTimeStart = TimeOfDay.now();
       DateTime _selectedDateFinish = DateTime.now();
       TimeOfDay _selectedTimeFinish = TimeOfDay.now();
-      Evento currentEvent;
+     
       int currentIndex = 3;
       bool isCreationDisabled;
       TextEditingController nameCtrl = TextEditingController();
@@ -32,12 +36,13 @@ class EventCreator extends StatefulWidget
       bool isRegioneScelta = false;
       bool isProvinciaScelta = false;
 
-      String dropDownValue;
       Regione currentRegione;
       Provincia currentProvincia;
-      List<DropdownMenuItem<String>> dropItemRegione;
-      List<DropdownMenuItem<String>> dropItemProvincia;
-      List<DropdownMenuItem<String>> dropItemComune;
+      Comune currentComune;
+      
+      String dropItemRegione;
+      String dropItemProvincia;
+      String dropItemComune;
 
        //List<Topic> listTopic;
         //Topic selectedTopic;
@@ -46,234 +51,217 @@ class EventCreator extends StatefulWidget
 
    @override
     Widget build(BuildContext context)
-    {
-      
-      dropDownValue = "-";
-     
+    {     
        return Scaffold (
-         body: SingleChildScrollView(
-
-        child: Column( 
-          children: <Widget>[
-
-          //Container Nome Evento
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-            child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: TextField(
-                  controller: nameCtrl,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8),)),
-                      labelText: 'Nome Evento',
-                      icon: Icon(Icons.fiber_new),                    
-                  ),
-                ),
-              ),
-          ),
-          
-          // Container Descrizione Evento
-          Container(
-            child: Padding(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  controller: descCtrl,
-                  textCapitalization: TextCapitalization.sentences,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))
-                      ),
-                      labelText: 'Descrizione Evento',
-                      icon: Icon(Icons.description),                    
-                  ),
-                ),
-              ),
-          ),          
-          
-          // Riga N max , Regione, Provincia, Comune
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+         backgroundColor: Colors.grey,
+        body: SingleChildScrollView(
+        
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          color: Colors.white,
+          borderOnForeground: true,
+          child: Column( 
             children: <Widget>[
-              //Max persone
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                width: 105,
-                child: TextField(
-                  controller: maxPCtrl,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))
-                      ),
-                      
-                      labelText: 'Max',
-                      icon: Icon(Icons.people)                   
 
+            // Container Nome Evento
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextField(
+                    controller: nameCtrl,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8),)),
+                        labelText: 'Nome Evento',
+                        icon: Icon(Icons.fiber_new),                    
+                    ),
                   ),
                 ),
-              ),
-              
-              //Regione
-              Container(
-                child: FutureBuilder(
-                future: ControllerJM.loadRegioni(),
-                builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
-                  if(snapshot.data == null)
-                  {
-                    return CircularProgressIndicator();
-                  }
-                  else{
-                   return DropdownButton(
-                    items:snapshot.data.map( (Regione data) { 
-                                        return DropdownMenuItem<String>(
-                                          value: data.nome,
-                                          child: Text(data.nome),);}).toList(), 
-                    onChanged: (value) => setState(() {currentRegione.nome = value; isRegioneScelta = true;}),
-                     );
-                  }
-                 },)
-                 ),
+            ),
+            
+            // Container Descrizione Evento
+            Container(
+              child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: descCtrl,
+                    textCapitalization: TextCapitalization.sentences,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))
+                        ),
+                        labelText: 'Descrizione Evento',
+                        icon: Icon(Icons.description),                    
+                    ),
+                  ),
+                ),
+            ),          
+            
+            // Colonna N max , Regione, Provincia, Comune
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                //Max persone
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  width: 105,
+                  child: TextField(
+                    controller: maxPCtrl,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))
+                        ),
+                        
+                        labelText: 'Max',
+                        icon: Icon(Icons.people)                   
 
-              //Provincia
-              Container(
-                child: FutureBuilder(
-                future: ControllerJM.loadProvinciaByRegione(currentRegione.nome),
-                builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
-                  if(snapshot.data == null && !isRegioneScelta)
-                  {
-                    return Text("Loading...");
-                  }
-                  else{
-                   return DropdownButton(
-                    items:snapshot.data.map( (Provincia data) { 
-                                        return DropdownMenuItem<String>(
-                                          value: data.nome,
-                                          child: Text(data.nome),);}).toList(), 
-                    onChanged: (value) => setState(() {currentProvincia = snapshot.data[currentIndex];}),
-                     );
-                  }
-                 },)
-                 ),
+                    ),
+                  ),
+                ),
+                
+                //Regione
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadRegioni(),
+                  builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      hint: Text("Seleziona regione"),
+                      value: dropItemRegione,
+                      items: snapshot.data.map( (Regione data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (String value) => setState(() {dropItemRegione = value; isRegioneScelta = true;}),
+                       );
+                    }
+                   },)
+                   ),
+
+                //Provincia
+                if (isRegioneScelta)
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadProvinciaByRegione(dropItemRegione),
+                  builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      items:snapshot.data.map( (Provincia data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (String value) => setState(() {dropItemProvincia = value;isProvinciaScelta = true;}),
+                      hint: Text("Seleziona provincia"),
+                      value: dropItemProvincia,
+                      );
+                    }
+                   },)
+                   ),
+                
 
                 // Comune
-              Container(
-                child: FutureBuilder(
-                future: ControllerJM.loadRegioni(),
-                builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
-                  if(snapshot.data == null)
-                  {
-                    return Text("Loading...");
-                  }
-                  else{
-                   return DropdownButton(
-                    items:snapshot.data.map( (Regione data) { 
-                                        return DropdownMenuItem<String>(
-                                          value: data.nome,
-                                          child: Text(data.nome),);}).toList(), 
-                    onChanged: (value) => setState(() {dropDownValue = value;}),
-                     );
-                  }
-                 },)
-                 )
+                if(isProvinciaScelta)
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadComuneByProvincia(dropItemProvincia),
+                  builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      hint: Text("Seleziona Comune"),
+                      value: dropItemComune,
+                      items:snapshot.data.map( (Comune data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (value) => setState(() { dropItemComune = value;}),
+                       );
+                    }
+                   },)
+                   )
 
 
-              
-            ],
+                
+              ],
+              ),
+
+            // Riga Data e Ora Inizio
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Text("Inizio Evento:")
+                  ),
+                
+                Text(df.format(_selectedDateStart)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getDataStart(context),
+                       ),
+                Text(_selectedTimeStart.format(context)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getTimeStart(context),
+                       ),
+                       ],
+            ),  
+
+            // Riga Data e Ora Fine
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Text("Fine Evento:")
+                  ),
+                  Text(df.format(_selectedDateFinish)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getDataFinish(context),
+                       ),
+                Text(_selectedTimeFinish.format(context)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getTimeFinish(context),
+                       ),
+              ],
             ),
 
-          //Riga Data e Ora Inizio
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Inizio Evento:")
-                ),
-              
-              Text(df.format(_selectedDateStart)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getDataStart(context),
-                     ),
-              Text(_selectedTimeStart.format(context)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getTimeStart(context),
-                     ),
-
-              
-            ],
-          ),  
-
-          //Riga Data e Ora Fine
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Fine Evento:")
-                ),
-                Text(df.format(_selectedDateFinish)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getDataFinish(context),
-                     ),
-              Text(_selectedTimeFinish.format(context)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getTimeFinish(context),
-                     ),
-            ],
-          ),
-
-
-
-                    //  itemCount: snapshot.data.length,
-                    //  itemBuilder: (BuildContext context, int index) {
-                    //    return DropdownButton(
-                    //      value: snapshot.data[index],
-                    //      items: listone.map(
-                    //        (Regione data) { 
-                    //       return DropdownMenuItem<String>(
-                    //       value: data.nome,
-                    //       child: Text(data.nome),);}).toList(), 
-                    //      onChanged: (value) async => setState(() {dropDownValue = value;}),
-                    //    );
-                    // },
-
-          //Prova DDM
-          // Container(
-          //   child: DropdownButton<String>(
-          //     value: dropDownValue,
-          //     items: listone.map(
-          //       (Regione data) { 
-          //                 return DropdownMenuItem<String>(
-          //                 value: data.nome,
-          //                 child: Text(data.nome),);}).toList(),
-          //       onChanged: (value) {
-          //       setState(() {
-          //         dropDownValue = value;
-          //       });},
-          //   ),
-          //   ),
-
-          //Bottone Crea Evento
-          RaisedButton(
-                  padding: EdgeInsets.all(15),
-                  child: Text("Crea Evento"),
-                  onPressed: () => _creaEvento(),
+            //Bottone Crea Evento
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: RaisedButton(
+                      padding: EdgeInsets.all(15),
+                      child: Text("Crea Evento"),
+                      onPressed: () => _creaEvento(),
+                      ),
+            ),
+                    ]     
+                    ),
+        ),
                   ),
-
-
-                                              ]     
-                                        ),
-                                    ),
-                            );
-                  }
-
+                  );
+                  
+                  
+                  
+    }
+       
 
 
 
@@ -284,7 +272,7 @@ class EventCreator extends StatefulWidget
                   
      void _creaEvento(){
       bool none = false;
-      currentEvent = new Evento("0", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text),"1", "nome provvisorio","id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
+      currentEvent = new Evento("0", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text),"1", dropItemComune,"id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
       print("Evento creato");
       print(currentEvent.toString());
       Future<bool> esito = ControllerJM.makePostRequest(currentEvent);

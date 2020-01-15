@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 import 'package:http/http.dart' as http;
+import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
 
@@ -15,6 +16,7 @@ class ControllerJM
   static final String urlLuoghi = "https://springboot-restapi.herokuapp.com/luoghi";
   static final String urlRegioni = "https://springboot-restapi.herokuapp.com/regioni";
   static final String urlProvincia = "https://springboot-restapi.herokuapp.com/regioni/province/";
+  static final String urlComune = "https://springboot-restapi.herokuapp.com/regioni/provincia/comuni/";
 
   static Future<bool> makePostRequest(Evento event) async {
      Map<String, String> headers = {"Content-type": "application/json"};
@@ -49,5 +51,10 @@ class ControllerJM
     return pr;
   }
 
-
+  static Future<List<Comune>> loadComuneByProvincia(String pro) async {
+    http.Response response = await http.get(Uri.encodeFull(urlComune + pro), headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Comune> pr = collection.map((json) => Comune.fromjson(json)).toList();
+    return pr;
+  }
 }
