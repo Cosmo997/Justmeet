@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:justmeet/view/routes/preferiti.dart';
 import 'view/routes/areariservata.dart';
 import 'view/routes/eventcreator.dart';
-import 'view/routes/homepagetest.dart';
+import 'view/routes/homepage.dart';
 
 
 class App extends StatefulWidget{
@@ -14,30 +15,42 @@ class App extends StatefulWidget{
 }
 
 class AppState extends State<App>{
-
+  
   int currentIndex = 0;
-  final pageOption = [
-    HomePageTest(),
+  final pageOption = 
+  [
+    HomePage(),
     EventCreator(),
-    AreaRiservata()
+    Preferiti(),
+    AreaRiservata(),
   ];
+  final ThemeData temaApp = ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.black,
+        primaryColorDark: Colors.black,
+        primaryColorLight: Colors.white,
+        accentColor: Colors.orange[400],
+        );
+  
+
 
   @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false, //Disabilita la scritta "debug" in alto a destra
-      themeMode: ThemeMode.dark,
+      title: "JustMeet",
+      theme: temaApp,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
 
 //App bar generale
 
-        appBar:AppBar
-                  (backgroundColor: Colors.black,
-                   elevation: 10,
-                   title: Image.asset('assets/logo.png', scale: 2.5),
-                   centerTitle: true,
-                   ),
+      appBar:AppBar(
+          backgroundColor: temaApp.primaryColor,
+          elevation: 10,
+          title: Image.asset('assets/logo.png', scale: 2.5),
+          centerTitle: true,
+          ),
 
 //Body = richiama il metodo costruttore Build della pagina all'indice currentIndex
 
@@ -46,24 +59,22 @@ class AppState extends State<App>{
 //Navigation Bar Generale
 
       bottomNavigationBar: CurvedNavigationBar(
+      
       height: 50,
       color: Colors.black,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       buttonBackgroundColor: Colors.black,  
-      items: <Widget>[
-      Icon(Icons.home, size: 20, color: Colors.white,),
-      Icon(Icons.add_circle, size: 20, color: Colors.white),
-      Icon(Icons.accessible_forward, size: 20, color: Colors.white,),
-      //Icon(Icons.favorite, size: 18, color: Colors.white,),
+      items: <Widget>
+      [
+        Icon(Icons.home, size: 30, color: Colors.white,),
+        Icon(Icons.add_circle, size: 30, color: Colors.white,),
+        Icon(Icons.favorite, size: 30, color: Colors.white,),
+        Icon(Icons.accessible_forward, size: 30, color: Colors.white,),
+        
       ],
-        animationDuration: Duration(
-          milliseconds: 600,
-            ),
-              index: currentIndex,
-                onTap: (index){
-                  setState(() {
-                    currentIndex = index;
-                                 });
+      animationDuration: Duration(milliseconds: 600),
+      index: currentIndex,
+      onTap: (index){setState(() {currentIndex = index;});
                                 },
                               ),
       )

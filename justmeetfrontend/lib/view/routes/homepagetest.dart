@@ -23,7 +23,7 @@ class HomePageTest extends StatefulWidget {
     print("detacco");
     List collection = json.decode(response.body);
     print(collection);
-    List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromJson(json)).toList();
+    List<Evento> _eventsFromSpring = collection.map((json) => Evento.fromjson(json)).toList();
     setState(() {
       eventsFromSpring = _eventsFromSpring;
       isLoading = false;

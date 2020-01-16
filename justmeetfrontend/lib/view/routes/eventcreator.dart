@@ -1,11 +1,12 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
-//import 'package:http/http.dart' as http;
+import 'package:justmeet/classi/provincia.dart';
+import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
 import 'package:justmeet/controllerjm.dart';
 
@@ -18,182 +19,276 @@ class EventCreator extends StatefulWidget
   
   class EventCreatorState extends State<EventCreator>{
 
-      final DateFormat df = DateFormat("dd/MM/yyyy");
+      final DateFormat _df = DateFormat("dd/MM/yyyy");
+      bool _isRegioneScelta = false;
+      bool _isProvinciaScelta = false;
+      // Evento da creare
+      Evento _currentEvent;
+      // Elementi Evento
       DateTime _selectedDateStart = DateTime.now();	
       TimeOfDay _selectedTimeStart = TimeOfDay.now();
       DateTime _selectedDateFinish = DateTime.now();
       TimeOfDay _selectedTimeFinish = TimeOfDay.now();
-      Evento currentEvent;
-      int currentIndex = 3;
-      bool isCreationDisabled;
-      TextEditingController nameCtrl = TextEditingController();
-      TextEditingController descCtrl = TextEditingController();
-      TextEditingController maxPCtrl = TextEditingController();
-
-        //List<Topic> listTopic;
-        //List<DropdownMenuItem<Topic>> dropdownItem;
-        //Topic selectedTopic;
-        //List<String> argomentiTopic;
+      TextEditingController _nameCtrl = TextEditingController();
+      TextEditingController _descCtrl = TextEditingController();
+      TextEditingController _maxPCtrl = TextEditingController();
+      String _currentRegione;
+      String _currentProvincia;
+      String _currentComune;
+      String _currentTopic;
+      
 
 
    @override
     Widget build(BuildContext context)
-    {
-     return Scaffold (
-      body: SingleChildScrollView(
-        child: Column(    
-          children: <Widget>[
-
-          //Container Nome Evento
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-            child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: TextField(
-                  controller: nameCtrl,
-                  onChanged: _onChanged(),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8),)),
-                      labelText: 'Nome Evento',
-                      icon: Icon(Icons.fiber_new),                    
-                  ),
-                ),
-              ),
-          ),
+    {     
+       return Scaffold (
+        body: SingleChildScrollView(
+        
+        child: Card(
+          margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          color: Colors.white,
           
-          // Container Descrizione Evento
-          Container(
-            child: Padding(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  controller: descCtrl,
-                  onChanged: _onChanged(),
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))
-                      ),
-                      labelText: 'Descrizione Evento',
-                      icon: Icon(Icons.description),                    
-                  ),
-                ),
-              ),
-          ),          
-          
-          // Riga N max , Regione, Provincia, Città
-          Row(
-            mainAxisSize: MainAxisSize.max,
+          child: Column( 
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                width: 105,
-                child: TextField(
-                  controller: maxPCtrl,
-                  onChanged:_onChanged(),
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))
-                      ),
-                      
-                      labelText: 'Max',
-                      icon: Icon(Icons.people)                   
 
+            // Container Nome Evento
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextField(
+                    controller: _nameCtrl,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8),)),
+                        labelText: 'Nome Evento',
+                        icon: Icon(Icons.fiber_new),                    
+                    ),
                   ),
                 ),
+            ),
+            
+            // Container Descrizione Evento
+            Container(
+              child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: _descCtrl,
+                    textCapitalization: TextCapitalization.sentences,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))
+                        ),
+                        labelText: 'Descrizione Evento',
+                        icon: Icon(Icons.description),                    
+                    ),
+                  ),
+                ),
+            ),          
+            
+            // Colonna N max, Topics, Regione, Provincia, Comune
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                //Max persone, Topics
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      width: 105,
+                      child: TextField(
+                        controller: _maxPCtrl,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8))
+                            ),
+                            
+                            labelText: 'Max',
+                            icon: Icon(Icons.people)                   
+
+                        ),
+                      ),
+                    ),
+                    Container(
+                      //padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: FutureBuilder(
+                        future: ControllerJM.loadTopics(),
+                        builder: (BuildContext context, AsyncSnapshot<List<Topic>> snapshot){
+                          if(snapshot.data == null)
+                          {
+                            return CircularProgressIndicator();
+                          }
+                          else{
+                            return DropdownButton(      
+                      hint: Text("Seleziona Topic"),
+                      value: _currentTopic,
+                      items: snapshot.data.map( (Topic data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.id,
+                                            child: Text(data.argomento),);}).toList(), 
+                      onChanged: (String value) => setState(() {_currentTopic = value;}),
+                       );
+                          }
+                        },
+                      ),
+                    )
+                  ],
+                ),
+                
+                //Regione
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadRegioni(),
+                  builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      hint: Text("Seleziona regione"),
+                      value: _currentRegione,
+                      items: snapshot.data.map( (Regione data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (String value) => setState(() {_currentRegione = value; _isRegioneScelta = true;}),
+                       );
+                    }
+                   },)
+                   ),
+
+                //Provincia
+                if (_isRegioneScelta)
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadProvinciaByRegione(_currentRegione),
+                  builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      items:snapshot.data.map( (Provincia data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (String value) => setState(() {_currentProvincia = value;_isProvinciaScelta = true;}),
+                      hint: Text("Seleziona provincia"),
+                      value: _currentProvincia,
+                      );
+                    }
+                   },)
+                   ),
+                
+
+                // Comune
+                if(_isProvinciaScelta)
+                Container(
+                  child: FutureBuilder(
+                  future: ControllerJM.loadComuneByProvincia(_currentProvincia),
+                  builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
+                    if(snapshot.data == null)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else{
+                     return DropdownButton(
+                      hint: Text("Seleziona Comune"),
+                      value: _currentComune,
+                      items:snapshot.data.map( (Comune data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.nome,
+                                            child: Text(data.nome),);}).toList(), 
+                      onChanged: (value) => setState(() { _currentComune = value;}),
+                       );
+                    }
+                   },)
+                   )
+
+
+                
+              ],
               ),
 
-              //Regione Provincia Città
-            ],
+            // Riga Data e Ora Inizio
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Text("Inizio Evento:")
+                  ),
+                
+                Text(_df.format(_selectedDateStart)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getDataStart(context),
+                       ),
+                Text(_selectedTimeStart.format(context)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getTimeStart(context),
+                       ),
+                       ],
+            ),  
+
+            // Riga Data e Ora Fine
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Text("Fine Evento:")
+                  ),
+                  Text(_df.format(_selectedDateFinish)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getDataFinish(context),
+                       ),
+                Text(_selectedTimeFinish.format(context)),
+                IconButton(
+                         icon: Icon(Icons.date_range),
+                         onPressed: () => getTimeFinish(context),
+                       ),
+              ],
             ),
 
-          //Riga Data e Ora Inizio
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Data e Ora inizio:")
-                ),
-              
-              Text(df.format(_selectedDateStart)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getDataStart(context),
-                     ),
-              Text(_selectedTimeStart.format(context)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getTimeStart(context),
-                     ),
-
-              
-            ],
-          ),  
-
-          //Riga Data e Ora Fine
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text("Data e ora fine: ")
-                ),
-                Text(df.format(_selectedDateFinish)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getDataFinish(context),
-                     ),
-              Text(_selectedTimeFinish.format(context)),
-              IconButton(
-                       icon: Icon(Icons.date_range),
-                       onPressed: () => getTimeFinish(context),
-                     ),
-            ],
-          ),
-          //Bottone Crea Evento
-          RaisedButton(
-                  padding: EdgeInsets.all(15),
-                  child: Text("Crea Evento"),
-                  onPressed: () => _creaEvento(),
-                  ),
-          
-          RaisedButton(
-                  padding: EdgeInsets.all(15),
-                  child: Text("Prova"),
-                  onPressed: _prova,
-                  ),
-          
-  /*       DropdownButton(
-            value: selectedTopic,
-            items: argomentiTopic.map((value) => DropdownMenuItem(
-              child: Text(value),
-              value: value,)).toList(),
-              onChanged: (selectedTopicT) {
-                setState(() {
-                   selectedTopic = selectedTopicT;
-                });
-              },
+            //Bottone Crea Evento
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      padding: EdgeInsets.all(15),
+                      child: Text("Crea Evento"),
+                      textTheme: ButtonTextTheme.primary,
+                      onPressed: () => _creaEvento(),
+                      ),
             ),
-    */
-                                              ]     
-                                        ),
-                                    ),
-                            );
-                  }
+              ]     
+            ),
+        ),
+                  ),
+                  );             
+    }
 
-                  
       // METODI ESTERNI  
                   
-     void _creaEvento()
-     {
+     void _creaEvento(){
       bool none = false;
-      currentEvent = new Evento("0", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text),"1", "nome provvisorio","id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
+      _currentEvent = new Evento("0", _nameCtrl.text, _descCtrl.text, int.parse(_maxPCtrl.text),_currentTopic, _currentComune,"id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
       print("Evento creato");
-      print(currentEvent.toString());
-      Future<bool> esito = ControllerJM.makePostRequest(currentEvent);
-      esito.then((bool value) => _showDialog(currentEvent,value));
+      print(_currentEvent.toString());
+      Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
+      esito.then((bool value) => _showDialog(_currentEvent,value));
      
      } 
                   
@@ -201,125 +296,99 @@ class EventCreator extends StatefulWidget
           showDialog(
           context: context,
           builder: (BuildContext context) {
-              // return object of type Dialog
-              return AlertDialog(
-                title: new Text("Evento: "+ event.titolo+ "creato correttamente"),
+            if(esito)
+            return AlertDialog(
+                title: new Text("Evento: \n"+ event.titolo+ "\nCreato correttamente"),
                 content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
                 actions: <Widget>[
-                  // usually buttons at the bottom of the dialog
                   new FlatButton(
                       child: new Text("Torna alla home"),
-                      onPressed: () {},
-                              ),
-                            ],
-                          );
-                        },
-                      );
-          }
-                   
-      _onChanged() {
-                            setState(() {
-                              isCreationDisabled = (descCtrl.text.isNotEmpty || nameCtrl.text.isNotEmpty || maxPCtrl.text.isNotEmpty);
-                            });
-                  
-                        }
-                    
-      void getDataStart(context) async {
-                            var fDate = await showDatePicker(
-                            context: context,
-                            initialDate: _selectedDateStart,
-                            firstDate: DateTime(2018),
-                            lastDate: DateTime(2030),
-                     );
-                       //aggiornare lo stato
-                       if (fDate != null) setState(() => _selectedDateStart = fDate);
-                  
-                    }
-      void getDataFinish(context) async {
-                            var fDate = await showDatePicker(
-                            context: context,
-                            initialDate: _selectedDateFinish,
-                            firstDate: DateTime(2018),
-                            lastDate: DateTime(2030),
-                     );
-                       //aggiornare lo stato
-                       if (fDate != null) setState(() => _selectedDateFinish = fDate);
-                  
-                    }
-                    
-      void getTimeStart(context) async {
-                      var fTime = await showTimePicker(
-                        context: context,
-                        initialTime: _selectedTimeStart
-                      );
-                      if (fTime != null) setState(() => _selectedTimeStart = fTime);
-                    }
-       void getTimeFinish(context) async {
-                      var fTime = await showTimePicker(
-                        context: context,
-                        initialTime: _selectedTimeFinish
-                      );
-                      if (fTime != null) setState(() => _selectedTimeFinish = fTime);
-                    }
-                  
-      @override
-      void initState() {
-                      isCreationDisabled = false;
-                      //currentEvent = Evento();
-                      //getTopic();
-                      //dropdownItem = creaListaTopic(listTopic);
-                      //riempiLista(listTopic);
-                      super.initState();
-                    }
-                  
-      @override
-      void dispose() {
-                      nameCtrl.dispose();
-                      descCtrl.dispose();
-                      maxPCtrl.dispose();
-                      super.dispose();
-                    } 
-                  
-      void _prova() {
-                      var prova1 = jsonEncode(_selectedDateStart.toIso8601String());
-                      var prova2 = jsonEncode(_selectedTimeStart.toString());
-                      print(prova1);
-                      print(prova2);
-  }
-
-      List<DropdownMenuItem<Topic>> creaListaTopic (List<Topic> topics){
-          List<DropdownMenuItem<Topic>> items = List();
-          for (Topic topic in topics) 
-          {
-            items.add(DropdownMenuItem(
-              value: topic,
-              child: Text(topic.argomento),
-              )
-              );  
-          }
-          print(items);
-          return items;
-        }
-/*
-      Future getTopic() async{
-        http.Response response = await http.get('https://springboot-restapi.herokuapp.com/topics');
-        List collection = json.decode(response.body);
-        //print(collection);
-        List<Topic> _listTopic = collection.map((json) => Topic.fromJson(json)).toList();
-
-        setState(() {
-          listTopic = _listTopic;
-          super.initState();
-        });
-
+                      onPressed: () {setState(() {
+                        _fineCreazione();
+                                                
+                                              });},
+                                                      ),
+                                                    ],
+                                    );
+                                    else
+                                    return AlertDialog(
+                                        title: new Text("Evento: \n"+ event.titolo+ "\nNon Creato"),
+                                        content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            child: Text("Back"),
+                                            onPressed: ()=>{},
+                                          )
+                                        ],);
+                                                },
+                                              );
+                                  }
+                                            
+     void getDataStart(context) async {
+                                                    var fDate = await showDatePicker(
+                                                    context: context,
+                                                    initialDate: _selectedDateStart,
+                                                    firstDate: DateTime(2018),
+                                                    lastDate: DateTime(2030),
+                                             );
+                                               //aggiornare lo stato
+                                               if (fDate != null) setState(() => _selectedDateStart = fDate);
+                                          
+                                            }
+     void getDataFinish(context) async {
+                                                    var fDate = await showDatePicker(
+                                                    context: context,
+                                                    initialDate: _selectedDateFinish,
+                                                    firstDate: DateTime(2018),
+                                                    lastDate: DateTime(2030),
+                                             );
+                                               //aggiornare lo stato
+                                               if (fDate != null) setState(() => _selectedDateFinish = fDate);
+                                          
+                                            }
+                                            
+     void getTimeStart(context) async {
+                                              var fTime = await showTimePicker(
+                                                context: context,
+                                                initialTime: _selectedTimeStart
+                                              );
+                                              if (fTime != null) setState(() => _selectedTimeStart = fTime);
+                                            }
+     void getTimeFinish(context) async {
+                                              var fTime = await showTimePicker(
+                                                context: context,
+                                                initialTime: _selectedTimeFinish
+                                              );
+                                              if (fTime != null) setState(() => _selectedTimeFinish = fTime);
+                                            }
+                                          
+     @override
+     void initState() {
+     super.initState();
       }
-*/
-/*
-      void riempiLista(List<Topic> lista){
-        for (Topic topic in lista) {
-          argomentiTopic.add(topic.argomento);
-  }
-  print(argomentiTopic);
-}
-*/
+                                          
+     @override
+     void dispose() {
+     _nameCtrl.dispose();
+     _descCtrl.dispose();
+     _maxPCtrl.dispose();
+      super.dispose();
+    }
+                        
+  void _fineCreazione() {
+    _currentEvent = null;
+     _selectedDateStart = DateTime.now();	
+     _selectedTimeStart = TimeOfDay.now();
+     _selectedDateFinish = DateTime.now();
+    _selectedTimeFinish = TimeOfDay.now();
+    _nameCtrl.clear();
+    _descCtrl.clear();
+    _maxPCtrl.clear();
+    _isRegioneScelta = false;
+    _isProvinciaScelta = false;
+    _currentRegione = "";
+    _currentProvincia = "";
+    _currentComune  = "";
+ } 
+                  
 }
