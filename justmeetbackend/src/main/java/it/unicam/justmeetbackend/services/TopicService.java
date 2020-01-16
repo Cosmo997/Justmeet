@@ -13,6 +13,7 @@ import it.unicam.justmeetbackend.databasefake.Topic;
 @Service
 public class TopicService {
 
+/*
     Topic topic1 = new Topic("1", "Calcetto");
     Topic topic2 = new Topic("2", "Par");
     Topic topic3 = new Topic("3", "studio");
@@ -38,6 +39,8 @@ public class TopicService {
             return topic;
         }
         return null;
-	}
+    }
+    
+    */
 
 }

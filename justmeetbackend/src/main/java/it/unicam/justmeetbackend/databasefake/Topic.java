@@ -1,14 +1,19 @@
 package it.unicam.justmeetbackend.databasefake;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+
 public class Topic {
 
-    private String id;
+    @Id
+    private int _id;
+    
     private String argomento;
 
     public Topic(){};
 
-    public Topic(String id, String a){
-        this.id = id;
+    public Topic(int id, String a){
+        this._id = id;
         this.argomento = a;
     }
 
@@ -26,12 +31,10 @@ public class Topic {
         this.argomento = argomento;
     }
 
-    public String getId() {
-        return id;
-    }
+    public int get_id() { return _id; }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        this._id = id;
     }
 
 }

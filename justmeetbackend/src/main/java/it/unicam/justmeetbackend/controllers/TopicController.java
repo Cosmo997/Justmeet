@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RestController
 public class TopicController {
 
+/*
+
     @Autowired
     TopicService topicService;
 
@@ -35,9 +37,8 @@ public class TopicController {
     public Topic getTopicByArgomento(@PathVariable String argomento) {
         return topicService.getTopicByArgomento(argomento);
     }
-    
-    
-    
+     
+    */
 
     
 }
