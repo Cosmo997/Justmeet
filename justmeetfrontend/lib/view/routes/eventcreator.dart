@@ -7,6 +7,7 @@ import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
 import 'package:justmeet/classi/regione.dart';
+import 'package:justmeet/classi/topic.dart';
 import 'package:justmeet/controllerjm.dart';
 
 /// Responsabilità: Creare un Evento.
@@ -18,48 +19,38 @@ class EventCreator extends StatefulWidget
   
   class EventCreatorState extends State<EventCreator>{
 
-      final DateFormat df = DateFormat("dd/MM/yyyy");
+      final DateFormat _df = DateFormat("dd/MM/yyyy");
+      bool _isRegioneScelta = false;
+      bool _isProvinciaScelta = false;
       // Evento da creare
-      Evento currentEvent;
+      Evento _currentEvent;
       // Elementi Evento
       DateTime _selectedDateStart = DateTime.now();	
       TimeOfDay _selectedTimeStart = TimeOfDay.now();
       DateTime _selectedDateFinish = DateTime.now();
       TimeOfDay _selectedTimeFinish = TimeOfDay.now();
-     
-      int currentIndex = 3;
-      bool isCreationDisabled;
-      TextEditingController nameCtrl = TextEditingController();
-      TextEditingController descCtrl = TextEditingController();
-      TextEditingController maxPCtrl = TextEditingController();
+      TextEditingController _nameCtrl = TextEditingController();
+      TextEditingController _descCtrl = TextEditingController();
+      TextEditingController _maxPCtrl = TextEditingController();
+      String _currentRegione;
+      String _currentProvincia;
+      String _currentComune;
+      String _currentTopic;
       
-      bool isRegioneScelta = false;
-      bool isProvinciaScelta = false;
-
-      Regione currentRegione;
-      Provincia currentProvincia;
-      Comune currentComune;
-      
-      String dropItemRegione;
-      String dropItemProvincia;
-      String dropItemComune;
-
-       //List<Topic> listTopic;
-        //Topic selectedTopic;
-        //List<String> argomentiTopic;
 
 
    @override
     Widget build(BuildContext context)
     {     
        return Scaffold (
-         backgroundColor: Colors.grey,
         body: SingleChildScrollView(
         
         child: Card(
+          margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+          elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
           color: Colors.white,
-          borderOnForeground: true,
+          
           child: Column( 
             children: <Widget>[
 
@@ -69,7 +60,7 @@ class EventCreator extends StatefulWidget
               child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: TextField(
-                    controller: nameCtrl,
+                    controller: _nameCtrl,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8),)),
@@ -85,7 +76,7 @@ class EventCreator extends StatefulWidget
               child: Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: descCtrl,
+                    controller: _descCtrl,
                     textCapitalization: TextCapitalization.sentences,
                     maxLines: 10,
                     decoration: InputDecoration(
@@ -99,28 +90,56 @@ class EventCreator extends StatefulWidget
                 ),
             ),          
             
-            // Colonna N max , Regione, Provincia, Comune
+            // Colonna N max, Topics, Regione, Provincia, Comune
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                //Max persone
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  width: 105,
-                  child: TextField(
-                    controller: maxPCtrl,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8))
-                        ),
-                        
-                        labelText: 'Max',
-                        icon: Icon(Icons.people)                   
+                //Max persone, Topics
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      width: 105,
+                      child: TextField(
+                        controller: _maxPCtrl,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8))
+                            ),
+                            
+                            labelText: 'Max',
+                            icon: Icon(Icons.people)                   
 
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      //padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: FutureBuilder(
+                        future: ControllerJM.loadTopics(),
+                        builder: (BuildContext context, AsyncSnapshot<List<Topic>> snapshot){
+                          if(snapshot.data == null)
+                          {
+                            return CircularProgressIndicator();
+                          }
+                          else{
+                            return DropdownButton(      
+                      hint: Text("Seleziona Topic"),
+                      value: _currentTopic,
+                      items: snapshot.data.map( (Topic data) { 
+                                          return DropdownMenuItem<String>(
+                                            value: data.id,
+                                            child: Text(data.argomento),);}).toList(), 
+                      onChanged: (String value) => setState(() {_currentTopic = value;}),
+                       );
+                          }
+                        },
+                      ),
+                    )
+                  ],
                 ),
                 
                 //Regione
@@ -135,22 +154,22 @@ class EventCreator extends StatefulWidget
                     else{
                      return DropdownButton(
                       hint: Text("Seleziona regione"),
-                      value: dropItemRegione,
+                      value: _currentRegione,
                       items: snapshot.data.map( (Regione data) { 
                                           return DropdownMenuItem<String>(
                                             value: data.nome,
                                             child: Text(data.nome),);}).toList(), 
-                      onChanged: (String value) => setState(() {dropItemRegione = value; isRegioneScelta = true;}),
+                      onChanged: (String value) => setState(() {_currentRegione = value; _isRegioneScelta = true;}),
                        );
                     }
                    },)
                    ),
 
                 //Provincia
-                if (isRegioneScelta)
+                if (_isRegioneScelta)
                 Container(
                   child: FutureBuilder(
-                  future: ControllerJM.loadProvinciaByRegione(dropItemRegione),
+                  future: ControllerJM.loadProvinciaByRegione(_currentRegione),
                   builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
                     if(snapshot.data == null)
                     {
@@ -162,9 +181,9 @@ class EventCreator extends StatefulWidget
                                           return DropdownMenuItem<String>(
                                             value: data.nome,
                                             child: Text(data.nome),);}).toList(), 
-                      onChanged: (String value) => setState(() {dropItemProvincia = value;isProvinciaScelta = true;}),
+                      onChanged: (String value) => setState(() {_currentProvincia = value;_isProvinciaScelta = true;}),
                       hint: Text("Seleziona provincia"),
-                      value: dropItemProvincia,
+                      value: _currentProvincia,
                       );
                     }
                    },)
@@ -172,10 +191,10 @@ class EventCreator extends StatefulWidget
                 
 
                 // Comune
-                if(isProvinciaScelta)
+                if(_isProvinciaScelta)
                 Container(
                   child: FutureBuilder(
-                  future: ControllerJM.loadComuneByProvincia(dropItemProvincia),
+                  future: ControllerJM.loadComuneByProvincia(_currentProvincia),
                   builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
                     if(snapshot.data == null)
                     {
@@ -184,12 +203,12 @@ class EventCreator extends StatefulWidget
                     else{
                      return DropdownButton(
                       hint: Text("Seleziona Comune"),
-                      value: dropItemComune,
+                      value: _currentComune,
                       items:snapshot.data.map( (Comune data) { 
                                           return DropdownMenuItem<String>(
                                             value: data.nome,
                                             child: Text(data.nome),);}).toList(), 
-                      onChanged: (value) => setState(() { dropItemComune = value;}),
+                      onChanged: (value) => setState(() { _currentComune = value;}),
                        );
                     }
                    },)
@@ -209,7 +228,7 @@ class EventCreator extends StatefulWidget
                   child: Text("Inizio Evento:")
                   ),
                 
-                Text(df.format(_selectedDateStart)),
+                Text(_df.format(_selectedDateStart)),
                 IconButton(
                          icon: Icon(Icons.date_range),
                          onPressed: () => getDataStart(context),
@@ -230,7 +249,7 @@ class EventCreator extends StatefulWidget
                   padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Text("Fine Evento:")
                   ),
-                  Text(df.format(_selectedDateFinish)),
+                  Text(_df.format(_selectedDateFinish)),
                 IconButton(
                          icon: Icon(Icons.date_range),
                          onPressed: () => getDataFinish(context),
@@ -247,36 +266,29 @@ class EventCreator extends StatefulWidget
             Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: RaisedButton(
+                      color: Theme.of(context).accentColor,
                       padding: EdgeInsets.all(15),
                       child: Text("Crea Evento"),
+                      textTheme: ButtonTextTheme.primary,
                       onPressed: () => _creaEvento(),
                       ),
             ),
-                    ]     
-                    ),
+              ]     
+            ),
         ),
                   ),
-                  );
-                  
-                  
-                  
+                  );             
     }
-       
-
-
-
-
-
 
       // METODI ESTERNI  
                   
      void _creaEvento(){
       bool none = false;
-      currentEvent = new Evento("0", nameCtrl.text, descCtrl.text, int.parse(maxPCtrl.text),"1", dropItemComune,"id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
+      _currentEvent = new Evento("0", _nameCtrl.text, _descCtrl.text, int.parse(_maxPCtrl.text),_currentTopic, _currentComune,"id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
       print("Evento creato");
-      print(currentEvent.toString());
-      Future<bool> esito = ControllerJM.makePostRequest(currentEvent);
-      esito.then((bool value) => _showDialog(currentEvent,value));
+      print(_currentEvent.toString());
+      Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
+      esito.then((bool value) => _showDialog(_currentEvent,value));
      
      } 
                   
@@ -284,72 +296,99 @@ class EventCreator extends StatefulWidget
           showDialog(
           context: context,
           builder: (BuildContext context) {
-              // return object of type Dialog
-              return AlertDialog(
-                title: new Text("Evento: "+ event.titolo+ "creato correttamente"),
+            if(esito)
+            return AlertDialog(
+                title: new Text("Evento: \n"+ event.titolo+ "\nCreato correttamente"),
                 content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
                 actions: <Widget>[
-                  // usually buttons at the bottom of the dialog
                   new FlatButton(
                       child: new Text("Torna alla home"),
-                      onPressed: () {},
-                              ),
-                            ],
-                          );
-                        },
-                      );
-          }
-                    
-      void getDataStart(context) async {
-                            var fDate = await showDatePicker(
-                            context: context,
-                            initialDate: _selectedDateStart,
-                            firstDate: DateTime(2018),
-                            lastDate: DateTime(2030),
-                     );
-                       //aggiornare lo stato
-                       if (fDate != null) setState(() => _selectedDateStart = fDate);
-                  
-                    }
-      void getDataFinish(context) async {
-                            var fDate = await showDatePicker(
-                            context: context,
-                            initialDate: _selectedDateFinish,
-                            firstDate: DateTime(2018),
-                            lastDate: DateTime(2030),
-                     );
-                       //aggiornare lo stato
-                       if (fDate != null) setState(() => _selectedDateFinish = fDate);
-                  
-                    }
-                    
-      void getTimeStart(context) async {
-                      var fTime = await showTimePicker(
-                        context: context,
-                        initialTime: _selectedTimeStart
-                      );
-                      if (fTime != null) setState(() => _selectedTimeStart = fTime);
-                    }
-       void getTimeFinish(context) async {
-                      var fTime = await showTimePicker(
-                        context: context,
-                        initialTime: _selectedTimeFinish
-                      );
-                      if (fTime != null) setState(() => _selectedTimeFinish = fTime);
-                    }
-                  
-      @override
-      void initState() {
-                      
-                      super.initState();
-                    }
-                  
-      @override
-      void dispose() {
-                      nameCtrl.dispose();
-                      descCtrl.dispose();
-                      maxPCtrl.dispose();
-                      super.dispose();
-                    } 
+                      onPressed: () {setState(() {
+                        _fineCreazione();
+                                                
+                                              });},
+                                                      ),
+                                                    ],
+                                    );
+                                    else
+                                    return AlertDialog(
+                                        title: new Text("Evento: \n"+ event.titolo+ "\nNon Creato"),
+                                        content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            child: Text("Back"),
+                                            onPressed: ()=>{},
+                                          )
+                                        ],);
+                                                },
+                                              );
+                                  }
+                                            
+     void getDataStart(context) async {
+                                                    var fDate = await showDatePicker(
+                                                    context: context,
+                                                    initialDate: _selectedDateStart,
+                                                    firstDate: DateTime(2018),
+                                                    lastDate: DateTime(2030),
+                                             );
+                                               //aggiornare lo stato
+                                               if (fDate != null) setState(() => _selectedDateStart = fDate);
+                                          
+                                            }
+     void getDataFinish(context) async {
+                                                    var fDate = await showDatePicker(
+                                                    context: context,
+                                                    initialDate: _selectedDateFinish,
+                                                    firstDate: DateTime(2018),
+                                                    lastDate: DateTime(2030),
+                                             );
+                                               //aggiornare lo stato
+                                               if (fDate != null) setState(() => _selectedDateFinish = fDate);
+                                          
+                                            }
+                                            
+     void getTimeStart(context) async {
+                                              var fTime = await showTimePicker(
+                                                context: context,
+                                                initialTime: _selectedTimeStart
+                                              );
+                                              if (fTime != null) setState(() => _selectedTimeStart = fTime);
+                                            }
+     void getTimeFinish(context) async {
+                                              var fTime = await showTimePicker(
+                                                context: context,
+                                                initialTime: _selectedTimeFinish
+                                              );
+                                              if (fTime != null) setState(() => _selectedTimeFinish = fTime);
+                                            }
+                                          
+     @override
+     void initState() {
+     super.initState();
+      }
+                                          
+     @override
+     void dispose() {
+     _nameCtrl.dispose();
+     _descCtrl.dispose();
+     _maxPCtrl.dispose();
+      super.dispose();
+    }
+                        
+  void _fineCreazione() {
+    _currentEvent = null;
+     _selectedDateStart = DateTime.now();	
+     _selectedTimeStart = TimeOfDay.now();
+     _selectedDateFinish = DateTime.now();
+    _selectedTimeFinish = TimeOfDay.now();
+    _nameCtrl.clear();
+    _descCtrl.clear();
+    _maxPCtrl.clear();
+    _isRegioneScelta = false;
+    _isProvinciaScelta = false;
+    _currentRegione = "";
+    _currentProvincia = "";
+    _currentComune  = "";
+ } 
                   
 }

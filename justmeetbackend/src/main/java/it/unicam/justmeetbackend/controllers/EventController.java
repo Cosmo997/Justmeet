@@ -68,7 +68,10 @@ public class EventController {
     public List<Evento> getEventByComune(@PathVariable String comune) {
         return eventService.getEventsByComune(comune);
     }
-    
+    // @GetMapping(value = "/eventi/preferiti/{idUtente}")
+    // public List<Evento> getEventiByUser(@PathVariable String idUser) {
+    //     return eventService.
+    // }
 
 
 }

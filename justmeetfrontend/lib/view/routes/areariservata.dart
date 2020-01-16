@@ -9,7 +9,7 @@ class AreaRiservata extends StatefulWidget{
     
     }
     
-    class AreaRiservataState extends State<AreaRiservata>{
+  class AreaRiservataState extends State<AreaRiservata>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

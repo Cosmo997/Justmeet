@@ -20,19 +20,12 @@ class HomePageState extends State<HomePage>{
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
+        return Container(
+          child: Center(
                   child:CircularProgressIndicator(
                     backgroundColor: Colors.white
-                )),
-              ],
-            ),
-          ],
+                    )
+                    )
         );
         }
         else
@@ -68,7 +61,7 @@ class HomePageState extends State<HomePage>{
                                        ListTile(
                                 title: Text(evento.inizioEvento.toString()),
                                 subtitle: Text(evento.fineEvento.toString()),
-                                trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic:"),
+                                trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic: "+ evento.idTopic.toString()),
                               ),
                                   ],),
                                 ),

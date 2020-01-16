@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
+import 'package:justmeet/classi/topic.dart';
 
 import 'classi/regione.dart';
 
@@ -17,6 +18,8 @@ class ControllerJM
   static final String urlRegioni = "https://springboot-restapi.herokuapp.com/regioni";
   static final String urlProvincia = "https://springboot-restapi.herokuapp.com/regioni/province/";
   static final String urlComune = "https://springboot-restapi.herokuapp.com/regioni/provincia/comuni/";
+  static final String urlTopics = "https://springboot-restapi.herokuapp.com/topics";
+  static final String urlPreferiti = "https://springboot-restapi.herokuapp.com/";
 
   static Future<bool> makePostRequest(Evento event) async {
      Map<String, String> headers = {"Content-type": "application/json"};
@@ -32,7 +35,7 @@ class ControllerJM
     print("Risposta ricevuta");
     print("Body: " +response.body);
     List collection = json.decode(response.body);
-    List<Evento> eventi = collection.map((json) => Evento.fromJson(json)).toList();
+    List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
     return eventi;
   }
 
@@ -56,5 +59,19 @@ class ControllerJM
     List collection = json.decode(response.body);
     List<Comune> pr = collection.map((json) => Comune.fromjson(json)).toList();
     return pr;
+  }
+
+  static Future<List<Topic>> loadTopics() async {
+    http.Response response = await http.get(Uri.encodeFull(urlTopics), headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Topic> topic = collection.map((json) => Topic.fromjson(json)).toList();
+    return topic;
+  }
+//TODO Url mancante
+  static Future<List<Evento>> loadPreferitiByUtente(String idUtente) async {
+    http.Response response = await http.get(Uri.encodeFull(urlTopics), headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Evento> preferiti = collection.map((json) => Evento.fromjson(json)).toList();
+    return preferiti;
   }
 }

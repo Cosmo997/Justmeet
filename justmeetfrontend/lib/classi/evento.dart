@@ -43,7 +43,7 @@ class Evento {
     return map;
   }
 
-Evento.fromJson(Map<String, dynamic> json)
+Evento.fromjson(Map<String, dynamic> json)
         :
           id = json['id'],
           titolo = json['titolo'],

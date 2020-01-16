@@ -8,15 +8,9 @@ class Topic{
   
   Topic(this. id, this.argomento);
 
-  Topic.fromJson(Map<String, dynamic> json)
+  Topic.fromjson(Map<String, dynamic> json)
   : 
   id = json['id'],
   argomento = json['argomento'];
-
-/*
-  factory Topic.fromJson(Map<String, dynamic> json){
-    return Topic(id: json['id'],argomento: json['argomento']);
-  }
-  */
 
 }
