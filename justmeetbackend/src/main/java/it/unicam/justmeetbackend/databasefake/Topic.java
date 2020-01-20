@@ -1,6 +1,5 @@
 package it.unicam.justmeetbackend.databasefake;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 public class Topic {

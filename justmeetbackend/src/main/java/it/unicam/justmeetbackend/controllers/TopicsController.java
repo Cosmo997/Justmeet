@@ -1,6 +1,5 @@
 package it.unicam.justmeetbackend.controllers;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +48,7 @@ public class TopicsController {
     return topic;
   }
   
-  @RequestMapping(value = "/topic/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/topic/id/{id}", method = RequestMethod.DELETE)
   public void deleteTopic(@PathVariable int _id) {
     repository.delete(repository.findBy_id(_id));
   }
