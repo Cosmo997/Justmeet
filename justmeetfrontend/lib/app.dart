@@ -16,6 +16,7 @@ class App extends StatefulWidget{
 
 class AppState extends State<App>{
   
+  bool isDarkThemeEnabled = false;
   int currentIndex = 0;
   final pageOption = 
   [
@@ -39,7 +40,7 @@ class AppState extends State<App>{
 
     return MaterialApp(
       title: "JustMeet",
-      theme: temaApp,
+      theme: isDarkThemeEnabled ? ThemeData.dark() : ThemeData.light(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
 
