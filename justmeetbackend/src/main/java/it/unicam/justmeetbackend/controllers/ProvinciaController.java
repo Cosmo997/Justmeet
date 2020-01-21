@@ -16,12 +16,6 @@ import java.util.List;
 
 @RestController
 public class ProvinciaController {
-  
-  private static int latestId = 0;
-
-  public static int generateId() {
-    return ++latestId;
- }
 
     @Autowired
     private ProvinciaRepository repository;
@@ -48,9 +42,9 @@ return repository.findBySigla(sigla);
  */
 
 @RequestMapping(value = "/provincie", method = RequestMethod.POST)
-public List<Provincia> createProvincia(@Valid @RequestBody List<Provincia> provinicie) {
+public String createProvincia(@Valid @RequestBody List<Provincia> provinicie) {
   repository.saveAll(provinicie);
-  return provinicie;
+  return "Provinicie aggiunte: " +provinicie.size();
 }
 
 /**

@@ -1,32 +1,38 @@
 package it.unicam.justmeetbackend.databasefake;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * Regione
  */
 public class Regione {
 
+    @Id
+    int id;
+    
     String nome;
 
-    public Regione(){};
+    public Regione(){}
 
-    public Regione(String nome)
-    {
-        this.nome = nome;
+    public int getId() {
+        return id;
     }
 
-    /**
-     * @return the nome
-     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    public Regione(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
     
 }

@@ -14,7 +14,6 @@ public class Evento {
     private boolean isApproved;
     private DateTime inizioEvento;
     private DateTime fineEvento;
-   
 
     public Evento() {
     };
