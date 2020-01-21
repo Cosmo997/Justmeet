@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:justmeet/utils/theme.dart';
 
 class AreaRiservata extends StatefulWidget{
   
+  
+
   @override
   State<StatefulWidget> createState() {
     return AreaRiservataState();
@@ -11,7 +14,7 @@ class AreaRiservata extends StatefulWidget{
   
 
   class AreaRiservataState extends State<AreaRiservata>{
-    bool isDarkModeEnabled = true;
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +22,7 @@ class AreaRiservata extends StatefulWidget{
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            
             //Account
             Card(
               elevation: 10,
@@ -42,7 +46,7 @@ class AreaRiservata extends StatefulWidget{
                          padding: EdgeInsets.all(8),
                          child: CircleAvatar(
                            radius: 56,
-                           backgroundImage: AssetImage("\logo.png"),
+                           //backgroundImage: AssetImage("nu"),
                          )
                        ),
                           alignment: Alignment.topLeft,
@@ -77,12 +81,13 @@ class AreaRiservata extends StatefulWidget{
                 Column(
                   children: <Widget>[
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text("Tema Scuro: "),
                         Switch(
-                          value:isDarkModeEnabled,
+                          value:ThemeHandler.isDarkThemeEnabled,
                           onChanged: (bool value){
-                            setState(() {isDarkModeEnabled = value;});
+                            setState(() {ThemeHandler.changeTheme();});
                           },
                         )
                       ],

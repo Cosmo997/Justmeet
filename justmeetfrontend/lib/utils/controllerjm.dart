@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:justmeet/classi/comune.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
+import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
 
-import 'classi/regione.dart';
+
 
 /// Responsabilità: Comunicare con il BackEnd.
 

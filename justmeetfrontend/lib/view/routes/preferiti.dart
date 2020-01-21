@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/controllerjm.dart';
+import 'package:justmeet/utils/controllerjm.dart';
 
 
 
@@ -25,9 +25,7 @@ class PreferitiState extends State<Preferiti>
        {
         return Container(
           child: Center(
-                  child:CircularProgressIndicator(
-                    backgroundColor: Colors.white
-                    )
+                  child:CircularProgressIndicator()
                     )
         );
         }
