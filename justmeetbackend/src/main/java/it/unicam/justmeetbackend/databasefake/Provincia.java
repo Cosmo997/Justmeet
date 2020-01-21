@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Provincia {
 
+    
     String sigla;
+    
     String provincia;
     double superficie;
     int residenti;
     int num_comuni;
-    @Id
     int id_regione;
 
     public Provincia(){}

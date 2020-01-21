@@ -47,18 +47,4 @@ public String createProvincia(@Valid @RequestBody List<Provincia> provinicie) {
   return "Provinicie aggiunte: " +provinicie.size();
 }
 
-/**
- * POST METHOD
- * @param provinicia
- * @return provincia aggiunta
- */
-
-@RequestMapping(value = "/provinciaAdd", method = RequestMethod.POST)
-public Provincia createProvincia(@Valid @RequestBody Provincia provinicia) {
-  repository.save(provinicia);
-  return provinicia;
-}
-
-    
-  
 }
