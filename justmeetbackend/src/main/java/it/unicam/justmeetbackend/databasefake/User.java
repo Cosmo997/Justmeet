@@ -3,9 +3,13 @@ package it.unicam.justmeetbackend.databasefake;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
 public class User
     {
+        @Id
         private String id;
+        
         private String nome;
         private String cognome;
         private String email;
