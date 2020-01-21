@@ -35,6 +35,14 @@ public Provincia getProvinciaBySigla(@PathVariable String sigla) {
 return repository.findBySigla(sigla);
 }
 
+/*
+@RequestMapping(value = "/provincia/regione/{id_regione}", method = RequestMethod.GET)
+public Provincia getProvinciaByIdRegione(@PathVariable int id_regione) {
+return repository.findById_regione(id_regione);
+}
+
+*/
+
 /**
  * POST METHOD
  * @param provinicie

@@ -1,17 +1,11 @@
 package it.unicam.justmeetbackend.databasefake;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.stereotype.Repository;
-
 /**
  * Provincia
  */
-@Repository
 public class Provincia {
 
-    
     String sigla;
-    
     String provincia;
     double superficie;
     int residenti;
