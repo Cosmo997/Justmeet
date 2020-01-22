@@ -2,57 +2,48 @@ package it.unicam.justmeetbackend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unicam.justmeetbackend.databasefake.Provincia;
+import it.unicam.justmeetbackend.classi.Provincia;
 import it.unicam.justmeetbackend.repository.ProvinciaRepository;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
 @RestController
 public class ProvinciaController {
 
-    @Autowired
-    private ProvinciaRepository repository;
+@Autowired
+private ProvinciaRepository repository;
   
-    @RequestMapping(value = "/provincie", method = RequestMethod.GET)
-    public List<Provincia> getAllProvincias() {
-    return repository.findAll();
-  }
+@RequestMapping(value = "/province", method = RequestMethod.GET)
+public List<Provincia> getAllProvince() {
+  return repository.findAll();
+}
 
-  @RequestMapping(value = "/provincia/{provincia}", method = RequestMethod.GET)
-  public Provincia getProvinciaByName(@PathVariable String provincia) {
-  return repository.findByProvincia(provincia);
+@RequestMapping(value = "/provincia/nome/{nome}", method = RequestMethod.GET)
+public List<Provincia> getProvinciaByName(@PathVariable String nome) {
+  return repository.findByNome(nome);
 }
 
 @RequestMapping(value = "/provincia/sigla/{sigla}", method = RequestMethod.GET)
-public Provincia getProvinciaBySigla(@PathVariable String sigla) {
+public List<Provincia> getProvinciaBySigla(@PathVariable String sigla) {
 return repository.findBySigla(sigla);
 }
 
-/*
-@RequestMapping(value = "/provincia/regione/{id_regione}", method = RequestMethod.GET)
-public Provincia getProvinciaByIdRegione(@PathVariable int id_regione) {
-return repository.findById_regione(id_regione);
-}
 
-*/
+// /**
+//  * POST METHOD
+//  * @param provinice
+//  * @return Liste di provincie aggiunte
+//  */
 
-/**
- * POST METHOD
- * @param provinicie
- * @return Liste di provincie aggiunte
- */
-
-@RequestMapping(value = "/provincie", method = RequestMethod.POST)
-public String createProvincia(@Valid @RequestBody List<Provincia> provinicie) {
-  repository.saveAll(provinicie);
-  return "Provinicie aggiunte: " +provinicie.size();
-}
+// @RequestMapping(value = "/provincia", method = RequestMethod.POST)
+// public String createProvincia(@Valid @RequestBody List<Provincia> provinice) {
+//   repository.saveAll(provinice);
+//   return "Provinicie aggiunte: " +provinice.size();
+// }
 
 }

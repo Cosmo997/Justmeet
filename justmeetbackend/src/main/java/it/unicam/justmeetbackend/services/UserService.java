@@ -6,17 +6,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import it.unicam.justmeetbackend.databasefake.User;
+import it.unicam.justmeetbackend.classi.User;
 
 @Service
 public class UserService{
 
     ArrayList<String> idPreferit = new ArrayList<>(Arrays.asList("id1", "id2"));
 
-    User utente1 = new User("1234","Michele", "Benedetti", "email", "psw", true, idPreferit);
-    User utente2 = new User("12","Daniel", "Moschi", "username", "email", true, idPreferit);
-    User utente3 = new User("34","Pluto", "Pippo", "username", "email", true, idPreferit);
-    User utente4 = new User("1","1","1","1","1",true, idPreferit);
+    User utente1 = new User("Michele", "Benedetti", "email", "psw", true);
+    User utente2 = new User("Daniel", "Moschi", "username", "email", true);
+    User utente3 = new User("Pluto", "Pippo", "username", "email", true);
+    User utente4 = new User("1","1","1","1",true);
 
     List<User> userList = new ArrayList<>(Arrays.asList(utente1,utente2,utente3));
 

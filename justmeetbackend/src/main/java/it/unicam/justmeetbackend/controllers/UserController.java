@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unicam.justmeetbackend.databasefake.User;
+import it.unicam.justmeetbackend.classi.User;
 import it.unicam.justmeetbackend.repository.UserRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,35 +23,34 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public List<User> getUser() {
+    public List<User> getUsers() {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/id/{id}", method = RequestMethod.GET)
     public Optional<User> getUserById(@PathVariable String id) {
     return repository.findById(id);
   }
 
-  @RequestMapping(value = "/user/{nome}", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/nome/{nome}", method = RequestMethod.GET)
     public List<User> getUserByNome(@PathVariable String nome) {
     return repository.findByNome(nome);
   }
 
-  @RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/email/{email}", method = RequestMethod.GET)
     public List<User> getUserByEmail(@PathVariable String email) {
     return repository.findByEmail(email);
   }
 
-  
-  @RequestMapping(value = "/useradd", method = RequestMethod.POST)
-  public String createUser(@Valid @RequestBody List<User> user) {
-    repository.saveAll(user);
-    return "User"+user+"Aggiunto";
+  @RequestMapping(value = "/user", method = RequestMethod.POST)
+  public void createUser(@Valid @RequestBody User user) {
+    repository.save(user);
   }
   
   @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-  public void deleteUser(@PathVariable String id) {
+  public void deleteUserById(@PathVariable String id) {
     repository.deleteById(id);
   }
     
