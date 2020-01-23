@@ -27,8 +27,6 @@ class ControllerJM
 
   static Future<List<Evento>> loadEvents()  async {
     http.Response response = await http.get(urlBase + "/eventi", headers: {"Accept" : "application/json"});
-    print("Risposta ricevuta");
-    print("Body: " +response.body);
     List collection = json.decode(response.body);
     List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
     return eventi;

@@ -39,14 +39,14 @@ public class Provincia {
     /**
      * @return the provincia
      */
-    public String getProvincia() {
+    public String getNome() {
         return nome;
     }
 
     /**
      * @param provincia the provincia to set
      */
-    public void setProvincia(String provincia) {
+    public void setNome(String provincia) {
         this.nome = provincia;
     }
 

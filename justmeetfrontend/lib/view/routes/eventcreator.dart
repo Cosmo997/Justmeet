@@ -170,7 +170,9 @@ class EventCreator extends StatefulWidget
                                                 return DropdownMenuItem<String>(
                                                   value: data.nome,
                                                   child: Text(data.nome),);}).toList(), 
-                            onChanged: (String value) => setState(() {_currentRegione = value; _isRegioneScelta = true;}),
+                            onChanged: (String value) => setState(() {
+                              print(value);
+                              _currentRegione = value; _isRegioneScelta = true;}),
                              );
                           }
                          },)
@@ -192,7 +194,9 @@ class EventCreator extends StatefulWidget
                                                 return DropdownMenuItem<String>(
                                                   value: data.nome,
                                                   child: Text(data.nome),);}).toList(), 
-                            onChanged: (String value) => setState(() {_currentProvincia = value;_isProvinciaScelta = true;}),
+                            onChanged: (String value) => setState(() {
+                              print(_currentProvincia);
+                              _currentProvincia = value;_isProvinciaScelta = true;}),
                             hint: Text("Seleziona provincia"),
                             value: _currentProvincia,
                             );
