@@ -36,7 +36,7 @@ public class Comune {
     /**
      * @param provincia the provincia to set
      */
-    public void setProvincia(String provincia) {
+    public void setSiglaProvincia(String provincia) {
         this.siglaProvincia = provincia;
     }
 
