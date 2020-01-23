@@ -29,7 +29,7 @@ public class ComuneController {
         return repository.findByNome(nome);
     }
 
-    @RequestMapping(value = "/comune/provincia/{provincia}", method = RequestMethod.GET)
+    @RequestMapping(value = "/comune/provincia/{siglaProvincia}", method = RequestMethod.GET)
     public List<Comune> getComuneBySiglaProvincia(@PathVariable String siglaProvincia){
         return repository.findBySiglaProvincia(siglaProvincia);
     }
