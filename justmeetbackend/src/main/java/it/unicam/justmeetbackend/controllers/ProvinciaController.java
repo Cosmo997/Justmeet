@@ -12,6 +12,7 @@ import it.unicam.justmeetbackend.repository.ProvinciaRepository;
 import java.util.List;
 
 
+
 @RestController
 public class ProvinciaController {
 
@@ -33,8 +34,13 @@ public List<Provincia> getProvinciaBySigla(@PathVariable String sigla) {
 return repository.findBySigla(sigla);
 }
 
+@RequestMapping(value = "/provincia/regione/{regione}", method = RequestMethod.GET)
+public List<Provincia> getProvinciaByRegione(@PathVariable String regione){
+  return repository.findByRegione(regione);
+}
 
-// /**
+
+
 //  * POST METHOD
 //  * @param provinice
 //  * @return Liste di provincie aggiunte

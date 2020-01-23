@@ -30,9 +30,9 @@ class EventCreator extends StatefulWidget
       TimeOfDay _selectedTimeStart = TimeOfDay.now();
       DateTime _selectedDateFinish = DateTime.now();
       TimeOfDay _selectedTimeFinish = TimeOfDay.now();
-      TextEditingController _nameCtrl = TextEditingController();
-      TextEditingController _descCtrl = TextEditingController();
-      TextEditingController _maxPCtrl = TextEditingController();
+      TextEditingController _titolo = TextEditingController();
+      TextEditingController _descrizione = TextEditingController();
+      TextEditingController _partecipanti = TextEditingController();
       String _currentRegione;
       String _currentProvincia;
       String _currentComune;
@@ -71,7 +71,7 @@ class EventCreator extends StatefulWidget
                     child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: TextField(
-                          controller: _nameCtrl,
+                          controller: _titolo,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(8),)),
@@ -87,7 +87,7 @@ class EventCreator extends StatefulWidget
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: TextField(
-                          controller: _descCtrl,
+                          controller: _descrizione,
                           textCapitalization: TextCapitalization.sentences,
                           maxLines: 10,
                           decoration: InputDecoration(
@@ -114,7 +114,7 @@ class EventCreator extends StatefulWidget
                             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                             width: 105,
                             child: TextField(
-                              controller: _maxPCtrl,
+                              controller: _partecipanti,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -205,7 +205,7 @@ class EventCreator extends StatefulWidget
                       if(_isProvinciaScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadComuneByProvincia(_currentProvincia),
+                        future: ControllerJM.loadComuneBySiglaProvincia(_currentProvincia),
                         builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -301,7 +301,7 @@ class EventCreator extends StatefulWidget
       // METODI ESTERNI  
                   
      void _creaEvento(){
-      //_currentEvent = new Evento();
+      _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,"Giovanni",_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
       print("Evento creato");
       print(_currentEvent.toString());
       Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
@@ -386,9 +386,9 @@ class EventCreator extends StatefulWidget
                                           
      @override
      void dispose() {
-     _nameCtrl.dispose();
-     _descCtrl.dispose();
-     _maxPCtrl.dispose();
+     _titolo.dispose();
+     _descrizione.dispose();
+     _partecipanti.dispose();
       super.dispose();
     }
                         
@@ -398,9 +398,9 @@ class EventCreator extends StatefulWidget
      _selectedTimeStart = TimeOfDay.now();
      _selectedDateFinish = DateTime.now();
     _selectedTimeFinish = TimeOfDay.now();
-    _nameCtrl.clear();
-    _descCtrl.clear();
-    _maxPCtrl.clear();
+    _titolo.clear();
+    _descrizione.clear();
+    _partecipanti.clear();
     _isRegioneScelta = false;
     _isProvinciaScelta = false;
     _currentRegione = "";

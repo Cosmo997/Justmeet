@@ -19,7 +19,7 @@ class HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
   return Scaffold(
     body: FutureBuilder(
-      future: ControllerJM.loadEvent(),
+      future: ControllerJM.loadEvents(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
