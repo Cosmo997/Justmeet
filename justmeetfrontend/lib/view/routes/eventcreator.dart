@@ -309,7 +309,7 @@ class EventCreator extends StatefulWidget
        print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+ "Giovanni" +"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
       _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,"Giovanni",_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
       print("Evento creato");
-      print(_currentEvent.toString());
+      //print(_currentEvent.toString());
       Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
       esito.then((bool value) => _showDialog(_currentEvent,value));
      
@@ -326,10 +326,14 @@ class EventCreator extends StatefulWidget
                 actions: <Widget>[
                   new FlatButton(
                       child: new Text("Torna alla home"),
-                      onPressed: () {setState(() {
+                      onPressed: () {
+                        _isProvinciaScelta = false;
+                        _isRegioneScelta = false;
+                        setState(() {
                         _fineCreazione();
                                                 
-                                              });},
+                                              })
+                                              ;},
                                                       ),
                                                     ],
                                     );
@@ -407,8 +411,8 @@ class EventCreator extends StatefulWidget
     _titolo.clear();
     _descrizione.clear();
     _partecipanti.clear();
-    _isRegioneScelta = false;
-    _isProvinciaScelta = false;
+    //_isRegioneScelta = false;
+    //_isProvinciaScelta = false;
     _currentRegione = "";
     _currentProvincia = "";
     _currentComune  = "";
