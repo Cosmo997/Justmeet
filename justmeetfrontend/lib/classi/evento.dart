@@ -2,61 +2,59 @@ class Evento {
   
       String id;
       String titolo;
-      String desc;
+      String descrizione;
       int partecipanti; 
-      String idTopic;    
-      String nomeComune;
-      String idCreatore;
+      String idTopic;   
+      String idCreatore; 
+      String idComune;
+      bool isApproved;
       DateTime inizioEvento;
       DateTime fineEvento;
-      bool isApproved;
+      
 
       
-    Evento(String id, String titolo, String desc, int partecipanti, String idTopic, String nomeComune,String idCreatore, String inizioEvent ,String fineEvent, bool isApproved)
+    Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore, String idComune, bool isApproved, String inizioEvento ,String fineEvento)
     {
-      this.id = id;
       this.titolo = titolo;
-      this.desc = desc;
+      this.descrizione = descrizione;
       this.partecipanti = partecipanti;
       this.idTopic = idTopic;
-      this.nomeComune = nomeComune;
       this.idCreatore = idCreatore;
-      this.inizioEvento = DateTime.parse(inizioEvent);
-      this.fineEvento = DateTime.parse(fineEvent);
+      this.idComune = idComune;
       this.isApproved = isApproved;
+      this.inizioEvento = DateTime.parse(inizioEvento);
+      this.fineEvento = DateTime.parse(fineEvento);
     }
 
   Map<String, dynamic> toMap() 
   {
     var map = new Map<String, dynamic>();
-    map["id"] = this.id;
     map["titolo"] = this.titolo;
-    map["desc"] = this.desc;
+    map["descrizione"] = this.descrizione;
     map["partecipanti"] = this.partecipanti;
-    map["topic"] = this.idTopic;
-    map["idComune"] = this.nomeComune;
+    map["idTopic"] = this.idTopic;
     map["idCreatore"] = this.idCreatore;
-    map["inizioEvento"] = this.inizioEvento.toIso8601String();
-    map["fineEvento"] = this.fineEvento.toIso8601String();
+    map["idComune"] = this.idComune;
     map["isApproved"] = this.isApproved;
-    
+    map["inizioEvento"] = this.inizioEvento.toIso8601String();
+    map["fineEvento"] = this.fineEvento.toIso8601String();  
     return map;
   }
+
 
 Evento.fromjson(Map<String, dynamic> json)
         :
           id = json['id'],
           titolo = json['titolo'],
-          desc = json['desc'],
+          descrizione = json['descrizione'],
           partecipanti = json['partecipanti'],
           idTopic = json['idTopic'],
-          nomeComune = json['nomeComune'],
-          idCreatore = json['user'],
+          idCreatore = json['idCreatore'],
+          idComune = json['idComune'],
+          isApproved = json['isApproved'],
           inizioEvento = DateTime.parse(json['inizioEvento']),
-          fineEvento = DateTime.parse(json['fineEvento']),
-          isApproved = json['isApproved'];
-          
-          
+          fineEvento = DateTime.parse(json['fineEvento']);
+            
   
 	String getId() {
 		return this.id;
@@ -75,11 +73,11 @@ Evento.fromjson(Map<String, dynamic> json)
 	}
 
 	String getDesc() {
-		return this.desc;
+		return this.descrizione;
 	}
 
 	void setDesc(String desc) {
-		this.desc = desc;
+		this.descrizione = desc;
 	}
 
 	int getMaxPartecipanti() {
@@ -95,10 +93,10 @@ Evento.fromjson(Map<String, dynamic> json)
     String infoEvento;
     infoEvento = "ID: "+ id +"\n"+
                   "Titolo: "+ titolo + "\n"+
-                  "Descrizione: "+ desc + "\n"+
+                  "Descrizione: "+ descrizione + "\n"+
                   "Partecipanti: "+ partecipanti.toString() + "\n"+
                   "Topic: "+ idTopic + "\n"+
-                  "Comune: "+ nomeComune + "\n"+
+                  "Comune: "+ idComune + "\n"+
                   "Creatore: "+ idCreatore + "\n"+
                   "Inizio:"+ inizioEvento.toIso8601String() + "\n"+
                   "Fine: "+ fineEvento.toIso8601String() + "\n"+

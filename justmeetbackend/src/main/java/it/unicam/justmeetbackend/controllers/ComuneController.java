@@ -30,8 +30,8 @@ public class ComuneController {
     }
 
     @RequestMapping(value = "/comune/provincia/{provincia}", method = RequestMethod.GET)
-    public List<Comune> getComuneByProvincia(@PathVariable String provincia){
-        return repository.findBySiglaProvincia(provincia);
+    public List<Comune> getComuneBySiglaProvincia(@PathVariable String siglaProvincia){
+        return repository.findBySiglaProvincia(siglaProvincia);
     }
 
 }

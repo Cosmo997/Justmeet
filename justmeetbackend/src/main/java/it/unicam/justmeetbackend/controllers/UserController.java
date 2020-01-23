@@ -46,6 +46,7 @@ public class UserController {
 
   @RequestMapping(value = "/user", method = RequestMethod.POST)
   public void createUser(@Valid @RequestBody User user) {
+    user.setIsMod(false);
     repository.save(user);
   }
   
@@ -53,6 +54,13 @@ public class UserController {
   public void deleteUserById(@PathVariable String id) {
     repository.deleteById(id);
   }
-    
-    
+  
+  @RequestMapping(value= "/user/{id}", method = RequestMethod.PUT)
+  public void updateUser(@RequestBody User user, @PathVariable String id) {
+    user.setId(id);
+    repository.save(user);
+  }
+
+
+
 }

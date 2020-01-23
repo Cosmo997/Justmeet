@@ -1,16 +1,26 @@
-//import 'dart:convert';
-//import 'dart:js_util';
+
 
 class Topic{
 
    String argomento;
-   String id;
+   int _id;
+
+	
+
   
-  Topic(this. id, this.argomento);
+  Topic(this._id, this.argomento);
 
   Topic.fromjson(Map<String, dynamic> json)
   : 
-  id = json['id'],
+  _id = json['_id'],
   argomento = json['argomento'];
 
+  int getId() {
+		return this._id;
+	}
+
+	void setId(int _id) {
+		this._id = _id;
+	}
+  
 }

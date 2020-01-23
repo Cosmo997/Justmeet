@@ -16,6 +16,7 @@ public class Topic {
         this.argomento = a;
     }
 
+    
     /**
      * @return the argomento
      */

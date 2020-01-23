@@ -142,7 +142,7 @@ class EventCreator extends StatefulWidget
                             value: _currentTopic,
                             items: snapshot.data.map( (Topic data) { 
                                                 return DropdownMenuItem<String>(
-                                                  value: data.id,
+                                                  value: data.argomento,
                                                   child: Text(data.argomento),);}).toList(), 
                             onChanged: (String value) => setState(() {_currentTopic = value;}),
                              );
@@ -301,8 +301,7 @@ class EventCreator extends StatefulWidget
       // METODI ESTERNI  
                   
      void _creaEvento(){
-      bool none = false;
-      _currentEvent = new Evento("0", _nameCtrl.text, _descCtrl.text, int.parse(_maxPCtrl.text),_currentTopic, _currentComune,"id provvisorio", _selectedDateStart.toIso8601String(), _selectedDateFinish.toIso8601String(),none);
+      //_currentEvent = new Evento();
       print("Evento creato");
       print(_currentEvent.toString());
       Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
@@ -317,7 +316,7 @@ class EventCreator extends StatefulWidget
             if(esito)
             return AlertDialog(
                 title: new Text("Evento: \n"+ event.titolo+ "\nCreato correttamente"),
-                content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
+                content: new Text("Descrizione:"+event.descrizione+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
                 actions: <Widget>[
                   new FlatButton(
                       child: new Text("Torna alla home"),
@@ -331,7 +330,7 @@ class EventCreator extends StatefulWidget
                                     else
                                     return AlertDialog(
                                         title: new Text("Evento: \n"+ event.titolo+ "\nNon Creato"),
-                                        content: new Text("Descrizione:"+event.desc+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
+                                        content: new Text("Descrizione:"+event.descrizione+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
                                         actions: <Widget>[
                                           new FlatButton(
                                             child: Text("Back"),

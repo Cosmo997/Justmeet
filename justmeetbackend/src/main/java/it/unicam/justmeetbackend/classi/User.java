@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 public class User
     {
         @Id
-        private String id;
+        private String _id;
         
         private String nome;
         private String cognome;
@@ -19,14 +19,14 @@ public class User
 
         public User(){}
 
-        public User(String nome, String cognome, String email, String password, boolean isMod)
+        public User(String nome, String cognome, String email, String password)
         {
             this.nome = nome;
             this.cognome = cognome;
             this.email = email;
             this.password = password;
-            this.isMod = isMod;
         }
+
 
     public String getNome() {
         return nome;
@@ -64,7 +64,7 @@ public class User
         return isMod;
     }
 
-    public void setIsLogged(Boolean isMod) {
+    public void setIsMod(Boolean isMod) {
         this.isMod = isMod;
     }
 
@@ -77,11 +77,11 @@ public class User
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     }

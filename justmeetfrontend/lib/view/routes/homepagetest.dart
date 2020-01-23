@@ -60,7 +60,7 @@ class HomePageTest extends StatefulWidget {
                               children: <Widget>[
                                 ListTile(
                                   title: Text(evento.titolo),
-                                  subtitle: Text(evento.desc),
+                                  subtitle: Text(evento.descrizione),
                                   trailing: Icon(Icons.favorite_border), onTap: () => {}
                                   //Se loggato, salva l'evento tra i preferiti.
                                 ),

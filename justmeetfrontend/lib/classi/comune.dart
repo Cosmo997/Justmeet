@@ -1,9 +1,9 @@
 class Comune {
   String nome;
-  String provincia;
-  Comune(this.nome, this.provincia);
+  String siglaProvincia;
+  Comune(this.nome, this.siglaProvincia);
   Comune.fromjson(Map<String, dynamic> json)
   :
     this.nome = json['nome'],
-    this.provincia = json['provincia'];
+    this.siglaProvincia = json['siglaProvincia'];
 }

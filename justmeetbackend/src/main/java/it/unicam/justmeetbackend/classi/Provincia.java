@@ -5,7 +5,6 @@ package it.unicam.justmeetbackend.classi;
  */
 public class Provincia {
 
-    
     String nome;
     String sigla;
     String regione;

@@ -5,9 +5,9 @@ public class Comune {
     String nome;
     String siglaProvincia;
 
-    public Comune(String nome, String provincia) {
+    public Comune(String nome, String siglaProvincia) {
         this.nome = nome;
-        this.siglaProvincia = provincia;
+        this.siglaProvincia = siglaProvincia;
     }
 
     public Comune() {}
@@ -29,7 +29,7 @@ public class Comune {
     /**
      * @return the provincia
      */
-    public String getProvincia() {
+    public String getSiglaProvincia() {
         return siglaProvincia;
     }
 

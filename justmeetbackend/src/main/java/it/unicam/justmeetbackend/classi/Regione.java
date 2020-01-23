@@ -9,13 +9,7 @@ public class Regione {
     String nome;
 
     public Regione(){}
-
-    /**
-     * @param nome
-     */
-    public Regione(String nome) {
-        this.nome = nome;
-    }
+    public Regione(String nome) {this.nome = nome;}
 
     /**
      * @return the nome
