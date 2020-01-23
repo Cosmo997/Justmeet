@@ -13,7 +13,7 @@ class Evento {
       
 
       
-    Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore, String idComune, bool isApproved, String inizioEvento ,String fineEvento)
+    Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore, String idComune, String inizioEvento ,String fineEvento)
     {
       this.titolo = titolo;
       this.descrizione = descrizione;
@@ -21,7 +21,6 @@ class Evento {
       this.idTopic = idTopic;
       this.idCreatore = idCreatore;
       this.idComune = idComune;
-      this.isApproved = isApproved;
       this.inizioEvento = DateTime.parse(inizioEvento);
       this.fineEvento = DateTime.parse(fineEvento);
     }
@@ -35,7 +34,6 @@ class Evento {
     map["idTopic"] = this.idTopic;
     map["idCreatore"] = this.idCreatore;
     map["idComune"] = this.idComune;
-    map["isApproved"] = this.isApproved;
     map["inizioEvento"] = this.inizioEvento.toIso8601String();
     map["fineEvento"] = this.fineEvento.toIso8601String();  
     return map;

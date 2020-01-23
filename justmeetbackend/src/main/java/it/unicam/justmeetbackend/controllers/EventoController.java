@@ -35,6 +35,7 @@ public class EventoController {
      */
     @RequestMapping(method = RequestMethod.POST, value="/evento")
     public void postEvent(@RequestBody Evento e) {
+        e.setApproved(false);
         repository.save(e);
     }
 

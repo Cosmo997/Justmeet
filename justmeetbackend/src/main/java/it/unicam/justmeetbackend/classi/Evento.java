@@ -33,14 +33,13 @@ public class Evento {
      * @param fineEvento
      */
     public Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore,
-            String idComune, boolean isApproved, String inizioEvento, String fineEvento) {
+            String idComune, String inizioEvento, String fineEvento) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.partecipanti = partecipanti;
         this.idTopic = idTopic;
         this.idCreatore = idCreatore;
         this.idComune = idComune;
-        this.isApproved = isApproved;
         this.inizioEvento = new DateTime(inizioEvento);
         this.fineEvento = new DateTime(fineEvento);
     }
