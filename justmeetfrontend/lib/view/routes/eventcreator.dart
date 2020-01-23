@@ -37,7 +37,7 @@ class EventCreator extends StatefulWidget
       String _currentProvincia;
       String _currentComune;
       String _currentTopic;
-      
+      String _currentSiglaProvincia;
 
 
    @override
@@ -192,11 +192,12 @@ class EventCreator extends StatefulWidget
                            return DropdownButton(
                             items:snapshot.data.map( (Provincia data) { 
                                                 return DropdownMenuItem<String>(
-                                                  value: data.nome,
+                                                  value: data.sigla,
                                                   child: Text(data.nome),);}).toList(), 
                             onChanged: (String value) => setState(() {
+                              _currentProvincia = value;
                               print(_currentProvincia);
-                              _currentProvincia = value;_isProvinciaScelta = true;}),
+                              _isProvinciaScelta = true;}),
                             hint: Text("Seleziona provincia"),
                             value: _currentProvincia,
                             );
@@ -305,6 +306,7 @@ class EventCreator extends StatefulWidget
       // METODI ESTERNI  
                   
      void _creaEvento(){
+       print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+ "Giovanni" +"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
       _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,"Giovanni",_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
       print("Evento creato");
       print(_currentEvent.toString());

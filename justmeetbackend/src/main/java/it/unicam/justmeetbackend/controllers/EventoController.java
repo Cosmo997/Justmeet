@@ -34,9 +34,13 @@ public class EventoController {
      * @param e
      */
     @RequestMapping(method = RequestMethod.POST, value="/evento")
-    public void postEvent(@RequestBody Evento e) {
+    public boolean postEvent(@RequestBody Evento e) {
+        if(e == null)
+        return false;
+        else
         e.setApproved(false);
         repository.save(e);
+        return true;
     }
 
     /**
