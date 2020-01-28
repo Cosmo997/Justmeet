@@ -59,19 +59,62 @@ class HomePageState extends State<HomePage>{
                                   margin: EdgeInsets.all(15),
                                   child: Column(
                                     children: <Widget>[
-                                      Row(
+                                      Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          Text("Inizio Evento: " + _df.format(evento.inizioEvento)),
-                                          Text("Posti disponibili: "+ evento.partecipanti.toString())
+                                          //Inizio Evento
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.all(2),
+                                            child:Text(
+                                              "Inizio Evento: " + _df.format(evento.inizioEvento),
+                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor)),
+                                            decoration:BoxDecoration(
+                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
+                                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                              color: ThemeHandler.jmTheme().accentColor),
+                                            ),
+                                          //Fine Evento
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.all(2),
+                                            decoration:BoxDecoration(
+                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
+                                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                              color: ThemeHandler.jmTheme().accentColor),
+                                            child: Text(
+                                              "Fine Evento: " + _df.format(evento.fineEvento),
+                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
+                                              )),
+                                          //Posti Disponibili
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.all(2),
+                                            child:Text(
+                                              "Posti disponibili: "+ evento.partecipanti.toString(),
+                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
+                                              ),
+                                            decoration:BoxDecoration(
+                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
+                                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                              color: ThemeHandler.jmTheme().accentColor)
+                                              ),
+                                          //Topic
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.all(2),
+                                            decoration:BoxDecoration(
+                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
+                                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                              color: ThemeHandler.jmTheme().accentColor), 
+                                            child: Text(
+                                              "Topic: "+ evento.idTopic.toString(),
+                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
+                                                )
+                                              ),
                                         ],
                                         ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text("Fine Evento: " + _df.format(evento.fineEvento)),
-                                          Text("Topic: "+ evento.idTopic.toString()),
-                                      ],)
+                                      
                               //          ListTile(
                               //           title:Text(_df.format(evento.inizioEvento)),
                               //           subtitle: Text(_df.format(evento.fineEvento)),
