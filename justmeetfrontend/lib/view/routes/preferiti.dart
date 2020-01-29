@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 
-
+  //TODO vuole USER in ingresso
 
 class Preferiti extends StatefulWidget {
   @override

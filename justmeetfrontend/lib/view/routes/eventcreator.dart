@@ -10,8 +10,7 @@ import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/widget/navigationbar.dart';
-
+  //TODO vuole USER in ingresso
 /// Responsabilità: Creare un Evento.
 class EventCreator extends StatefulWidget 
   {
@@ -315,7 +314,6 @@ class EventCreator extends StatefulWidget
           ],
         ),
                   ),
-        bottomNavigationBar: NavigationBar(currentIndex: 1),
                   );             
     }
 

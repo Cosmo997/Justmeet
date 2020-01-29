@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justmeet/app.dart';
 import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
@@ -11,7 +12,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => App());
       case '/creaevento':
         return MaterialPageRoute(builder: (_) => EventCreator());
         // // Validation of correct data type

@@ -1,9 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/widget/navigationbar.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
            child: Column(
              children: <Widget>[
                Center(
-                 child: Image.asset('assets/iconaverticale.png')
+                 child: null //Image.asset('assets/iconaverticale.png')
                ),
                Container(
                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -101,11 +101,19 @@ class _LoginPageState extends State<LoginPage> {
                   else{
                    bool result = await AuthProvider().singInWithEmail(_email.text, _password.text);
                    if(!result){
-                     print("Login failed");
+                     print("Auth fail");
                    }
+                  Navigator.of(context).pushNamed('/');
                   }
                 },
-              )
+              ),
+              RaisedButton(
+                child: Text("Logout"),
+                onPressed: () {
+                  setState(() {
+                    AuthProvider().logOut();
+                  });
+                },)
            ],),
          ),
        ),

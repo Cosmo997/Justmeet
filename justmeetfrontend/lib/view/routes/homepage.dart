@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/widget/navigationbar.dart';
 
 
 
@@ -152,7 +151,6 @@ class HomePageState extends State<HomePage>{
 
         },
     ),
-    bottomNavigationBar: NavigationBar(currentIndex: 0),
     );             
       }
 

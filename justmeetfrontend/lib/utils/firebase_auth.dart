@@ -5,7 +5,7 @@ class AuthProvider {
 
   Future<bool> singInWithEmail(String email, String password) async {
     try {
-        AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+        AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
         FirebaseUser user = result.user;
         if(user == null)
         return false;
@@ -13,5 +13,8 @@ class AuthProvider {
     } catch (e) {
       return false;
     }
+  }
+  void logOut(){
+    _auth.signOut();
   }
 }
