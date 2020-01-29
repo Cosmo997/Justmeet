@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/navigationbar.dart';
 
 class AreaRiservata extends StatefulWidget{
   
@@ -101,7 +102,8 @@ class AreaRiservata extends StatefulWidget{
             ]
             
         ),
-      )
+      ),
+      bottomNavigationBar: NavigationBar(currentIndex: 3),
     );
   }
 }

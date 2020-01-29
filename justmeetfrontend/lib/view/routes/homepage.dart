@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/navigationbar.dart';
 
 
 
@@ -46,22 +47,25 @@ class HomePageState extends State<HomePage>{
                           child: Container(
                             child: Column(
                               children: <Widget>[
-                                ListTile(
-                                  title: Text(evento.titolo),
-                                  subtitle: Text(evento.descrizione),
-                                  trailing: Icon(Icons.favorite_border), onTap: () => {}
-                                  //Se loggato, salva l'evento tra i preferiti.
-                                ),
+                                
                               Card(
                                 elevation: 10,
                                 
                                 child: Container(
                                   margin: EdgeInsets.all(15),
                                   child: Column(
+                                    
                                     children: <Widget>[
+                                      ListTile(
+                                  title: Text(evento.titolo),
+                                  subtitle: Text(evento.descrizione),
+                                  trailing: Icon(Icons.favorite_border), onTap: () => {}
+                                  //Se loggato, salva l'evento tra i preferiti.
+                                ),
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
+
                                           //Inizio Evento
                                           Container(
                                             alignment: Alignment.center,
@@ -147,7 +151,8 @@ class HomePageState extends State<HomePage>{
         }
 
         },
-    )
+    ),
+    bottomNavigationBar: NavigationBar(currentIndex: 0),
     );             
       }
 

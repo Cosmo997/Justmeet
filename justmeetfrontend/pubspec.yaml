@@ -27,6 +27,8 @@ dependencies:
   http:
   intl: ^0.16.0
   font_awesome_flutter: ^8.5.0
+  firebase_auth:
+  google_sign_in:
   
 
 dev_dependencies:

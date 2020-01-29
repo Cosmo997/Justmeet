@@ -10,6 +10,7 @@ import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/navigationbar.dart';
 
 /// Responsabilità: Creare un Evento.
 class EventCreator extends StatefulWidget 
@@ -34,10 +35,10 @@ class EventCreator extends StatefulWidget
       TextEditingController _descrizione = TextEditingController();
       TextEditingController _partecipanti = TextEditingController();
       String _currentRegione;
-      String _currentProvincia;
+      String _currentSiglaProvincia;
       String _currentComune;
       String _currentTopic;
-      String _currentSiglaProvincia;
+
 
 
    @override
@@ -59,12 +60,10 @@ class EventCreator extends StatefulWidget
               child: Card(
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 color: ThemeHandler.jmTheme().secondaryHeaderColor,
-                
                 elevation: 10,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                child: Column( 
+                child: Column(
                   children: <Widget>[
-                    
                   // Container Nome Evento
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -195,11 +194,11 @@ class EventCreator extends StatefulWidget
                                                   value: data.sigla,
                                                   child: Text(data.nome),);}).toList(), 
                             onChanged: (String value) => setState(() {
-                              _currentProvincia = value;
-                              print(_currentProvincia);
+                              _currentSiglaProvincia = value;
+                              print(_currentSiglaProvincia);
                               _isProvinciaScelta = true;}),
                             hint: Text("Seleziona provincia"),
-                            value: _currentProvincia,
+                            value: _currentSiglaProvincia,
                             );
                           }
                          },)
@@ -210,7 +209,7 @@ class EventCreator extends StatefulWidget
                       if(_isProvinciaScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadComuneBySiglaProvincia(_currentProvincia),
+                        future: ControllerJM.loadComuneBySiglaProvincia(_currentSiglaProvincia),
                         builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -290,7 +289,23 @@ class EventCreator extends StatefulWidget
                             padding: EdgeInsets.all(15),
                             child: Text("Crea Evento"),
                             textTheme: ButtonTextTheme.primary,
-                            onPressed: () => _creaEvento(),
+                            onPressed: () {
+                              if(_titolo.text.isEmpty || _descrizione.text.isEmpty || _partecipanti.text.isEmpty || _currentComune == null)
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Attenzione"),
+                                    content: Text("Compilare tutti i campi prima di creare un nuovo evento"),
+                                   );
+                            }
+                            );
+                            }
+                            else {
+                              _creaEvento();
+                            }
+                               },
                             ),
                   ),
                     ]     
@@ -300,6 +315,7 @@ class EventCreator extends StatefulWidget
           ],
         ),
                   ),
+        bottomNavigationBar: NavigationBar(currentIndex: 1),
                   );             
     }
 
@@ -332,20 +348,20 @@ class EventCreator extends StatefulWidget
                         setState(() {
                         _fineCreazione();
                                                 
-                                              })
-                                              ;},
-                                                      ),
-                                                    ],
+                                    });
+                                    },
+                                  ),
+                                ],
                                     );
-                                    else
-                                    return AlertDialog(
-                                        title: new Text("Evento: \n"+ event.titolo+ "\nNon Creato"),
-                                        content: new Text("Descrizione:"+event.descrizione+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
-                                        actions: <Widget>[
-                                          new FlatButton(
-                                            child: Text("Back"),
-                                            onPressed: ()=>{},
-                                          )
+            else
+            return AlertDialog(
+              title: new Text("Evento: \n"+ event.titolo+ "\nNon Creato"),
+              content: new Text("Descrizione:"+event.descrizione+" \n Numero di partecipanti: "+ event.partecipanti.toString()),
+              actions: <Widget>[
+                  new FlatButton(
+                      child: Text("Back"),
+                      onPressed: ()=>{},
+                    )
                                         ],);
                                                 },
                                               );
@@ -408,14 +424,13 @@ class EventCreator extends StatefulWidget
      _selectedTimeStart = TimeOfDay.now();
      _selectedDateFinish = DateTime.now();
     _selectedTimeFinish = TimeOfDay.now();
-    _titolo.clear();
-    _descrizione.clear();
-    _partecipanti.clear();
-    //_isRegioneScelta = false;
-    //_isProvinciaScelta = false;
-    _currentRegione = "";
-    _currentProvincia = "";
-    _currentComune  = "";
+    _currentRegione = null;
+    _currentComune = null;
+    _currentSiglaProvincia = null;
+    _currentTopic = null;
+    _titolo = TextEditingController(text: "");
+    _descrizione = TextEditingController(text: "");
+    _partecipanti = TextEditingController(text: "");
  } 
                   
 }

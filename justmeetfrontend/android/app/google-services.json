@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1073420427971",
+    "firebase_url": "https://justmeet-c8d6f.firebaseio.com",
+    "project_id": "justmeet-c8d6f",
+    "storage_bucket": "justmeet-c8d6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073420427971:android:a2eec94e5b674463e97876",
+        "android_client_info": {
+          "package_name": "it.unicam.cs.justmeet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073420427971-l8van2de88lcckmj3bs498443ac4rqi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.unicam.cs.justmeet",
+            "certificate_hash": "3bfb1af6ac0e21bd12690985e0ed1f6fd9b9bbea"
+          }
+        },
+        {
+          "client_id": "1073420427971-uckf76phkp10g0o37ti1aud7qn23u6im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU5u1S3OkjCrfEBBCWTV3E6CoxQ_2mVQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073420427971-uckf76phkp10g0o37ti1aud7qn23u6im.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,7 +10,7 @@ import 'package:justmeet/classi/topic.dart';
 
 
 
-/// Responsabilità: Comunicare con il BackEnd.
+/// Responsabilità: "Comunicare con il BackEnd.""
 
 class ControllerJM 
 {
