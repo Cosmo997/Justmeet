@@ -24,9 +24,72 @@ public class EventoController {
         return repository.findAll();
     }
 
-    @RequestMapping(value="/evento/{titolo}", method=RequestMethod.GET)
+    /**
+     * Get eventi by titolo
+     */
+    @RequestMapping(value="/eventi/{titolo}", method=RequestMethod.GET)
     public List<Evento> getEventsByTitolo(@PathVariable String titolo) {
         return repository.findByTitolo(titolo);
+    }
+
+    /**
+     * Get eventi che contengono $titolo nel Titolo
+     * @param titolo
+     * @return
+     */
+    @RequestMapping(value="/eventi/like/{titolo}", method=RequestMethod.GET)
+    public List<Evento> getEventsByTitoloLike(@PathVariable String titolo) {
+        return repository.findByTitoloLike(titolo);
+    }
+
+    /**
+     * Get eventi by Nome del Comune
+     * @param nome
+     * @return
+     */
+    @GetMapping(value="/eventi/comune/{idComune}")
+    public List<Evento> getEventByComune(@PathVariable String idComune) {
+        return repository.findByIdComune(idComune);
+    } 
+    
+    /**
+     * Get eventi where isApproved = true/false
+     * @param isApproved
+     * @return
+     */
+    @RequestMapping(value = "/eventi/approvati/{isApproved}")
+    public List<Evento> getEventiApprovati(@PathVariable Boolean isApproved) {
+        return repository.findByIsApproved(isApproved);
+    }
+    
+    /**
+     * Get eventi by Numero Partecipanti
+     * @param partecipanti
+     * @return
+     */
+    @RequestMapping(value = "/eventi/partecipanti/{partecipanti}")
+    public List<Evento> getEventiByPartecipanti(@PathVariable int partecipanti) {
+        return repository.findByPartecipanti(partecipanti);
+    }
+    
+    /**
+     * Get eventi where partecipanti > $partecipanti
+     * @param partecipanti
+     * @return
+     */
+    @RequestMapping(value = "/eventi/sopra/{partecipanti}")
+    public List<Evento> getEventiByPartecipantiGreater(@PathVariable int partecipanti) {
+        return repository.findByPartecipantiGreaterThan(partecipanti);
+    }
+
+    /**
+     * get eventi where partecipanti < $partecipanti
+     * @param partecipanti
+     * @return
+     */
+    @RequestMapping(value = "/eventi/sotto/{partecipanti}")
+    public List<Evento> getEventiByPartecipantiLess(@PathVariable int partecipanti) {
+        return repository.findByPartecipantiLessThan(partecipanti);
     }
     
     /**
@@ -62,15 +125,5 @@ public class EventoController {
     public void deleteEvent(@PathVariable String id) {
             repository.deleteById(id);
     }
-
-    @GetMapping(value="/evento/comune/{comune}")
-    public List<Evento> getEventByComune(@PathVariable String comune) {
-        return repository.findByIdComune(comune);
-    }
-    // @GetMapping(value = "/eventi/preferiti/{idUtente}")
-    // public List<Evento> getEventiByUser(@PathVariable String idUser) {
-    //     return eventService.
-    // }
-
 
 }
