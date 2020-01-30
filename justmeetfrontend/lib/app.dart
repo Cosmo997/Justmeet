@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/utils/route_generator.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
 import 'package:justmeet/view/routes/homepage.dart';
 import 'package:justmeet/view/routes/homepageanonima.dart';
+import 'package:justmeet/view/routes/preferiti.dart';
 
 
 
@@ -24,7 +24,7 @@ class AppState extends State<App>{
         final pageOption = [
           HomePage(),
           EventCreator(),
-          LoginPage(),
+          Preferiti(),
           AreaRiservata()];
 
         var pageIcons = [
@@ -83,14 +83,7 @@ class AppState extends State<App>{
             animationDuration: Duration(milliseconds: 600),
             index: currentIndex,
             onTap: (index){setState(() {
-              if(currentUser == null && index == 1)
-              {
-                print(currentUser);
-                print("nooooo");
-              }
-              else{
               currentIndex = index;
-              }
             });})
       ),
           );

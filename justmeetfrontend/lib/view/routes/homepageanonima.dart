@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:justmeet/view/authentication/login.dart';
 
 class HomepageAnonima extends StatefulWidget{
   @override
@@ -151,7 +153,12 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
     floatingActionButton: FloatingActionButton(
       backgroundColor: ThemeHandler.jmTheme().accentColor,
       child: Icon(Icons.account_box, color: ThemeHandler.jmTheme().primaryColor),
-      onPressed: () => Navigator.pushNamed(context, "/login"),
+      onPressed: () => {
+        showModalBottomSheet(context: context, builder: (BuildContext context) { return LoginPage(); },),
+        Fluttertoast.showToast(msg: "ciao"),
+        //Navigator.pushNamed(context, "/login"),
+
+      }
     ));          
 
   }

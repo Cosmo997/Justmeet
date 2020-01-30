@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
 
 class AreaRiservata extends StatefulWidget{
@@ -97,6 +98,22 @@ class AreaRiservata extends StatefulWidget{
                 ],
             
             ),
+            ),
+            Container(decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.all(Radius.circular(20))
+                 ),
+                 margin: EdgeInsets.all(10),
+              child: Card(
+                
+                child: IconButton(
+                  iconSize: 40,
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed:() => AuthProvider().logOut(),
+                  tooltip: "LogOut",
+                  color: ThemeHandler.jmTheme().accentColor,
+                ),
+              ),
             )
             ]
             
