@@ -1,11 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:justmeet/utils/route_generator.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
 import 'package:justmeet/view/routes/homepage.dart';
+import 'package:justmeet/view/routes/homepageanonima.dart';
 
 
 
@@ -17,9 +19,8 @@ class App extends StatefulWidget{
 }
 
 class AppState extends State<App>{
-  
+        static FirebaseUser currentUser;
         int currentIndex = 0;
-        FirebaseUser currentUser;
         final pageOption = [
           HomePage(),
           EventCreator(),
@@ -35,19 +36,30 @@ class AppState extends State<App>{
 
     @override
     initState() { 
-      checkUser();
       super.initState();
     }
     
       @override
       Widget build(BuildContext context) {
-        return MaterialApp(
+         return StreamBuilder(
+          stream: FirebaseAuth.instance.onAuthStateChanged ,
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            print(snapshot);
+            if(!snapshot.hasData || snapshot.data == null){
+            return MaterialApp(
+              title: "JustMeet",
+              theme: ThemeHandler.jmTheme(),
+              debugShowCheckedModeBanner: false,
+              onGenerateRoute: RouteGenerator.generateRoute,
+              home: HomepageAnonima()
+            );
+            }
+            else{
+            return MaterialApp(
           title: "JustMeet",
           theme: ThemeHandler.jmTheme(),
           debugShowCheckedModeBanner: false,
-          //onGenerateRoute: RouteGenerator.generateRoute,
            home: Scaffold(
-
      //App bar generale
            appBar:AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
@@ -71,9 +83,9 @@ class AppState extends State<App>{
             animationDuration: Duration(milliseconds: 600),
             index: currentIndex,
             onTap: (index){setState(() {
-              
-              if(index == 1 && currentUser == null)
+              if(currentUser == null && index == 1)
               {
+                print(currentUser);
                 print("nooooo");
               }
               else{
@@ -82,13 +94,15 @@ class AppState extends State<App>{
             });})
       ),
           );
+          }
+          },
+        );
         
 }
-Future<void> checkUser() async {
-currentUser = await FirebaseAuth.instance.currentUser();
+
 }
 
 
-}
+
 
 

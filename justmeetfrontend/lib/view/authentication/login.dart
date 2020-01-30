@@ -1,5 +1,4 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:justmeet/utils/firebase_auth.dart';
@@ -18,8 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _email = TextEditingController(text: "");
-    _password = TextEditingController(text: "");
+    _email = TextEditingController(text: "test@test.it");
+    _password = TextEditingController(text: "testtest");
   }
 
   @override
@@ -103,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                    if(!result){
                      print("Auth fail");
                    }
-                  Navigator.of(context).pushNamed('/');
+                   Navigator.pop(context);
                   }
                 },
               ),

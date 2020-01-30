@@ -3,15 +3,14 @@ import 'package:justmeet/app.dart';
 import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
-import 'package:justmeet/view/routes/homepage.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
-    //final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
+      print(settings.arguments);
         return MaterialPageRoute(builder: (_) => App());
       case '/creaevento':
         return MaterialPageRoute(builder: (_) => EventCreator());
