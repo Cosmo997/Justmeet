@@ -19,7 +19,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
     appBar:AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
                elevation: 10,
-               title: Image.asset('assets/logo.png', scale: 2.5),
+               title: Image.asset('assets/images/logo.png', scale: 2.5),
                centerTitle: true,
                ),
     body: FutureBuilder(
@@ -158,9 +158,14 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
     floatingActionButton: FloatingActionButton(
       backgroundColor: ThemeHandler.jmTheme().accentColor,
       child: Icon(Icons.account_box, color: ThemeHandler.jmTheme().primaryColor),
-      onPressed: () => {
-        BottomSheet(builder: (BuildContext context) { return BS(); }, onClosing: () {  },),
-                //showModalBottomSheet(context: context, builder: (BuildContext context) { return LoginPage(); },),
+      onPressed: () => { 
+       // BottomSheet(builder: (BuildContext context) { return BS(); }, onClosing: () {  },),
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) { return FractionallySizedBox(
+                    heightFactor: 0.8,
+                    child: LoginPage()); },
+                  isScrollControlled: true),
                 //Fluttertoast.showToast(msg: "ciao"),
                 //Navigator.pushNamed(context, "/login"),
         
@@ -187,7 +192,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
           builder: (BuildContext context) => AnimatedContainer(
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                borderRadius: BorderRadius.circular(30)),
             child: AnimatedCrossFade(
                 firstChild: Container(
                   constraints: BoxConstraints.expand(

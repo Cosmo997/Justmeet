@@ -5,12 +5,11 @@ class User
   String nome;
   String cognome;
   String email;
-  String password;
   bool isMod;
   List<String> preferiti;
 
 
-  User(this.nome,this.cognome, this.email, this.password);
+  User(this._id,this.nome,this.cognome, this.email);
   
   User.fromJson(Map<String, dynamic> json)
     :
@@ -18,7 +17,7 @@ class User
     nome = json['nome'],
     cognome = json['cognome'],
     email = json['email'],
-    password = json['password'];
+    isMod = json['isMod'];
   
   Map<String, dynamic> toMap() 
   {
@@ -27,7 +26,6 @@ class User
     map["nome"] = this.nome;
     map["cognome"] = this.cognome;
     map["email"] = this.email;
-    map["password"] = this.password;
     map["isMod"] = this.isMod; 
     return map;
   }

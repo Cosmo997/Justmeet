@@ -64,7 +64,7 @@ class AppState extends State<App>{
            appBar:AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
                elevation: 10,
-               title: Image.asset('assets/logo.png', scale: 2.5),
+               title: Image.asset('assets/images/logo.png', scale: 2.5),
                centerTitle: true,
                ),
     
