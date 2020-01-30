@@ -95,6 +95,23 @@ class AreaRiservata extends StatefulWidget{
                     )
                   ],
                 ),
+                Divider(height: 10),
+                  ListTile(
+                    title: Text("I miei Eventi"),
+                    leading: Icon(Icons.person_outline),
+                    //Apre pagina degli eventi creati dall'utente.
+                    onTap: () => {},
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  Divider(height: 10),
+                  ListTile(
+                    title: Text("Eventi Preferiti"),
+                    leading: Icon(Icons.favorite),
+                    //Apre pagina con gli eventi preferiti dell'utente.
+                    onTap: () => {},
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  Divider(height: 10,)
                 ],
             
             ),
@@ -105,7 +122,6 @@ class AreaRiservata extends StatefulWidget{
                  ),
                  margin: EdgeInsets.all(10),
               child: Card(
-                
                 child: IconButton(
                   iconSize: 40,
                   icon: Icon(Icons.exit_to_app),
@@ -116,7 +132,6 @@ class AreaRiservata extends StatefulWidget{
               ),
             )
             ]
-            
         ),
       ),
     );
