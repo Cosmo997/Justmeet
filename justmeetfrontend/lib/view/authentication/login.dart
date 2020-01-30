@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -104,6 +105,17 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                 ),
+                
+                SignInButton(Buttons.Google, onPressed:() async{ 
+                  bool result = await AuthProvider().loginWithGoogle();
+                  if(result == false)
+                  {
+                    print("Login con google fallito");
+                  }
+                   Navigator.pop(context);
+                  },
+                  
+                  )
              ],),
            ),
     );

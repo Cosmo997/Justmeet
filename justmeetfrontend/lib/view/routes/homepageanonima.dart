@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:justmeet/view/authentication/login.dart';
 
 class HomepageAnonima extends StatefulWidget{
@@ -17,6 +16,12 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    appBar:AppBar(
+               backgroundColor: ThemeHandler.jmTheme().primaryColor,
+               elevation: 10,
+               title: Image.asset('assets/logo.png', scale: 2.5),
+               centerTitle: true,
+               ),
     body: FutureBuilder(
       future: ControllerJM.loadEvents(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
@@ -155,9 +160,6 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
       child: Icon(Icons.account_box, color: ThemeHandler.jmTheme().primaryColor),
       onPressed: () => {
         showModalBottomSheet(context: context, builder: (BuildContext context) { return LoginPage(); },),
-        Fluttertoast.showToast(msg: "ciao"),
-        //Navigator.pushNamed(context, "/login"),
-
       }
     ));          
 
