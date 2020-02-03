@@ -10,8 +10,9 @@ class ThemeHandler{
   if(isDarkThemeEnabled){
   ThemeData base = ThemeData.light();
   return base.copyWith(
+      bottomSheetTheme: BottomSheetThemeData(
+              backgroundColor: Colors.black.withOpacity(0)),
       primaryColor: Colors.grey[500],
-      
       scaffoldBackgroundColor: Colors.white,
       accentColor: Colors.orange[400],
       iconTheme: IconThemeData(
@@ -29,6 +30,8 @@ class ThemeHandler{
 {
   ThemeData base = ThemeData.dark();
   return base.copyWith(
+      bottomSheetTheme: BottomSheetThemeData(
+              backgroundColor: Colors.black.withOpacity(0)),
       primaryColor: Colors.black,
       scaffoldBackgroundColor: Colors.grey[700],
       accentColor: Colors.orange[400],

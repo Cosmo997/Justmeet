@@ -7,6 +7,7 @@ import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/classi/provincia.dart';
 import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
+import 'package:justmeet/classi/user.dart';
 
 
 
@@ -67,4 +68,13 @@ class ControllerJM
 //     List<Evento> preferiti = collection.map((json) => Evento.fromjson(json)).toList();
 //     return preferiti;
 //   }
+
+
+  static Future<bool> postUser(User newuser) async {
+    http.Response response = await http.post(urlBase + "/user", headers: {"Accept" : "application/json"}, body: json.encode(newuser.toMap()));
+    if(response.statusCode == 200)
+     return true;
+     else return false;
+
+  }
 }

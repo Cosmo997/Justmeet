@@ -36,5 +36,27 @@ class AuthProvider {
       return false;
     }
   }
-  
+  Future<FirebaseUser> singinWithGoogle() async {
+    GoogleSignIn google = new GoogleSignIn();
+    GoogleSignInAccount newuser = await google.signIn();
+    if(newuser == null)
+    return null;
+    AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      accessToken: (await newuser.authentication).accessToken,
+      idToken: (await newuser.authentication).idToken
+    ));
+    return result.user;
+  }
+bool creaUtenteFirebase(String email, String password){
+  try 
+  {
+     _auth.createUserWithEmailAndPassword(email: email, password: password);
+     return true;
+  }
+  catch (e) 
+  {
+  return false;
+  }
+}
+
 }

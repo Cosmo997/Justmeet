@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
     
 
   return BottomSheet(
-          
           enableDrag: true,
           onClosing: () {},
           builder: (BuildContext context) => 
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Image.asset('assets/images/iconaverticale.png', scale: 1.5,)
                        ),
                         Container(
-                          height: 300,
+                          height: 400,
                           child: Card(
               margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
               color: ThemeHandler.jmTheme().secondaryHeaderColor,
@@ -132,7 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                   }
                    change();
                   },
-                  
+                  ),
+                  RaisedButton(
+                    color: ThemeHandler.jmTheme().accentColor,
+                    child: Text("Iscriviti"),
+                    onPressed: () => Navigator.of(context).pushNamed("/singinselection"),
                   )
              ],),
            ),
