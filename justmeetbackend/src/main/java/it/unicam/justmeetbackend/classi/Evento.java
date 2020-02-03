@@ -1,5 +1,7 @@
 package it.unicam.justmeetbackend.classi;
 
+import java.util.ArrayList;
+
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 
@@ -17,6 +19,7 @@ public class Evento {
     private boolean isApproved;
     private DateTime inizioEvento;
     private DateTime fineEvento;
+    private ArrayList<String> iscrizioni;
 
     public Evento() {}
 
@@ -42,6 +45,7 @@ public class Evento {
         this.idComune = idComune;
         this.inizioEvento = new DateTime(inizioEvento);
         this.fineEvento = new DateTime(fineEvento);
+        this.iscrizioni = new ArrayList<String>();
     }
 
     /**
@@ -185,7 +189,20 @@ public class Evento {
         this.fineEvento = new DateTime(fineEvento);
     }
 
- 
+    public void setInizioEvento(DateTime inizioEvento) {
+        this.inizioEvento = inizioEvento;
+    }
 
-  
+    public void setFineEvento(DateTime fineEvento) {
+        this.fineEvento = fineEvento;
+    }
+
+    public ArrayList<String> getIscrizioni() {
+        return iscrizioni;
+    }
+
+    public void setIscrizioni(ArrayList<String> iscrizioni) {
+        this.iscrizioni = iscrizioni;
+    }
+
 }

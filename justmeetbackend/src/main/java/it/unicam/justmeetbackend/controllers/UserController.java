@@ -1,5 +1,6 @@
 package it.unicam.justmeetbackend.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,12 +55,22 @@ public class UserController {
   public void deleteUserById(@PathVariable String id) {
     repository.deleteById(id);
   }
-  
-  @RequestMapping(value= "/user/{id}", method = RequestMethod.PUT)
-  public void updateUser(@RequestBody User user, @PathVariable String id) {
-    user.setId(id);
-    repository.save(user);
+
+  @RequestMapping(value = "/user/prefeiti/{_id}", method = RequestMethod.GET)
+  public ArrayList<String> getPreferidiById(@PathVariable String _id) {
+  Optional<User> user = repository.findById(_id);  
+  if(user.isPresent())
+  {
+    return user.get().getPreferiti();
   }
+  else
+  return null;
+  }
+
+  
+
+  
+
 
 
 

@@ -1,7 +1,6 @@
 package it.unicam.justmeetbackend.classi;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
@@ -13,20 +12,18 @@ public class User
         private String nome;
         private String cognome;
         private String email;
-        private String password;
         private Boolean isMod;
         private ArrayList<String> preferiti;
 
         public User(){}
 
-        public User(String nome, String cognome, String email, String password)
-        {
-            this.nome = nome;
-            this.cognome = cognome;
-            this.email = email;
-            this.password = password;
-        }
+    public String get_id() {
+        return _id;
+    }
 
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getNome() {
         return nome;
@@ -52,15 +49,7 @@ public class User
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getIsLogged() {
+    public Boolean getIsMod() {
         return isMod;
     }
 
@@ -68,20 +57,25 @@ public class User
         this.isMod = isMod;
     }
 
-    public List<String> getPreferiti() {
+    public ArrayList<String> getPreferiti() {
         return preferiti;
     }
 
-    public void setPreferiti(String preferiti) {
-        this.preferiti.add(preferiti);
+    public void setPreferiti(ArrayList<String> preferiti) {
+        this.preferiti = preferiti;
     }
 
-    public String getId() {
-        return _id;
+    public void addPreferiti(String id){
+        this.preferiti.add(id);
     }
 
-    public void setId(String id) {
-        this._id = id;
+    public User(String _id, String nome, String cognome, String email, Boolean isMod, ArrayList<String> preferiti) {
+        this._id = _id;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.isMod = isMod;
+        this.preferiti = preferiti;
     }
-
+  
     }
