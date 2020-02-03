@@ -144,10 +144,12 @@ public class EventoController {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/evento")
     public boolean postEvent(@RequestBody Evento e) {
+        ArrayList<String> app = new ArrayList<>();
         if (e == null)
             return false;
         else
             e.setApproved(false);
+            e.setIscrizioni(app);
         repository.save(e);
         return true;
     }

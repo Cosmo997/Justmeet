@@ -48,6 +48,8 @@ public class UserController {
   @RequestMapping(value = "/user", method = RequestMethod.POST)
   public void createUser(@Valid @RequestBody User user) {
     user.setIsMod(false);
+    ArrayList<String> app = new ArrayList<>();
+    user.setPreferiti(app);
     repository.save(user);
   }
   
