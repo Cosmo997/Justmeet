@@ -157,17 +157,32 @@ public class EventoController {
     /**
      * Aggiornare evento byId
      * 
-     * @param e
-     * @param id
+     * @param e Evento completo nel Body
+     * @param id Id dell'evento da modificare
      */
     @RequestMapping(value = "/evento/{id}", method = RequestMethod.PUT)
     public void updateEventById(@RequestBody Evento e, @PathVariable String id) {
         repository.update(id, e);
     }
 
-    @RequestMapping(value = "evento/update", method = RequestMethod.PUT)
+    /**
+     * Aggiunge l'id dell'user alla lista Iscritti dell'evento.
+     * @param idEvento al quale l'user vuole iscriversi
+     * @param idUser che si vuole iscrivere
+     */
+    @RequestMapping(value = "evento/iscrizione/update", method = RequestMethod.PUT)
     public void updateIscrizioni(@RequestParam String idEvento, @RequestParam String idUser){
         repository.updateIscrizioni(idEvento, idUser);
+    }
+
+    /**
+     * Rimuove l'iscrizione ad un determinato evento
+     * @param idEvento dal quali rimuovere l'user
+     * @param idUser da cancellare tra gli iscritti
+     */
+    @RequestMapping(value = "evento/iscrizione/delete", method = RequestMethod.PUT)
+    public void deleteIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
+        repository.deleteIscrizione(idEvento, idUser);
     }
 
     /**
