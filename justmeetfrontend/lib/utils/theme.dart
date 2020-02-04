@@ -10,6 +10,7 @@ class ThemeHandler{
   if(isDarkThemeEnabled){
   ThemeData base = ThemeData.light();
   return base.copyWith(
+      cardColor: Colors.black.withOpacity(0),
       bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: Colors.black.withOpacity(0)),
       primaryColor: Colors.grey[500],
@@ -30,6 +31,7 @@ class ThemeHandler{
 {
   ThemeData base = ThemeData.dark();
   return base.copyWith(
+      cardColor: Colors.black.withOpacity(0),
       bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: Colors.black.withOpacity(0)),
       primaryColor: Colors.black,

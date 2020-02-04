@@ -59,6 +59,7 @@ class AppState extends State<App>{
           title: "JustMeet",
           theme: ThemeHandler.jmTheme(),
           debugShowCheckedModeBanner: false,
+          onGenerateRoute: RouteGenerator.generateRoute,
            home: Scaffold(
      //App bar generale
            appBar:AppBar(
