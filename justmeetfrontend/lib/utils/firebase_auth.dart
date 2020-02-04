@@ -25,6 +25,11 @@ static Future<String> getUId() async {
   return utente.uid;
 }
 
+static Future<String> getImage()async{
+  utente = await FirebaseAuth.instance.currentUser();
+  return utente.photoUrl;
+}
+
   Future<bool> loginWithGoogle() async {
     try {
       GoogleSignIn google = new GoogleSignIn();

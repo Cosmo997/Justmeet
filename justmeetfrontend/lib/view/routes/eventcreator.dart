@@ -45,7 +45,6 @@ class EventCreator extends StatefulWidget
     {     
        return Scaffold (
         body: SingleChildScrollView(
-        
         child: Column(
           children: <Widget>[
             Container(

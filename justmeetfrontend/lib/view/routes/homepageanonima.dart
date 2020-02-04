@@ -161,7 +161,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
-                    heightFactor: 0.8,
+                    heightFactor: 0.9,
                     child: LoginPage()); },
                   isScrollControlled: true),
                 //Fluttertoast.showToast(msg: "ciao"),

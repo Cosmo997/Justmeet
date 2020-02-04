@@ -25,7 +25,14 @@ class HomePageState extends State<HomePage>{
         {
         return Container(
           child: Center(
-                  child:CircularProgressIndicator()
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("LOADING", style: TextStyle(color: ThemeHandler.jmTheme().accentColor),),
+                      Divider(color: ThemeHandler.jmTheme().accentColor, height: 30,indent: 50 ,endIndent: 50,),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
                     )
         );
         }
@@ -46,18 +53,15 @@ class HomePageState extends State<HomePage>{
                           child: Container(
                             child: Column(
                               children: <Widget>[
-                                
                               Card(
                                 elevation: 10,
-                                
                                 child: Container(
                                   margin: EdgeInsets.all(15),
                                   child: Column(
-                                    
                                     children: <Widget>[
                                       ListTile(
                                   title: Text(evento.titolo),
-                                  subtitle: Text(evento.descrizione),
+                                  subtitle: Text(evento.descrizione, maxLines: 10,),
                                   trailing: Icon(Icons.favorite_border), onTap: () => {}
                                   //Se loggato, salva l'evento tra i preferiti.
                                 ),
@@ -130,10 +134,8 @@ class HomePageState extends State<HomePage>{
                                 elevation: 2,
                                 shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(8.0),
-                                
                                 ),
-
-                                child: Text("ISCRIVITI"),
+                                child: Text("APRI"),
                                 color: ThemeHandler.jmTheme().accentColor,
                                 onPressed: ()=>{}
                                 //,

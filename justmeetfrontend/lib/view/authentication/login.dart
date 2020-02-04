@@ -143,26 +143,39 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                       ),
-                secondChild: Container(
-                  constraints: BoxConstraints.expand(
-                      height: MediaQuery.of(context).size.height / 3),
-                  padding: EdgeInsets.all(20),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: RaisedButton(
-                      onPressed: () => Navigator.pop(context),
-                      color: Colors.green,
-                      padding: EdgeInsets.all(15),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                secondChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      constraints: BoxConstraints.expand(
+                          height: MediaQuery.of(context).size.height / 3),
+                      padding: EdgeInsets.all(20),
+                      child: Column(
                         children: <Widget>[
-                          Text("ok"),
+                          Text("Autenticazione Completata", style: TextStyle(fontSize: 20),),
+                          Divider(color: Colors.orange, height: 20,),
+                          Image.asset('assets/images/ok2.png', scale: 5,),
+                          Divider(height: 10,),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: RaisedButton(
+                              onPressed: () => Navigator.pop(context),
+                              color: Colors.green,
+                              padding: EdgeInsets.all(15),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("Continua"),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
                 crossFadeState: _showSecond
                     ? CrossFadeState.showSecond
