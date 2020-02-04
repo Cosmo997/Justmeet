@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/view/routes/eventhandler.dart';
 
 
 
@@ -18,7 +19,9 @@ class HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    
     body: FutureBuilder(
+      
       future: ControllerJM.loadEvents(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
@@ -43,6 +46,7 @@ class HomePageState extends State<HomePage>{
               Evento evento = snapshot.data[index];
               return  SingleChildScrollView(
                         child: Container(
+                        
                         padding: EdgeInsets.all(20),
                         margin: EdgeInsets.all(30),
                         decoration: BoxDecoration(
@@ -60,6 +64,7 @@ class HomePageState extends State<HomePage>{
                                   child: Column(
                                     children: <Widget>[
                                       ListTile(
+                                     onLongPress: () => {},   
                                   title: Text(evento.titolo),
                                   subtitle: Text(evento.descrizione, maxLines: 10,),
                                   trailing: Icon(Icons.favorite_border), onTap: () => {}
@@ -137,7 +142,11 @@ class HomePageState extends State<HomePage>{
                                 ),
                                 child: Text("APRI"),
                                 color: ThemeHandler.jmTheme().accentColor,
-                                onPressed: ()=>{}
+                                onPressed: () => showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) => EventHandlerPage(currentEvent: snapshot.data[index])
+                                   
+                                //Navigator.of(context).pushNamed('/eventhandler',arguments: snapshot.data[index])
                                 //,
                               ),
                             ],
