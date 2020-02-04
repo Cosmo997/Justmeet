@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justmeet/app.dart';
-import 'package:justmeet/view/authentication/googlesingin.dart';
 import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/authentication/singin.dart';
-import 'package:justmeet/view/routes/singinselection.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,10 +13,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginPage());
       case '/singin':
         return MaterialPageRoute(builder: (_) => SinginPage());
-      case '/singinselection':
-        return MaterialPageRoute(builder: (_) => SinginSelection());
-      case '/googlesingin': 
-        return MaterialPageRoute(builder: (_) => SinginGooglePage());
       default:
         return _errorRoute();
     }

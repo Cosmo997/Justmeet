@@ -35,7 +35,7 @@ class Evento {
     map["idCreatore"] = this.idCreatore;
     map["idComune"] = this.idComune;
     map["inizioEvento"] = this.inizioEvento.toIso8601String();
-    map["fineEvento"] = this.fineEvento.toIso8601String();  
+    map["fineEvento"] = this.fineEvento.toIso8601String();
     return map;
   }
 

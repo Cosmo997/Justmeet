@@ -71,10 +71,12 @@ class ControllerJM
 
 
   static Future<bool> postUser(User newuser) async {
+    
     http.Response response = await http.post(urlBase + "/user", headers: {"Accept" : "application/json"}, body: json.encode(newuser.toMap()));
-    if(response.statusCode == 200)
-     return true;
-     else return false;
+    print(json.encode(newuser.toMap()));
+    print(response.statusCode);
+    if(response.statusCode == 200) return true;
+    else return false;
 
   }
 }

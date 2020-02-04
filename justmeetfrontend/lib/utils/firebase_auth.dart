@@ -3,12 +3,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  static FirebaseUser utente;
 
   Future<bool> singInWithEmail(String email, String password) async {
     try {
         AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-        FirebaseUser user = result.user;
-        if(user == null)
+        utente = result.user;
+        if(utente == null)
         return false;
         return true;
     } catch (e) {
@@ -18,6 +19,11 @@ class AuthProvider {
   void logOut(){
     _auth.signOut();
   }
+
+static Future<String> getUId() async {
+  utente = await  FirebaseAuth.instance.currentUser();
+  return utente.uid;
+}
 
   Future<bool> loginWithGoogle() async {
     try {

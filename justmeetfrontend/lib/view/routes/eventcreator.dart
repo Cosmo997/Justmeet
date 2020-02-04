@@ -9,8 +9,8 @@ import 'package:justmeet/classi/provincia.dart';
 import 'package:justmeet/classi/regione.dart';
 import 'package:justmeet/classi/topic.dart';
 import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
-  //TODO vuole USER in ingresso
 /// Responsabilità: Creare un Evento.
 class EventCreator extends StatefulWidget 
   {
@@ -319,11 +319,10 @@ class EventCreator extends StatefulWidget
 
       // METODI ESTERNI  
                   
-     void _creaEvento(){
-       print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+ "Giovanni" +"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
-      _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,"Giovanni",_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
+     Future<void> _creaEvento() async {
+       print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+await AuthProvider.getUId()+"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
+      _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,await AuthProvider.getUId(),_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
       print("Evento creato");
-      //print(_currentEvent.toString());
       Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
       esito.then((bool value) => _showDialog(_currentEvent,value));
      

@@ -26,7 +26,6 @@ class User
     map["nome"] = this.nome;
     map["cognome"] = this.cognome;
     map["email"] = this.email;
-    map["isMod"] = this.isMod; 
     return map;
   }
 }
