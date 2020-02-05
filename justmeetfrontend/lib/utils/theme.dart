@@ -55,6 +55,13 @@ class ThemeHandler{
 
   static changeTheme(){isDarkThemeEnabled = !isDarkThemeEnabled;}
 
+  static bool getCurrentThema(){
+    if(isDarkThemeEnabled)
+    return true;
+    else 
+    return false;
+  }
+
     
 }
 

@@ -28,13 +28,6 @@ class AppState extends State<App>{
           Preferiti(),
           AreaRiservata()];
 
-        var pageIcons = [
-            Icon(Icons.home, size: 30, color: ThemeHandler.jmTheme().accentColor,),
-            Icon(Icons.add_circle, size: 30),
-            Icon(Icons.favorite, size: 30),
-            Icon(Icons.accessible_forward, size: 30),   
-                  ];
-
     @override
     initState() { 
       super.initState();
@@ -90,12 +83,18 @@ class AppState extends State<App>{
             color: ThemeHandler.jmTheme().primaryColor,
             backgroundColor: Colors.black.withOpacity(0),
             buttonBackgroundColor: ThemeHandler.jmTheme().primaryColor,  
-            items: pageIcons,
-            animationDuration: Duration(milliseconds: 600),
+            items: [
+              Icon(Icons.home, size: 30,color: (currentIndex==0)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
+              Icon(Icons.add_circle, size: 30, color: (currentIndex==1)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
+              Icon(Icons.favorite, size: 30, color: (currentIndex==2)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
+              Icon(Icons.accessible_forward, size: 30, color: (currentIndex==3)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor)
+            ],
+            animationDuration: Duration(milliseconds: 700),
             index: currentIndex,
             onTap: (index){setState(() {
               currentIndex = index;
             });})
+            
       ),
           );
           }
