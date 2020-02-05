@@ -38,7 +38,6 @@ class AppState extends State<App>{
          return StreamBuilder(
           stream: FirebaseAuth.instance.onAuthStateChanged ,
           builder: (BuildContext context, AsyncSnapshot snapshot){
-            print(snapshot);
             if(!snapshot.hasData || snapshot.data == null){
             return MaterialApp(
               title: "JustMeet",

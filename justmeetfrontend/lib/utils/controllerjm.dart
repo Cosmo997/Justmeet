@@ -19,7 +19,6 @@ class ControllerJM
 
   static Future<bool> makePostRequest(Evento event) async {
      Map<String, String> headers = {"Content-type": "application/json"};
-     print(json.encode(event.toMap()));
      http.Response response = await http.post(urlBase +"/evento", headers: headers, body: json.encode(event.toMap()));
      if(response.statusCode == 200)
      return true;
@@ -28,7 +27,6 @@ class ControllerJM
 
   static Future<List<Evento>> loadEvents()  async {
     http.Response response = await http.get(urlBase + "/eventi", headers: {"Accept" : "application/json"});
-    print(response.body);
     List collection = json.decode(response.body);
     List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
     return eventi;
@@ -72,7 +70,6 @@ class ControllerJM
        http.Response response = await http.get(urlBase + "/evento/id/" +idEventiPreferiti[i], headers: {"Accept" : "application/json"});
        Evento e = Evento.fromjson(jsonDecode(response.body));
        preferiti.add(e);
-       print(preferiti);
      }
      return preferiti;
    }
@@ -89,8 +86,6 @@ class ControllerJM
   static Future<bool> postUser(User newuser) async {
     
     http.Response response = await http.post(urlBase + "/user", headers: {"Accept" : "application/json"}, body: json.encode(newuser.toMap()));
-    print(json.encode(newuser.toMap()));
-    print(response.statusCode);
     if(response.statusCode == 200) return true;
     else return false;
 
@@ -99,31 +94,26 @@ class ControllerJM
   static Future<User> getUserById(Future<String> idUtente) async {
     String id = await idUtente;
     http.Response response = await http.get(urlBase + "/user/id/" +id,  headers: {"Accept" : "application/json"});
-    print(response.body);
     User user = User.fromJson(jsonDecode(response.body));
     return user;
   }
 
   static void addPreferito(Future<String> idUser, String idEvento) async {
     String id = await idUser;
-    http.Response response = await http.put(urlBase + "/user/addpreferiti?idUser="+id+"&idEvento="+idEvento);
-    print(response.body +"Evento "+idEvento+" aggiunto ai preferiti");
+    await http.put(urlBase + "/user/addpreferiti?idUser="+id+"&idEvento="+idEvento);
   }
 
   static void deletePreferito(Future<String> idUser, String idEvento) async {
     String id = await idUser;
-    http.Response response = await http.put(urlBase + "/user/deletepreferiti?idUser="+id+"&idEvento="+idEvento);
-    print(response.body +"Evento "+idEvento+" rimosso dai preferiti");
+    await http.put(urlBase + "/user/deletepreferiti?idUser="+id+"&idEvento="+idEvento);
   }
 
    static void addIscrizione(String idEvento, String idUser) async {
-    http.Response response = await http.put(urlBase + "/evento/iscrizione/update?idEvento="+idEvento+"&idUser="+idUser);
-    print(response.body +"Utente "+idUser+" iscritto all'evento");
+    await http.put(urlBase + "/evento/iscrizione/update?idEvento="+idEvento+"&idUser="+idUser);
   }
 
     static void deleteIscrizione(String idEvento, String idUser) async {
-    http.Response response = await http.put(urlBase + "/evento/iscrizione/delete?idEvento="+idEvento+"&idUser="+idUser);
-    print(response.body +"Utente "+idUser+" rimosso dagli iscritti all'evento");
+    await http.put(urlBase + "/evento/iscrizione/delete?idEvento="+idEvento+"&idUser="+idUser);
   }
 
   static Future<String> getNomeByIdUser(String idUser) async{

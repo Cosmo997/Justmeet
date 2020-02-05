@@ -171,7 +171,6 @@ class EventCreator extends StatefulWidget
                                                   value: data.nome,
                                                   child: Text(data.nome),);}).toList(), 
                             onChanged: (String value) => setState(() {
-                              print(value);
                               _currentRegione = value; _isRegioneScelta = true;}),
                              );
                           }
@@ -196,7 +195,6 @@ class EventCreator extends StatefulWidget
                                                   child: Text(data.nome),);}).toList(), 
                             onChanged: (String value) => setState(() {
                               _currentSiglaProvincia = value;
-                              print(_currentSiglaProvincia);
                               _isProvinciaScelta = true;}),
                             hint: Text("Seleziona provincia"),
                             value: _currentSiglaProvincia,
@@ -322,9 +320,8 @@ class EventCreator extends StatefulWidget
       // METODI ESTERNI  
                   
      Future<void> _creaEvento() async {
-       print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+await AuthProvider.getUId()+"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
+       //print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+await AuthProvider.getUId()+"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
       _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,await AuthProvider.getUId(),_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
-      print("Evento creato");
       Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
       esito.then((bool value) => _showDialog(_currentEvent,value));
      
