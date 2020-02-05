@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:justmeet/app.dart';
-import 'package:justmeet/classi/evento.dart';
 import 'package:justmeet/view/authentication/login.dart';
 import 'package:justmeet/view/authentication/singin.dart';
-import 'package:justmeet/view/routes/eventhandler.dart';
+import 'package:justmeet/view/routes/mieieventi.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,10 +14,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginPage());
       case '/singin':
         return MaterialPageRoute(builder: (_) => SinginPage());
-      case '/eventhandler':
-      if(settings.arguments is Evento)
-        return MaterialPageRoute(builder: (_) => EventHandlerPage(currentEvent: settings.arguments as Evento));
-      return _errorRoute();
+      case '/mieieventi':
+        return MaterialPageRoute(builder: (_) => MieiEventi());
       
       default:
         return _errorRoute();

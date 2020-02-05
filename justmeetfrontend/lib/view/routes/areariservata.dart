@@ -49,8 +49,8 @@ class AreaRiservata extends StatefulWidget{
               }
               else{
                 return Container(
-        child: SingleChildScrollView(
-              child: Column(
+              child: SingleChildScrollView(
+               child: Column(
                 children: <Widget>[
                     Container(
                       margin: EdgeInsets.fromLTRB(0, 10,0, 0),
@@ -134,7 +134,9 @@ class AreaRiservata extends StatefulWidget{
                           title: Text("I miei Eventi"),
                           leading: Icon(Icons.person_outline),
                           //Apre pagina degli eventi creati dall'utente.
-                          onTap: () => {},
+                          onTap: () => {
+                            Navigator.of(context).pushNamed('/mieieventi'),
+                          },
                           trailing: Icon(Icons.arrow_forward_ios),
                         ),
                         Divider(height: 10),
@@ -151,6 +153,7 @@ class AreaRiservata extends StatefulWidget{
                           leading: Icon(Icons.info_outline),
                           trailing: Icon(Icons.arrow_forward_ios),
                           onTap: () {
+                            showAboutDialog(context: context);
                           },
                         ),
                       ],
