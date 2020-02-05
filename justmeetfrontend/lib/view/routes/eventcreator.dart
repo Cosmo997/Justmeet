@@ -359,7 +359,7 @@ class EventCreator extends StatefulWidget
               actions: <Widget>[
                   new FlatButton(
                       child: Text("Back"),
-                      onPressed: ()=>{},
+                      onPressed: ()=> Navigator.of(context).pop(),
                     )
                                         ],);
                                                 },
