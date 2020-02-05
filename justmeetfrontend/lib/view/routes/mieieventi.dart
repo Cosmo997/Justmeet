@@ -153,7 +153,6 @@ class MieiEventiState extends State<MieiEventi>{
                                     Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
                                     Text("Comune: " +evento.idComune),
                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
-                                   
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
@@ -179,13 +178,8 @@ class MieiEventiState extends State<MieiEventi>{
                                          return AlertDialog(
                                          title: Text("Rimozione iscrizione avvenuta con successo"),
                                          elevation: 10,
-                                        
-                                   );
-                            }
-                            ); 
-                                        });                                        
-                                        },
-                                     );
+                                   );}); 
+                                  });},);
                                else
                               return RaisedButton.icon(
                                 shape: RoundedRectangleBorder(
@@ -194,8 +188,7 @@ class MieiEventiState extends State<MieiEventi>{
                                       color: ThemeHandler.jmTheme().accentColor,
                                       icon: Icon(Icons.check_circle_outline),
                                       label: Text("Partecipa"),
-                                     onPressed:() 
-                                     {
+                                     onPressed:() {
                                        setState(() {
                                         ControllerJM.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
@@ -214,7 +207,6 @@ class MieiEventiState extends State<MieiEventi>{
                                     
                                   ],
                                 ),
-
                                 ],
                               )
                             ),
@@ -223,7 +215,7 @@ class MieiEventiState extends State<MieiEventi>{
                         );
                       },
             itemCount: snapshot.data.length,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => Divider(indent: 30, endIndent: 30, thickness: 2),
             );
         }
         },

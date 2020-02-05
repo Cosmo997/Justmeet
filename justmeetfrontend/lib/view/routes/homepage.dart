@@ -218,7 +218,7 @@ class HomePageState extends State<HomePage>{
                         );
                       },
             itemCount: snapshot.data.length,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => Divider(indent: 30, endIndent: 30, thickness: 2),
             );
         }
         },

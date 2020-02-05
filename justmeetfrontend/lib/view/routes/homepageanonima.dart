@@ -25,23 +25,102 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                ),
                drawer: Drawer(
                    elevation: 20,
-                   child: Column(
+                   child: ListView(
                      children: <Widget>[
+                       DrawerHeader(
+                         decoration: BoxDecoration(
+                           gradient: LinearGradient(colors: <Color>[
+                             ThemeHandler.jmTheme().accentColor,
+                             Colors.orange
+                           ])
+                         ),
+                         child:  Container(
+                           child: Column(
+                             children: <Widget>[
+                               Material(
+                                 borderRadius: BorderRadius.all(Radius.circular(20)),
+                                 child: Image.asset('assets/images/iconaverticale.png', scale: 2),
+                               ),
+                             ],
+                           )),),
+                      ListTile(
+                         title: Text("Login",style: TextStyle(fontSize: 15)),
+                         leading: Icon(Icons.person, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
+                         onTap: () {
+                           showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) { return FractionallySizedBox(
+                    heightFactor: 0.9,
+                    child: LoginPage()); },
+                  isScrollControlled: true);
+                         },
+                       ),
                        ListTile(
-                         title: Text("Crea Evento",style: TextStyle(fontSize: 20)),
+                         title: Text("SignIn",style: TextStyle(fontSize: 15)),
+                         leading: Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
+                         onTap: () {
+                         },
+                       ),
+                       ListTile(
+                         title: Text("Crea Evento",style: TextStyle(fontSize: 15)),
                          leading: Icon(Icons.add_circle, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
                          onTap: () {
+                           showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                     return FractionallySizedBox(
+                    heightFactor: 0.9,
+                    child: LoginPage()); },
+                  isScrollControlled: true);
+                         },
+                       ),
+                        ListTile(
+                         title: Text("I Miei Eventi",style: TextStyle(fontSize: 15)),
+                         leading: Icon(Icons.calendar_today, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
+                         onTap: () {
+                           showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) { return FractionallySizedBox(
+                    heightFactor: 0.9,
+                    child: LoginPage()); },
+                  isScrollControlled: true);
                          },
                        ),
                        ListTile(
-                         title: Text("Preferiti",style: TextStyle(fontSize: 20)),
+                         title: Text("Preferiti",style: TextStyle(fontSize: 15)),
                          leading: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
                          onTap: () {
+                           showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) { return FractionallySizedBox(
+                    heightFactor: 0.9,
+                    child: LoginPage()); },
+                  isScrollControlled: true);
                          },
                        ),
                        ListTile(
-                         title: Text("Area Riservata",style: TextStyle(fontSize: 20)),
+                         title: Text("Area Riservata",style: TextStyle(fontSize: 15)),
                          leading: Icon(Icons.accessible_forward, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
+                         onTap: () {
+                           showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) { return FractionallySizedBox(
+                    heightFactor: 0.9,
+                    child: LoginPage()); },
+                  //isScrollControlled: true 
+                  );
+                         },
+                       ),
+                       ListTile(
+                         title: Text("Settings",style: TextStyle(fontSize: 15)),
+                         leading: Icon(Icons.settings, color: ThemeHandler.jmTheme().accentColor,),
+                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
                          onTap: () {
                          },
                        ),
@@ -121,8 +200,14 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                                       Text(_df.format(evento.inizioEvento)),
                                     ],),
                                   ),
-                                    Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
-                                    Text("Comune: " +evento.idComune),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 20),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
+                                          Text("Comune: " +evento.idComune),
+                                        ],
+                                      )),
                                 ],
                               )
                             ),
@@ -131,7 +216,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                         );
                       },
             itemCount: snapshot.data.length,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => Divider(indent: 30, endIndent: 30, thickness: 2),
             );
         }
 
@@ -147,9 +232,6 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                     heightFactor: 0.9,
                     child: LoginPage()); },
                   isScrollControlled: true),
-                //Fluttertoast.showToast(msg: "ciao"),
-                //Navigator.pushNamed(context, "/login"),
-        
               }
             ));          
         
