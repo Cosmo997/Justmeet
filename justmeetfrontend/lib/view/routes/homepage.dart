@@ -146,7 +146,8 @@ class HomePageState extends State<HomePage>{
                                     context: context,
                                     builder: (BuildContext context) { 
                                       return FractionallySizedBox(
-                                        heightFactor: 0.9,
+                                        alignment: Alignment.center,
+                                        heightFactor: 0.7,
                                         child: EventHandlerPage(
                                         currentEvent: snapshot.data[index])); },
                                     isScrollControlled: true),

@@ -53,6 +53,7 @@ Evento.fromjson(Map<String, dynamic> json)
           isApproved = json['isApproved'],
           inizioEvento = DateTime.parse(json['inizioEvento']),
           fineEvento = DateTime.parse(json['fineEvento']);
+          //iscrizioni = 
             
   
 	String getId() {

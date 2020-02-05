@@ -88,7 +88,7 @@ class AppState extends State<App>{
            bottomNavigationBar: CurvedNavigationBar(
             height: 50,
             color: ThemeHandler.jmTheme().primaryColor,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.black.withOpacity(0),
             buttonBackgroundColor: ThemeHandler.jmTheme().primaryColor,  
             items: pageIcons,
             animationDuration: Duration(milliseconds: 600),
