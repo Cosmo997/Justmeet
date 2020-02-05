@@ -15,13 +15,14 @@ class EventHandlerPage extends StatefulWidget {
 
 class _EventHandlerPageState extends State<EventHandlerPage> {
   final Evento currentEvent;
-
+  bool isButtonEnabled = false;
   _EventHandlerPageState(this.currentEvent);
 
   final DateFormat _df = DateFormat("dd/MM/yyyy");
 
   @override
   Widget build(BuildContext context) {
+    
     return BottomSheet(
       enableDrag: true,
       onClosing: () {},
@@ -171,16 +172,23 @@ class _EventHandlerPageState extends State<EventHandlerPage> {
               Row(
                 children: <Widget>[
                   FutureBuilder(
-                    future: ControllerJM().getNomeByIdUser(currentEvent.idCreatore),
+                    future: AuthProvider.getUId(),
                     builder: (context, AsyncSnapshot<String> snapshot) {
                       if(snapshot.data == null)
                       return CircularProgressIndicator();
-                      else return null;
+                      else if (currentEvent.iscrizioni.contains(snapshot.data))
+                        return RaisedButton(
+                          onPressed: isButtonEnabled ? null : () => {ControllerJM.deleteIscrizione(currentEvent.id, snapshot.data),
+                                                                      disableButton()},
+                          child: Text("Disiscriviti"),);
+                      else
+                        return RaisedButton(
+                          onPressed:  isButtonEnabled ? null : () => {ControllerJM.addIscrizione(currentEvent.id, snapshot.data),
+                                                                      disableButton()},
+                          child: Text("Iscriviti"),);
                     },
                 ),
-                  RaisedButton(
-                    onPressed: () => {},
-                  )
+                  
                 ],
               )
 
@@ -191,5 +199,10 @@ class _EventHandlerPageState extends State<EventHandlerPage> {
         ),
       ),
     );
+  }
+  disableButton(){
+    setState(() {
+      isButtonEnabled = false;
+    });
   }
 }

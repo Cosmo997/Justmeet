@@ -17,7 +17,8 @@ class User
     nome = json['nome'],
     cognome = json['cognome'],
     email = json['email'],
-    isMod = json['isMod'];
+    isMod = json['isMod'],
+    preferiti = List.castFrom(json['preferiti']);
   
   Map<String, dynamic> toMap() 
   {
