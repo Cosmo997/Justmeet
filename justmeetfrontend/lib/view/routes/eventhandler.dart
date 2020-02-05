@@ -171,7 +171,7 @@ class _EventHandlerPageState extends State<EventHandlerPage> {
               Row(
                 children: <Widget>[
                   FutureBuilder(
-                    future: ControllerJM().getNomeByIdUser(currentEvent.idCreatore),
+                    future: ControllerJM.getNomeByIdUser(currentEvent.idCreatore),
                     builder: (context, AsyncSnapshot<String> snapshot) {
                       if(snapshot.data == null)
                       return CircularProgressIndicator();

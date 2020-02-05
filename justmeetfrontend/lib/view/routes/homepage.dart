@@ -142,7 +142,7 @@ class HomePageState extends State<HomePage>{
                                 child: Text("APRI"),
                                 color: ThemeHandler.jmTheme().accentColor,
                                 onPressed: () => { 
-                                  showBottomSheet(
+                                  showModalBottomSheet(
                                     context: context,
                                     builder: (BuildContext context) { 
                                       return FractionallySizedBox(
@@ -153,7 +153,7 @@ class HomePageState extends State<HomePage>{
                                         )
                                         ); 
                                         },
-                                    //isScrollControlled: true
+                                    isScrollControlled: true
                                     ),
                                 }
                               ),
@@ -167,7 +167,6 @@ class HomePageState extends State<HomePage>{
             separatorBuilder: (context, index) => Divider(),
             );
         }
-
         },
     ),
     );             
