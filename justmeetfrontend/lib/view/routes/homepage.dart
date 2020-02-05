@@ -44,97 +44,64 @@ class HomePageState extends State<HomePage>{
           return ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               Evento evento = snapshot.data[index];
-              return  SingleChildScrollView(
+              return SingleChildScrollView(
                         child: Container(
-                        padding: EdgeInsets.all(20),
-                        margin: EdgeInsets.all(30),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          color: ThemeHandler.jmTheme().secondaryHeaderColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Container(
-                            child: Column(
-                              children: <Widget>[
-                              Card(
-                                elevation: 10,
-                                child: Container(
-                                  margin: EdgeInsets.all(15),
-                                  child: Column(
-                                    children: <Widget>[
-                                      ListTile(
-                                     onLongPress: () => {},   
-                                  title: Text(evento.titolo),
-                                  subtitle: Text(evento.descrizione, maxLines: 10,),
-                                  trailing: Icon(Icons.favorite_border), onTap: () => {}
-                                  //Se loggato, salva l'evento tra i preferiti.
-                                ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-
-                                          //Inizio Evento
-                                          Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(2),
-                                            child:Text(
-                                              "Inizio Evento: " + _df.format(evento.inizioEvento),
-                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor)),
-                                            decoration:BoxDecoration(
-                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                              color: ThemeHandler.jmTheme().accentColor),
-                                            ),
-                                          //Fine Evento
-                                          Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(2),
-                                            decoration:BoxDecoration(
-                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                              color: ThemeHandler.jmTheme().accentColor),
-                                            child: Text(
-                                              "Fine Evento: " + _df.format(evento.fineEvento),
-                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
-                                              )),
-                                          //Posti Disponibili
-                                          Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(2),
-                                            child:Text(
-                                              "Posti disponibili: "+ evento.partecipanti.toString(),
-                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
-                                              ),
-                                            decoration:BoxDecoration(
-                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                              color: ThemeHandler.jmTheme().accentColor)
-                                              ),
-                                          //Topic
-                                          Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(2),
-                                            decoration:BoxDecoration(
-                                              border: Border.all(color: ThemeHandler.jmTheme().primaryColor),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                              color: ThemeHandler.jmTheme().accentColor), 
-                                            child: Text(
-                                              "Topic: "+ evento.idTopic.toString(),
-                                              style: TextStyle(color: ThemeHandler.jmTheme().primaryColor),
-                                                )
-                                              ),
-                                        ],
-                                        ),
-                                      
-                              //          ListTile(
-                              //           title:Text(_df.format(evento.inizioEvento)),
-                              //           subtitle: Text(_df.format(evento.fineEvento)),
-                              //           trailing: Text("Numero partecipanti:"+evento.partecipanti.toString() +"\n\nTopic: "+ evento.idTopic.toString()),
-                              // ),
-                                  ],),
-                                ),
-                              ),
-                              RaisedButton(
+                          child: Center(
+                            child: Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                              color: ThemeHandler.jmTheme().secondaryHeaderColor,
+                              elevation: 10,
+                              margin: EdgeInsets.all(20),
+                              child: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: CircleAvatar(),
+                                    title: Text(evento.titolo),
+                                    subtitle: Text(evento.idCreatore),
+                                    trailing: Icon(Icons.more_horiz),
+                                  ),
+                                   Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                   Text("Descrizione", style: TextStyle(fontSize: 18), ),
+                                   Container(
+                                     height: 150,
+                                     width: 1000,  
+                                     child: Card(
+                                       color: Colors.grey,
+                                       margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                                       child: SingleChildScrollView(
+                                         child: Padding(
+                                           padding: const EdgeInsets.all(10.0),
+                                           child: Text(evento.descrizione),
+                                         )),
+                                     ),
+                                   ),
+                                   Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                  Container(
+                                    margin: EdgeInsets.all(20),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                      Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
+                                      Text(" Partecipanti: "),
+                                      Text(evento.partecipanti.toString()),
+                                      Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
+                                      Text(" Topic: "),
+                                      Text(evento.idTopic),
+                                    ],),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.all(20),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                      Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                      Text(_df.format(evento.inizioEvento)),
+                                      Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                      Text(_df.format(evento.inizioEvento)),
+                                    ],),
+                                  ),
+                                   Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                   RaisedButton(
                                 elevation: 2,
                                 shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(8.0),
@@ -157,7 +124,8 @@ class HomePageState extends State<HomePage>{
                                     ),
                                 }
                               ),
-                              ]
+                                ],
+                              )
                             ),
                           ),
                         ),

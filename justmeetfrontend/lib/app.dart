@@ -8,6 +8,7 @@ import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
 import 'package:justmeet/view/routes/homepage.dart';
 import 'package:justmeet/view/routes/homepageanonima.dart';
+import 'package:justmeet/view/routes/mieieventi.dart';
 import 'package:justmeet/view/routes/preferiti.dart';
 
 
