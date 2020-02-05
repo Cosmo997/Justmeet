@@ -1,7 +1,3 @@
-
-
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/classi/evento.dart';
@@ -9,7 +5,6 @@ import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
 
-  //TODO vuole USER in ingresso
 
 class Preferiti extends StatefulWidget {
 
@@ -23,7 +18,6 @@ class PreferitiState extends State<Preferiti>
   Widget build(BuildContext context) {
   return Scaffold(
     body: FutureBuilder(
-      //TODO non corretto sistemare
       future: ControllerJM.loadPreferitiByUtente(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)

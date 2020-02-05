@@ -157,7 +157,6 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
       backgroundColor: ThemeHandler.jmTheme().accentColor,
       child: Icon(Icons.account_box, color: ThemeHandler.jmTheme().primaryColor),
       onPressed: () => { 
-       // BottomSheet(builder: (BuildContext context) { return BS(); }, onClosing: () {  },),
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(

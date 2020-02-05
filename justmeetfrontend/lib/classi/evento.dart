@@ -10,6 +10,7 @@ class Evento {
       bool isApproved;
       DateTime inizioEvento;
       DateTime fineEvento;
+      List<String> iscrizioni;
       
 
       

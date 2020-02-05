@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/route_generator.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/view/routes/areariservata.dart';
@@ -67,6 +68,15 @@ class AppState extends State<App>{
                elevation: 10,
                title: Image.asset('assets/images/logo.png', scale: 2.5),
                centerTitle: true,
+               actions: <Widget>[
+                 IconButton(
+                    iconSize: 40,
+                    icon: Icon(Icons.exit_to_app),
+                    onPressed:() => AuthProvider().logOut(),
+                    tooltip: "LogOut",
+                    color: ThemeHandler.jmTheme().accentColor,
+                  ),
+               ],
                ),
     
      //Body = richiama il metodo costruttore Build della pagina all'indice currentIndex

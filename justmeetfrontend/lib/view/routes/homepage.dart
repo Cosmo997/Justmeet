@@ -46,7 +46,6 @@ class HomePageState extends State<HomePage>{
               Evento evento = snapshot.data[index];
               return  SingleChildScrollView(
                         child: Container(
-                        
                         padding: EdgeInsets.all(20),
                         margin: EdgeInsets.all(30),
                         decoration: BoxDecoration(
@@ -142,14 +141,18 @@ class HomePageState extends State<HomePage>{
                                 ),
                                 child: Text("APRI"),
                                 color: ThemeHandler.jmTheme().accentColor,
-                                onPressed: () => showModalBottomSheet(
+                                onPressed: () => { 
+                                  showModalBottomSheet(
                                     context: context,
-                                    builder: (BuildContext context) => EventHandlerPage(currentEvent: snapshot.data[index])
-                                   
-                                //Navigator.of(context).pushNamed('/eventhandler',arguments: snapshot.data[index])
-                                //,
+                                    builder: (BuildContext context) { 
+                                      return FractionallySizedBox(
+                                        heightFactor: 0.9,
+                                        child: EventHandlerPage(
+                                        currentEvent: snapshot.data[index])); },
+                                    isScrollControlled: true),
+                              }
                               ),
-                            ],
+                              ]
                             ),
                           ),
                         ),
@@ -163,9 +166,6 @@ class HomePageState extends State<HomePage>{
         },
     ),
     );             
-      }
 
-
-@override
-void initState() {super.initState();}
+  }
 }
