@@ -78,17 +78,12 @@ class ControllerJM
    }
 
    static Future<List<Evento>> loadEventiByIdCreatore(Future<String> idUtente) async {
+
      String id = await idUtente;
-     http.Response response = await http.get(urlBase + "/user/prefeiti/" +id , headers: {"Accept" : "application/json"});
-     List<Evento> preferiti = [];
-     List<String> idEventiPreferiti = (jsonDecode(response.body) as List<dynamic>).cast<String>();
-     for (int i = 0; i < idEventiPreferiti.length; i++) {
-       http.Response response = await http.get(urlBase + "/evento/id/" +idEventiPreferiti[i], headers: {"Accept" : "application/json"});
-       Evento e = Evento.fromjson(jsonDecode(response.body));
-       preferiti.add(e);
-       print(preferiti);
-     }
-     return preferiti;
+     http.Response response = await http.get(urlBase + "/eventi/idcreatore/" +id , headers: {"Accept" : "application/json"});
+     List collection = json.decode(response.body);
+     List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
+     return myEvent;
    }
 
   static Future<bool> postUser(User newuser) async {

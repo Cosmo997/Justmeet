@@ -23,6 +23,7 @@ class AuthProvider {
 
 static Future<String> getUId() async {
   utente = await  FirebaseAuth.instance.currentUser();
+  print(utente.uid);
   return utente.uid;
 }
 

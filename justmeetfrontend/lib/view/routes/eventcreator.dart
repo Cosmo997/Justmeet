@@ -342,6 +342,7 @@ class EventCreator extends StatefulWidget
                   new FlatButton(
                       child: new Text("Torna alla home"),
                       onPressed: () {
+                        Navigator.of(context).pop();
                         _isProvinciaScelta = false;
                         _isRegioneScelta = false;
                         setState(() {

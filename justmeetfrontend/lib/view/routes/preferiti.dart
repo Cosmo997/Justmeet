@@ -6,7 +6,6 @@ import 'package:justmeet/classi/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/view/routes/eventhandler.dart';
 
 
 class Preferiti extends StatefulWidget {
