@@ -1,3 +1,6 @@
+
+import 'dart:core';
+
 class Evento {
   
       String id;
@@ -12,9 +15,7 @@ class Evento {
       DateTime fineEvento;
       List<String> iscrizioni;
       
-
-      
-    Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore, String idComune, String inizioEvento ,String fineEvento)
+  Evento(String titolo, String descrizione, int partecipanti, String idTopic, String idCreatore, String idComune, String inizioEvento ,String fineEvento)
     {
       this.titolo = titolo;
       this.descrizione = descrizione;
@@ -24,7 +25,9 @@ class Evento {
       this.idComune = idComune;
       this.inizioEvento = DateTime.parse(inizioEvento);
       this.fineEvento = DateTime.parse(fineEvento);
+      this.iscrizioni = new List();
     }
+      
 
   Map<String, dynamic> toMap() 
   {
@@ -37,6 +40,7 @@ class Evento {
     map["idComune"] = this.idComune;
     map["inizioEvento"] = this.inizioEvento.toIso8601String();
     map["fineEvento"] = this.fineEvento.toIso8601String();
+    map["iscrizioni"] = this.iscrizioni;
     return map;
   }
 
@@ -52,9 +56,8 @@ Evento.fromjson(Map<String, dynamic> json)
           idComune = json['idComune'],
           isApproved = json['isApproved'],
           inizioEvento = DateTime.parse(json['inizioEvento']),
-          fineEvento = DateTime.parse(json['fineEvento']);
-          //iscrizioni = 
-            
+          fineEvento = DateTime.parse(json['fineEvento']),
+          iscrizioni = List.castFrom(json['iscrizioni']);
   
 	String getId() {
 		return this.id;
