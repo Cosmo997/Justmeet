@@ -107,4 +107,17 @@ class ControllerJM
     User user = User.fromJson(jsonDecode(response.body));
     return user;
   }
+
+  static void addPreferito(Future<String> idUser, String idEvento) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/user/addpreferiti?idUser="+id+"&idEvento="+idEvento);
+    print(response.body +"Evento "+idEvento+" aggiunto ai preferiti");
+  }
+
+  static void deletePreferito(Future<String> idUser, String idEvento) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/user/deletepreferiti?idUser="+id+"&idEvento="+idEvento);
+    print(response.body +"Evento "+idEvento+" rimosso dai preferiti");
+  }
+
 }

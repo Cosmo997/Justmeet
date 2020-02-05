@@ -49,9 +49,12 @@ class EventCreator extends StatefulWidget
           children: <Widget>[
             Container(
                  alignment: Alignment.center,
-                 child: Text("Creazione Nuovo Evento"),
+                 child: 
+                 Text("Creazione Nuovo Evento", style: TextStyle(color: ThemeHandler.jmTheme().accentColor, fontSize: 15),
+                 ),
                  padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                ),
+               Divider(color: ThemeHandler.jmTheme().accentColor, indent: 40, endIndent: 40, height: 10,),
             Container(
               padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
               margin: EdgeInsets.all(5),

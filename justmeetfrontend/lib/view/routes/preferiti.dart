@@ -62,6 +62,11 @@ class PreferitiState extends State<Preferiti>
                                 ListTile(
                                   title: Text(evento.titolo),
                                   subtitle: Text(evento.descrizione, maxLines: 10,),
+                                  trailing: GestureDetector(
+                                    onTap: () {
+                                      
+                                    },
+                                    child: Icon(Icons.delete_forever)),
                                 )
                               ],
                             ),

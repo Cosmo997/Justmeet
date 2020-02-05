@@ -29,7 +29,7 @@ class AppState extends State<App>{
           AreaRiservata()];
 
         var pageIcons = [
-            Icon(Icons.home, size: 30),
+            Icon(Icons.home, size: 30, color: ThemeHandler.jmTheme().accentColor,),
             Icon(Icons.add_circle, size: 30),
             Icon(Icons.favorite, size: 30),
             Icon(Icons.accessible_forward, size: 30),   
