@@ -142,16 +142,20 @@ class HomePageState extends State<HomePage>{
                                 child: Text("APRI"),
                                 color: ThemeHandler.jmTheme().accentColor,
                                 onPressed: () => { 
-                                  showModalBottomSheet(
+                                  showBottomSheet(
                                     context: context,
                                     builder: (BuildContext context) { 
                                       return FractionallySizedBox(
                                         alignment: Alignment.center,
                                         heightFactor: 0.7,
                                         child: EventHandlerPage(
-                                        currentEvent: snapshot.data[index])); },
-                                    isScrollControlled: true),
-                              }
+                                        currentEvent: snapshot.data[index]
+                                        )
+                                        ); 
+                                        },
+                                    //isScrollControlled: true
+                                    ),
+                                }
                               ),
                               ]
                             ),

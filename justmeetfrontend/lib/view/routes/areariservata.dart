@@ -43,6 +43,10 @@ class AreaRiservata extends StatefulWidget{
     child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 10,0, 0),
+                  child: Text("Area Riservata", style: TextStyle(color: ThemeHandler.jmTheme().accentColor, fontSize: 20))),
+                Divider(color: ThemeHandler.jmTheme().accentColor, indent: 40, endIndent: 40,),
               //Account
               Card(
                 elevation: 10,

@@ -92,6 +92,16 @@ public class UserController {
   public void updatePreferiti(@RequestParam String idUser, @RequestParam String idEvento){
       repository.updatePreferiti(idUser, idEvento);
   }
+
+  /**
+   * Rimuove un'evento tra quelli preferiti dell'utente
+   * @param idUser da modificare
+   * @param idEvento da rimuovere tra i preferiti
+   */
+  @RequestMapping(value = "user/deletepreferiti", method = RequestMethod.PUT)
+  public void deleteFromPreferiti(@RequestParam String idUser, @RequestParam String idEvento){
+      repository.deletePreferito(idUser, idEvento);
+  }
   
   /**
    * Get eventi preferiti dell'utente

@@ -107,4 +107,35 @@ class ControllerJM
     User user = User.fromJson(jsonDecode(response.body));
     return user;
   }
+
+  static void addPreferito(Future<String> idUser, String idEvento) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/user/addpreferiti?idUser="+id+"&idEvento="+idEvento);
+    print(response.body +"Evento "+idEvento+" aggiunto ai preferiti");
+  }
+
+  static void deletePreferito(Future<String> idUser, String idEvento) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/user/deletepreferiti?idUser="+id+"&idEvento="+idEvento);
+    print(response.body +"Evento "+idEvento+" rimosso dai preferiti");
+  }
+
+   static void addIscrizione(String idEvento, Future<String> idUser) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/evento/iscrizione/update?idEvento="+idEvento+"&idUser="+id);
+    print(response.body +"Utente "+id+" iscritto all'evento");
+  }
+
+    static void deleteIscrizione(String idEvento, Future<String> idUser) async {
+    String id = await idUser;
+    http.Response response = await http.put(urlBase + "/evento/iscrizione/delete?idEvento="+idEvento+"&idUser="+id);
+    print(response.body +"Utente "+id+" rimosso dagli iscritti all'evento");
+  }
+
+  static Future<String> getNomeByIdUser(String idUser) async{
+    http.Response response = await http.get(urlBase + "/user/id/" +idUser,  headers: {"Accept" : "application/json"});
+    User user = User.fromJson(jsonDecode(response.body));
+    return user.nome;
+  }
+
 }
