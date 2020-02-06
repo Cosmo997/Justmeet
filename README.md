@@ -24,7 +24,7 @@ L'errore da noi commesso è stato quello di voler implementare nel software i ca
 Ci siamo trovati in difficoltà anche con i requisiti da noi individuati, in quanto poco precisi e molti errati, fortunatamente però non avendo ancora una conoscenza dettagliata della materia e del software Visual Paradigm, abbiamo preferito non eccedere con elaborati, rischiando poi di crearne di inutili o sbagliati, e fortunatamente con la fine della prima parte delle lezioni abbiamo più conoscenze ed esempi di elaborati da poter utilizzare nel progetto, questo comporta una prossima iterazione, basata molto sul miglioramento e l'implementazione dei requisiti basilari individuati in precedenza, con idee che sono nate nella fase di implementazione appena svolta.
 Nella prossima iterazione verranno anche implementati i primi test poiché nell'applicazione sono già necessari per via della complessità, almeno per noi, riscontrata.
 
-IV Iterazione<BR>
+III Iterazione<BR>
 In questa iterazione abbiamo dedicato molto lavoro nel perfezionamento della documentazione, migliorando di molto il diagramma delle classi e implementando i diagrammi di sequenza correttamente.
 La milestone chi ci siamo posti all'inizio dell'iterazione era quella di implementare l'iterfaccia grafica dedicata all'area personale dell'utente, e quella di collegare il nostro backend spring boot con un database mongodb.
 In questa iterazione abbiamo anche pensato ai primi Test, dato che il backend non era ancora collegato al database abbiamo preferito non effettuare test iniziali per poi doverli riscrivere completamente.
