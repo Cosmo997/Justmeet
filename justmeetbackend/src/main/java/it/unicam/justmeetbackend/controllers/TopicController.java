@@ -14,12 +14,6 @@ import java.util.List;
 @RestController
 public class TopicController {
   
-//   private static int latestId = 0;
-
-//   public static int generateId() {
-//     return ++latestId;
-//  }
-
     @Autowired
     private TopicRepository repository;
   
@@ -33,23 +27,9 @@ public class TopicController {
     return repository.findBy_id(_id);
   }
 
-  
   @RequestMapping(value = "/topic/argomento/{argomento}", method = RequestMethod.GET)
   public Topic getTopicByArgomento(@PathVariable("argomento") String argomento) {
     return repository.findByArgomento(argomento);
   }
-  
-  // @RequestMapping(value = "/topic", method = RequestMethod.POST)
-  // public Topic createTopic(@Valid @RequestBody Topic topic) {
-  //   topic.setId(generateId());
-  //   repository.save(topic);
-  //   return topic;
-  // }
-  
-  // @RequestMapping(value = "/topic/id/{id}", method = RequestMethod.DELETE)
-  // public void deleteTopic(@PathVariable int _id) {
-  //   repository.delete(repository.findBy_id(_id));
-  // }
 
-  
 }

@@ -38,18 +38,4 @@ return repository.findBySigla(sigla);
 public List<Provincia> getProvinciaByRegione(@PathVariable String regione){
   return repository.findByRegione(regione);
 }
-
-
-
-//  * POST METHOD
-//  * @param provinice
-//  * @return Liste di provincie aggiunte
-//  */
-
-// @RequestMapping(value = "/provincia", method = RequestMethod.POST)
-// public String createProvincia(@Valid @RequestBody List<Provincia> provinice) {
-//   repository.saveAll(provinice);
-//   return "Provinicie aggiunte: " +provinice.size();
-// }
-
 }

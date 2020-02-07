@@ -99,9 +99,9 @@ public class EventoController {
      * @param isApproved
      * @return
      */
-    @RequestMapping(value = "/eventi/approvati/{isApproved}")
-    public List<Evento> getEventiApprovati(@PathVariable Boolean isApproved) {
-        return repository.findByIsApproved(isApproved);
+    @RequestMapping(value = "/eventi/approvati")
+    public List<Evento> getEventiApprovati() {
+        return repository.findByIsApproved(true);
     }
 
     /**
@@ -171,7 +171,7 @@ public class EventoController {
      * @param idUser che si vuole iscrivere
      */
     @RequestMapping(value = "evento/iscrizione/update", method = RequestMethod.PUT)
-    public void updateIscrizioni(@RequestParam String idEvento, @RequestParam String idUser){
+    public void addIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
         repository.updateIscrizioni(idEvento, idUser);
     }
 

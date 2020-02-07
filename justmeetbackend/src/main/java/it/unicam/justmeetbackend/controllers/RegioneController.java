@@ -29,18 +29,4 @@ public class RegioneController {
   return repository.findByNome(nome);
 }
 
-
-// 
-// @RequestMapping(value = "/regioniadd", method = RequestMethod.POST)
-// public List<Regione> createRegione(@Valid @RequestBody List<Regione> regioni) {
-//   repository.saveAll(regioni);
-//   return regioni;
-// }
-// 
-// @RequestMapping(value = "/regioneadd", method = RequestMethod.POST)
-// public Regione createRegione(@Valid @RequestBody Regione regione) {
-//   repository.save(regione);
-//   return regione;
-// }
-  
 }
