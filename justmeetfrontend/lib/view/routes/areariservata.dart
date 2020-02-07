@@ -132,26 +132,26 @@ class AreaRiservata extends StatefulWidget{
                       Divider(height: 10),
                         ListTile(
                           title: Text("I miei Eventi"),
-                          leading: Icon(Icons.person_outline),
+                          leading: Icon(Icons.person_outline, color: ThemeHandler.jmTheme().accentColor),
                           //Apre pagina degli eventi creati dall'utente.
                           onTap: () => {
                             Navigator.of(context).pushNamed('/mieieventi'),
                           },
-                          trailing: Icon(Icons.arrow_forward_ios),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
                         ),
                         Divider(height: 10),
                         ListTile(
                           title: Text("Settings"),
-                          leading: Icon(Icons.settings),
-                          trailing: Icon(Icons.arrow_forward_ios),
+                          leading: Icon(Icons.settings, color: ThemeHandler.jmTheme().accentColor),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
                           onTap: () {
                           },
                         ),
                         Divider(height: 10),
                         ListTile(
                           title: Text("About Us"),
-                          leading: Icon(Icons.info_outline),
-                          trailing: Icon(Icons.arrow_forward_ios),
+                          leading: Icon(Icons.info_outline, color: ThemeHandler.jmTheme().accentColor,),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
                           onTap: () {
                             showAboutDialog(context: context);
                           },
