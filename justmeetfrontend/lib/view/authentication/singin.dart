@@ -48,95 +48,157 @@ class _SinginPageState extends State<SinginPage> {
                 firstChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-            //Camibio registrazione
-                  SignInButton(
-                    Buttons.Email,
-                    onPressed: () => change(),
-                    
-                  ),
-            //NOME
-                  TextField(
-               controller: nome,
-               decoration: InputDecoration(
-                labelText: 'Nome',
-                hintText: "Inserisci qui il tuo nome",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8),)),
-                           ),
+                    //Camibio registrazione
+                    SignInButton(
+                      Buttons.Email,
+                      onPressed: () => change(),
+                      
+                    ),
+                    //NOME
+                    TextField(
+                controller: nome,
+                decoration: InputDecoration(
+                  labelText: 'Nome',
+                  hintText: "Inserisci qui il tuo nome",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8),)),
+                            ),
+                ),
+                    //COGNOME
+                    TextField(
+                controller: cognome,
+                decoration: InputDecoration(
+                  labelText: 'Cognome',
+                  hintText: "Inserisci qui il tuo cognome",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8),)),
+                            ),
               ),
-             //COGNOME
-                  TextField(
-               controller: cognome,
-               decoration: InputDecoration(
-                labelText: 'Cognome',
-                hintText: "Inserisci qui il tuo cognome",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8),)),
-                           ),
-             ),
-             //CONTINUA CON GOOGLE
-                  SignInButton(
-               Buttons.Google,
-               text:"Continua con Google",
-               onPressed: () async => {
-                  if(nome.text.isEmpty || cognome.text.isEmpty)      
-                  showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Attenzione"),
-                                    content: Text("Compilare tutti i campi"),
-                                   );
-                            }
-                            )
-                  else
-                  {
-                    newUser = await AuthProvider().singinWithGoogle(),
-                    mongoUser = new User(newUser.uid, nome.text, cognome.text, newUser.email),
-                    esito = await ControllerJM.postUser(mongoUser),
-                    print(esito),
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'))
-                  }
-               }
-               ),
-                    ]
-                  ),
+                    //CONTINUA CON GOOGLE
+                    SignInButton(
+                Buttons.Google,
+                text:"Continua con Google",
+                onPressed: () async => {
+                    if(nome.text.isEmpty || cognome.text.isEmpty)      
+                    showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Attenzione"),
+                                      content: Text("Compilare tutti i campi"),
+                                    );
+                              }
+                              )
+                    else
+                    {
+                      newUser = await AuthProvider().singinWithGoogle(),
+                      mongoUser = new User(newUser.uid, nome.text, cognome.text, newUser.email),
+                      esito = await ControllerJM.postUser(mongoUser),
+                      print(esito),
+                      Navigator.of(context).popUntil(ModalRoute.withName('/'))
+                    }
+                }
+                ),
+                      ]
+                    ),
                 secondChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                      //Camibio registrazione
                      SignInButton(
                        Buttons.Google,
                        onPressed: () => change()),
-                        //EMAIL
-                        TextField(
-               controller: email,
-               decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: "Inserisci qui la tua email",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8),)),
-                             ),
-             ),
-                        //PASSWORD
-                        TextField(
-               controller: password,
-               decoration: InputDecoration(
-                  labelText: 'Password',
-                  hintText: "Inserisci qui la tua password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8),)),
-                             ),
-             ),
-                        //CONFERMA PASSWORD
-                        TextField(
-               controller: confermapassword,
-               decoration: InputDecoration(
-                  labelText: 'Re-Password',
-                  hintText: "Renserisci qui la tua password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8),)),
-                             ),
-             ),
+                      //Nome       
+                      TextField(
+                        controller: nome,
+                        decoration: InputDecoration(
+                        labelText: 'Nome',
+                        hintText: "Inserisci qui il tuo nome",
+                        border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8),)),
+                           ),
+                       ),
+                      //COGNOME
+                      TextField(
+                        controller: cognome,
+                        decoration: InputDecoration(
+                          labelText: 'Cognome',
+                          hintText: "Inserisci qui il tuo cognome",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8),)),
+                                    ),
+                      ),
+                      //EMAIL
+                      TextField(
+                        controller: email,
+                        decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: "Inserisci qui la tua email",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8),)),
+                                      ),
+                      ),
+                      //PASSWORD
+                      TextField(
+                        controller: password,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: "Inserisci qui la tua password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8),)),
+                                      ),
+                      ),
+                      //CONFERMA PASSWORD
+                      TextField(
+                        controller: confermapassword,
+                        decoration: InputDecoration(
+                            labelText: 'Re-Password',
+                            hintText: "Renserisci qui la tua password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(8),)),
+                                      ),
+                      ),
+                      //LOGIN
+                         SignInButton(
+                Buttons.Email,
+                text:"Login",
+                onPressed: () async => {
+                    if(nome.text.isEmpty || cognome.text.isEmpty || email.text.isEmpty || password.text.isEmpty || confermapassword.text.isEmpty || confermapassword.text != password.text)      
+                    showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Attenzione"),
+                                      content: Text("Compilare tutti i campi"),
+                                    );
+                              }
+                              )
+                    else
+                    {
+                      newUser = AuthProvider().creaUtenteFirebase(email.text, password.text),
+                      if(newUser == null)
+                      showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Boh"),
+                                      content: Text("Problema"),
+                                    );
+                              }
+                              )
+                      else{
+                      print(await AuthProvider.getUId()),
+                      mongoUser = new User(await AuthProvider.getUId(), nome.text, cognome.text, newUser.email),
+                      print(mongoUser.toString()),
+                      esito = await ControllerJM.postUser(mongoUser),
+                      print("Esito mongo: " + esito.toString()),
+                      print("Esito firebase: "+ AuthProvider.getUId().toString()),
+                      Navigator.of(context).popUntil(ModalRoute.withName('/'))
+                      }
+
+                    }
+                }
+                )
                   ]
                 ),
                 crossFadeState: _showSecond

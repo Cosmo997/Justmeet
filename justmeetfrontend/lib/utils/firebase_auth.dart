@@ -58,16 +58,10 @@ static Future<String> getImage()async{
     ));
     return result.user;
   }
-bool creaUtenteFirebase(String email, String password){
-  try 
-  {
-     _auth.createUserWithEmailAndPassword(email: email, password: password);
-     return true;
-  }
-  catch (e) 
-  {
-  return false;
-  }
+FirebaseUser creaUtenteFirebase(String email, String password){
+  AuthResult franco;
+   _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => franco = value).catchError(franco = null);
+  return franco.user;
 }
 
 }

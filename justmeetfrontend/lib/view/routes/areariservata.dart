@@ -20,7 +20,6 @@ class AreaRiservata extends StatefulWidget{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setDarkMode(ThemeHandler.getCurrentThema());
       }
