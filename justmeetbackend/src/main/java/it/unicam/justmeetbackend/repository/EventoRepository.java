@@ -22,6 +22,22 @@ public interface EventoRepository extends MongoRepository<Evento, String> {
             save(e);
     };
     
+    default void updateApproved(String idEvento)
+    {
+        Optional<Evento> evento = findById(idEvento);
+        Evento e;
+        if(evento.isPresent()) {
+            e = evento.get();
+            if(!e.isApproved()){
+                e.setApproved(true);
+            }
+        }
+        else{
+            e = null;
+        }
+        save(e);
+    }
+
     default void updateIscrizioni(String idEvento, String idUser) {
         Optional<Evento> evento = findById(idEvento);
         Evento e;
@@ -55,12 +71,12 @@ public interface EventoRepository extends MongoRepository<Evento, String> {
         }
         save(e);
     }
-
+    List<Evento> findByIdTopic(String topic);
     List<Evento> findByIsApproved(Boolean isApproved);
     List<Evento> findByPartecipanti(int partecipanti);
     List<Evento> findByPartecipantiGreaterThan(int partecipanti);
     List<Evento> findByPartecipantiLessThan(int partecipanti);
-    List<Evento> findByTitoloLike(String titolo);    
+    List<Evento> findByTitoloLikeIgnoreCase(String titolo);    
     List<Evento> findByIdCreatore(String id);
     
 }
