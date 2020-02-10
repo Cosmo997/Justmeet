@@ -7,12 +7,12 @@ import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
-class MieiEventi extends StatefulWidget{
+class ApprovaEventi extends StatefulWidget{
   @override
-    MieiEventiState createState() => MieiEventiState();
+    ApprovaEventiState createState() => ApprovaEventiState();
   }
 
-class MieiEventiState extends State<MieiEventi>{
+class ApprovaEventiState extends State<ApprovaEventi>{
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   
   @override
@@ -25,7 +25,7 @@ class MieiEventiState extends State<MieiEventi>{
                centerTitle: true,
                ),
     body: FutureBuilder(
-      future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
+      future: ControllerJM.loadEventsToBeApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
@@ -48,7 +48,7 @@ class MieiEventiState extends State<MieiEventi>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("Non hai creato nessun evento"),
+                      Text("Non ci sono eventi da approvare"),
                     ],
                   ),
                     )
@@ -75,52 +75,6 @@ class MieiEventiState extends State<MieiEventi>{
                                     ),
                                     title: Text(evento.titolo),
                                     subtitle: Text(evento.idCreatore),
-                                    trailing: FutureBuilder(
-                                      future: ControllerJM.getUserById(AuthProvider.getUId()),
-                                      builder: (context, AsyncSnapshot<User> user) {
-                                        if(user.data == null)
-                                         return CircularProgressIndicator();
-                                        else 
-                                        if(user.data.preferiti.contains(evento.id))
-                                        {
-                                          return                                   
-                                        GestureDetector(
-                                          child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
-                                          onTap: () {
-                                            setState(() {
-                                               ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
-                                             showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione dai preferiti avvenuta con successo"),
-                                   );
-                            }
-                            );    
-                                       });
-                                          },
-                                        );
-                                        }
-                                        else
-                                        return
-                                        GestureDetector(
-                                          child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
-                                          onTap: () {
-                                            setState(() {
-                                               ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
-                                             showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Evento aggiunto ai preferiti"),
-                                   );
-                            }
-                            );    
-                                       });
-                                          },
-                                        );
-                                      },
-                                    )
                                   ),
                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
                                    Text("Descrizione", style: TextStyle(fontSize: 18), ),
@@ -168,55 +122,50 @@ class MieiEventiState extends State<MieiEventi>{
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    FutureBuilder(
-                                      future: AuthProvider.getUId(),
-                                      builder: (context, AsyncSnapshot<String> snapshot) {
-                                      if(snapshot.data == null)
-                                        return CircularProgressIndicator();
-                                      else if (evento.iscrizioni.contains(snapshot.data))
-                                        return RaisedButton.icon(
-                                          shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                ),
-                                icon: Icon(Icons.remove_circle_outline),
-                                label: Text("Rimuovi Iscrizione"),
-                                 color: ThemeHandler.jmTheme().accentColor,
-                                      onPressed: ()  {
-                                        setState(() {
-                                              ControllerJM.deleteIscrizione(evento.id, snapshot.data);
-                                              showDialog(
-                                           context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione iscrizione avvenuta con successo"),
-                                         elevation: 10,
-                                   );}); 
-                                  });},);
-                               else
-                              return RaisedButton.icon(
+                                    RaisedButton.icon(
                                 shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(10.0),
                                 ),
                                       color: ThemeHandler.jmTheme().accentColor,
                                       icon: Icon(Icons.check_circle_outline),
-                                      label: Text("Partecipa"),
+                                      label: Text("Apporva"),
                                      onPressed:() {
                                        setState(() {
-                                        ControllerJM.addIscrizione(evento.id, snapshot.data);
+                                        ControllerJM.approvaEvento(evento.id);
+                                        snapshot.data.removeAt(index);
                                         showDialog(
                                            context: context,
                                           builder: (BuildContext context) {
                                          return AlertDialog(
-                                         title: Text("Iscrizione avvenuta con successo"),
+                                         title: Text("Evento Approvato con successo"),
                                    );
                                     }
                                     );    
                                        });
                                       },
-                                     );
-                                     },
-                                    ),
-                                    
+                                     ),
+                                     RaisedButton.icon(
+                                shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                ),
+                                      color: ThemeHandler.jmTheme().accentColor,
+                                      icon: Icon(Icons.check_circle_outline),
+                                      label: Text("Rifiuta"),
+                                     onPressed:() {
+                                       setState(() {
+                                        ControllerJM.rifiutaEvento(evento.id);
+                                        snapshot.data.removeAt(index);
+                                        showDialog(
+                                           context: context,
+                                          builder: (BuildContext context) {
+                                         return AlertDialog(
+                                         title: Text("Evento Rifiutato"),
+                                   );
+                                    }
+                                    );    
+                                       });
+                                      },
+                                     ),
                                   ],
                                 ),
                                 ],
@@ -236,3 +185,5 @@ class MieiEventiState extends State<MieiEventi>{
 
   }
 }
+
+                             

@@ -86,7 +86,7 @@ class AppState extends State<App>{
               Icon(Icons.home, size: 30,color: (currentIndex==0)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
               Icon(Icons.add_circle, size: 30, color: (currentIndex==1)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
               Icon(Icons.favorite, size: 30, color: (currentIndex==2)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
-              Icon(Icons.accessible_forward, size: 30, color: (currentIndex==3)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor)
+              Icon(Icons.account_circle, size: 30, color: (currentIndex==3)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor)
             ],
             animationDuration: Duration(milliseconds: 700),
             index: currentIndex,

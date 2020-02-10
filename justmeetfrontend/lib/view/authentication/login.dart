@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                   RaisedButton(
                     color: ThemeHandler.jmTheme().accentColor,
                     child: Text("Iscriviti"),
-                    onPressed: () => Navigator.of(context).pushNamed("/singin"),
+                    onPressed: () => Navigator.of(context).pushNamed("/signup"),
                   )
              ],),
            ),

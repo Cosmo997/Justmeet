@@ -25,13 +25,6 @@ class ControllerJM
      else return false;
      }
 
-  static Future<List<Evento>> loadEvents()  async {
-    http.Response response = await http.get(urlBase + "/eventi", headers: {"Accept" : "application/json"});
-    List collection = json.decode(response.body);
-    List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
-    return eventi;
-  }
-
   static Future<List<Regione>> loadRegioni() async {
     http.Response response = await http.get(urlBase + "/regioni", headers: {"Accept" : "application/json"});
     List collection = json.decode(response.body);
@@ -84,10 +77,13 @@ class ControllerJM
    }
 
   static Future<bool> postUser(User newuser) async {
-    print(json.encode(newuser.toMap()));
-    http.Response response = await http.post(urlBase + "/user", headers: {"Accept" : "application/json"}, body: json.encode(newuser.toMap()));
-    if(response.statusCode == 200) return true;
-    else return false;
+    print("Json.encode: " +json.encode(newuser.toMap()));
+    http.Response response = await http.post(urlBase + "/user", headers: {"Content-type": "application/json"}, body: json.encode(newuser.toMap()));
+    print("Status code: " +response.statusCode.toString());
+    if(response.statusCode == 200) 
+    return true;
+    else 
+    return false;
 
   }
 
@@ -116,10 +112,32 @@ class ControllerJM
     await http.put(urlBase + "/evento/iscrizione/delete?idEvento="+idEvento+"&idUser="+idUser);
   }
 
+   static void approvaEvento(String idEvento) async {
+    await http.put(urlBase + "/evento/approva?idEvento="+idEvento);
+  }
+
+  static void rifiutaEvento(String idEvento) async {
+    await http.delete(urlBase + "/evento/"+idEvento);
+  }
+
   static Future<String> getNomeByIdUser(String idUser) async{
     http.Response response = await http.get(urlBase + "/user/id/" +idUser,  headers: {"Accept" : "application/json"});
     User user = User.fromJson(jsonDecode(response.body));
     return user.nome;
+  }
+
+ static Future<List<Evento>> loadEventsToBeApproved()  async {
+    http.Response response = await http.get(urlBase + "/eventi/isapproved/false", headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
+    return eventi;
+  }
+
+  static Future<List<Evento>> loadEventsApproved()  async {
+    http.Response response = await http.get(urlBase + "/eventi/isapproved/true", headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
+    return eventi;
   }
 
 }

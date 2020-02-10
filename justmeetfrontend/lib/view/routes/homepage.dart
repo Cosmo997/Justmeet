@@ -20,7 +20,7 @@ class HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
   return Scaffold(
     body: FutureBuilder(
-      future: ControllerJM.loadEvents(),
+      future: ControllerJM.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
@@ -73,13 +73,24 @@ class HomePageState extends State<HomePage>{
                                             setState(() {
                                                ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione dai preferiti avvenuta con successo"),
-                                   );
-                            }
-                            );    
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Rimozione Preferito"),
+          content: new Text("Questo evento non farà più parte dei tuoi Eventi Preferiti"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
                                        });
                                           },
                                         );
@@ -92,13 +103,24 @@ class HomePageState extends State<HomePage>{
                                             setState(() {
                                                ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Evento aggiunto ai preferiti"),
-                                   );
-                            }
-                            );    
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Aggiunta Preferito"),
+          content: new Text("Evento aggiunto ai preferiti"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );    
                                        });
                                           },
                                         );
@@ -169,15 +191,24 @@ class HomePageState extends State<HomePage>{
                                         setState(() {
                                               ControllerJM.deleteIscrizione(evento.id, snapshot.data);
                                               showDialog(
-                                           context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione iscrizione avvenuta con successo"),
-                                         elevation: 10,
-                                        
-                                   );
-                            }
-                            ); 
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Rimozione Iscrizione Avvenita Con Successo"),
+          content: new Text("Ora non sei piu iscritto a questo evento"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
                                         });                                        
                                         },
                                      );
@@ -193,14 +224,25 @@ class HomePageState extends State<HomePage>{
                                      {
                                        setState(() {
                                         ControllerJM.addIscrizione(evento.id, snapshot.data);
-                                        showDialog(
-                                           context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Iscrizione avvenuta con successo"),
-                                   );
-                            }
-                            );    
+                                      showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Iscrizione Avvenuta Con Successo"),
+          content: new Text("Ora sei iscritto, continua a navigare"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    ); 
                                        });
                                       },
                                      );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:justmeet/app.dart';
 import 'package:justmeet/view/authentication/login.dart';
+import 'package:justmeet/view/authentication/signup.dart';
 import 'package:justmeet/view/authentication/singin.dart';
+import 'package:justmeet/view/routes/approvaeventi.dart';
 import 'package:justmeet/view/routes/mieieventi.dart';
 
 class RouteGenerator {
@@ -16,7 +18,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SinginPage());
       case '/mieieventi':
         return MaterialPageRoute(builder: (_) => MieiEventi());
-      
+      case '/signup':
+        return MaterialPageRoute(builder: (_) => SignUp());
+      case '/approva':
+        return MaterialPageRoute(builder: (_) => ApprovaEventi());
+
       default:
         return _errorRoute();
     }

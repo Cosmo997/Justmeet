@@ -155,6 +155,22 @@ class AreaRiservata extends StatefulWidget{
                             showAboutDialog(context: context);
                           },
                         ),
+                        if(snapshot.data.isMod == true)
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Divider(height: 10),
+                              ListTile(
+                          title: Text("Aprova Eventi"),
+                          leading: Icon(Icons.check_circle_outline, color: ThemeHandler.jmTheme().accentColor,),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/approva');
+                          },
+                        ),
+                            ],
+                          )),
+                        
                       ],
                   ),
                   ),

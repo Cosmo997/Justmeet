@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider {
@@ -58,10 +59,18 @@ static Future<String> getImage()async{
     ));
     return result.user;
   }
-FirebaseUser creaUtenteFirebase(String email, String password){
+
+  FirebaseUser creaUtenteFirebase(String email, String password){
   AuthResult franco;
    _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => franco = value).catchError(franco = null);
   return franco.user;
 }
+
+Future<String> signUp(String email, String password) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    FirebaseUser user = result.user;
+    return user.uid;
+  }
 
 }
