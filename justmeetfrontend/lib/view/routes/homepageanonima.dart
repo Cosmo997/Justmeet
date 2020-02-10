@@ -57,10 +57,11 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                          },
                        ),
                        ListTile(
-                         title: Text("SignIn",style: TextStyle(fontSize: 15)),
+                         title: Text("SignUp",style: TextStyle(fontSize: 15)),
                          leading: Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
                          trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
                          onTap: () {
+                           Navigator.of(context).pushNamed('/signup');
                          },
                        ),
                        ListTile(
@@ -128,7 +129,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                    ),
                  ),
     body: FutureBuilder(
-      future: ControllerJM.loadEvents(),
+      future: ControllerJM.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {

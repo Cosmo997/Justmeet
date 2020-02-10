@@ -161,7 +161,7 @@ class _SinginPageState extends State<SinginPage> {
                       //LOGIN
                          SignInButton(
                 Buttons.Email,
-                text:"Login",
+                text:"Iscriviti",
                 onPressed: () async => {
                     if(nome.text.isEmpty || cognome.text.isEmpty || email.text.isEmpty || password.text.isEmpty || confermapassword.text.isEmpty || confermapassword.text != password.text)      
                     showDialog(
@@ -175,17 +175,11 @@ class _SinginPageState extends State<SinginPage> {
                               )
                     else
                     {
-                      newUser = AuthProvider().creaUtenteFirebase(email.text, password.text),
+                      newUser = (await AuthProvider().singInWithEmail(email.text, password.text)) as FirebaseUser,
                       if(newUser == null)
-                      showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text("Boh"),
-                                      content: Text("Problema"),
-                                    );
-                              }
-                              )
+                      {
+                        print("user null")
+                      }
                       else{
                       print(await AuthProvider.getUId()),
                       mongoUser = new User(await AuthProvider.getUId(), nome.text, cognome.text, newUser.email),

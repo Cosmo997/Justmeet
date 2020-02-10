@@ -100,9 +100,9 @@ public class EventoController {
      * @param isApproved
      * @return
      */
-    @RequestMapping(value = "/eventi/approvati")
-    public List<Evento> getEventiApprovati() {
-        return repository.findByIsApproved(true);
+    @GetMapping(value = "/eventi/isapproved/{isApproved}")
+    public List<Evento> getEventiByIsApproved(@PathVariable boolean isApproved) {
+        return repository.findByIsApproved(isApproved);
     }
 
     /**
