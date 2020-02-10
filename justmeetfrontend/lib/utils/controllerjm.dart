@@ -122,4 +122,17 @@ class ControllerJM
     return user.nome;
   }
 
+  static Future<List<Evento>> search(String titolo, String topic, String comune) async {
+    http.Response response = await http.get(urlBase + "eventi/search?titolo=" + titolo +"&idTopic=" + topic +"&idComune=" + comune,  headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
+    return myEvent;
+  }
+
+  static Future<List<Comune>> loadComuni() async {
+    http.Response response = await http.get(urlBase+ "/comune", headers: {"Accept" : "application/json"});
+    List collection = json.decode(response.body);
+    List<Comune> pr = collection.map((json) => Comune.fromjson(json)).toList();
+    return pr;
+  }
 }

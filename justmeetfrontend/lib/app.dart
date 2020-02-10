@@ -8,7 +8,7 @@ import 'package:justmeet/view/routes/areariservata.dart';
 import 'package:justmeet/view/routes/eventcreator.dart';
 import 'package:justmeet/view/routes/homepage.dart';
 import 'package:justmeet/view/routes/homepageanonima.dart';
-import 'package:justmeet/view/routes/preferiti.dart';
+import 'package:justmeet/view/routes/ricerca.dart';
 
 
 
@@ -25,7 +25,7 @@ class AppState extends State<App>{
         final pageOption = [
           HomePage(),
           EventCreator(),
-          Preferiti(),
+          RicercaPage(),
           AreaRiservata()];
 
     @override
@@ -85,7 +85,7 @@ class AppState extends State<App>{
             items: [
               Icon(Icons.home, size: 30,color: (currentIndex==0)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
               Icon(Icons.add_circle, size: 30, color: (currentIndex==1)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
-              Icon(Icons.favorite, size: 30, color: (currentIndex==2)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
+              Icon(Icons.search, size: 30, color: (currentIndex==2)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
               Icon(Icons.accessible_forward, size: 30, color: (currentIndex==3)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor)
             ],
             animationDuration: Duration(milliseconds: 700),

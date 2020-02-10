@@ -59,6 +59,7 @@ class EventCreator extends StatefulWidget
               padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
               margin: EdgeInsets.all(5),
               child: Card(
+                
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 color: ThemeHandler.jmTheme().secondaryHeaderColor,
                 elevation: 10,
@@ -241,7 +242,6 @@ class EventCreator extends StatefulWidget
                         padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                         child: Text("Inizio Evento:")
                         ),
-                      
                       Text(_df.format(_selectedDateStart)),
                       IconButton(
                                color: ThemeHandler.jmTheme().accentColor,
