@@ -1,6 +1,7 @@
 package it.unicam.justmeetbackend.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,7 @@ public class EventoController {
      */
     @RequestMapping(value = "/eventi/like/{titolo}", method = RequestMethod.GET)
     public List<Evento> getEventsByTitoloLike(@PathVariable String titolo) {
-        return repository.findByTitoloLike(titolo);
+        return repository.findByTitoloLikeIgnoreCase(titolo);
     }
 
     /**
@@ -116,6 +117,16 @@ public class EventoController {
     }
 
     /**
+     * Get eventi by selected Topic
+     * @param topic
+     * @return gli eventi dato un deterimnato topic
+     */
+    @RequestMapping(value = "/eventi/topic/{idTopic}")
+    public List<Evento> getEventiByTopic(@PathVariable String idTopic) {
+        return repository.findByIdTopic(idTopic);
+    }
+
+    /**
      * Get eventi where partecipanti > $partecipanti
      * 
      * @param partecipanti
@@ -170,7 +181,7 @@ public class EventoController {
      * @param idEvento al quale l'user vuole iscriversi
      * @param idUser che si vuole iscrivere
      */
-    @RequestMapping(value = "evento/iscrizione/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/evento/iscrizione/update", method = RequestMethod.PUT)
     public void addIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
         repository.updateIscrizioni(idEvento, idUser);
     }
@@ -180,9 +191,18 @@ public class EventoController {
      * @param idEvento dal quali rimuovere l'user
      * @param idUser da cancellare tra gli iscritti
      */
-    @RequestMapping(value = "evento/iscrizione/delete", method = RequestMethod.PUT)
+    @RequestMapping(value = "/evento/iscrizione/delete", method = RequestMethod.PUT)
     public void deleteIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
         repository.deleteIscrizione(idEvento, idUser);
+    }
+
+    /**
+     * Modifica l'evento settando isApproved a True
+     * @param idEvento da Approvare
+     */
+    @RequestMapping(value = "/evento/approva", method = RequestMethod.PUT)
+    public void updateApproved(@RequestParam String idEvento){
+        repository.updateApproved(idEvento);
     }
 
     /**
@@ -193,6 +213,31 @@ public class EventoController {
     @RequestMapping(value="/evento/{id}", method=RequestMethod.DELETE)
     public void deleteEvent(@PathVariable String id) {
             repository.deleteById(id);
+    }
+
+    /**
+     * 
+     * @param titolo
+     * @param topic
+     * @param idComune
+     * @return
+     */
+    @RequestMapping(value = "eventi/search", method = RequestMethod.GET)
+    public List<Evento> getSearchEvents(@RequestParam String titolo, @RequestParam String idTopic, @RequestParam String idComune)
+    {
+        HashSet<Evento> eventiFiltrati = new HashSet<>();
+
+        if(titolo != null)
+        eventiFiltrati.addAll(repository.findByTitoloLikeIgnoreCase(titolo));
+        if(idTopic != null)
+        eventiFiltrati.addAll(repository.findByIdTopic(idTopic));
+        if(idComune != null)
+        eventiFiltrati.addAll(repository.findByIdComune(idComune));        
+
+        List<Evento> e = new ArrayList<>();
+        e.addAll(eventiFiltrati);
+
+        return e;
     }
 
 }
