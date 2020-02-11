@@ -115,7 +115,7 @@ class GuestHomePageState extends State<GuestHomePage>{
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
                     child: SinginPage()); },
-                  //isScrollControlled: true 
+                  isScrollControlled: true 
                   );
                          },
                        ),
