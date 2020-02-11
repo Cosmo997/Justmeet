@@ -6,8 +6,10 @@ import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
+
 class VistaEventiWidget extends StatefulWidget {
   final Future<List<Evento>> events;
+
   VistaEventiWidget({Key key, @required this.events}) : super(key: key);
 
   @override

@@ -5,6 +5,8 @@ import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/appbar_widget.dart';
+import 'package:justmeet/widget/loading_widget.dart';
 
 
 class MieiEventiPage extends StatefulWidget{
@@ -18,32 +20,12 @@ class MieiEventiPageState extends State<MieiEventiPage>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-    //TODO Aggiungere default appbar
-     appBar:AppBar(
-               backgroundColor: ThemeHandler.jmTheme().primaryColor,
-               elevation: 10,
-               title: Image.asset('assets/images/logo.png', scale: 2.5),
-               centerTitle: true,
-               ),
+    appBar:JMAppBar(),
     body: FutureBuilder(
       future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         //TODO aggiungere vista eventi
-        if(snapshot.data == null)
-        {
-        return Container(
-          child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("LOADING", style: TextStyle(color: ThemeHandler.jmTheme().accentColor),),
-                      Divider(color: ThemeHandler.jmTheme().accentColor, height: 30,indent: 50 ,endIndent: 50,),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
-                    )
-        );
-        }
+        if(snapshot.data == null) {return LoadingWidget();}
         else if(snapshot.data.length == 0){
          return Container(
           child: Center(

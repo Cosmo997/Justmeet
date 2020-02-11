@@ -103,7 +103,6 @@ class CreaEventoPage extends StatefulWidget
                   ),          
                   
                   // Colonna N max, Topics, Regione, Provincia, Comune
-                  //TODO Spostare Regione Provincia Comune in un unico widget luogo_widget.dart
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -130,7 +129,6 @@ class CreaEventoPage extends StatefulWidget
                             ),
                           ),
                           Container(
-                            //padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: FutureBuilder(
                               future: ControllerJM.loadTopics(),
                               builder: (BuildContext context, AsyncSnapshot<List<Topic>> snapshot){

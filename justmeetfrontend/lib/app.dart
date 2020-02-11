@@ -1,7 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/route_generator.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/view/routes/areariservata_page.dart';
@@ -9,6 +8,7 @@ import 'package:justmeet/view/routes/creaevento_page.dart';
 import 'package:justmeet/view/routes/ricerca_page.dart';
 import 'package:justmeet/view/routes/user_home_page.dart';
 import 'package:justmeet/view/routes/guest_home_page.dart';
+import 'package:justmeet/widget/appbar_widget.dart';
 
 void main() => runApp(App());
 
@@ -54,30 +54,8 @@ class AppState extends State<App>{
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.generateRoute,
            home: Scaffold(
-     //App bar generale
-          //TODO Spostare in un widget appbar_widget.dart
-           appBar:AppBar(
-               backgroundColor: ThemeHandler.jmTheme().primaryColor,
-               elevation: 10,
-               title: Image.asset('assets/images/logo.png', scale: 2.5),
-               centerTitle: true,
-               actions: <Widget>[
-                 IconButton(
-                    iconSize: 40,
-                    icon: Icon(Icons.exit_to_app),
-                    onPressed:() => AuthProvider().logOut(),
-                    tooltip: "LogOut",
-                    color: ThemeHandler.jmTheme().accentColor,
-                  ),
-               ],
-               ),
-    
-     //Body = richiama il metodo costruttore Build della pagina all'indice currentIndex
-    
+           appBar: JMAppBar(),
            body: pageOption[currentIndex],
-    
-     //Navigation Bar Generale
-    
            bottomNavigationBar: CurvedNavigationBar(
             height: 50,
             color: ThemeHandler.jmTheme().primaryColor,
@@ -94,7 +72,6 @@ class AppState extends State<App>{
             onTap: (index){setState(() {
               currentIndex = index;
             });})
-            
       ),
           );
           }
@@ -104,6 +81,8 @@ class AppState extends State<App>{
 }
 
 }
+
+
 
 
 

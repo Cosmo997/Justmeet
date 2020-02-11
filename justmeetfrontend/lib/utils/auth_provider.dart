@@ -19,6 +19,7 @@ class AuthProvider {
   }
   void logOut(){
     _auth.signOut();
+  
   }
 
 static Future<String> getUId() async {

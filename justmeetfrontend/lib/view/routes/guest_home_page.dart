@@ -4,6 +4,8 @@ import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/view/authentication/singin_page.dart';
+import 'package:justmeet/widget/appbar_widget.dart';
+import 'package:justmeet/widget/drawer_widget.dart';
 
 class GuestHomePage extends StatefulWidget{
   @override
@@ -16,119 +18,10 @@ class GuestHomePageState extends State<GuestHomePage>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-    appBar:AppBar(
+    appBar:JMAppBar(),
+    drawer: JMDrawer(),
+    //ControllerJM.loadEventsApproved(),
 
-               backgroundColor: ThemeHandler.jmTheme().primaryColor,
-               elevation: 10,
-               title: Image.asset('assets/images/logo.png', scale: 2.5),
-               centerTitle: true,
-               ),
-               //TODO Spostare in drawer_widget.dart
-               drawer: Drawer(
-                   elevation: 20,
-                   child: ListView(
-                     children: <Widget>[
-                       DrawerHeader(
-                         decoration: BoxDecoration(
-                           gradient: LinearGradient(colors: <Color>[
-                             ThemeHandler.jmTheme().accentColor,
-                             Colors.orange
-                           ])
-                         ),
-                         child:  Container(
-                           child: Column(
-                             children: <Widget>[
-                               Material(
-                                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                                 child: Image.asset('assets/images/iconaverticale.png', scale: 2),
-                               ),
-                             ],
-                           )),),
-                      ListTile(
-                         title: Text("Login",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.person, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) { return FractionallySizedBox(
-                    heightFactor: 0.9,
-                    child: SinginPage()); },
-                  isScrollControlled: true);
-                         },
-                       ),
-                       ListTile(
-                         title: Text("SignUp",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           Navigator.of(context).pushNamed('/signup');
-                         },
-                       ),
-                       ListTile(
-                         title: Text("Crea Evento",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.add_circle, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                     return FractionallySizedBox(
-                    heightFactor: 0.9,
-                    child: SinginPage()); },
-                  isScrollControlled: true);
-                         },
-                       ),
-                        ListTile(
-                         title: Text("I Miei Eventi",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.calendar_today, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) { return FractionallySizedBox(
-                    heightFactor: 0.9,
-                    child: SinginPage()); },
-                  isScrollControlled: true);
-                         },
-                       ),
-                       ListTile(
-                         title: Text("Preferiti",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) { return FractionallySizedBox(
-                    heightFactor: 0.9,
-                    child: SinginPage()); },
-                  isScrollControlled: true);
-                         },
-                       ),
-                       ListTile(
-                         title: Text("Area Riservata",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.accessible_forward, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                           showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) { return FractionallySizedBox(
-                    heightFactor: 0.9,
-                    child: SinginPage()); },
-                  //isScrollControlled: true 
-                  );
-                         },
-                       ),
-                       ListTile(
-                         title: Text("Settings",style: TextStyle(fontSize: 15)),
-                         leading: Icon(Icons.settings, color: ThemeHandler.jmTheme().accentColor,),
-                         trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
-                         onTap: () {
-                         },
-                       ),
-                     ],
-                   ),
-                 ),
     body: FutureBuilder(
       future: ControllerJM.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
@@ -246,3 +139,4 @@ class GuestHomePageState extends State<GuestHomePage>{
         
     
     }
+

@@ -4,6 +4,7 @@ import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/loading_widget.dart';
 
 class AreaRiservataPage extends StatefulWidget{
   
@@ -33,19 +34,7 @@ class AreaRiservataPage extends StatefulWidget{
             builder: (BuildContext context, AsyncSnapshot<User> snapshot){
               if(snapshot.data == null)
               {
-                //TODO Spostare in loading_widget.dart
-               return Container(
-              child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("LOADING", style: TextStyle(color: ThemeHandler.jmTheme().accentColor),),
-                          Divider(color: ThemeHandler.jmTheme().accentColor, height: 30,indent: 50 ,endIndent: 50,),
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-                        )
-            );
+               return LoadingWidget();
               }
               else{
                 return Container(
@@ -223,4 +212,7 @@ class AreaRiservataPage extends StatefulWidget{
         tema = "Light Mode";
       }
 }
+
+
+
 
