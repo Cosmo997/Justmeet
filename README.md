@@ -1,4 +1,41 @@
-# Justmeet
+
+<p align="center">
+  <img src="https://github.com/Cosmo997/Justmeet/blob/master/justmeetfrontend/assets/images/logo_black.png">
+</p>
+
+---
+
+<p align="center">
+    Il progetto <b>JustMeet</b> è stato realizzato in <b>Flutter</b> per il corso di laurea <b>L-31</b> presso <b>Unicam</b>, <i>nell'anno accademico 2019/2020</i>, dagli studenti Benedetti Michele e Daniele Moschini, per l'esame di <b>Programmazione Web e Mobile</b> e <b>Ingegneria del Software</b>, utilizzando le tecnologie mostrate durante il corso.
+</p>
+
+# Indice  
+
+- [Vision del Progetto](#vision)
+- [Tecnologie Utilizzate](#tec)
+
+# Vision del Progetto <a name = "vision"></a>
+
+Si vuole realizzare un sistema software che permetta l’incontro tra persone al fine di svolgere **attività cooperative e di squadra**. L’obiettivo del sistema è dunque favorire la creazione di gruppi e di nuove amicizie e deve funzionare come una sorta di **bacheca avanzata di annunci** e di coordinamento.<br><br>
+Gli utenti, qual'ora siano autenticati, possono utilizzare la piattaforma per inserire eventi e per richiedere la partecipazione di altri utenti. In particolare ogni evento sarà caratterizzato da un **topic**, che rispecchierà la tipologia di evento creato. 
+Ad esempio il sistema potrebbe permettere di organizzare una partita di calcetto inserendo specifici dati quali **luogo orario e numero minimo di calciatori** necessario affinché l’evento abbia luogo. <br><br>
+Gli utenti potreanno inoltre consultare nella propria **area riservata**, la lista di eventi ai quali sono **iscritti**, quelli salvati tra i **preferiti** e quelli da loro **creati**, rimuovendoli o inserendone altri a piacimendo dall'apposita pagina.
+Una volta creato, al fine di evitare la pubblicazione di eventi non appropriati, l'evento verrà **approvato** o **rifiutato** da un moderatore, selezionato dagli sviluppatori.
+Se le condizioni saranno soddisfatte, e l'evento verrà approvato, gli utenti registrati avranno la possibilità di sottoscriversi ad esso con conseguente messaggio di conferma.<br>
+Mentre per coloro che **non** sono registrati, sarà comunque possibile usufruire dell'app per visualizzare la bacheca generale.
+
+# Tecnologie Utilizzate durante lo Sviluppo <a name = "tec"></a>
+
+Per questo progetto, abbiamo deciso di utillare un linguaggio lato Front-End, che ci permetta di sviluppare un'applicazione **Cross-Platform**, al fine di avere un software **Single-CodeBase** che sia fruibile su **iOS**, **Android** e **Web** .
+Per fare ciò, abbiamo scelto il linguaggio di programmazione **Dart** e il relativo Framework di sviluppo **Flutter**.
+<br><br>
+Per quanto riguarda il lato Back-End, abbiamo utilizzato interamente il linguaggio **Java** ed il relativo Framework **Spring-Boot** per la creazione di **Api Rest**, utulizzare per far comunicare il lato FrontEnd con il Database NOSQL **MongoDB** per lo storage dei dati.
+<br>
+Per poter effettuare le chiamate REST ci siamo affidati al servizio messo a disposizione da [**Hekoku**](https://www.heroku.com/), che ci ha permesso di spostare in remoto gratuitamente il **Server Apache** messo a disposizione da SpringBoot. <br>
+L'autentucazione dell'utente nell'applicazione viene effettuata grazie al servizio **Google Firebase**, che gestisce in modo autonomo dal sistema da noi implementato, le fasi di **SignIn** e **SignUp**.
+
+<br><br>
+# Prima Vision e Iterazioni per lo Sviluppo 
 
 VISON:<BR>
 
