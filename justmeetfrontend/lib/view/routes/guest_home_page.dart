@@ -23,6 +23,7 @@ class GuestHomePageState extends State<GuestHomePage>{
                title: Image.asset('assets/images/logo.png', scale: 2.5),
                centerTitle: true,
                ),
+               //TODO Spostare in drawer_widget.dart
                drawer: Drawer(
                    elevation: 20,
                    child: ListView(
@@ -223,6 +224,7 @@ class GuestHomePageState extends State<GuestHomePage>{
 
         },
     ),
+    //TODO Spostare in singin_button_widget.dart
     floatingActionButton: FloatingActionButton(
       backgroundColor: ThemeHandler.jmTheme().accentColor,
       child: Icon(Icons.account_box, color: ThemeHandler.jmTheme().primaryColor),

@@ -33,6 +33,7 @@ class AreaRiservataPage extends StatefulWidget{
             builder: (BuildContext context, AsyncSnapshot<User> snapshot){
               if(snapshot.data == null)
               {
+                //TODO Spostare in loading_widget.dart
                return Container(
               child: Center(
                       child: Column(

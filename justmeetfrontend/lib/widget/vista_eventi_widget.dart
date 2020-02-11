@@ -62,7 +62,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                       ),
                                       title: Text(evento.titolo),
                                       subtitle: Text(evento.idCreatore),
-                                      trailing: FutureBuilder(
+                                      trailing: FutureBuilder( //TODO Spostare button favorite
                                         future: ControllerJM.getUserById(AuthProvider.getUId()),
                                         builder: (context, AsyncSnapshot<User> user) {
                                           if(user.data == null)

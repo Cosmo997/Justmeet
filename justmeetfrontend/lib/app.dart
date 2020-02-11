@@ -55,6 +55,7 @@ class AppState extends State<App>{
           onGenerateRoute: RouteGenerator.generateRoute,
            home: Scaffold(
      //App bar generale
+          //TODO Spostare in un widget appbar_widget.dart
            appBar:AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
                elevation: 10,

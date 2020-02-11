@@ -18,6 +18,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    //TODO Aggiungere default appbar
      appBar:AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
                elevation: 10,
@@ -27,6 +28,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
     body: FutureBuilder(
       future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
+        //TODO aggiungere vista eventi
         if(snapshot.data == null)
         {
         return Container(

@@ -21,6 +21,7 @@ class PreferitiPageState extends State<PreferitiPage>
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    //TODO Sostituire appbar
     appBar: AppBar(
                backgroundColor: ThemeHandler.jmTheme().primaryColor,
                elevation: 10,
@@ -36,6 +37,7 @@ class PreferitiPageState extends State<PreferitiPage>
                   ),
                ],
                ),
+    //TODO Sostiuire body
     body: FutureBuilder(
       future: ControllerJM.loadPreferitiByUtente(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {

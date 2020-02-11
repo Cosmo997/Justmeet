@@ -123,7 +123,7 @@ class SignUpPage extends StatefulWidget {
                          showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        // return object of type Dialog
+                        //TODO Spostare in errore_comp_widget.dart
                         return AlertDialog(
                           title: new Text("Errore nella compilazione"),
                           content: new Text("Attenzione, uno o piu campi non sono stati compilati correttamente, o le password inserite non corrispondono"),

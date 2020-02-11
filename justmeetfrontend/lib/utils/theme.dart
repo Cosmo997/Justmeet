@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///Responsabilità: "Gestire il Tema dell'applicazione"
-class ThemeHandler {
+class ThemeHandler{
   
   static bool isDarkThemeEnabled = false;
 
