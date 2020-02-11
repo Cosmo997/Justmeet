@@ -1,17 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class SinginPage extends StatefulWidget {
+  SinginPage({Key key}) : super(key: key);
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SinginPageState createState() => _SinginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SinginPageState extends State<SinginPage> {
   TextEditingController _email;
   TextEditingController _password;
   bool _showSecond = false;

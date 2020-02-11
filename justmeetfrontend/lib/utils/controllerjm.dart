@@ -2,12 +2,12 @@ import 'dart:convert';
 
 
 import 'package:http/http.dart' as http;
-import 'package:justmeet/classi/comune.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/provincia.dart';
-import 'package:justmeet/classi/regione.dart';
-import 'package:justmeet/classi/topic.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/comune.dart';
+import 'package:justmeet/model/evento.dart';
+import 'package:justmeet/model/provincia.dart';
+import 'package:justmeet/model/regione.dart';
+import 'package:justmeet/model/topic.dart';
+import 'package:justmeet/model/user.dart';
 
 
 
@@ -127,7 +127,13 @@ class ControllerJM
   }
 
   static Future<List<Evento>> search(String titolo, String topic, String comune) async {
-    http.Response response = await http.get(urlBase + "eventi/search?titolo=" + titolo +"&idTopic=" + topic +"&idComune=" + comune,  headers: {"Accept" : "application/json"});
+    if(titolo == null)
+    titolo = "null";
+    if(topic == null)
+    topic = "null";
+    if(comune == null)
+    comune = "null";
+    http.Response response = await http.get(urlBase + "/eventi/search/?titolo=" + titolo +"&idTopic=" + topic +"&idComune=" + comune,  headers: {"Accept" : "application/json"});
     List collection = json.decode(response.body);
     List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
     return myEvent;

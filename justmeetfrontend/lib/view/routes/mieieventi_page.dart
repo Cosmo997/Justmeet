@@ -1,31 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/evento.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
-class Preferiti extends StatefulWidget {
-
+class MieiEventiPage extends StatefulWidget{
   @override
-  PreferitiState createState() => PreferitiState();
-}
+    MieiEventiPageState createState() => MieiEventiPageState();
+  }
 
-class PreferitiState extends State<Preferiti>
-{
-    final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
-
+class MieiEventiPageState extends State<MieiEventiPage>{
+  final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
+  
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+     appBar:AppBar(
+               backgroundColor: ThemeHandler.jmTheme().primaryColor,
+               elevation: 10,
+               title: Image.asset('assets/images/logo.png', scale: 2.5),
+               centerTitle: true,
+               ),
     body: FutureBuilder(
-      future: ControllerJM.loadPreferitiByUtente(AuthProvider.getUId()),
+      future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
-       {
+        {
         return Container(
           child: Center(
                   child: Column(
@@ -39,19 +42,17 @@ class PreferitiState extends State<Preferiti>
                     )
         );
         }
-        else
-        if(snapshot.data.length == 0)
-        {
-          return Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Non hai preferiti")
-                ],
-              ),
-            ),
-          );
+        else if(snapshot.data.length == 0){
+         return Container(
+          child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Non hai creato nessun evento"),
+                    ],
+                  ),
+                    )
+        );
         }
         else
         {
@@ -164,7 +165,6 @@ class PreferitiState extends State<Preferiti>
                                     Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
                                     Text("Comune: " +evento.idComune),
                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
-                                   
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
@@ -190,13 +190,8 @@ class PreferitiState extends State<Preferiti>
                                          return AlertDialog(
                                          title: Text("Rimozione iscrizione avvenuta con successo"),
                                          elevation: 10,
-                                        
-                                   );
-                            }
-                            ); 
-                                        });                                        
-                                        },
-                                     );
+                                   );}); 
+                                  });},);
                                else
                               return RaisedButton.icon(
                                 shape: RoundedRectangleBorder(
@@ -205,8 +200,7 @@ class PreferitiState extends State<Preferiti>
                                       color: ThemeHandler.jmTheme().accentColor,
                                       icon: Icon(Icons.check_circle_outline),
                                       label: Text("Partecipa"),
-                                     onPressed:() 
-                                     {
+                                     onPressed:() {
                                        setState(() {
                                         ControllerJM.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
@@ -215,8 +209,8 @@ class PreferitiState extends State<Preferiti>
                                          return AlertDialog(
                                          title: Text("Iscrizione avvenuta con successo"),
                                    );
-                            }
-                            );    
+                                    }
+                                    );    
                                        });
                                       },
                                      );
@@ -225,7 +219,6 @@ class PreferitiState extends State<Preferiti>
                                     
                                   ],
                                 ),
-
                                 ],
                               )
                             ),
@@ -237,20 +230,9 @@ class PreferitiState extends State<Preferiti>
             separatorBuilder: (context, index) => Divider(indent: 30, endIndent: 30, thickness: 2),
             );
         }
-
         },
-    )
+    ),
     );             
+
   }
-    
-      @override
-      void initState() {
-        super.initState();
-      }
-    
-      @override
-      void dispose() {
-        super.dispose();
-      }
- 
 }

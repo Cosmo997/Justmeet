@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 
 class SinginPage extends StatefulWidget {
   SinginPage({Key key}) : super(key: key);

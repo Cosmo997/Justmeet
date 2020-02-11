@@ -3,18 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 
-class SignUp extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
 
   @override
-  SignUpState createState() => SignUpState();
+  SignUpPageState createState() => SignUpPageState();
     
   }
   
-  class SignUpState extends State<SignUp> {
+  class SignUpPageState extends State<SignUpPage> {
 
 
     Future<FirebaseUser> newUser;

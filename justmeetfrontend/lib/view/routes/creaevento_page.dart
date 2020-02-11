@@ -3,22 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
-import 'package:justmeet/classi/comune.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/provincia.dart';
-import 'package:justmeet/classi/regione.dart';
-import 'package:justmeet/classi/topic.dart';
+import 'package:justmeet/model/comune.dart';
+import 'package:justmeet/model/evento.dart';
+import 'package:justmeet/model/provincia.dart';
+import 'package:justmeet/model/regione.dart';
+import 'package:justmeet/model/topic.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 /// Responsabilità: Creare un Evento.
-class EventCreator extends StatefulWidget 
+class CreaEventoPage extends StatefulWidget 
   {
   @override
-  State<StatefulWidget> createState() => EventCreatorState();
+  State<StatefulWidget> createState() => CreaEventoPageState();
   }
   
-  class EventCreatorState extends State<EventCreator>{
+  class CreaEventoPageState extends State<CreaEventoPage>{
 
       final DateFormat _df = DateFormat("dd/MM/yyyy");
       bool _isRegioneScelta = false;

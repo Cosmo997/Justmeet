@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:justmeet/classi/evento.dart';
+import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/view/authentication/login.dart';
+import 'package:justmeet/view/authentication/singin_page.dart';
 
-class HomepageAnonima extends StatefulWidget{
+class GuestHomePage extends StatefulWidget{
   @override
-    HomepageAnonimaState createState() => HomepageAnonimaState();
+    GuestHomePageState createState() => GuestHomePageState();
   }
 
-class HomepageAnonimaState extends State<HomepageAnonima>{
+class GuestHomePageState extends State<GuestHomePage>{
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   
   @override
@@ -52,7 +52,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   isScrollControlled: true);
                          },
                        ),
@@ -74,7 +74,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   builder: (BuildContext context) {
                      return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   isScrollControlled: true);
                          },
                        ),
@@ -87,7 +87,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   isScrollControlled: true);
                          },
                        ),
@@ -100,7 +100,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   isScrollControlled: true);
                          },
                        ),
@@ -113,7 +113,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   //isScrollControlled: true 
                   );
                          },
@@ -231,7 +231,7 @@ class HomepageAnonimaState extends State<HomepageAnonima>{
                   context: context,
                   builder: (BuildContext context) { return FractionallySizedBox(
                     heightFactor: 0.9,
-                    child: LoginPage()); },
+                    child: SinginPage()); },
                   isScrollControlled: true),
               }
             ));          

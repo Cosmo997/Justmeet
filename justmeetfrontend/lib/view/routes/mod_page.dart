@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
-class ApprovaEventi extends StatefulWidget{
+class ModPage extends StatefulWidget{
   @override
-    ApprovaEventiState createState() => ApprovaEventiState();
+    ModPageState createState() => ModPageState();
   }
 
-class ApprovaEventiState extends State<ApprovaEventi>{
+class ModPageState extends State<ModPage>{
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   
   @override

@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/evento.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
-class MieiEventi extends StatefulWidget{
+class UserHomePage extends StatefulWidget{
   @override
-    MieiEventiState createState() => MieiEventiState();
+    UserHomePageState createState() => UserHomePageState();
   }
 
-class MieiEventiState extends State<MieiEventi>{
+class UserHomePageState extends State<UserHomePage>{
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
+   bool isButtonEnabled = false;
   
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-     appBar:AppBar(
-               backgroundColor: ThemeHandler.jmTheme().primaryColor,
-               elevation: 10,
-               title: Image.asset('assets/images/logo.png', scale: 2.5),
-               centerTitle: true,
-               ),
     body: FutureBuilder(
-      future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
+      future: ControllerJM.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
@@ -42,24 +37,12 @@ class MieiEventiState extends State<MieiEventi>{
                     )
         );
         }
-        else if(snapshot.data.length == 0){
-         return Container(
-          child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Non hai creato nessun evento"),
-                    ],
-                  ),
-                    )
-        );
-        }
         else
         {
           return ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               Evento evento = snapshot.data[index];
-              return  SingleChildScrollView(
+              return SingleChildScrollView(
                         child: Container(
                           child: Center(
                             child: Card(
@@ -90,13 +73,24 @@ class MieiEventiState extends State<MieiEventi>{
                                             setState(() {
                                                ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione dai preferiti avvenuta con successo"),
-                                   );
-                            }
-                            );    
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Rimozione Preferito"),
+          content: new Text("Questo evento non farà più parte dei tuoi Eventi Preferiti"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
                                        });
                                           },
                                         );
@@ -109,13 +103,24 @@ class MieiEventiState extends State<MieiEventi>{
                                             setState(() {
                                                ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
-                                               context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Evento aggiunto ai preferiti"),
-                                   );
-                            }
-                            );    
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Aggiunta Preferito"),
+          content: new Text("Evento aggiunto ai preferiti"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );    
                                        });
                                           },
                                         );
@@ -165,6 +170,7 @@ class MieiEventiState extends State<MieiEventi>{
                                     Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
                                     Text("Comune: " +evento.idComune),
                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                   
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
@@ -185,13 +191,27 @@ class MieiEventiState extends State<MieiEventi>{
                                         setState(() {
                                               ControllerJM.deleteIscrizione(evento.id, snapshot.data);
                                               showDialog(
-                                           context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Rimozione iscrizione avvenuta con successo"),
-                                         elevation: 10,
-                                   );}); 
-                                  });},);
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Rimozione Iscrizione Avvenita Con Successo"),
+          content: new Text("Ora non sei piu iscritto a questo evento"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+                                        });                                        
+                                        },
+                                     );
                                else
                               return RaisedButton.icon(
                                 shape: RoundedRectangleBorder(
@@ -200,17 +220,29 @@ class MieiEventiState extends State<MieiEventi>{
                                       color: ThemeHandler.jmTheme().accentColor,
                                       icon: Icon(Icons.check_circle_outline),
                                       label: Text("Partecipa"),
-                                     onPressed:() {
+                                     onPressed:() 
+                                     {
                                        setState(() {
                                         ControllerJM.addIscrizione(evento.id, snapshot.data);
-                                        showDialog(
-                                           context: context,
-                                          builder: (BuildContext context) {
-                                         return AlertDialog(
-                                         title: Text("Iscrizione avvenuta con successo"),
-                                   );
-                                    }
-                                    );    
+                                      showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Iscrizione Avvenuta Con Successo"),
+          content: new Text("Ora sei iscritto, continua a navigare"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    ); 
                                        });
                                       },
                                      );
@@ -219,6 +251,7 @@ class MieiEventiState extends State<MieiEventi>{
                                     
                                   ],
                                 ),
+
                                 ],
                               )
                             ),
@@ -236,3 +269,4 @@ class MieiEventiState extends State<MieiEventi>{
 
   }
 }
+

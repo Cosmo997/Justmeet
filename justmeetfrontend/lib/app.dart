@@ -1,16 +1,16 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/route_generator.dart';
 import 'package:justmeet/utils/theme.dart';
-import 'package:justmeet/view/routes/areariservata.dart';
-import 'package:justmeet/view/routes/eventcreator.dart';
-import 'package:justmeet/view/routes/homepage.dart';
-import 'package:justmeet/view/routes/homepageanonima.dart';
-import 'package:justmeet/view/routes/ricerca.dart';
+import 'package:justmeet/view/routes/areariservata_page.dart';
+import 'package:justmeet/view/routes/creaevento_page.dart';
+import 'package:justmeet/view/routes/ricerca_page.dart';
+import 'package:justmeet/view/routes/user_home_page.dart';
+import 'package:justmeet/view/routes/guest_home_page.dart';
 
-
+void main() => runApp(App());
 
 class App extends StatefulWidget{
   @override
@@ -23,10 +23,10 @@ class AppState extends State<App>{
         static FirebaseUser currentUser;
         int currentIndex = 0;
         final pageOption = [
-          HomePage(),
-          EventCreator(),
+          UserHomePage(),
+          CreaEventoPage(),
           RicercaPage(),
-          AreaRiservata()];
+          AreaRiservataPage()];
 
     @override
     initState() { 
@@ -44,7 +44,7 @@ class AppState extends State<App>{
               theme: ThemeHandler.jmTheme(),
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RouteGenerator.generateRoute,
-              home: HomepageAnonima()
+              home: GuestHomePage()
             );
             }
             else{

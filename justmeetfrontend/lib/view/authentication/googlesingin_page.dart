@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SinginGooglePage extends StatelessWidget {
@@ -49,6 +49,7 @@ class SinginGooglePage extends StatelessWidget {
                              ),
               controller: email,
             ),
+            //Button
             SignInButton(
               Buttons.Google,
               text: "Iscriviti con google",

@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:justmeet/classi/user.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerjm.dart';
-import 'package:justmeet/utils/firebase_auth.dart';
+import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
-class AreaRiservata extends StatefulWidget{
+class AreaRiservataPage extends StatefulWidget{
   
   @override
   State<StatefulWidget> createState() {
-    return AreaRiservataState();
+    return AreaRiservataPageState();
       }
     }
   
 
-  class AreaRiservataState extends State<AreaRiservata>{
+  class AreaRiservataPageState extends State<AreaRiservataPage>{
     
   String tema;
 
@@ -155,6 +155,20 @@ class AreaRiservata extends StatefulWidget{
                             showAboutDialog(context: context);
                           },
                         ),
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Divider(height: 10),
+                              ListTile(
+                          title: Text("Preferiti"),
+                          leading: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor,),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/preferiti');
+                          },
+                        ),
+                            ],
+                          )),
                         if(snapshot.data.isMod == true)
                         Container(
                           child: Column(

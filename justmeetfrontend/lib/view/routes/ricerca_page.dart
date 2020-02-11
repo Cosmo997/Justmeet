@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:justmeet/classi/comune.dart';
-import 'package:justmeet/classi/evento.dart';
-import 'package:justmeet/classi/provincia.dart';
-import 'package:justmeet/classi/regione.dart';
-import 'package:justmeet/classi/topic.dart';
+import 'package:justmeet/model/comune.dart';
+import 'package:justmeet/model/provincia.dart';
+import 'package:justmeet/model/regione.dart';
+import 'package:justmeet/model/topic.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 import 'package:justmeet/utils/theme.dart';
 
@@ -16,6 +15,7 @@ class RicercaPage extends StatefulWidget {
 }
 
 class _RicercaPageState extends State<RicercaPage> {
+  List<String> argomenti = new List<String>();
   TextEditingController ricerca;
   bool _isRegioneScelta = false;
   bool _isProvinciaScelta = false;
@@ -212,15 +212,17 @@ class _RicercaPageState extends State<RicercaPage> {
                         ),
             ),
         RaisedButton.icon(
-          onPressed: null, 
-          icon: null, 
-          label: null,)
+          onPressed: () {
+            Navigator.of(context).pushNamed('/ricerca', arguments: ControllerJM.search(ricerca.text, _currentTopic, _currentComune));
+          },
+          icon: Icon(Icons.ac_unit), 
+          label: Text("Cerca"),)
           ],
         ),
       )
       
         
-          // Container(
+          // Container( VistaEventi(events: ControllerJM.search(ricerca.text, _currentTopic, _currentComune));
           //   padding: EdgeInsets.all(5),
           //   child: SearchBar<Evento>(
           //     onSearch: ControllerJM.search(ricerca.text, topic, comune) 
