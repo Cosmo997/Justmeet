@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/Cosmo997/Justmeet/blob/master/justmeetfrontend/assets/images/logo.png">
+  <img src="https://github.com/Cosmo997/Justmeet/blob/master/justmeetfrontend/assets/images/logo_black.png">
 </p>
 
 ---
