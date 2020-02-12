@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class SignUpPage extends StatefulWidget {
   
   class SignUpPageState extends State<SignUpPage> {
 
-
+    UserController userController = new UserController();
     Future<FirebaseUser> newUser;
     Future<String> idUser;
     String usercur;
@@ -145,7 +145,7 @@ class SignUpPage extends StatefulWidget {
                            usercur = await idUser,
                            //print("usercur: " +usercur),
                            mongoUser = new User(usercur, nome.text, cognome.text, email.text),
-                           esito = await ControllerJM.postUser(mongoUser),
+                           esito = await userController.postUser(mongoUser),
                            //print("Esito post:  " +esito.toString()),
                           Navigator.of(context).popUntil(ModalRoute.withName('/'))
                          }

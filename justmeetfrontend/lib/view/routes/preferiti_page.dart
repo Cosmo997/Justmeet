@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/widget/appbar_widget.dart';
 
 
 class PreferitiPage extends StatefulWidget {
@@ -16,30 +18,17 @@ class PreferitiPage extends StatefulWidget {
 
 class PreferitiPageState extends State<PreferitiPage>
 {
+    EventoController eventoController = new EventoController();
+    UserController userController = new UserController(); 
     final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
 
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-    //TODO Sostituire appbar
-    appBar: AppBar(
-               backgroundColor: ThemeHandler.jmTheme().primaryColor,
-               elevation: 10,
-               title: Image.asset('assets/images/logo.png', scale: 2.5),
-               centerTitle: true,
-               actions: <Widget>[
-                 IconButton(
-                    iconSize: 40,
-                    icon: Icon(Icons.exit_to_app),
-                    onPressed:() => AuthProvider().logOut(),
-                    tooltip: "LogOut",
-                    color: ThemeHandler.jmTheme().accentColor,
-                  ),
-               ],
-               ),
+    appBar: JMAppBar(),
     //TODO Sostiuire body
     body: FutureBuilder(
-      future: ControllerJM.loadPreferitiByUtente(AuthProvider.getUId()),
+      future: eventoController.loadPreferitiByUtente(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
        {
@@ -92,7 +81,7 @@ class PreferitiPageState extends State<PreferitiPage>
                                     title: Text(evento.titolo),
                                     subtitle: Text(evento.idCreatore),
                                     trailing: FutureBuilder(
-                                      future: ControllerJM.getUserById(AuthProvider.getUId()),
+                                      future: userController.getUserById(AuthProvider.getUId()),
                                       builder: (context, AsyncSnapshot<User> user) {
                                         if(user.data == null)
                                          return CircularProgressIndicator();
@@ -104,7 +93,7 @@ class PreferitiPageState extends State<PreferitiPage>
                                           child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.deletePreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
                                                context: context,
                                           builder: (BuildContext context) {
@@ -123,7 +112,7 @@ class PreferitiPageState extends State<PreferitiPage>
                                           child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.addPreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
                                                context: context,
                                           builder: (BuildContext context) {
@@ -200,7 +189,7 @@ class PreferitiPageState extends State<PreferitiPage>
                                  color: ThemeHandler.jmTheme().accentColor,
                                       onPressed: ()  {
                                         setState(() {
-                                              ControllerJM.deleteIscrizione(evento.id, snapshot.data);
+                                              eventoController.deleteIscrizione(evento.id, snapshot.data);
                                               showDialog(
                                            context: context,
                                           builder: (BuildContext context) {
@@ -225,7 +214,7 @@ class PreferitiPageState extends State<PreferitiPage>
                                      onPressed:() 
                                      {
                                        setState(() {
-                                        ControllerJM.addIscrizione(evento.id, snapshot.data);
+                                        eventoController.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
                                            context: context,
                                           builder: (BuildContext context) {

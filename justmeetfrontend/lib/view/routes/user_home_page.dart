@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
@@ -13,6 +14,8 @@ class UserHomePage extends StatefulWidget{
   }
 
 class UserHomePageState extends State<UserHomePage>{
+  EventoController eventoController = new EventoController();
+  UserController userController = new UserController(); 
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
    bool isButtonEnabled = false;
   
@@ -20,7 +23,7 @@ class UserHomePageState extends State<UserHomePage>{
   Widget build(BuildContext context) {
   return Scaffold(
     body: FutureBuilder(
-      future: ControllerJM.loadEventsApproved(),
+      future: eventoController.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
@@ -59,7 +62,7 @@ class UserHomePageState extends State<UserHomePage>{
                                     title: Text(evento.titolo),
                                     subtitle: Text(evento.idCreatore),
                                     trailing: FutureBuilder(
-                                      future: ControllerJM.getUserById(AuthProvider.getUId()),
+                                      future: userController.getUserById(AuthProvider.getUId()),
                                       builder: (context, AsyncSnapshot<User> user) {
                                         if(user.data == null)
                                          return CircularProgressIndicator();
@@ -71,7 +74,7 @@ class UserHomePageState extends State<UserHomePage>{
                                           child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.deletePreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -101,7 +104,7 @@ class UserHomePageState extends State<UserHomePage>{
                                           child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.addPreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -189,7 +192,7 @@ class UserHomePageState extends State<UserHomePage>{
                                  color: ThemeHandler.jmTheme().accentColor,
                                       onPressed: ()  {
                                         setState(() {
-                                              ControllerJM.deleteIscrizione(evento.id, snapshot.data);
+                                              eventoController.deleteIscrizione(evento.id, snapshot.data);
                                               showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -223,7 +226,7 @@ class UserHomePageState extends State<UserHomePage>{
                                      onPressed:() 
                                      {
                                        setState(() {
-                                        ControllerJM.addIscrizione(evento.id, snapshot.data);
+                                        eventoController.addIscrizione(evento.id, snapshot.data);
                                       showDialog(
       context: context,
       builder: (BuildContext context) {

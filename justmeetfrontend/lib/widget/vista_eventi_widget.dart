@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
@@ -17,6 +18,8 @@ class VistaEventiWidget extends StatefulWidget {
 }
 
 class _VistaEventiWidgetState extends State<VistaEventiWidget> {
+  EventoController eventoController = new EventoController();
+  UserController userController = new UserController(); 
   final Future<List<Evento>> events;
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
    bool isButtonEnabled = false;
@@ -65,7 +68,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                       title: Text(evento.titolo),
                                       subtitle: Text(evento.idCreatore),
                                       trailing: FutureBuilder( //TODO Spostare button favorite
-                                        future: ControllerJM.getUserById(AuthProvider.getUId()),
+                                        future: userController.getUserById(AuthProvider.getUId()),
                                         builder: (context, AsyncSnapshot<User> user) {
                                           if(user.data == null)
                                            return CircularProgressIndicator();
@@ -77,7 +80,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                             child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
                                             onTap: () {
                                               setState(() {
-                                                 ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
+                                                 userController.deletePreferito(AuthProvider.getUId(), evento.getId());
                                                showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -107,7 +110,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                             child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                             onTap: () {
                                               setState(() {
-                                                 ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
+                                                 userController.addPreferito(AuthProvider.getUId(), evento.getId());
                                                showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -195,7 +198,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                    color: ThemeHandler.jmTheme().accentColor,
                                         onPressed: ()  {
                                           setState(() {
-                                                ControllerJM.deleteIscrizione(evento.id, snapshot.data);
+                                                eventoController.deleteIscrizione(evento.id, snapshot.data);
                                                 showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -229,7 +232,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                        onPressed:() 
                                        {
                                          setState(() {
-                                          ControllerJM.addIscrizione(evento.id, snapshot.data);
+                                          eventoController.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
         context: context,
         builder: (BuildContext context) {

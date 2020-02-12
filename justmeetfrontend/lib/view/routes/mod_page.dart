@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
@@ -11,6 +11,7 @@ class ModPage extends StatefulWidget{
   }
 
 class ModPageState extends State<ModPage>{
+  EventoController eventoController = new EventoController();
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   
   @override
@@ -23,7 +24,7 @@ class ModPageState extends State<ModPage>{
                centerTitle: true,
                ),
     body: FutureBuilder(
-      future: ControllerJM.loadEventsToBeApproved(),
+      future: eventoController.loadEventsToBeApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
@@ -129,7 +130,7 @@ class ModPageState extends State<ModPage>{
                                       label: Text("Apporva"),
                                      onPressed:() {
                                        setState(() {
-                                        ControllerJM.approvaEvento(evento.id);
+                                        eventoController.approvaEvento(evento.id);
                                         snapshot.data.removeAt(index);
                                         showDialog(
                                            context: context,
@@ -151,7 +152,7 @@ class ModPageState extends State<ModPage>{
                                       label: Text("Rifiuta"),
                                      onPressed:() {
                                        setState(() {
-                                        ControllerJM.rifiutaEvento(evento.id);
+                                        eventoController.rifiutaEvento(evento.id);
                                         snapshot.data.removeAt(index);
                                         showDialog(
                                            context: context,

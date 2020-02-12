@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/widget/appbar_widget.dart';
@@ -15,14 +16,16 @@ class MieiEventiPage extends StatefulWidget{
   }
 
 class MieiEventiPageState extends State<MieiEventiPage>{
+  UserController userController = new UserController(); 
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
-  
+  EventoController eventoController = new EventoController();
+
   @override
   Widget build(BuildContext context) {
   return Scaffold(
     appBar:JMAppBar(),
     body: FutureBuilder(
-      future: ControllerJM.loadEventiByIdCreatore(AuthProvider.getUId()),
+      future: eventoController.loadEventiByIdCreatore(AuthProvider.getUId()),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         //TODO aggiungere vista eventi
         if(snapshot.data == null) {return LoadingWidget();}
@@ -60,7 +63,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                     title: Text(evento.titolo),
                                     subtitle: Text(evento.idCreatore),
                                     trailing: FutureBuilder(
-                                      future: ControllerJM.getUserById(AuthProvider.getUId()),
+                                      future: userController.getUserById(AuthProvider.getUId()),
                                       builder: (context, AsyncSnapshot<User> user) {
                                         if(user.data == null)
                                          return CircularProgressIndicator();
@@ -72,7 +75,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                           child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.deletePreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.deletePreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
                                                context: context,
                                           builder: (BuildContext context) {
@@ -91,7 +94,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                           child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                           onTap: () {
                                             setState(() {
-                                               ControllerJM.addPreferito(AuthProvider.getUId(), evento.getId());
+                                               userController.addPreferito(AuthProvider.getUId(), evento.getId());
                                              showDialog(
                                                context: context,
                                           builder: (BuildContext context) {
@@ -167,7 +170,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                  color: ThemeHandler.jmTheme().accentColor,
                                       onPressed: ()  {
                                         setState(() {
-                                              ControllerJM.deleteIscrizione(evento.id, snapshot.data);
+                                              eventoController.deleteIscrizione(evento.id, snapshot.data);
                                               showDialog(
                                            context: context,
                                           builder: (BuildContext context) {
@@ -186,7 +189,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                       label: Text("Partecipa"),
                                      onPressed:() {
                                        setState(() {
-                                        ControllerJM.addIscrizione(evento.id, snapshot.data);
+                                        eventoController.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
                                            context: context,
                                           builder: (BuildContext context) {

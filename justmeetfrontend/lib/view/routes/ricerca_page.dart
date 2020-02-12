@@ -3,7 +3,9 @@ import 'package:justmeet/model/comune.dart';
 import 'package:justmeet/model/provincia.dart';
 import 'package:justmeet/model/regione.dart';
 import 'package:justmeet/model/topic.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/luogo_controller.dart';
+import 'package:justmeet/utils/controllerAPI/topic_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 
 
@@ -15,7 +17,10 @@ class RicercaPage extends StatefulWidget {
 }
 
 class _RicercaPageState extends State<RicercaPage> {
+  EventoController eventoController = new EventoController();
   List<String> argomenti = new List<String>();
+  TopicController topicController = new TopicController();
+  LuogoController luogoController = new LuogoController();
   TextEditingController ricerca;
   bool _isRegioneScelta = false;
   bool _isProvinciaScelta = false;
@@ -63,7 +68,7 @@ class _RicercaPageState extends State<RicercaPage> {
                      //Regione
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadRegioni(),
+                        future: luogoController.loadRegioni(),
                         builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -88,7 +93,7 @@ class _RicercaPageState extends State<RicercaPage> {
                       if (_isRegioneScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadProvinciaByRegione(_currentRegione),
+                        future: luogoController.loadProvinciaByRegione(_currentRegione),
                         builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -115,7 +120,7 @@ class _RicercaPageState extends State<RicercaPage> {
                       if(_isProvinciaScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadComuneBySiglaProvincia(_currentSiglaProvincia),
+                        future: luogoController.loadComuneBySiglaProvincia(_currentSiglaProvincia),
                         builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -167,7 +172,7 @@ class _RicercaPageState extends State<RicercaPage> {
                   children: <Widget>[
                       Container(
                         child: FutureBuilder(
-                            future: ControllerJM.loadTopics(),
+                            future: topicController.loadTopics(),
                             builder: (BuildContext context, AsyncSnapshot<List<Topic>> snapshot){
                               if(snapshot.data == null)
                               {
@@ -213,7 +218,7 @@ class _RicercaPageState extends State<RicercaPage> {
             ),
         RaisedButton.icon(
           onPressed: () {
-            Navigator.of(context).pushNamed('/ricerca', arguments: ControllerJM.search(ricerca.text, _currentTopic, _currentComune));
+            Navigator.of(context).pushNamed('/ricerca', arguments: eventoController.search(ricerca.text, _currentTopic, _currentComune));
           },
           icon: Icon(Icons.ac_unit), 
           label: Text("Cerca"),)

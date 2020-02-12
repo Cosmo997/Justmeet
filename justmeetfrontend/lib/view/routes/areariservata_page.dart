@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/widget/loading_widget.dart';
@@ -16,7 +16,8 @@ class AreaRiservataPage extends StatefulWidget{
   
 
   class AreaRiservataPageState extends State<AreaRiservataPage>{
-    
+
+   UserController userController = new UserController(); 
   String tema;
 
   @override
@@ -30,7 +31,7 @@ class AreaRiservataPage extends StatefulWidget{
       return Scaffold(
         
            body: FutureBuilder(
-           future: ControllerJM.getUserById(AuthProvider.getUId()),
+           future: userController.getUserById(AuthProvider.getUId()),
             builder: (BuildContext context, AsyncSnapshot<User> snapshot){
               if(snapshot.data == null)
               {
