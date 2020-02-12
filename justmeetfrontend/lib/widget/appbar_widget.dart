@@ -14,15 +14,6 @@ class JMAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 10,
         title: Image.asset('assets/images/logo.png', scale: 2.5),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-             iconSize: 40,
-             icon: Icon(Icons.exit_to_app),
-             onPressed:() => AuthProvider().logOut(),
-             tooltip: "LogOut",
-             color: ThemeHandler.jmTheme().accentColor,
-           ),
-        ],
         );
   }
 

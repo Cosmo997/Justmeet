@@ -100,7 +100,7 @@ class JMDrawer extends StatelessWidget {
        builder: (BuildContext context) { return FractionallySizedBox(
          heightFactor: 0.9,
          child: SinginPage()); },
-       //isScrollControlled: true 
+       isScrollControlled: true 
        );
               },
             ),

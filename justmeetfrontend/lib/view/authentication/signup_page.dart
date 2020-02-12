@@ -6,6 +6,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
+import 'package:justmeet/widget/appbar_widget.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -44,6 +45,7 @@ class SignUpPage extends StatefulWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: JMAppBar(),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -51,7 +53,6 @@ class SignUpPage extends StatefulWidget {
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: <Widget>[
                     Image.asset('assets/images/iconaverticale.png', scale: 2,),
-                    
                     //Nome
                    TextField(
                      maxLength: 15,
@@ -63,11 +64,9 @@ class SignUpPage extends StatefulWidget {
                       borderRadius: BorderRadius.all(Radius.circular(8),)),
                       ),
                    ),
-
                    //Cognome
                    TextField(
                      maxLength: 15,
-                   
                      controller: cognome,
                      decoration: InputDecoration(
                     labelText: 'Cognome',
@@ -76,11 +75,9 @@ class SignUpPage extends StatefulWidget {
                       borderRadius: BorderRadius.all(Radius.circular(8),)),
                      ),
                    ),
-
                    //Email
                    TextField(
                      maxLength: 25,
-               
                      controller: email,
                      decoration: InputDecoration(
                             labelText: 'Email',
@@ -89,10 +86,10 @@ class SignUpPage extends StatefulWidget {
                               borderRadius: BorderRadius.all(Radius.circular(8),)),
                         ),
                    ),
-
                    //Password
                     TextField(
                       maxLength: 15,
+                      obscureText: true,
                       controller: password,
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -106,6 +103,7 @@ class SignUpPage extends StatefulWidget {
                     TextField(
                       maxLength: 15,
                       controller: confermapassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Re-Password',
                           hintText: "Inserisci qui la tua password",

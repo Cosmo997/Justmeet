@@ -96,12 +96,28 @@ class ModPageState extends State<ModPage>{
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                      Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
-                                      Text("Posti rimanenti: "),
-                                      Text((evento.partecipanti - evento.iscrizioni.length).toString()),
-                                      Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
-                                      Text(" Topic: "),
-                                      Text(evento.idTopic),
+                                      Column(
+                                        children: <Widget>[
+                                          Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
+                                          Row(
+                                            children: <Widget>[
+                                              Text("Posti liberi: "),
+                                               Text((evento.partecipanti - evento.iscrizioni.length).toString()),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
+                                          Row(
+                                            children: <Widget>[
+                                              Text("Topic: "),
+                                              Text(evento.idTopic),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ],),
                                   ),
                                   Container(
@@ -109,10 +125,18 @@ class ModPageState extends State<ModPage>{
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                      Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
-                                      Text(_df.format(evento.inizioEvento)),
-                                      Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
-                                      Text(_df.format(evento.inizioEvento)),
+                                      Column(
+                                        children: <Widget>[
+                                          Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                          Text(_df.format(evento.inizioEvento)),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                           Text(_df.format(evento.fineEvento)),
+                                        ],
+                                      ),
                                     ],),
                                   ),
                                     Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),

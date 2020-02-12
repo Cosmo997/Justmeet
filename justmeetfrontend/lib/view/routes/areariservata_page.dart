@@ -160,7 +160,7 @@ class AreaRiservataPage extends StatefulWidget{
                         ),
                             ],
                           )),
-                        if(snapshot.data.isMod == true)
+                        if(snapshot.data.isMod)
                         Container(
                           child: Column(
                             children: <Widget>[

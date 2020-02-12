@@ -37,7 +37,7 @@ class UserController extends ControllerJM{
     await http.put(getUrlBase() + "/user/deletepreferiti?idUser="+id+"&idEvento="+idEvento);
   }
 
-  Future<String> getNomeByIdUser(String idUser) async{
+    Future<String> getNomeByIdUser(String idUser) async{
     http.Response response = await http.get(getUrlBase() + "/user/id/" +idUser,  headers: getHeaders());
     User user = User.fromJson(jsonDecode(response.body));
     return user.nome;
