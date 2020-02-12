@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -10,6 +10,7 @@ class SinginGooglePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserController userController = new UserController();
     TextEditingController nome = new TextEditingController();
     TextEditingController cognome = new TextEditingController();
     TextEditingController email = new TextEditingController();
@@ -64,7 +65,7 @@ class SinginGooglePage extends StatelessWidget {
                 print("Utente null");
                 
                 newuser = new User(currentuser.providerId, nome.text, cognome.text, email.text);
-                bool result = await ControllerJM.postUser(newuser);
+                bool result = await userController.postUser(newuser);
                 if(result == true){
                 print("ISCRITTO");
                 Navigator.pop(context);

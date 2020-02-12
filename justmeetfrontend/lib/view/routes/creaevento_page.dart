@@ -8,7 +8,9 @@ import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/provincia.dart';
 import 'package:justmeet/model/regione.dart';
 import 'package:justmeet/model/topic.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/luogo_controller.dart';
+import 'package:justmeet/utils/controllerAPI/topic_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 /// Responsabilità: Creare un Evento.
@@ -19,7 +21,9 @@ class CreaEventoPage extends StatefulWidget
   }
   
   class CreaEventoPageState extends State<CreaEventoPage>{
-
+      EventoController eventoController = new EventoController();
+      LuogoController luogoController = new LuogoController();
+      TopicController topicController = new TopicController();
       final DateFormat _df = DateFormat("dd/MM/yyyy");
       bool _isRegioneScelta = false;
       bool _isProvinciaScelta = false;
@@ -130,7 +134,7 @@ class CreaEventoPage extends StatefulWidget
                           ),
                           Container(
                             child: FutureBuilder(
-                              future: ControllerJM.loadTopics(),
+                              future: topicController.loadTopics(),
                               builder: (BuildContext context, AsyncSnapshot<List<Topic>> snapshot){
                                 if(snapshot.data == null)
                                 {
@@ -156,7 +160,7 @@ class CreaEventoPage extends StatefulWidget
                       //Regione
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadRegioni(),
+                        future: luogoController.loadRegioni(),
                         builder: (BuildContext context, AsyncSnapshot<List<Regione>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -181,7 +185,7 @@ class CreaEventoPage extends StatefulWidget
                       if (_isRegioneScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadProvinciaByRegione(_currentRegione),
+                        future: luogoController.loadProvinciaByRegione(_currentRegione),
                         builder: (BuildContext context, AsyncSnapshot<List<Provincia>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -208,7 +212,7 @@ class CreaEventoPage extends StatefulWidget
                       if(_isProvinciaScelta)
                       Container(
                         child: FutureBuilder(
-                        future: ControllerJM.loadComuneBySiglaProvincia(_currentSiglaProvincia),
+                        future: luogoController.loadComuneBySiglaProvincia(_currentSiglaProvincia),
                         builder: (BuildContext context, AsyncSnapshot<List<Comune>> snapshot) {
                           if(snapshot.data == null)
                           {
@@ -321,7 +325,7 @@ class CreaEventoPage extends StatefulWidget
      Future<void> _creaEvento() async {
        //print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+await AuthProvider.getUId()+"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
       _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,await AuthProvider.getUId(),_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
-      Future<bool> esito = ControllerJM.makePostRequest(_currentEvent);
+      Future<bool> esito = eventoController.postEvent(_currentEvent);
       esito.then((bool value) => _showDialog(_currentEvent,value));
      
      } 

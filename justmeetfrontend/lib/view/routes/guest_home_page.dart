@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
-import 'package:justmeet/utils/controllerjm.dart';
+import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/view/authentication/singin_page.dart';
 import 'package:justmeet/widget/appbar_widget.dart';
@@ -13,6 +13,7 @@ class GuestHomePage extends StatefulWidget{
   }
 
 class GuestHomePageState extends State<GuestHomePage>{
+  EventoController eventoController = new EventoController();
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   
   @override
@@ -23,7 +24,7 @@ class GuestHomePageState extends State<GuestHomePage>{
     //ControllerJM.loadEventsApproved(),
 
     body: FutureBuilder(
-      future: ControllerJM.loadEventsApproved(),
+      future: eventoController.loadEventsApproved(),
       builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
         if(snapshot.data == null)
         {
