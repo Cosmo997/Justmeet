@@ -128,8 +128,8 @@ class MieiEventiPageState extends State<MieiEventiPage>{
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                       Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
-                                      Text(" Partecipanti: "),
-                                      Text(evento.partecipanti.toString()),
+                                      Text("Posti rimanenti: "),
+                                      Text((evento.partecipanti- evento.iscrizioni.length).toString()),
                                       Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
                                       Text(" Topic: "),
                                       Text(evento.idTopic),

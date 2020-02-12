@@ -75,12 +75,10 @@ class UserHomePageState extends State<UserHomePage>{
                                              showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: new Text("Rimozione Preferito"),
           content: new Text("Questo evento non farà più parte dei tuoi Eventi Preferiti"),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Close"),
               onPressed: () {
@@ -105,12 +103,10 @@ class UserHomePageState extends State<UserHomePage>{
                                              showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: new Text("Aggiunta Preferito"),
           content: new Text("Evento aggiunto ai preferiti"),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Close"),
               onPressed: () {
@@ -149,8 +145,8 @@ class UserHomePageState extends State<UserHomePage>{
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                       Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
-                                      Text(" Partecipanti: "),
-                                      Text(evento.partecipanti.toString()),
+                                      Text("Posti rimanenti: "),
+                                      Text((evento.partecipanti - evento.iscrizioni.length).toString()),
                                       Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
                                       Text(" Topic: "),
                                       Text(evento.idTopic),
