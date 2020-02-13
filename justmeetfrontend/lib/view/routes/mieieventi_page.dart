@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/widget/appbar_widget.dart';
@@ -13,7 +12,6 @@ class MieiEventiPage extends StatefulWidget{
 
 class MieiEventiPageState extends State<MieiEventiPage>{
   UserController userController = new UserController(); 
-  final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   EventoController eventoController = new EventoController();
 
   @override

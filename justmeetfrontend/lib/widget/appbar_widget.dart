@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
 
 class JMAppBar extends StatelessWidget implements PreferredSizeWidget {

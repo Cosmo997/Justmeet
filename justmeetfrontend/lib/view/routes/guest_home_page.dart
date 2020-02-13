@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/theme.dart';
@@ -16,7 +14,6 @@ class GuestHomePage extends StatefulWidget{
 
 class GuestHomePageState extends State<GuestHomePage>{
   EventoController eventoController = new EventoController();
-  final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
   UserController userController = new UserController();
   
   @override
