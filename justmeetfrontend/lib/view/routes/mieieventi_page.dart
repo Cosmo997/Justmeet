@@ -18,7 +18,7 @@ class MieiEventiPageState extends State<MieiEventiPage>{
   Widget build(BuildContext context) {
   return Scaffold(
     appBar:JMAppBar(),
-    body: ViewEvent(isLogged: true),
+    body: ViewEvent(isLogged: true, page: "miei",),
     );             
 
   }

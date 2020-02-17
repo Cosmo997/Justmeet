@@ -20,7 +20,7 @@ class PreferitiPageState extends State<PreferitiPage>
   Widget build(BuildContext context) {
   return Scaffold(
     appBar: JMAppBar(),
-    body: ViewEvent(isLogged: true,)
+    body: ViewEvent(isLogged: true, page: "favo",)
     );             
   }
       @override

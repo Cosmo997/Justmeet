@@ -139,6 +139,15 @@ class AreaRiservataPage extends StatefulWidget{
                         ),
                         Divider(height: 10),
                         ListTile(
+                          title: Text("Eventi Sottoscritti"),
+                          leading: Icon(Icons.check_circle, color: ThemeHandler.jmTheme().accentColor),
+                          trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),
+                          onTap: () => {
+                            Navigator.of(context).pushNamed('/sub'),
+                          },
+                        ),
+                        Divider(height: 10),
+                        ListTile(
                           title: Text("About Us"),
                           leading: Icon(Icons.info_outline, color: ThemeHandler.jmTheme().accentColor,),
                           trailing: Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor),

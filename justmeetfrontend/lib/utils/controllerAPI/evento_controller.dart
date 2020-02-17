@@ -17,14 +17,16 @@ class EventoController extends ControllerJM{
 
  Future<List<Evento>> loadPreferitiByUtente(Future<String> idUtente) async {
      String id = await idUtente;
-     http.Response response = await http.get(getUrlBase() + "/user/prefeiti/" +id , headers: getHeaders());
+     http.Response response1 = await http.get(getUrlBase() + "/user/prefeiti/" +id , headers: getHeaders());
      List<Evento> preferiti = [];
-     List<String> idEventiPreferiti = (jsonDecode(response.body) as List<dynamic>).cast<String>();
+     List<String> idEventiPreferiti = (jsonDecode(response1.body) as List<dynamic>).cast<String>();
      for (int i = 0; i < idEventiPreferiti.length; i++) {
        http.Response response = await http.get(getUrlBase() + "/evento/id/" +idEventiPreferiti[i], headers: getHeaders());
+       print("Evento: " +response.body);
        Evento e = Evento.fromjson(jsonDecode(response.body));
        preferiti.add(e);
      }
+     print("Preferiti: " +preferiti.toString());
      return preferiti;
    }
 
@@ -32,6 +34,15 @@ class EventoController extends ControllerJM{
 
      String id = await idUtente;
      http.Response response = await http.get(getUrlBase() + "/eventi/idcreatore/" +id , headers: getHeaders());
+     List collection = json.decode(response.body);
+     List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
+     return myEvent;
+   }
+
+   Future<List<Evento>> loadEventiWhereUserIsSub(Future<String> idUtente) async {
+
+     String id = await idUtente;
+     http.Response response = await http.get(getUrlBase() + "/eventi/usersub/"+id , headers: getHeaders());
      List collection = json.decode(response.body);
      List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
      return myEvent;
@@ -77,4 +88,5 @@ class EventoController extends ControllerJM{
     List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
     return eventi;
   }
+
 }

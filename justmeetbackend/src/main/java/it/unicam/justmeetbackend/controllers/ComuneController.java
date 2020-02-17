@@ -20,6 +20,7 @@ public class ComuneController {
     @Autowired
     private ComuneRepository repository;
 
+    
     @RequestMapping(value = "/comuni", method = RequestMethod.GET)
     public List<Comune> getAllComuni() {
         return repository.findAll();

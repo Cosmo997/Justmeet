@@ -27,15 +27,7 @@ public class EventoController {
         return repository.findAll();
     }
 
-    /**
-     * Get eventi by titolo
-     */
-    @RequestMapping(value = "/eventi/{titolo}", method = RequestMethod.GET)
-    public List<Evento> getEventsByTitolo(@PathVariable String titolo) {
-        return repository.findByTitolo(titolo);
-    }
-
-    /**
+    /**Restituisce l'evento dato un id.
      * 
      * @param id dell'evento
      * @return
@@ -56,7 +48,7 @@ public class EventoController {
         return repository.findByTitoloLikeIgnoreCase(titolo);
     }
 
-    /**
+    /**Restituisce gli eventi creati dall'utente.
      * 
      * @param idCreatore
      * @return Eventi con idCreatore passato come parametro
@@ -66,7 +58,7 @@ public class EventoController {
         return repository.findByIdCreatore(idCreatore);
     }
 
-    /**
+    /**Restituisce gli eventi al quale l'utente è iscritto
      * 
      * @param _id Dell'utente
      * @return
@@ -127,42 +119,20 @@ public class EventoController {
     }
 
     /**
-     * Get eventi where partecipanti > $partecipanti
-     * 
-     * @param partecipanti
-     * @return
-     */
-    @RequestMapping(value = "/eventi/sopra/{partecipanti}")
-    public List<Evento> getEventiByPartecipantiGreater(@PathVariable int partecipanti) {
-        return repository.findByPartecipantiGreaterThan(partecipanti);
-    }
-
-    /**
-     * get eventi where partecipanti < $partecipanti
-     * 
-     * @param partecipanti
-     * @return
-     */
-    @RequestMapping(value = "/eventi/sotto/{partecipanti}")
-    public List<Evento> getEventiByPartecipantiLess(@PathVariable int partecipanti) {
-        return repository.findByPartecipantiLessThan(partecipanti);
-    }
-
-    /**
      * Creare Evento (POST)
      * 
      * @param e
      */
     @RequestMapping(method = RequestMethod.POST, value = "/evento")
-    public String postEvent(@RequestBody Evento e) {
+    public boolean postEvent(@RequestBody Evento e) {
         ArrayList<String> app = new ArrayList<>();
         if (e == null)
-            return "false";
+            return false;
         else
             e.setApproved(false);
             e.setIscrizioni(app);
-        Evento eventoSalvato = repository.save(e);
-        return eventoSalvato.getId();
+        repository.save(e);
+        return true;
     }
 
     /**
@@ -216,7 +186,7 @@ public class EventoController {
     }
 
     /**
-     * 
+     * Restituisce gli eventi che rispettano la ricerca
      * @param titolo
      * @param topic
      * @param idComune

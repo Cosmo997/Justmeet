@@ -3,6 +3,7 @@ import 'package:justmeet/app.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/view/authentication/singin_page.dart';
 import 'package:justmeet/view/authentication/signup_page.dart';
+import 'package:justmeet/view/routes/eventi_sub_page.dart';
 import 'package:justmeet/view/routes/mod_page.dart';
 import 'package:justmeet/view/routes/mieieventi_page.dart';
 import 'package:justmeet/view/routes/preferiti_page.dart';
@@ -29,6 +30,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ModPage());
       case '/preferiti':
         return MaterialPageRoute(builder: (_) => PreferitiPage());
+      case '/sub':
+        return MaterialPageRoute(builder: (_) => EventiSubPage());
 
       default:
         return _errorRoute();

@@ -22,7 +22,7 @@ class GuestHomePageState extends State<GuestHomePage>{
     appBar:JMAppBar(),
     drawer: JMDrawer(),
 
-    body: ViewEvent(isLogged: false),
+    body: ViewEvent(isLogged: false, page: "anonimo",),
 
     floatingActionButton: FloatingActionButton(
       backgroundColor: ThemeHandler.jmTheme().accentColor,
