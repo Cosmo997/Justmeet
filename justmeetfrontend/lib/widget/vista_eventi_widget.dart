@@ -6,24 +6,28 @@ import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/utils/viewtype.dart';
 
 
 class VistaEventiWidget extends StatefulWidget {
+  final ViewType tipovista;
   final Future<List<Evento>> events;
 
-  VistaEventiWidget({Key key, @required this.events}) : super(key: key);
+  VistaEventiWidget({Key key, @required this.events, this.tipovista}) : super(key: key);
 
   @override
-  _VistaEventiWidgetState createState() => _VistaEventiWidgetState(this.events);
+  _VistaEventiWidgetState createState() => _VistaEventiWidgetState(this.events, this.tipovista);
 }
 
 class _VistaEventiWidgetState extends State<VistaEventiWidget> {
+  final Future<List<Evento>> events;
+  final ViewType tipovista;
   EventoController eventoController = new EventoController();
   UserController userController = new UserController(); 
-  final Future<List<Evento>> events;
+  
   final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
    bool isButtonEnabled = false;
-  _VistaEventiWidgetState(this.events);
+  _VistaEventiWidgetState(this.events, this.tipovista);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
         body: FutureBuilder(
         future: events,
         builder: (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
+          //CARICAMENTO
           if(snapshot.data == null)
           {
           return Container(
@@ -67,7 +72,132 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                       ),
                                       title: Text(evento.titolo),
                                       subtitle: Text(evento.idCreatore),
-                                      trailing: FutureBuilder( 
+                                      trailing: 
+                                    ),
+                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                    Text("Descrizione", style: TextStyle(fontSize: 18), ),
+                                    Container(
+                                       height: 150,
+                                       width: 1000,  
+                                       child: Card(
+                                         color: Colors.grey,
+                                         margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                                         child: SingleChildScrollView(
+                                           child: Padding(
+                                             padding: const EdgeInsets.all(10.0),
+                                             child: Text(evento.descrizione),
+                                           )),
+                                       ),
+                                     ),
+                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                        Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
+                                        Text(" Partecipanti: "),
+                                        Text(evento.partecipanti.toString()),
+                                        Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
+                                        Text(" Topic: "),
+                                        Text(evento.idTopic),
+                                      ],),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                        Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                        Text(_df.format(evento.inizioEvento)),
+                                        Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
+                                        Text(_df.format(evento.inizioEvento)),
+                                      ],),
+                                    ),
+                                    Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
+                                    Text("Comune: " +evento.idComune),
+                                    Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
+                                     
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      if(tipovista == ViewType.USER_HOME)
+                                      FutureBuilder(
+                                        future: AuthProvider.getUId(),
+                                        builder: (context, AsyncSnapshot<String> snapshot) {
+                                        if(snapshot.data == null)
+                                          return CircularProgressIndicator();
+                                        else if (evento.iscrizioni.contains(snapshot.data))
+                                          return RaisedButton.icon(
+                                            shape: RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(10.0),
+                                            ),
+                                            icon: Icon(Icons.remove_circle_outline),
+                                            label: Text("Rimuovi Iscrizione"),
+                                            color: ThemeHandler.jmTheme().accentColor,
+                                                  onPressed: ()  {
+                                                    setState(() {
+                                                          eventoController.deleteIscrizione(evento.id, snapshot.data);
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (BuildContext context) {
+                                                              // return object of type Dialog
+                                                              return AlertDialog(
+                                                                title: new Text("Rimozione Iscrizione Avvenita Con Successo"),
+                                                                content: new Text("Ora non sei piu iscritto a questo evento"),
+                                                                actions: <Widget>[
+                                                                  // usually buttons at the bottom of the dialog
+                                                                  new FlatButton(
+                                                                    child: new Text("Close"),
+                                                                    onPressed: () {
+                                                                      Navigator.of(context).pop();
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          );
+                                          });                                        
+                                          },
+                                       );
+                                 else
+                                return RaisedButton.icon(
+                                  shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(10.0),
+                                  ),
+                                        color: ThemeHandler.jmTheme().accentColor,
+                                        icon: Icon(Icons.check_circle_outline),
+                                        label: Text("Partecipa"),
+                                       onPressed:() 
+                                       {
+                                         setState(() {
+                                          eventoController.addIscrizione(evento.id, snapshot.data);
+                                        showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Iscrizione Avvenuta Con Successo"),
+            content: new Text("Ora sei iscritto, continua a navigare"),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              new FlatButton(
+                child: new Text("Close"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ); 
+                                         });
+                                        },
+                                       );
+                                       },
+                                      ),
+                                      if(tipovista == ViewType.USER_HOME)
+                                      FutureBuilder( 
                                         future: userController.getUserById(AuthProvider.getUId()),
                                         builder: (context, AsyncSnapshot<User> user) {
                                           if(user.data == null)
@@ -135,129 +265,6 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                           );
                                         },
                                       )
-                                    ),
-                                     Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
-                                     Text("Descrizione", style: TextStyle(fontSize: 18), ),
-                                     Container(
-                                       height: 150,
-                                       width: 1000,  
-                                       child: Card(
-                                         color: Colors.grey,
-                                         margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
-                                         child: SingleChildScrollView(
-                                           child: Padding(
-                                             padding: const EdgeInsets.all(10.0),
-                                             child: Text(evento.descrizione),
-                                           )),
-                                       ),
-                                     ),
-                                     Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
-                                    Container(
-                                      margin: EdgeInsets.all(20),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                        Icon(Icons.people, color: ThemeHandler.jmTheme().accentColor,),
-                                        Text(" Partecipanti: "),
-                                        Text(evento.partecipanti.toString()),
-                                        Icon(Icons.category,  color: ThemeHandler.jmTheme().accentColor),
-                                        Text(" Topic: "),
-                                        Text(evento.idTopic),
-                                      ],),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(20),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                        Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
-                                        Text(_df.format(evento.inizioEvento)),
-                                        Icon(Icons.calendar_today,  color: ThemeHandler.jmTheme().accentColor),
-                                        Text(_df.format(evento.inizioEvento)),
-                                      ],),
-                                    ),
-                                      Icon(Icons.place, color: ThemeHandler.jmTheme().accentColor),
-                                      Text("Comune: " +evento.idComune),
-                                     Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
-                                     
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      FutureBuilder(
-                                        future: AuthProvider.getUId(),
-                                        builder: (context, AsyncSnapshot<String> snapshot) {
-                                        if(snapshot.data == null)
-                                          return CircularProgressIndicator();
-                                        else if (evento.iscrizioni.contains(snapshot.data))
-                                          return RaisedButton.icon(
-                                            shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(10.0),
-                                  ),
-                                  icon: Icon(Icons.remove_circle_outline),
-                                  label: Text("Rimuovi Iscrizione"),
-                                   color: ThemeHandler.jmTheme().accentColor,
-                                        onPressed: ()  {
-                                          setState(() {
-                                                eventoController.deleteIscrizione(evento.id, snapshot.data);
-                                                showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Rimozione Iscrizione Avvenita Con Successo"),
-            content: new Text("Ora non sei piu iscritto a questo evento"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-                                          });                                        
-                                          },
-                                       );
-                                 else
-                                return RaisedButton.icon(
-                                  shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(10.0),
-                                  ),
-                                        color: ThemeHandler.jmTheme().accentColor,
-                                        icon: Icon(Icons.check_circle_outline),
-                                        label: Text("Partecipa"),
-                                       onPressed:() 
-                                       {
-                                         setState(() {
-                                          eventoController.addIscrizione(evento.id, snapshot.data);
-                                        showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Iscrizione Avvenuta Con Successo"),
-            content: new Text("Ora sei iscritto, continua a navigare"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      ); 
-                                         });
-                                        },
-                                       );
-                                       },
-                                      ),
-                                      
                                     ],
                                   ),
 
