@@ -65,42 +65,62 @@ public class UserController {
   /**
    * POST un nuovo user con isMod = false e Lista preferiti vuota.
    * @param user da creare
+   * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
    */
   @RequestMapping(value = "/user", method = RequestMethod.POST)
-  public void createUser(@Valid @RequestBody User user) {
-    user.setIsMod(false);
-    ArrayList<String> app = new ArrayList<>();
-    user.setPreferiti(app);
-    repository.save(user);
+  public boolean createUser(@Valid @RequestBody User user) {
+    if(user != null){
+      user.setIsMod(false);
+      ArrayList<String> app = new ArrayList<>();
+      user.setPreferiti(app);
+      repository.save(user);
+      return true;
+    }else
+      return false;
   }
 
   /**
    * Delete user ByID
    * @param id dell'utente
+   * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
    */
   @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-  public void deleteUserById(@PathVariable String id) {
-    repository.deleteById(id);
+  public boolean deleteUserById(@PathVariable String id) {
+    if(id != null){
+      repository.deleteById(id);
+      return true;
+    }else
+      return false;
   }
 
   /**
    * Aggiunge un determinato evento alla lista preferiti dell'utente
    * @param idUser da modificare
    * @param idEvento da aggiungere ai preferiti
+   * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
    */
   @RequestMapping(value = "user/addpreferiti", method = RequestMethod.PUT)
-  public void updatePreferiti(@RequestParam String idUser, @RequestParam String idEvento){
+  public boolean updatePreferiti(@RequestParam String idUser, @RequestParam String idEvento){
+    if(idUser != null && idEvento != null){  
       repository.updatePreferiti(idUser, idEvento);
+      return true;
+    }else
+      return false;
   }
 
   /**
    * Rimuove un'evento tra quelli preferiti dell'utente
    * @param idUser da modificare
    * @param idEvento da rimuovere tra i preferiti
+   * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
    */
   @RequestMapping(value = "user/deletepreferiti", method = RequestMethod.PUT)
-  public void deleteFromPreferiti(@RequestParam String idUser, @RequestParam String idEvento){
+  public boolean deleteFromPreferiti(@RequestParam String idUser, @RequestParam String idEvento){
+    if(idUser != null && idEvento != null){  
       repository.deletePreferito(idUser, idEvento);
+      return true;
+    }else
+      return false;
   }
   
   /**
@@ -111,12 +131,10 @@ public class UserController {
   @RequestMapping(value = "/user/prefeiti/{_id}", method = RequestMethod.GET)
   public ArrayList<String> getPreferidiById(@PathVariable String _id) {
   Optional<User> user = repository.findById(_id);  
-  if(user.isPresent())
-  {
+  if(user.isPresent()){
     return user.get().getPreferiti();
-  }
-  else
-  return null;
+  }else
+    return null;
   }
 
 }
