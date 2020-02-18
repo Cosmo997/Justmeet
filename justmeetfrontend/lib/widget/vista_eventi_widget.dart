@@ -72,7 +72,7 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                       ),
                                       title: Text(evento.titolo),
                                       subtitle: Text(evento.idCreatore),
-                                      trailing: 
+                                      
                                     ),
                                     Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
                                     Text("Descrizione", style: TextStyle(fontSize: 18), ),
@@ -173,24 +173,24 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                          setState(() {
                                           eventoController.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Iscrizione Avvenuta Con Successo"),
-            content: new Text("Ora sei iscritto, continua a navigare"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      ); 
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            // return object of type Dialog
+                                            return AlertDialog(
+                                              title: new Text("Iscrizione Avvenuta Con Successo"),
+                                              content: new Text("Ora sei iscritto, continua a navigare"),
+                                              actions: <Widget>[
+                                                // usually buttons at the bottom of the dialog
+                                                new FlatButton(
+                                                  child: new Text("Close"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ); 
                                          });
                                         },
                                        );
