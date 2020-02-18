@@ -51,30 +51,7 @@ class SinginGooglePage extends StatelessWidget {
               controller: email,
             ),
             //Button
-            SignInButton(
-              Buttons.Google,
-              text: "Iscriviti con google",
-              onPressed: () async {
-                //Controlli sulle variabili
-                if(nome.text.isEmpty || cognome.text.isEmpty || email.text.isEmpty)
-                print("Attenzione ai campi");
-                else{
-                //Creazione account su firebase
-                FirebaseUser currentuser = await AuthProvider().singinWithGoogle();
-                if(currentuser == null)
-                print("Utente null");
-                
-                newuser = new User(currentuser.providerId, nome.text, cognome.text, email.text);
-                bool result = await userController.postUser(newuser);
-                if(result == true){
-                print("ISCRITTO");
-                Navigator.pop(context);
-                }
-                else {
-                Navigator.pop(context);}
-                }
-              },
-            )
+           
           ],
         ),
       )

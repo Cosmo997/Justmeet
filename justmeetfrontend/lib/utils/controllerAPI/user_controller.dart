@@ -23,6 +23,8 @@ class UserController extends ControllerJM{
   Future<User> getUserById(Future<String> idUtente) async {
     String id = await idUtente;
     http.Response response = await http.get(getUrlBase() + "/user/id/" +id,  headers: getHeaders());
+    if(response.body == "[]")
+    return null;
     User user = User.fromJson(jsonDecode(response.body));
     return user;
   }

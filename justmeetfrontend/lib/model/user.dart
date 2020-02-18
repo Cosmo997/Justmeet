@@ -29,4 +29,7 @@ class User
     map["email"] = this.email;
     return map;
   }
+  List<String> getPreferiti(){
+    return preferiti;
+  }
 }

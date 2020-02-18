@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:justmeet/model/evento.dart';
+import 'package:justmeet/model/user.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/controllerjm.dart';
 
 class EventoController extends ControllerJM{
@@ -16,15 +18,20 @@ class EventoController extends ControllerJM{
      }
 
  Future<List<Evento>> loadPreferitiByUtente(Future<String> idUtente) async {
-     String id = await idUtente;
-     http.Response response1 = await http.get(getUrlBase() + "/user/prefeiti/" +id , headers: getHeaders());
-     List<Evento> preferiti = [];
-     List<String> idEventiPreferiti = (jsonDecode(response1.body) as List<dynamic>).cast<String>();
+    UserController userController = new UserController();
+    User app = await userController.getUserById(idUtente);
+    List<Evento> preferiti = [];
+    List<String> idEventiPreferiti = app.getPreferiti();
      for (int i = 0; i < idEventiPreferiti.length; i++) {
+       print(idEventiPreferiti[i]);
        http.Response response = await http.get(getUrlBase() + "/evento/id/" +idEventiPreferiti[i], headers: getHeaders());
-       print("Evento: " +response.body);
+       if(response.statusCode == 200)
+       {
+       print("Evento: " +response.statusCode.toString());
        Evento e = Evento.fromjson(jsonDecode(response.body));
+       if(e != null)
        preferiti.add(e);
+       }
      }
      print("Preferiti: " +preferiti.toString());
      return preferiti;

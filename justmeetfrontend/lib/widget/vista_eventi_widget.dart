@@ -172,24 +172,24 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                          setState(() {
                                           eventoController.addIscrizione(evento.id, snapshot.data);
                                         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Iscrizione Avvenuta Con Successo"),
-            content: new Text("Ora sei iscritto, continua a navigare"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      ); 
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            // return object of type Dialog
+                                            return AlertDialog(
+                                              title: new Text("Iscrizione Avvenuta Con Successo"),
+                                              content: new Text("Ora sei iscritto, continua a navigare"),
+                                              actions: <Widget>[
+                                                // usually buttons at the bottom of the dialog
+                                                new FlatButton(
+                                                  child: new Text("Close"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ); 
                                          });
                                         },
                                        );
