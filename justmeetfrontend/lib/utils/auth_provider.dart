@@ -32,33 +32,22 @@ static Future<String> getImage()async{
   return utente.photoUrl;
 }
 
-  Future<bool> loginWithGoogle() async {
+  Future<String> loginWithGoogle() async {
     try {
       GoogleSignInAccount user = await _gAuth.signIn();
       if(user == null)
-      return false;
+      return null;
       AuthResult result = await _auth.signInWithCredential(
         GoogleAuthProvider.getCredential(
         accessToken: (await user.authentication).accessToken,
         idToken: (await user.authentication).idToken));
-      if(result.user == null)
-      return false;
-      return true;
+      return result.user.uid;
     } catch (e) {
-      return false;
+      print(e);
+      return null;
     }
   }
-  Future<FirebaseUser> singinWithGoogle() async {
-    
-    GoogleSignInAccount newuser = await _gAuth.signIn();
-    if(newuser == null)
-    return null;
-    AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-      accessToken: (await newuser.authentication).accessToken,
-      idToken: (await newuser.authentication).idToken
-    ));
-    return result.user;
-  }
+  
 
   FirebaseUser creaUtenteFirebase(String email, String password){
   AuthResult franco;

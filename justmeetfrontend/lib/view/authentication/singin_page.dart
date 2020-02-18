@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/auth_provider.dart';
+import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -12,6 +14,7 @@ class SinginPage extends StatefulWidget {
 }
 
 class _SinginPageState extends State<SinginPage> {
+  UserController userController = new UserController();
   TextEditingController _email;
   TextEditingController _password;
   bool _showSecond = false;
@@ -126,14 +129,24 @@ class _SinginPageState extends State<SinginPage> {
 
                               SignInButton(
                                 Buttons.Google, 
-                                onPressed:() async{ 
-                                  bool result = await AuthProvider().loginWithGoogle();
-                                  if(result == false) {
-                                    print("Login con google fallito");
-                                  }
-                                  change();
-                                },
-                                ),
+                                onPressed:() async{
+                                  Future<String> currentId = AuthProvider().loginWithGoogle();
+                                  Future<User> user = userController.getUserById(currentId);
+                                  if(user == null)
+                                  print("Utente null");
+                                  else 
+                                  print("Utente non null");
+                                  //newuser = new User(currentuser, nome.text, cognome.text, email.text);
+                                  //bool result = await userController.postUser(newuser);
+                                  // if(result == true){
+                                  // print("ISCRITTO");
+                                  // Navigator.pop(context);
+                                  // }
+                                  // else {
+                                  // Navigator.pop(context);}
+                                  
+                                }
+                                                  ),
                               
                               RaisedButton(
                                   color: ThemeHandler.jmTheme().accentColor,
