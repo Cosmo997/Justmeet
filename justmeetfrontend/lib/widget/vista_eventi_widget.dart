@@ -211,24 +211,24 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                               setState(() {
                                                  userController.deletePreferito(AuthProvider.getUId(), evento.getId());
                                                showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Rimozione Preferito"),
-            content: new Text("Questo evento non farà più parte dei tuoi Eventi Preferiti"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  // return object of type Dialog
+                                                  return AlertDialog(
+                                                    title: new Text("Rimozione Preferito"),
+                                                    content: new Text("Questo evento non farà più parte dei tuoi Eventi Preferiti"),
+                                                    actions: <Widget>[
+                                                      // usually buttons at the bottom of the dialog
+                                                      new FlatButton(
+                                                        child: new Text("Close"),
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
                                          });
                                             },
                                           );
@@ -241,25 +241,25 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                               setState(() {
                                                  userController.addPreferito(AuthProvider.getUId(), evento.getId());
                                                showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          // return object of type Dialog
-          return AlertDialog(
-            title: new Text("Aggiunta Preferito"),
-            content: new Text("Evento aggiunto ai preferiti"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );    
-                                         });
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  // return object of type Dialog
+                                                  return AlertDialog(
+                                                    title: new Text("Aggiunta Preferito"),
+                                                    content: new Text("Evento aggiunto ai preferiti"),
+                                                    actions: <Widget>[
+                                                      // usually buttons at the bottom of the dialog
+                                                      new FlatButton(
+                                                        child: new Text("Close"),
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );    
+                                            });
                                             },
                                           );
                                         },

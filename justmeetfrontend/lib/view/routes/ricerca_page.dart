@@ -7,6 +7,8 @@ import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
 import 'package:justmeet/utils/controllerAPI/luogo_controller.dart';
 import 'package:justmeet/utils/controllerAPI/topic_controller.dart';
 import 'package:justmeet/utils/theme.dart';
+import 'package:justmeet/utils/viewtype.dart';
+import 'package:justmeet/widget/view_event_widget.dart';
 
 
 class RicercaPage extends StatefulWidget {
@@ -218,7 +220,7 @@ class _RicercaPageState extends State<RicercaPage> {
             ),
         RaisedButton.icon(
           onPressed: () {
-            Navigator.of(context).pushNamed('/ricerca', arguments: eventoController.search(ricerca.text, _currentTopic, _currentComune));
+            Builder(builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(ricerca.text, _currentTopic, _currentComune)));
           },
           icon: Icon(Icons.ac_unit), 
           label: Text("Cerca"),)
@@ -226,6 +228,7 @@ class _RicercaPageState extends State<RicercaPage> {
         ),
       )
       
+     //
         
           // Container( VistaEventi(events: ControllerJM.search(ricerca.text, _currentTopic, _currentComune));
           //   padding: EdgeInsets.all(5),

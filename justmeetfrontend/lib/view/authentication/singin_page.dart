@@ -132,8 +132,9 @@ class _SinginPageState extends State<SinginPage> {
                                 onPressed:() async{
                                   Future<String> currentId = AuthProvider().loginWithGoogle();
                                   Future<User> user = userController.getUserById(currentId);
+                                  await user;
                                   if(user == null)
-                                  print("Utente null");
+                                  
                                   else 
                                   print("Utente non null");
                                   //newuser = new User(currentuser, nome.text, cognome.text, email.text);
