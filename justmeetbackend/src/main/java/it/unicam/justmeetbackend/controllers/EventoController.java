@@ -22,6 +22,9 @@ public class EventoController {
     @Autowired
     private EventoRepository repository;
 
+    /**
+     * Restituisce tutti gli eventi
+     */
     @GetMapping("/eventi")
     public List<Evento> getAllEvents() {
         return repository.findAll();
@@ -142,47 +145,72 @@ public class EventoController {
      * @param id Id dell'evento da modificare
      */
     @RequestMapping(value = "/evento/{id}", method = RequestMethod.PUT)
-    public void updateEventById(@RequestBody Evento e, @PathVariable String id) {
-        repository.update(id, e);
+    public boolean updateEventById(@RequestBody Evento e, @PathVariable String id) {
+        if(e != null && id != null){        
+            repository.update(id, e);
+            return true;
+        }else
+           return false;
     }
 
     /**
      * Aggiunge l'id dell'user alla lista Iscritti dell'evento.
      * @param idEvento al quale l'user vuole iscriversi
      * @param idUser che si vuole iscrivere
+     * @return true se andato a buon fine, flase se uno o piu parametri passati sono null 
      */
     @RequestMapping(value = "/evento/iscrizione/update", method = RequestMethod.PUT)
-    public void addIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
-        repository.updateIscrizioni(idEvento, idUser);
-    }
+    public boolean addIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
+        if(idEvento != null && idUser != null){
+            repository.updateIscrizioni(idEvento, idUser);
+            return true;
+        }
+        else
+            return false;
+    }   
 
     /**
-     * Rimuove l'iscrizione ad un determinato evento
-     * @param idEvento dal quali rimuovere l'user
-     * @param idUser da cancellare tra gli iscritti
+     * Cancella l'iscrizione di un'utente ad un determinato evento.
+     * @param idEvento
+     * @param idUser
+     * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
      */
     @RequestMapping(value = "/evento/iscrizione/delete", method = RequestMethod.PUT)
-    public void deleteIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
-        repository.deleteIscrizione(idEvento, idUser);
+    public boolean deleteIscrizione(@RequestParam String idEvento, @RequestParam String idUser){
+        if(idEvento != null && idUser != null){
+            repository.deleteIscrizione(idEvento, idUser);
+            return true;
+        }
+        return false;
     }
 
     /**
      * Modifica l'evento settando isApproved a True
      * @param idEvento da Approvare
+     * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
      */
     @RequestMapping(value = "/evento/approva", method = RequestMethod.PUT)
-    public void updateApproved(@RequestParam String idEvento){
-        repository.updateApproved(idEvento);
+    public boolean updateApproved(@RequestParam String idEvento){
+        if(idEvento != null){
+            repository.updateApproved(idEvento);
+            return true;
+        }else
+            return false;
     }
 
     /**
      * Cancellare evento byId
      * @param id
-     * @return
+     * @return true se andato a buon fine, flase se uno o piu parametri passati sono null
      */
     @RequestMapping(value="/evento/{id}", method=RequestMethod.DELETE)
-    public void deleteEvent(@PathVariable String id) {
-            repository.deleteById(id);
+    public boolean deleteEvent(@PathVariable String id) {
+        if(id != null) {
+        repository.deleteById(id);
+            return true;
+        }
+        else
+            return false;
     }
 
     /**
