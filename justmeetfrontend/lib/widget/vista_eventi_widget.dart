@@ -72,7 +72,6 @@ class _VistaEventiWidgetState extends State<VistaEventiWidget> {
                                       ),
                                       title: Text(evento.titolo),
                                       subtitle: Text(evento.idCreatore),
-                                      trailing: 
                                     ),
                                     Divider(indent: 30, endIndent: 30, height: 10, thickness: 2,),
                                     Text("Descrizione", style: TextStyle(fontSize: 18), ),

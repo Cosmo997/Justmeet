@@ -56,7 +56,6 @@ class ViewEvent extends StatefulWidget{
       return Text("Non ci sono Eventi disponibili");
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
