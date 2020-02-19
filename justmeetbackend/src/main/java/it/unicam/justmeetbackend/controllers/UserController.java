@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-public class UserController {
+public class UserController{
 
     @Autowired
     private UserRepository repository;
