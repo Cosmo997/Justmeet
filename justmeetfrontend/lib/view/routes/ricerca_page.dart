@@ -219,35 +219,18 @@ class _RicercaPageState extends State<RicercaPage> {
                         ),
             ),
         RaisedButton.icon(
-          onPressed: () {
-            Builder(builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(ricerca.text, _currentTopic, _currentComune)));
+          onPressed:() {
+            Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(ricerca.text, _currentTopic, _currentComune)),
+                  ),);
           },
-          icon: Icon(Icons.ac_unit), 
+          icon: Icon(Icons.search),
+          color: ThemeHandler.jmTheme().accentColor,
           label: Text("Cerca"),)
           ],
         ),
       )
       
-     //
-        
-          // Container( VistaEventi(events: ControllerJM.search(ricerca.text, _currentTopic, _currentComune));
-          //   padding: EdgeInsets.all(5),
-          //   child: SearchBar<Evento>(
-          //     onSearch: ControllerJM.search(ricerca.text, topic, comune) 
-          //     onItemFound: (Evento e, int index) {
-          //       return ListTile(
-          //         title: Text(post.title),
-          //         subtitle: Text(post.description),
-          //       ),
-          //     emptyWidget: null,
-          //     loader: CircularProgressIndicator(),
-          //     ),
-
-
-
-          // ),
-          
-          //Builder(builder: null)
     );
   }
 }

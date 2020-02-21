@@ -1,19 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
-import 'package:justmeet/utils/auth_provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-class SinginGooglePage extends StatelessWidget {
+class SinginGooglePage extends StatefulWidget {
   final String id;
 
   SinginGooglePage({Key key, this.id}) : super(key: key);
 
- 
+
 
   @override
-  Widget build(BuildContext context) {
+  _SinginGooglePageState createState() => _SinginGooglePageState(this.id);
+}
+
+class _SinginGooglePageState extends State<SinginGooglePage> {
     final String id;
     UserController userController = new UserController();
     TextEditingController nome = new TextEditingController();
@@ -21,6 +22,12 @@ class SinginGooglePage extends StatelessWidget {
     TextEditingController email = new TextEditingController();
     User newuser;
     bool esito;
+
+  _SinginGooglePageState(this.id);
+
+  @override
+  Widget build(BuildContext context) {
+    
         return Container(
           child: Card(
             child: Column(
@@ -60,11 +67,18 @@ class SinginGooglePage extends StatelessWidget {
                   Buttons.Google, 
                   onPressed: () async => {
                     newuser = new User(id, nome.text, cognome.text, email.text),
-                    esito = await userController.postUser(newuser),
+                    this.esito = await userController.postUser(newuser),
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return 
+                        return AlertDialog(
+                          actions: <Widget>[
+                            RaisedButton.icon(onPressed: () => Navigator.pop(context), icon: Icon(Icons.arrow_back), label: Text("Indietro"))
+                          ],
+                          title: Text("Congratulazioni, sei iscritto a JustMeet",
+
+                        ),
+                        );
                       },
                       )
               })

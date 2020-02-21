@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:justmeet/model/user.dart';
@@ -6,6 +8,7 @@ import 'package:justmeet/utils/auth_provider.dart';
 import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:justmeet/view/authentication/googlesingin_page.dart';
 
 class SinginPage extends StatefulWidget {
   SinginPage({Key key}) : super(key: key);
@@ -131,20 +134,17 @@ class _SinginPageState extends State<SinginPage> {
                                 Buttons.Google, 
                                 onPressed:() async{
                                   Future<String> currentId = AuthProvider().loginWithGoogle();
+                                  sleep(Duration(seconds: 2));
                                   Future<User> user = userController.getUserById(currentId);
                                   await user;
+                                  String id = await currentId;
                                   if(user == null)
-                                  
+                                  {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SinginGooglePage(id: id)));
+                                  }
                                   else 
-                                  print("Utente non null");
-                                  //newuser = new User(currentuser, nome.text, cognome.text, email.text);
-                                  //bool result = await userController.postUser(newuser);
-                                  // if(result == true){
-                                  // print("ISCRITTO");
-                                  // Navigator.pop(context);
-                                  // }
-                                  // else {
-                                  // Navigator.pop(context);}
+                                  print("User loggato");
+                                  Navigator.pop(context);
                                   
                                 }
                                                   ),

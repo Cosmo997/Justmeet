@@ -26,7 +26,6 @@ class ViewEvent extends StatefulWidget{
 
   final ViewType type;
   final Future<List<Evento>> events;
-  Future<String> idUser = AuthProvider.getUId();
 
     
       EventoController eventoController = new EventoController();
@@ -35,33 +34,10 @@ class ViewEvent extends StatefulWidget{
     
       ViewEventState(this.type, this.events);
     
-      Future<List<Evento>> getPage(String p, Future<String> id){
-        if(p == "favo")
-          return eventoController.loadPreferitiByUtente(id);
-        else if(p == "sub"){
-          return eventoController.loadEventiWhereUserIsSub(id);
-        }else if(p == "miei")
-          return eventoController.loadEventiByIdCreatore(id);
-        else
-          return eventoController.loadEventsApproved();
-      }
-    
-        Text getText(String p){
-        if(p == "favo"){
-          return Text("Non ci sono Eventi Preferiti");
-        }else if(p == "miei"){
-          return Text("Non hai ancora creato Eventi");
-        }else if(p == "sub"){
-          return Text("Non sei iscritto a nessun Evento");
-        }
-        else
-          return Text("Non ci sono Eventi disponibili");
-      }
-    
       @override
       Widget build(BuildContext context) {
         return Scaffold(
-        body: FutureBuilder(
+          body: FutureBuilder(
           future: events,
           builder: (BuildContext context, AsyncSnapshot<List<Evento>> eventi) {
             if(eventi.data == null){return LoadingWidget();}
@@ -115,7 +91,7 @@ class ViewEvent extends StatefulWidget{
                                                 );
                                                 case ViewType.GUEST_HOME: return Text("");
                                                 default: return FutureBuilder(
-                                              future: userController.getUserById(idUser),
+                                              future: userController.getUserById(AuthProvider.getUId()),
                                               builder: (context, AsyncSnapshot<User> user) {
                                                 if(user.data == null) return CircularProgressIndicator();
                                                 else 
@@ -150,7 +126,7 @@ class ViewEvent extends StatefulWidget{
                                                   child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                                   onTap: () {
                                                     setState(() {
-                                                      userController.addPreferito(idUser, eventi.data[index].getId());
+                                                      userController.addPreferito(AuthProvider.getUId(), eventi.data[index].getId());
                                                     showDialog(
                                                       context: context,
                                                       builder: (BuildContext context) {
