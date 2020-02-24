@@ -67,3 +67,16 @@ La milestone chi ci siamo posti all'inizio dell'iterazione era quella di impleme
 In questa iterazione abbiamo anche pensato ai primi Test, dato che il backend non era ancora collegato al database abbiamo preferito non effettuare test iniziali per poi doverli riscrivere completamente.
 La parte frontend invece abbiamo pensato di aspettare prima di inziare la fase di testing per via delle poche informazioni che abbiamo ancora sul framework flutter e gli strumenti che mette a disposizione per il testing.
 Nella fase di Progettazione abbiamo identificato anche gli elementi più difficili da comprendere nella documentazione, che nella prossima iterazione perfezioneremo con altri diagrammi.
+  
+IV Iterazione<BR>
+In quest'ultima iterazione ci siamo dedicati inizialmente a completare la documentazione implementando i casi d'uso rimanenti e i sequence diagram rimanente, per poi passare ad implementare le ultime funzioni che ci siamo prefissati per il progetto.
+Il progetto è finito per quanto riguarda la documentazione e l'implementazione. Nella fase finale ci siamo dedicati alla parte di testing, anche essa terminata con successo.
+ Per quanto riguarda il testing dell'applicazione abbiamo utilizzato il programma postman, dato che lo abbiamo già utiizzato per testing di componente e testing di integrazione.
+Per visualzzare i test è necessario importare in postman il seguente link:
+https://www.getpostman.com/collections/612b73d4f5ea9e75c464
+  
+ Iterazione extra<BR>
+Abbiamo deciso di inserire una successiva mini-iterazione per via di alcuni bug riscontrati nel codice, per un refactoring generale della documentazione (aggiornando alcune chiamate con i metodi specifici) e soprattutto per farla rientrare nelle specifiche richieste dal professore per svolgere l'esame.
+Per fare ciò abbiamo riscaricato i commit principali da github che riguardavano la documentazione e abbiamo ripreso i class diagram e i casi d'uso di ogni iterazioni e li abbiamo aggiunti a quelli già presenti.
+Invece per quanto riguarda i sequence diagram siamo passati da uno stile informale ad uno formale cambiando il linguaggio, ma non il contenuto.
+
