@@ -57,8 +57,7 @@ static Future<String> getImage()async{
 }
 
 Future<String> signUp(String email, String password) async {
-    AuthResult result = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     FirebaseUser user = result.user;
     return user.uid;
   }

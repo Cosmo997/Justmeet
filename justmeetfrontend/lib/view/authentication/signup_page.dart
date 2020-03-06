@@ -137,14 +137,14 @@ class SignUpPage extends StatefulWidget {
     )
                          }
                          else{
-                           //print("email: " +email.text+ " password: " +password.text),
+                           print("email: " +email.text+ " password: " +password.text),
                            idUser = AuthProvider().signUp(email.text, password.text),
-                           //print("idUser: " + await idUser),
+                           print("idUser: " + await idUser),
                            usercur = await idUser,
-                           //print("usercur: " +usercur),
+                           print("usercur: " +usercur),
                            mongoUser = new User(usercur, nome.text, cognome.text, email.text),
                            esito = await userController.postUser(mongoUser),
-                           //print("Esito post:  " +esito.toString()),
+                           print("Esito post:  " +esito.toString()),
                           Navigator.of(context).popUntil(ModalRoute.withName('/'))
                          }
                       },
