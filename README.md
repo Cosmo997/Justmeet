@@ -26,7 +26,7 @@ Mentre per coloro che **non** sono registrati, sarà comunque possibile usufruir
 
 # Tecnologie Utilizzate durante lo Sviluppo <a name = "tec"></a>
 
-Per questo progetto, abbiamo deciso di utillare un linguaggio lato Front-End, che ci permetta di sviluppare un'applicazione **Cross-Platform**, al fine di avere un software **Single-CodeBase** che sia fruibile su **iOS**, **Android** e **Web** .
+Per questo progetto, abbiamo deciso di utillare un linguaggio lato Front-End, che ci permetta di sviluppare un'applicazione **Cross-Platform**, al fine di avere un software **Single-CodeBase** che sia fruibile su **iOS**, **Android** e [**Web**](https://michele-x98.github.io/web/#/)  .
 Per fare ciò, abbiamo scelto il linguaggio di programmazione **Dart** e il relativo Framework di sviluppo **Flutter**.
 <br><br>
 Per quanto riguarda il lato Back-End, abbiamo utilizzato interamente il linguaggio **Java** ed il relativo Framework **Spring-Boot** per la creazione di **Api Rest**, utulizzare per far comunicare il lato FrontEnd con il Database NOSQL **MongoDB** per lo storage dei dati.
