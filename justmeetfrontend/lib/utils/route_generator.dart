@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justmeet/app.dart';
+import 'package:justmeet/main.dart';
 import 'package:justmeet/view/authentication/singin_page.dart';
 import 'package:justmeet/view/authentication/signup_page.dart';
 import 'package:justmeet/view/routes/eventi_sub_page.dart';

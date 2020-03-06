@@ -10,13 +10,14 @@ class AuthProvider {
     try {
         AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
         utente = result.user;
-        if(utente == null)
-        return false;
+        //if(utente == null)
+        //return false;
         return true;
     } catch (e) {
       return false;
     }
   }
+  
   void logOut(){
     _auth.signOut();
   
