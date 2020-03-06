@@ -16,7 +16,7 @@ class PreferitiPage extends StatefulWidget {
 class PreferitiPageState extends State<PreferitiPage>
 {
     EventoController eventoController = new EventoController();
-    UserController userController = new UserController(); 
+    //UserController userController = new UserController(); 
 
   @override
   Widget build(BuildContext context) {
