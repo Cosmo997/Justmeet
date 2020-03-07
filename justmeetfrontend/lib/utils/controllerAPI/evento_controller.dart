@@ -23,7 +23,6 @@ class EventoController extends ControllerJM{
     List<Evento> preferiti = [];
     List<String> idEventiPreferiti = app.getPreferiti();
      for (int i = 0; i < idEventiPreferiti.length; i++) {
-       print(idEventiPreferiti[i]);
        http.Response response = await http.get(getUrlBase() + "/evento/id/" +idEventiPreferiti[i], headers: getHeaders());
        if(response.statusCode == 200)
        {

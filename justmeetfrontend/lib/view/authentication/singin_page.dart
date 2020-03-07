@@ -122,9 +122,7 @@ class _SinginPageState extends State<SinginPage> {
                                             });}
                                         else{
                                         bool result = await AuthProvider().singInWithEmail(_email.text, _password.text);
-                                        if(!result){
-                                          print("Auth fail");
-                                        }
+                                        print(result.toString());
                                           change();
                                         }
                                 },
