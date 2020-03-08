@@ -24,8 +24,8 @@ class _SinginPageState extends State<SinginPage> {
   @override
   void initState() {
     super.initState();
-    _email = TextEditingController(text: "test@test.it");
-    _password = TextEditingController(text: "testtest");
+    _email = TextEditingController(text: "micheletest@gmail.com");
+    //_password = TextEditingController(text: "testtest");
   }
 
   @override
