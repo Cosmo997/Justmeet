@@ -21,18 +21,17 @@ class EventoController extends ControllerJM{
     UserController userController = new UserController();
     User app = await userController.getUserById(idUtente);
     List<Evento> preferiti = [];
+    
     List<String> idEventiPreferiti = app.getPreferiti();
      for (int i = 0; i < idEventiPreferiti.length; i++) {
        http.Response response = await http.get(getUrlBase() + "/evento/id/" +idEventiPreferiti[i], headers: getHeaders());
-       if(response.statusCode == 200)
+       if(response.body != null)
        {
-       print("Evento: " +response.statusCode.toString());
        Evento e = Evento.fromjson(jsonDecode(response.body));
        if(e != null)
        preferiti.add(e);
        }
      }
-     print("Preferiti: " +preferiti.toString());
      return preferiti;
    }
 

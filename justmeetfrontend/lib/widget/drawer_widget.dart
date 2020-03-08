@@ -92,7 +92,7 @@ class JMDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text("Area Riservata",style: TextStyle(fontSize: 15)),
-              leading: Icon(Icons.accessible_forward, color: ThemeHandler.jmTheme().accentColor,),
+              leading: Icon(Icons.account_circle, color: ThemeHandler.jmTheme().accentColor,),
               trailing:  Icon(Icons.arrow_forward_ios, color: ThemeHandler.jmTheme().accentColor,),
               onTap: () {
                 showModalBottomSheet(
