@@ -24,8 +24,8 @@ class _SinginPageState extends State<SinginPage> {
   @override
   void initState() {
     super.initState();
-    _email = TextEditingController(text: "micheletest@gmail.com");
-    //_password = TextEditingController(text: "testtest");
+    _email = TextEditingController(text: "prova@prova.com");
+    _password = TextEditingController(text: "provaprova");
   }
 
   @override
@@ -122,8 +122,18 @@ class _SinginPageState extends State<SinginPage> {
                                             });}
                                         else{
                                         bool result = await AuthProvider().singInWithEmail(_email.text, _password.text);
-                                        if(result == true)
+                                        print(result.toString());
+                                        if(result == true){
                                           change();
+                                        }else
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text("Attenzione"),
+                                                content: Text("Ricontrollare i cambi inseriti"),
+                                              );
+                                            });
                                         }
                                 },
                               ),
