@@ -30,7 +30,6 @@ class _RicercaPageState extends State<RicercaPage> {
   String _currentSiglaProvincia;
   String _currentComune;
   String _currentTopic;
-
   
   @override
   void initState() {
@@ -44,6 +43,25 @@ class _RicercaPageState extends State<RicercaPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            Container(
+                 alignment: Alignment.center,
+                 child: 
+                 Text("Cerca nel titolo", style: TextStyle(color: ThemeHandler.jmTheme().accentColor, fontSize: 15),
+                 ),
+                 padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+               ),
+            Divider(color: ThemeHandler.jmTheme().accentColor, indent: 40, endIndent: 40, height: 10,),
+            //Contenuto parole chiave
+            Container(
+              child: TextField(
+                controller: ricerca,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8),)),
+                    labelText: 'Cerca...',
+                ),
+                        ),
+            ),
             //Titolo
             Container(
                  alignment: Alignment.center,
@@ -141,13 +159,9 @@ class _RicercaPageState extends State<RicercaPage> {
                           }
                          },)
                          )
-                  
-
-
                   ],
                 ),
               ),
-              
             ),
             //Titolo
             Container(
@@ -198,30 +212,16 @@ class _RicercaPageState extends State<RicercaPage> {
                                   ),
                 ),
               ),
-            //Titolo teto
-            Container(
-                 alignment: Alignment.center,
-                 child: 
-                 Text("Cerca nel titolo", style: TextStyle(color: ThemeHandler.jmTheme().accentColor, fontSize: 15),
-                 ),
-                 padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-               ),
-            Divider(color: ThemeHandler.jmTheme().accentColor, indent: 40, endIndent: 40, height: 10,),
-            //Contenuto parole chiave
-            Container(
-              child: TextField(
-                controller: ricerca,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8),)),
-                    labelText: 'Cerca...',
-                ),
-                        ),
-            ),
         RaisedButton.icon(
           onPressed:() {
+            String currentRicerca; 
+            if(ricerca.text.isEmpty){
+            currentRicerca = "null";
+            }else
+            currentRicerca = ricerca.text;
+            print("Ricerca: " +ricerca.text);
             Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(ricerca.text, _currentTopic, _currentComune)),
+                                builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(currentRicerca, _currentTopic, _currentComune)),
                   ),);
           },
           icon: Icon(Icons.search),
