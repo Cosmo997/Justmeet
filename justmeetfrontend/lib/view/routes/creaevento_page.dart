@@ -289,7 +289,10 @@ class CreaEventoPage extends StatefulWidget
                     child: RaisedButton(
                             color: Theme.of(context).accentColor,
                             padding: EdgeInsets.all(15),
-                            child: Text("Crea Evento"),
+                            shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            ),
+                            child: Text("Crea Evento", style: TextStyle(color: Colors.white),),
                             textTheme: ButtonTextTheme.primary,
                             onPressed: () {
                               if(_titolo.text.isEmpty || _descrizione.text.isEmpty || _partecipanti.text.isEmpty || _currentComune == null)

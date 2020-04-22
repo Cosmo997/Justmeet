@@ -9,6 +9,7 @@ import 'package:justmeet/view/routes/ricerca_page.dart';
 import 'package:justmeet/view/routes/user_home_page.dart';
 import 'package:justmeet/view/routes/guest_home_page.dart';
 import 'package:justmeet/widget/appbar_widget.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(App());
 
@@ -35,6 +36,10 @@ class AppState extends State<App>{
     
       @override
       Widget build(BuildContext context) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        ]);
          return StreamBuilder(
           stream: FirebaseAuth.instance.onAuthStateChanged ,
           builder: (BuildContext context, AsyncSnapshot snapshot){
@@ -59,7 +64,7 @@ class AppState extends State<App>{
            bottomNavigationBar: CurvedNavigationBar(
             height: 50,
             color: ThemeHandler.jmTheme().primaryColor,
-            backgroundColor: Colors.black.withOpacity(0),
+            backgroundColor: ThemeHandler.jmTheme().secondaryHeaderColor,
             buttonBackgroundColor: ThemeHandler.jmTheme().primaryColor,  
             items: [
               Icon(Icons.home, size: 30,color: (currentIndex==0)?ThemeHandler.jmTheme().accentColor:ThemeHandler.jmTheme().secondaryHeaderColor),
@@ -71,19 +76,15 @@ class AppState extends State<App>{
             index: currentIndex,
             onTap: (index){setState(() {
               currentIndex = index;
-            });})
-      ),
+            });}
+            ),
+          ),
           );
           }
           },
         );
-        
 }
-
 }
-
-
-
 
 
 

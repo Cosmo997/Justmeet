@@ -213,6 +213,9 @@ class _RicercaPageState extends State<RicercaPage> {
                 ),
               ),
         RaisedButton.icon(
+          shape: RoundedRectangleBorder(
+             borderRadius: new BorderRadius.circular(18.0),
+            ),
           onPressed:() {
             String currentRicerca; 
             if(ricerca.text.isEmpty){

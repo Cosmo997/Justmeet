@@ -57,6 +57,7 @@ class ViewEvent extends StatefulWidget{
                                     children: <Widget>[
                                       ListTile(
                                         leading: CircleAvatar(
+                                          backgroundColor: Colors.black,
                                           child:Image.asset('assets/images/iconaUser.png'),
                                         ),
                                         title: Text(eventi.data[index].titolo),
@@ -64,7 +65,8 @@ class ViewEvent extends StatefulWidget{
                                         trailing: Builder(
                                             builder: (context) {
                                               switch (type) {
-                                                case ViewType.MYEVENT: return GestureDetector(
+                                                case ViewType.MYEVENT: 
+                                                return GestureDetector(
                                                   child: Icon(Icons.delete_forever,size: 30 ,color: ThemeHandler.jmTheme().accentColor),
                                                   onTap: () {
                                                     setState(() {
@@ -159,7 +161,7 @@ class ViewEvent extends StatefulWidget{
                                          height: 150,
                                          width: 1000,  
                                          child: Card(
-                                           color: Colors.grey,
+                                           color: ThemeHandler.jmTheme().scaffoldBackgroundColor,
                                            margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
                                            child: SingleChildScrollView(
                                              child: Padding(

@@ -16,9 +16,14 @@ class JMDrawer extends StatelessWidget {
             DrawerHeader(
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: <Color>[
+                  Colors.yellow,
                   ThemeHandler.jmTheme().accentColor,
-                  Colors.orange
-                ])
+                  Colors.orange,
+                ],
+                stops: [0.5,0.5,0.5],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight
+                )
               ),
               child:  Container(
                 child: Column(

@@ -13,7 +13,8 @@ class LoadingWidget extends StatelessWidget {
                child: Column(
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: <Widget>[
-                   Text("LOADING", style: TextStyle(color: ThemeHandler.jmTheme().accentColor),),
+                   Text("LOADING", style: TextStyle(
+                     color: ThemeHandler.jmTheme().accentColor),),
                    Divider(color: ThemeHandler.jmTheme().accentColor, height: 30,indent: 50 ,endIndent: 50,),
                    CircularProgressIndicator(),
                  ],

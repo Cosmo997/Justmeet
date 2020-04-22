@@ -38,7 +38,7 @@ class _SinginPageState extends State<SinginPage> {
             AnimatedContainer(
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30)),
+            borderRadius: BorderRadius.circular(30)),
             child: AnimatedCrossFade(
                 firstChild: Container(
                   color: Colors.transparent,
@@ -83,9 +83,7 @@ class _SinginPageState extends State<SinginPage> {
                                         ),
                                 ),
                               ),
-                              
                               const SizedBox(height: 10.0,),
-                              
                               Container(
                                 padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                                 child: Padding(
@@ -105,7 +103,6 @@ class _SinginPageState extends State<SinginPage> {
                               ),
                               
                               const SizedBox(height: 10.0,),
-                              
                               RaisedButton(
                                 color: ThemeHandler.jmTheme().accentColor,
                                 child: Text("Login"),
@@ -137,7 +134,6 @@ class _SinginPageState extends State<SinginPage> {
                                         }
                                 },
                               ),
-
                               SignInButton(
                                 Buttons.Google, 
                                 onPressed:() async{
@@ -153,10 +149,8 @@ class _SinginPageState extends State<SinginPage> {
                                   else 
                                   print("User loggato");
                                   Navigator.pop(context);
-                                  
                                 }
-                                                  ),
-                              
+                               ),
                               RaisedButton(
                                   color: ThemeHandler.jmTheme().accentColor,
                                   child: Text("Iscriviti"),

@@ -17,13 +17,14 @@ class AreaRiservataPage extends StatefulWidget{
 
   class AreaRiservataPageState extends State<AreaRiservataPage>{
 
-   UserController userController = new UserController(); 
+  UserController userController = new UserController(); 
   String tema;
 
   @override
   void initState() {
     super.initState();
     setDarkMode(ThemeHandler.getCurrentThema());
+    ThemeHandler.getCurrentThema();
       }
     
       @override
@@ -69,6 +70,7 @@ class AreaRiservataPage extends StatefulWidget{
                                padding: EdgeInsets.all(8),
                                child: CircleAvatar(
                                  radius: 56,
+                                  backgroundColor: Colors.black,
                                   child: Image.asset('assets/images/iconaUser.png'),
                                  //backgroundImage: NetworkImage(),
                                )
@@ -108,11 +110,15 @@ class AreaRiservataPage extends StatefulWidget{
                             children: <Widget>[
                               Text(tema),
                               Switch(
+                                activeColor: Colors.grey,
+                                inactiveTrackColor: Colors.black,
                                 value:ThemeHandler.isDarkThemeEnabled,
                                 onChanged: (bool value){
-                                  setState(() {
-                                    setDarkMode(ThemeHandler.getCurrentThema());
-                                    ThemeHandler.changeTheme();});
+                                  setState(() => {
+                                    setDarkMode(ThemeHandler.getCurrentThema()),
+                                    ThemeHandler.changeTheme()
+                                    }
+                                  );
                                 },
                               )
                             ],
@@ -191,9 +197,9 @@ class AreaRiservataPage extends StatefulWidget{
                   Container(
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.all(Radius.circular(20))
+                        borderRadius: BorderRadius.all(Radius.circular(40))
                        ),
-                       margin: EdgeInsets.all(10),
+                       margin: EdgeInsets.all(20),
                     child: Card(
                       child: IconButton(
                         iconSize: 40,

@@ -13,7 +13,7 @@ class ThemeHandler{
       //cardColor: Colors.black.withOpacity(0),
       bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: Colors.black.withOpacity(0)),
-      primaryColor: Colors.grey[500],
+      primaryColor: Colors.black,
       scaffoldBackgroundColor: Colors.white,
       accentColor: Colors.orange[400],
       iconTheme: IconThemeData(
@@ -21,10 +21,10 @@ class ThemeHandler{
         size: 20.0,
       ),
       buttonColor: Colors.orange[400],
-      secondaryHeaderColor: Colors.grey[300],
+      secondaryHeaderColor: Colors.grey[400],
       backgroundColor: Colors.white,
       tabBarTheme: base.tabBarTheme.copyWith(
-        unselectedLabelColor: Colors.grey,
+        unselectedLabelColor: Colors.white,
       ));
   }
   else
