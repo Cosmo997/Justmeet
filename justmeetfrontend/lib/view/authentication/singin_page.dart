@@ -83,6 +83,7 @@ class _SinginPageState extends State<SinginPage> {
                                         ),
                                 ),
                               ),
+                              
                               const SizedBox(height: 10.0,),
                               Container(
                                 padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
