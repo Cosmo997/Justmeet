@@ -31,15 +31,15 @@ Per fare ciò, abbiamo scelto il linguaggio di programmazione **Dart** e il rela
 <br>
 <br>
 Per quanto riguarda il lato Back-End, abbiamo utilizzato interamente il linguaggio **Java** ed il relativo Framework **Spring-Boot** per la creazione di **Api Rest**, utulizzare per far comunicare il lato FrontEnd con il Database NOSQL **MongoDB** per lo storage dei dati.
-<br><br>
+<br>
 
 <p align="center">
-<img src="https://i.imgur.com/CjTaubG.png" height="450">
-<img src="https://i.imgur.com/7W7Pz6E.png" height="450">
-<img src="https://i.imgur.com/cQP1cBg.png" height="450">
+<img src="https://i.imgur.com/CjTaubG.png" height="500">
+<img src="https://i.imgur.com/7W7Pz6E.png" height="500">
+<img src="https://i.imgur.com/cQP1cBg.png" height="500">
 </p>
 
-<br><br>
+<br>
 
 Per poter effettuare le chiamate REST ci siamo affidati al servizio messo a disposizione da [**Hekoku**](https://www.heroku.com/), che ci ha permesso di spostare in remoto gratuitamente il **Server Apache** messo a disposizione da SpringBoot. <br>
 L'autentucazione dell'utente nell'applicazione viene effettuata grazie al servizio **Google Firebase**, che gestisce in modo autonomo dal sistema da noi implementato, le fasi di **SignIn** e **SignUp**.
