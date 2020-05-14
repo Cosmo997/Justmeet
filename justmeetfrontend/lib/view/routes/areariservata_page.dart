@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
@@ -19,12 +20,18 @@ class AreaRiservataPage extends StatefulWidget{
 
   UserController userController = new UserController(); 
   String tema;
+  String token;
+
+  void getToken() async{
+    token = await AuthProvider.getToken();
+  }
 
   @override
   void initState() {
     super.initState();
     setDarkMode(ThemeHandler.getCurrentThema());
     ThemeHandler.getCurrentThema();
+    getToken();
       }
     
       @override
@@ -210,7 +217,25 @@ class AreaRiservataPage extends StatefulWidget{
                       ),
                     ),
                   ),
-                  Text("LogOut"),
+                  Text("Print Token"),
+                  Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(40))
+                       ),
+                       margin: EdgeInsets.all(20),
+                    child: Card(
+                      child: IconButton(
+                        iconSize: 40,
+                        icon: Icon(Icons.exit_to_app),
+                        onPressed:() => {
+                            print("Token: $token")
+                          },
+                        tooltip: "LogOut",
+                        color: ThemeHandler.jmTheme().accentColor,
+                      ),
+                    ),
+                  ),
                   ]
               ),
             ),
@@ -228,7 +253,6 @@ class AreaRiservataPage extends StatefulWidget{
         tema = "Light Mode";
       }
 }
-
 
 
 

@@ -1,6 +1,5 @@
 package it.unicam.justmeetbackend;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -19,7 +18,7 @@ public class Main{
 
 		try {
             FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(
-                    new ClassPathResource("/justmeetbackend/src/main/resources/justmeet-c8d6f-firebase-adminsdk-5295x-382e05be1e.json").getInputStream()))
+                    new ClassPathResource("/justmeet-c8d6f-firebase-adminsdk-5295x-382e05be1e.json").getInputStream()))
                     .setStorageBucket("justmeet-ea052.appspot.com")
                     .setDatabaseUrl("https://justmeet-c8d6f.firebaseio.com").build();
             FirebaseApp.initializeApp(options);

@@ -23,6 +23,15 @@ class AuthProvider {
   
   }
 
+/*
+ * Restituisce il token dell'utente corrente
+ */
+static Future<String> getToken() async {
+  utente = await FirebaseAuth.instance.currentUser();
+  IdTokenResult res = await utente.getIdToken();
+  return res.token;
+}
+
 static Future<String> getUId() async {
   utente = await  FirebaseAuth.instance.currentUser();
   return utente.uid;
