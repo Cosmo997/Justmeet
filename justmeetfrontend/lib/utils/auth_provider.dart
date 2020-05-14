@@ -7,11 +7,10 @@ class AuthProvider {
   static FirebaseUser utente;
 
   Future<bool> singInWithEmail(String email, String password) async {
-    print("Email: " +email +"Psw: "+password);
-    try {
+  try {
         AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
         utente = result.user;
-        if(utente == null)
+      if(utente == null)
           return false;
         return true;
     } catch (e) {
@@ -52,9 +51,9 @@ static Future<String> getImage()async{
   
 
   FirebaseUser creaUtenteFirebase(String email, String password){
-  AuthResult franco;
-   _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => franco = value).catchError(franco = null);
-  return franco.user;
+  AuthResult newUser;
+    _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => newUser = value).catchError(newUser = null);
+    return newUser.user;
 }
 
 Future<String> signUp(String email, String password) async {

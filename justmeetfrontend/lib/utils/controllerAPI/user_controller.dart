@@ -10,9 +10,7 @@ class UserController extends ControllerJM{
   UserController();
 
   Future<bool> postUser(User newuser) async {
-    print("Json.encode: " +json.encode(newuser.toMap()));
     http.Response response = await http.post(getUrlBase() + "/user", headers: {"Content-type": "application/json"}, body: json.encode(newuser.toMap()));
-    print("Status code: " +response.statusCode.toString());
     if(response.statusCode == 200) 
     return true;
     else 
