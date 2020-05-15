@@ -15,7 +15,6 @@ class UserController extends ControllerJM{
     return true;
     else 
     return false;
-
   }
 
   /*
@@ -25,7 +24,7 @@ class UserController extends ControllerJM{
     String id = await idUtente;
     String token = await tokenUser;
 
-    http.Response response = await http.get(getUrlBase() + "/utenti/id/" +id, headers: {"Content-type": "application/json", "Autentication": token});
+    http.Response response = await http.get(getUrlLocal() + "/utente/id?idUser=" +id, headers: {"Content-type": "application/json", "Authorization": token});
     if(response.statusCode != 200 || response.body == "[]")
     return null;
     User user = User.fromJson(jsonDecode(response.body));

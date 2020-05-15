@@ -39,7 +39,7 @@ class AreaRiservataPage extends StatefulWidget{
       return Scaffold(
         
            body: FutureBuilder(
-           future: userController.getUserById(AuthProvider.getUId()),
+           future: userController.getUserByIdWithToken(AuthProvider.getUId(), AuthProvider.getToken()),
             builder: (BuildContext context, AsyncSnapshot<User> snapshot){
               if(snapshot.data == null)
               {

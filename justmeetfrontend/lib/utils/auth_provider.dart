@@ -28,8 +28,8 @@ class AuthProvider {
  */
 static Future<String> getToken() async {
   utente = await FirebaseAuth.instance.currentUser();
-  IdTokenResult res = await utente.getIdToken();
-  return res.token;
+  IdTokenResult result = await utente.getIdToken();
+  return result.token;
 }
 
 static Future<String> getUId() async {
