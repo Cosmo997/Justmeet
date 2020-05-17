@@ -17,11 +17,12 @@ public class Main{
 		SpringApplication.run(Main.class, args);
 
 		try {
-            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(
+            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(
+                GoogleCredentials.fromStream(
                     new ClassPathResource("/justmeet-c8d6f-firebase-adminsdk-5295x-382e05be1e.json").getInputStream()))
                     .setStorageBucket("justmeet-ea052.appspot.com")
                     .setDatabaseUrl("https://justmeet-c8d6f.firebaseio.com").build();
-            FirebaseApp.initializeApp(options);
+                    FirebaseApp.initializeApp(options);
         } catch (IOException e) {
             e.printStackTrace();
         }
