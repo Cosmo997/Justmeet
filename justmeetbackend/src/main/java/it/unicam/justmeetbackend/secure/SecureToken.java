@@ -14,7 +14,6 @@ public class SecureToken {
 		FirebaseAuth.getInstance();
 		return uid;
 	}
-
 	public static SecureToken getInstance() {
 		if (instance == null) {
 			instance = new SecureToken();
