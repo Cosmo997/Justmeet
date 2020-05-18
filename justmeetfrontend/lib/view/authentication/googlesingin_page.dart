@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerAPI/user_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_token_controller.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SinginGooglePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class SinginGooglePage extends StatefulWidget {
 
 class _SinginGooglePageState extends State<SinginGooglePage> {
     final String id;
-    UserController userController = new UserController();
+    UserTokenController userTokenController = new UserTokenController();
     TextEditingController nome = new TextEditingController();
     TextEditingController cognome = new TextEditingController();
     TextEditingController email = new TextEditingController();
@@ -67,7 +67,7 @@ class _SinginGooglePageState extends State<SinginGooglePage> {
                   Buttons.Google, 
                   onPressed: () async => {
                     newuser = new User(id, nome.text, cognome.text, email.text),
-                    this.esito = await userController.postUser(newuser),
+                    this.esito = await userTokenController.postUserGoogle(newuser),
                     showDialog(
                       context: context,
                       builder: (context) {

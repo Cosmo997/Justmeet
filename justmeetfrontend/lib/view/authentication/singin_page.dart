@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/auth_provider.dart';
-import 'package:justmeet/utils/controllerAPI/user_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_token_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:justmeet/view/authentication/googlesingin_page.dart';
@@ -17,7 +17,7 @@ class SinginPage extends StatefulWidget {
 }
 
 class _SinginPageState extends State<SinginPage> {
-  UserController userController = new UserController();
+  UserTokenController userTokenController = new UserTokenController();
   TextEditingController _email;
   TextEditingController _password;
   bool _showSecond = false;
@@ -140,7 +140,7 @@ class _SinginPageState extends State<SinginPage> {
                                 onPressed:() async{
                                   Future<String> currentId = AuthProvider().loginWithGoogle();
                                   sleep(Duration(seconds: 2));
-                                  Future<User> user = userController.getUserById(currentId);
+                                  Future<User> user = userTokenController.getUserById(currentId);
                                   await user;
                                   String id = await currentId;
                                   if(user == null)

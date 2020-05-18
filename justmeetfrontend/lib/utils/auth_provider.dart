@@ -57,18 +57,18 @@ static Future<String> getImage()async{
       return null;
     }
   }
-  
-
-  FirebaseUser creaUtenteFirebase(String email, String password){
-  AuthResult newUser;
-    _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => newUser = value).catchError(newUser = null);
-    return newUser.user;
-}
 
 Future<String> signUp(String email, String password) async {
     AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     FirebaseUser user = result.user;
     return user.uid;
+  }
+
+  Future<List<String>> signUpWithToken(String email, String password) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    FirebaseUser user = result.user;
+    IdTokenResult tokenResult = await user.getIdToken();
+    return [user.uid, tokenResult.token];
   }
 
 }

@@ -11,7 +11,6 @@ public class SecureToken {
 	public String getUid(String token) throws FirebaseAuthException {
 		FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
 		String uid = decodedToken.getUid();
-		FirebaseAuth.getInstance();
 		return uid;
 	}
 	public static SecureToken getInstance() {

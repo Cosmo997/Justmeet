@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:justmeet/utils/controllerAPI/user_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_token_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 
 class LoadName extends StatefulWidget{
@@ -14,7 +14,7 @@ class LoadName extends StatefulWidget{
 
   class LoadNameState extends State<LoadName>{
   final String idCreatore;
-  UserController userController = new UserController();
+  UserTokenController userTokenController = new UserTokenController();
 
   LoadNameState(this.idCreatore);
 
@@ -22,7 +22,7 @@ class LoadName extends StatefulWidget{
   Widget build(BuildContext context) {
    
     return FutureBuilder(
-                future: userController.getNomeByIdUser(this.idCreatore),
+                future: userTokenController.getNomeByIdUser(this.idCreatore),
                 builder: (context, AsyncSnapshot<String> nome){
                 if(nome.data == null){
                    return Text("Loading...", style: TextStyle(color: ThemeHandler.jmTheme().accentColor));

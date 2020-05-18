@@ -8,7 +8,7 @@ import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/provincia.dart';
 import 'package:justmeet/model/regione.dart';
 import 'package:justmeet/model/topic.dart';
-import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/evento_token_controller.dart';
 import 'package:justmeet/utils/controllerAPI/luogo_controller.dart';
 import 'package:justmeet/utils/controllerAPI/topic_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
@@ -21,7 +21,8 @@ class CreaEventoPage extends StatefulWidget
   }
   
   class CreaEventoPageState extends State<CreaEventoPage>{
-      EventoController eventoController = new EventoController();
+
+      EventoTokenController eventoTokenController = new EventoTokenController();
       LuogoController luogoController = new LuogoController();
       TopicController topicController = new TopicController();
       final DateFormat _df = DateFormat("dd/MM/yyyy");
@@ -326,9 +327,8 @@ class CreaEventoPage extends StatefulWidget
       // METODI ESTERNI  
                   
      Future<void> _creaEvento() async {
-       //print(_titolo.text + "\n" + _descrizione.text +"\n"+ _partecipanti.text +"\n"+ _currentTopic +"\n"+await AuthProvider.getUId()+"\n"+ _currentComune +"\n"+  _selectedDateStart.toIso8601String() +"\n"+ _selectedDateFinish.toIso8601String());
       _currentEvent = new Evento(_titolo.text, _descrizione.text, int.parse(_partecipanti.text),_currentTopic,await AuthProvider.getUId(),_currentComune, _selectedDateStart.toIso8601String(),_selectedDateFinish.toIso8601String());
-      Future<bool> esito = eventoController.postEvent(_currentEvent);
+      Future<bool> esito = eventoTokenController.postEvent(_currentEvent, AuthProvider.getToken());
       esito.then((bool value) => _showDialog(_currentEvent,value));
      
      } 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/evento_token_controller.dart';
 import 'package:justmeet/utils/viewtype.dart';
 import 'package:justmeet/widget/view_event_widget.dart';
 
@@ -10,10 +10,10 @@ class UserHomePage extends StatefulWidget{
   }
 
 class UserHomePageState extends State<UserHomePage>{
-  EventoController eventoController = new EventoController();
+  EventoTokenController eventoTokenController = new EventoTokenController();
   @override
   Widget build(BuildContext context) {
-    return ViewEvent(type: ViewType.USER_HOME, events: eventoController.loadEventsApproved());      
+    return ViewEvent(type: ViewType.USER_HOME, events: eventoTokenController.loadEventsApproved());      
   }
 }
 

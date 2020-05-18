@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:justmeet/model/evento.dart';
 import 'package:justmeet/model/user.dart';
 import 'package:justmeet/utils/auth_provider.dart';
-import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
-import 'package:justmeet/utils/controllerAPI/user_controller.dart';
+import 'package:justmeet/utils/controllerAPI/evento_token_controller.dart';
+import 'package:justmeet/utils/controllerAPI/user_token_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/utils/viewtype.dart';
 import 'package:justmeet/widget/no_data_widget.dart';
@@ -27,9 +27,9 @@ class ViewEvent extends StatefulWidget{
   final ViewType type;
   final Future<List<Evento>> events;
 
+      EventoTokenController eventoTokenController = new EventoTokenController();
+      UserTokenController userTokenController = new UserTokenController();
     
-      EventoController eventoController = new EventoController();
-      UserController userController = new UserController(); 
       final DateFormat _df = DateFormat("H:m dd/MM/yyyy");
     
       ViewEventState(this.type, this.events);
@@ -70,7 +70,7 @@ class ViewEvent extends StatefulWidget{
                                                   child: Icon(Icons.delete_forever,size: 30 ,color: ThemeHandler.jmTheme().accentColor),
                                                   onTap: () {
                                                     setState(() {
-                                                      eventoController.rifiutaEvento(eventi.data[index].getId());
+                                                      eventoTokenController.rifiutaEvento(eventi.data[index].getId(), AuthProvider.getToken());
                                                       eventi.data.removeAt(index);
                                                     showDialog(
                                                       context: context,
@@ -93,7 +93,7 @@ class ViewEvent extends StatefulWidget{
                                                 );
                                                 case ViewType.GUEST_HOME: return Text("");
                                                 default: return FutureBuilder(
-                                              future: userController.getUserById(AuthProvider.getUId()),
+                                              future: userTokenController.getUserByIdWithToken(AuthProvider.getUId(), AuthProvider.getToken()),
                                               builder: (context, AsyncSnapshot<User> user) {
                                                 if(user.data == null) return CircularProgressIndicator();
                                                 else 
@@ -102,7 +102,7 @@ class ViewEvent extends StatefulWidget{
                                                   child: Icon(Icons.favorite, color: ThemeHandler.jmTheme().accentColor),
                                                   onTap: () {
                                                     setState(() {
-                                                      userController.deletePreferito(AuthProvider.getUId(), eventi.data[index].getId());
+                                                      userTokenController.deletePreferito(AuthProvider.getUId(), eventi.data[index].getId(), AuthProvider.getToken());
                                                     showDialog(
                                                       context: context,
                                                       builder: (BuildContext context) {
@@ -128,7 +128,7 @@ class ViewEvent extends StatefulWidget{
                                                   child: Icon(Icons.favorite_border, color: ThemeHandler.jmTheme().accentColor),
                                                   onTap: () {
                                                     setState(() {
-                                                      userController.addPreferito(AuthProvider.getUId(), eventi.data[index].getId());
+                                                      userTokenController.addPreferito(AuthProvider.getUId(), eventi.data[index].getId(), AuthProvider.getToken());
                                                     showDialog(
                                                       context: context,
                                                       builder: (BuildContext context) {
@@ -236,7 +236,7 @@ class ViewEvent extends StatefulWidget{
                                                     label: Text("Apporva"),
                                                   onPressed:() {
                                                     setState(() {
-                                                      eventoController.approvaEvento(eventi.data[index].id);
+                                                      eventoTokenController.approvaEvento(eventi.data[index].id, AuthProvider.getToken());
                                                       eventi.data.removeAt(index);
                                                       showDialog(
                                                         context: context,
@@ -258,7 +258,7 @@ class ViewEvent extends StatefulWidget{
                                                     label: Text("Rifiuta"),
                                                   onPressed:() {
                                                     setState(() {
-                                                      eventoController.rifiutaEvento(eventi.data[index].id);
+                                                      eventoTokenController.rifiutaEvento(eventi.data[index].id, AuthProvider.getToken());
                                                       eventi.data.removeAt(index);
                                                       showDialog(
                                                         context: context,
@@ -298,7 +298,7 @@ class ViewEvent extends StatefulWidget{
                                                                 color: ThemeHandler.jmTheme().accentColor,
                                                                   onPressed: ()  {
                                                                         setState(() {
-                                                                              eventoController.deleteIscrizione(eventi.data[index].id, snapshot.data);
+                                                                              eventoTokenController.deleteIscrizione(eventi.data[index].id, snapshot.data, AuthProvider.getToken());
                                                                               showDialog(
                                                                                 context: context,
                                                                                 builder: (BuildContext context) {
@@ -344,7 +344,7 @@ class ViewEvent extends StatefulWidget{
                                                           onPressed:() 
                                                           {
                                                             setState(() {
-                                                              eventoController.addIscrizione(eventi.data[index].id, snapshot.data);
+                                                              eventoTokenController.addIscrizione(eventi.data[index].id, snapshot.data, AuthProvider.getToken());
                                                             showDialog(
                                                                     context: context,
                                                                     builder: (BuildContext context) {

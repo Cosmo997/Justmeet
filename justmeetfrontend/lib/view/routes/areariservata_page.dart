@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:justmeet/model/user.dart';
-import 'package:justmeet/utils/controllerAPI/user_controller.dart';
 import 'package:justmeet/utils/auth_provider.dart';
+import 'package:justmeet/utils/controllerAPI/user_token_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/widget/loading_widget.dart';
 
@@ -18,20 +18,14 @@ class AreaRiservataPage extends StatefulWidget{
 
   class AreaRiservataPageState extends State<AreaRiservataPage>{
 
-  UserController userController = new UserController(); 
+  UserTokenController userTokenController = new UserTokenController();
   String tema;
-  String token;
-
-  void getToken() async{
-    token = await AuthProvider.getToken();
-  }
 
   @override
   void initState() {
     super.initState();
     setDarkMode(ThemeHandler.getCurrentThema());
     ThemeHandler.getCurrentThema();
-    getToken();
       }
     
       @override
@@ -39,7 +33,7 @@ class AreaRiservataPage extends StatefulWidget{
       return Scaffold(
         
            body: FutureBuilder(
-           future: userController.getUserByIdWithToken(AuthProvider.getUId(), AuthProvider.getToken()),
+           future: userTokenController.getUserByIdWithToken(AuthProvider.getUId(), AuthProvider.getToken()),
             builder: (BuildContext context, AsyncSnapshot<User> snapshot){
               if(snapshot.data == null)
               {
@@ -212,25 +206,6 @@ class AreaRiservataPage extends StatefulWidget{
                         iconSize: 40,
                         icon: Icon(Icons.exit_to_app),
                         onPressed:() => AuthProvider().logOut(),
-                        tooltip: "LogOut",
-                        color: ThemeHandler.jmTheme().accentColor,
-                      ),
-                    ),
-                  ),
-                  Text("Print Token"),
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.all(Radius.circular(40))
-                       ),
-                       margin: EdgeInsets.all(20),
-                    child: Card(
-                      child: IconButton(
-                        iconSize: 40,
-                        icon: Icon(Icons.exit_to_app),
-                        onPressed:() => {
-                            print("Token: $token")
-                          },
                         tooltip: "LogOut",
                         color: ThemeHandler.jmTheme().accentColor,
                       ),

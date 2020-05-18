@@ -3,7 +3,7 @@ import 'package:justmeet/model/comune.dart';
 import 'package:justmeet/model/provincia.dart';
 import 'package:justmeet/model/regione.dart';
 import 'package:justmeet/model/topic.dart';
-import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/evento_token_controller.dart';
 import 'package:justmeet/utils/controllerAPI/luogo_controller.dart';
 import 'package:justmeet/utils/controllerAPI/topic_controller.dart';
 import 'package:justmeet/utils/theme.dart';
@@ -19,7 +19,7 @@ class RicercaPage extends StatefulWidget {
 }
 
 class _RicercaPageState extends State<RicercaPage> {
-  EventoController eventoController = new EventoController();
+  EventoTokenController eventoTokenController = new EventoTokenController();
   List<String> argomenti = new List<String>();
   TopicController topicController = new TopicController();
   LuogoController luogoController = new LuogoController();
@@ -222,9 +222,8 @@ class _RicercaPageState extends State<RicercaPage> {
             currentRicerca = "null";
             }else
             currentRicerca = ricerca.text;
-            print("Ricerca: " +ricerca.text);
             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoController.search(currentRicerca, _currentTopic, _currentComune)),
+                                builder: (context) => ViewEvent(type: ViewType.SEARCH_RESULT, events: eventoTokenController.search(currentRicerca, _currentTopic, _currentComune)),
                   ),);
           },
           icon: Icon(Icons.search),

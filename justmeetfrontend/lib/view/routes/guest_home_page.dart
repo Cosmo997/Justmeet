@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:justmeet/utils/controllerAPI/evento_controller.dart';
+import 'package:justmeet/utils/controllerAPI/evento_token_controller.dart';
 import 'package:justmeet/utils/theme.dart';
 import 'package:justmeet/utils/viewtype.dart';
 import 'package:justmeet/widget/appbar_widget.dart';
@@ -12,7 +12,7 @@ import 'package:justmeet/widget/view_event_widget.dart';
 
 import '../../model/user.dart';
 import '../../utils/auth_provider.dart';
-import '../../utils/controllerAPI/user_controller.dart';
+import '../../utils/controllerAPI/user_token_controller.dart';
 import '../authentication/googlesingin_page.dart';
 
 class GuestHomePage extends StatefulWidget{
@@ -21,9 +21,11 @@ class GuestHomePage extends StatefulWidget{
   }
 
 class GuestHomePageState extends State<GuestHomePage>{
-  EventoController eventoController = new EventoController();
+  EventoTokenController eventoTokenController = new EventoTokenController();
   bool _showSecond = false;   
-  UserController userController = new UserController();
+  UserTokenController userTokenController = new UserTokenController();
+  TextEditingController _email;
+  TextEditingController _password;
 
   @override
   void initState() {
@@ -43,7 +45,7 @@ class GuestHomePageState extends State<GuestHomePage>{
   return Scaffold(
     appBar:JMAppBar(),
     drawer: JMDrawer(),
-    body: ViewEvent(type: ViewType.GUEST_HOME,events: eventoController.loadEventsApproved()),
+    body: ViewEvent(type: ViewType.GUEST_HOME,events: eventoTokenController.loadEventsApproved()),
     floatingActionButton: FloatingActionButton(
       backgroundColor: ThemeHandler.jmTheme().accentColor,
       child: Icon(Icons.lock_outline, color: ThemeHandler.jmTheme().primaryColor),
@@ -157,7 +159,7 @@ class GuestHomePageState extends State<GuestHomePage>{
                                               onPressed:() async{
                                                 Future<String> currentId = AuthProvider().loginWithGoogle();
                                                 sleep(Duration(seconds: 2));
-                                                Future<User> user = userController.getUserById(currentId);
+                                                Future<User> user = userTokenController.getUserById(currentId);
                                                 await user;
                                                 String id = await currentId;
                                                 if(user == null){
@@ -243,7 +245,3 @@ class GuestHomePageState extends State<GuestHomePage>{
             ));          
           }
     }
-
-  UserController userController = new UserController();
-  TextEditingController _email;
-  TextEditingController _password;
