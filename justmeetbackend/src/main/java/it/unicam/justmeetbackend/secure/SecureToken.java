@@ -13,6 +13,7 @@ public class SecureToken {
 		String uid = decodedToken.getUid();
 		return uid;
 	}
+
 	public static SecureToken getInstance() {
 		if (instance == null) {
 			instance = new SecureToken();

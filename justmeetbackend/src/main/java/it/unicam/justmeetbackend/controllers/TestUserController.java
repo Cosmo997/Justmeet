@@ -37,7 +37,7 @@ public class TestUserController{
      * @throws FirebaseAuthException
      */
     @GetMapping("/utente/id")
-	public Optional<User> getOtherProfile(@RequestParam String idUser, @RequestHeader("Authorization") String token) throws FirebaseAuthException {
+	public Optional<User> getUserByIdWithToken(@RequestParam String idUser, @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         if(idUser != null && token != null){
             String idUserFromToken = SecureToken.getInstance().getUid(token);
             if(idUser.equals(idUserFromToken)){
@@ -159,8 +159,5 @@ public class TestUserController{
         }
         return false;
     }
-
-
-    
 
 }
