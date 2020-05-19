@@ -17,7 +17,7 @@ class EventoTokenController extends ControllerJM{
     token =  await tokenUser;
     print("Token: " +token);
     http.Response response = await http.post(getUrlBase() +"/eventowithtoken",
-    headers: {"Content-type": "application/json", "token" : token},
+    headers: {"Content-type": "application/json", "Authorization" : token},
     body: json.encode(evento.toMap()));
     print("Status: " +response.statusCode.toString());
     if(response.statusCode == 200)
@@ -30,7 +30,7 @@ class EventoTokenController extends ControllerJM{
     token = await tokenUser;
     id = await idUtente;
     http.Response response = await http.get(getUrlBase() + "/eventi/myevent?idCreatore=" +id ,
-    headers: {"Content-type" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
     List collection = json.decode(response.body);
     List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
     return myEvent;
@@ -39,7 +39,7 @@ class EventoTokenController extends ControllerJM{
   Future<List<Evento>> loadEventsToBeApproved(Future<String> tokenUser)  async {
     token = await tokenUser;
     http.Response response = await http.get(getUrlBase() + "/eventi/isnotapproved",
-    headers: {"Content-type" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
     List collection = json.decode(response.body);
     List<Evento> eventi = collection.map((json) => Evento.fromjson(json)).toList();
     return eventi;
@@ -56,7 +56,7 @@ class EventoTokenController extends ControllerJM{
     token = await tokenUser;
     id = await idUtente;
     http.Response response = await http.get(getUrlBase() + "/eventi/mysub?idUser="+id,
-    headers: {"Content-type" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
     List collection = json.decode(response.body);
     List<Evento> myEvent = collection.map((json) => Evento.fromjson(json)).toList();
     return myEvent;
@@ -95,24 +95,24 @@ class EventoTokenController extends ControllerJM{
   void addIscrizione(String idEvento, String idUser, Future<String> tokenUser) async {
     token = await tokenUser;
     await http.put(getUrlBase() + "/evento/iscrizione/add?idEvento="+idEvento+"&idUser="+idUser,
-    headers: {"Accept" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
   }
   void deleteIscrizione(String idEvento, String idUser, Future<String> tokenUser) async {
     token = await tokenUser;
     await http.put(getUrlBase() + "/evento/iscrizione/remove?idEvento="+idEvento+"&idUser="+idUser,
-    headers: {"Accept" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
   }
 
   void approvaEvento(String idEvento, Future<String> tokenUser) async {
     token = await tokenUser;
     await http.put(getUrlBase() + "/evento/approvabymod?idEvento="+idEvento,
-    headers: {"Accept" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
   }
 
   void rifiutaEvento(String idEvento, Future<String> tokeUser) async {
     token = await tokeUser;
     await http.delete(getUrlBase() + "/evento?idEvento="+idEvento,
-    headers: {"Content-type" : "application/json", "token" : token});
+    headers: {"Content-type" : "application/json", "Authorization" : token});
   }
 
 }
