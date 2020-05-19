@@ -39,7 +39,7 @@ public class TestEventoController {
      */
     @RequestMapping(value = "/eventi/myevent", method = RequestMethod.GET)
     public List<Evento> getEventiByIdCreatoreWithToken(
-        @RequestParam String idCreatore, @RequestHeader String token)
+        @RequestParam String idCreatore, @RequestHeader("Authorization") String token)
             throws FirebaseAuthException {
         if (idCreatore != null && token != null) {
             String idUserByToken = SecureToken.getInstance().getUid(token);
@@ -60,7 +60,7 @@ public class TestEventoController {
      */
     @RequestMapping(value = "/eventi/mysub", method = RequestMethod.GET)
     public List<Evento> getEventiWhereUserSubscribeWithToken(
-        @RequestParam String idUser, @RequestHeader String token) throws FirebaseAuthException {
+        @RequestParam String idUser, @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         if (idUser != null && token != null) {
             String idUserByToken = SecureToken.getInstance().getUid(token);
             if (idUser.equals(idUserByToken)) {
@@ -94,7 +94,7 @@ public class TestEventoController {
      * @throws FirebaseAuthException
      */
     @GetMapping(value = "/eventi/isnotapproved")
-    public List<Evento> getEventiByIsApproved(@RequestHeader String token) throws FirebaseAuthException {
+    public List<Evento> getEventiByIsApproved(@RequestHeader("Authorization") String token) throws FirebaseAuthException {
         String idUSerByToken = SecureToken.getInstance().getUid(token);
         Optional<User> user = userRepo.findById(idUSerByToken);
         if (user.get().getIsMod()) {
@@ -111,7 +111,7 @@ public class TestEventoController {
      * @throws FirebaseAuthException
      */
     @RequestMapping(method = RequestMethod.POST, value = "/eventowithtoken")
-    public String postEvent(@RequestBody Evento e, @RequestHeader String token) throws FirebaseAuthException {
+    public String postEvent(@RequestBody Evento e, @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         String idUserByToken = SecureToken.getInstance().getUid(token);
         if (idUserByToken.equals(e.getIdCreatore()) && e != null) {
             ArrayList<String> app = new ArrayList<>();
@@ -134,7 +134,7 @@ public class TestEventoController {
      */
     @RequestMapping(value = "/evento/iscrizione/add", method = RequestMethod.PUT)
     public boolean addIscrizione(@RequestParam String idEvento, @RequestParam String idUser,
-            @RequestHeader String token) throws FirebaseAuthException {
+            @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         if (idEvento != null && idUser != null && token != null) {
             String idUserByToken = SecureToken.getInstance().getUid(token);
             if (idUserByToken.equals(idUser)) {
@@ -156,7 +156,7 @@ public class TestEventoController {
      */
     @RequestMapping(value = "/evento/iscrizione/remove", method = RequestMethod.PUT)
     public boolean deleteIscrizione(@RequestParam String idEvento, @RequestParam String idUser,
-            @RequestHeader String token) throws FirebaseAuthException {
+            @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         if(idEvento != null && idUser != null && token != null){
             String idUserByToken = SecureToken.getInstance().getUid(token);
             if(idUserByToken.equals(idUser)){
@@ -176,7 +176,7 @@ public class TestEventoController {
      * @throws FirebaseAuthException
      */
     @RequestMapping(value = "/evento/approvabymod", method = RequestMethod.PUT)
-    public boolean updateApproved(@RequestParam String idEvento, @RequestHeader String token)
+    public boolean updateApproved(@RequestParam String idEvento, @RequestHeader("Authorization") String token)
             throws FirebaseAuthException {
         if (idEvento != null && token != null) {
             String idUserByToken = SecureToken.getInstance().getUid(token);
@@ -199,7 +199,7 @@ public class TestEventoController {
      * @throws FirebaseAuthException
      */
     @RequestMapping(value = "/evento", method = RequestMethod.DELETE)
-    public boolean deleteEvent(@RequestParam String idEvento, @RequestHeader String token) throws FirebaseAuthException {
+    public boolean deleteEvent(@RequestParam String idEvento, @RequestHeader("Authorization") String token) throws FirebaseAuthException {
         if(idEvento != null && token != null) {
             String idUserByToken = SecureToken.getInstance().getUid(token);
             Optional<User> user = userRepo.findById(idUserByToken);
